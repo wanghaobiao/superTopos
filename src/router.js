@@ -1,13 +1,13 @@
 import VueRouter from 'vue-router'
 import AddBlog from './components/addBlog'
 import UpdateBlog from './components/updateBlog'
-import ListBlog from './components/ListBlog'
+import ProjectList from './components/projectList'
 import HomeBlog from './components/HomeBlog'
 
 // 1、创建路由对象
 var router = new VueRouter({
     routes: [
-        { path: '/listBlog', component: ListBlog },
+        { path: '/projectList', component: ProjectList },
         { path: '/addBlog', component: AddBlog },
         { path: '/updateBlog/:id', component: UpdateBlog },
         { path: '/', component: HomeBlog }
