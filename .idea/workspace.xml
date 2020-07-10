@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/listBlog.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projectList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectList.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +73,8 @@
       <workItem from="1594187561984" duration="1082000" />
       <workItem from="1594198848499" duration="3084000" />
       <workItem from="1594256507826" duration="78000" />
+      <workItem from="1594276287529" duration="78000" />
+      <workItem from="1594287212766" duration="227000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -65,25 +83,72 @@
       <option name="project" value="LOCAL" />
       <updated>1594187644227</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="超级工具代码提交">
+      <created>1594276316269</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1594276316269</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="超级工具代码提交" />
     <option name="LAST_COMMIT_MESSAGE" value="超级工具代码提交" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1594187643514">
+    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1594276315633">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1594187643514" />
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1594187645546">
+    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1594276315633" />
+    <state x="92" y="92" width="1736" height="835" key="DiffContextDialog" timestamp="1594287440271">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1594187645546" />
+    <state x="92" y="92" width="1736" height="835" key="DiffContextDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594287440271" />
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1594276345826">
+      <screen x="0" y="0" width="1920" height="1019" />
+    </state>
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1594276345826" />
     <state x="623" y="219" width="672" height="678" key="search.everywhere.popup" timestamp="1594198857621">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>

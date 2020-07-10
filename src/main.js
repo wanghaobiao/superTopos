@@ -7,7 +7,18 @@ import router from './router.js'
 import VueResource from 'vue-resource'
 import Moment from 'moment'
 import axios from 'axios';
+import global from './../src/components/util/global'
+//自定义的过滤器
+import xfilters from './../src/components/util/xfilters'
+for(let key in xfilters){
+  Vue.filter(key,xfilters[key]);
+}
+//自定义的公用方法
+import {tools} from './../src/components/util/util'
 Vue.prototype.$axios = axios;
+//公共方法
+Vue.use(global);
+
 // 安装 ElementUI（ui）
 Vue.use(ElementUI)
 
