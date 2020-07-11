@@ -5,7 +5,7 @@
                  background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
             <el-submenu index="1">
                 <template slot="title">数据库工具</template>
-                <el-menu-item index="/projectList"><router-link to="/projectList">项目管理</router-link></el-menu-item>
+                <el-menu-item index="/project"><router-link to="/project">项目管理</router-link></el-menu-item>
                 <el-menu-item index="/demo/group/index">表结构管理</el-menu-item>
             </el-submenu>
             <el-submenu index="2">

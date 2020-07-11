@@ -1,22 +1,23 @@
+<!--项目表(project)-->
 <template>
     <div>
-         <!-- 搜索框开始 -->
+        <!-- 搜索框开始 -->
         <el-row :gutter="10">
             <el-col :span="12">
                 <el-form :inline="true"  class="demo-form-inline">
-                    <el-form-item label="项目名称" >
-                        <el-input v-model="pageData.name_eq" placeholder="请输入审批人" ></el-input>
+                    <el-form-item label="名称" >
+                        <el-input v-model="pageData.name_eq" placeholder="请输入名称"></el-input>
                     </el-form-item>
-                    <el-form-item label="项目编号" >
-                        <el-input v-model="pageData.number_eq" placeholder="请输入审批人"></el-input>
+                    <el-form-item label="编号" >
+                        <el-input v-model="pageData.number_eq" placeholder="请输入编号"></el-input>
                     </el-form-item>
                     <el-form-item label="创建人" >
-                        <el-input v-model="pageData.create_eq" placeholder="请输入审批人"></el-input>
+                        <el-input v-model="pageData.create_eq" placeholder="请输入创建人"></el-input>
                     </el-form-item>
                 </el-form>
                 <el-form :inline="true"  class="demo-form-inline">
                     <el-form-item label="创建时间" >
-                         <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.createTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+                        <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
                     </el-form-item>
                 </el-form>
             </el-col>
@@ -35,12 +36,16 @@
         <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" height="500"  fit border style="width: 100%" >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
-            <el-table-column  property="id" label="id" sortable  ></el-table-column>
-            <el-table-column  property="name" label="项目名"></el-table-column>
-            <el-table-column  property="number" label="项目编号"></el-table-column>
-            <el-table-column  property="remark" label="备注"></el-table-column>
-            <el-table-column  property="create" label="创建人"></el-table-column>
-            <el-table-column  property="creationTime" label="创建时间"></el-table-column>
+            <el-table-column  property="id" label="主键id" ></el-table-column>
+            <el-table-column  property="name" label="名称" ></el-table-column>
+            <el-table-column  property="number" label="编号" ></el-table-column>
+            <el-table-column  property="remark" label="备注" ></el-table-column>
+            <el-table-column  property="create" label="创建人" ></el-table-column>
+            <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
+            <el-table-column  property="lastUpdateUser" label="最后修改人" ></el-table-column>
+            <el-table-column  property="lastUpdateTime" label="最后修改时间" ></el-table-column>
+            <el-table-column  property="audit" label="审核人" ></el-table-column>
+            <el-table-column  property="auditTime" label="审核时间" ></el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <el-button type="success" plain size="small" @click="goView(scope.row.id)">查看</el-button>
@@ -50,51 +55,46 @@
         </el-table>
         <!-- 列表框结束 -->
         <el-row :gutter="10">
-            <el-col :span="24" ><el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange"  
-            :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination></el-col>
+            <el-col :span="24" ><el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange"
+                                               :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination></el-col>
         </el-row>
         <!-- 新增/编辑开始 -->
-        <el-dialog title="项目维护" :visible.sync="viewDialog.isShow" width="500" >
+        <el-dialog :title="viewDialog.isEdit ? '新增' : '查看'" :visible.sync="viewDialog.isShow" width="500" >
             <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
-                <el-form-item label="项目名称" clearable :label-width="formLabelWidth" prop="name">
-                    <el-input :disabled="!viewDialog.isEdit" v-model="data.name" autocomplete="off"></el-input>
+                <el-form-item label="名称" clearable :label-width="formLabelWidth" prop="name">
+                    <el-input :disabled="!viewDialog.isEdit" v-model="data.name" placeholder="请输入名称" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="项目编号" clearable :label-width="formLabelWidth" prop="number">
-                    <el-input :disabled="!viewDialog.isEdit" v-model="data.number" autocomplete="off"></el-input>
+                <el-form-item label="编号" clearable :label-width="formLabelWidth" prop="number">
+                    <el-input :disabled="!viewDialog.isEdit" v-model="data.number" placeholder="请输入编号" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="项目备注" clearable :label-width="formLabelWidth" prop="remark">
-                    <el-input :disabled="!viewDialog.isEdit" v-model="data.remark" autocomplete="off"></el-input>
+                <el-form-item label="备注" clearable :label-width="formLabelWidth" prop="remark">
+                    <el-input :disabled="!viewDialog.isEdit" v-model="data.remark" placeholder="请输入备注" autocomplete="off"></el-input>
                 </el-form-item>
             </el-form>
+            <!-- 新增明细开始 -->
             <el-row class="spacing" v-show="viewDialog.isEdit">
                 <el-button type="primary" @click.prevent="addDetails()" :loading="viewDialog.butIsLoading">新增</el-button>
             </el-row>
             <el-table :data="data.detailEntitys"  border style="width: 100%;" height="300" v-loading="viewDialog.butIsLoading" :highlight-current-row="viewDialog.isEdit" class="tb-edit" >
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
-                <el-table-column label="字段名称" >
+                <el-table-column label="名称" >
                     <template scope="scope">
-                        <el-input  v-model="scope.row.name" placeholder="请输入字段名称" clearable></el-input> <span>{{scope.row.name}}</span>
+                        <el-input  v-model="scope.row.name" placeholder="请输入名称" clearable></el-input> <span>{{scope.row.name}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="字段编号" >
+                <el-table-column label="编号" >
                     <template scope="scope">
-                        <el-input  v-model="scope.row.number" placeholder="请输入字段编号" clearable></el-input> <span>{{scope.row.number}}</span>
+                        <el-input  v-model="scope.row.number" placeholder="请输入编号" clearable></el-input> <span>{{scope.row.number}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="字段类型" >
                     <template scope="scope">
-                        <el-select v-model="scope.row.type" placeholder="请选择">
-                            <el-option v-for="item in options.columnType" :key="item.label" :label="item.label" :value="item.value"> </el-option>
-                        </el-select>
-                         <span>{{scope.row.type}}</span>
+                        <el-input  v-model="scope.row.type" placeholder="请输入字段类型" clearable></el-input> <span>{{scope.row.type}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="允许为空" >
                     <template scope="scope">
-                        <el-select v-model="scope.row.allowEmpty" placeholder="请选择">
-                            <el-option v-for="item in options.yesOrNo" :key="item.label" :label="item.label" :value="item.value"> </el-option>
-                        </el-select>
-                         <span>{{scope.row.type}}</span>
+                        <el-input  v-model="scope.row.allowEmpty" placeholder="请输入允许为空" clearable></el-input> <span>{{scope.row.allowEmpty}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="长度" >
@@ -122,12 +122,21 @@
                         <el-input  v-model="scope.row.remark" placeholder="请输入备注" clearable></el-input> <span>{{scope.row.remark}}</span>
                     </template>
                 </el-table-column>
+                <!--<el-table-column label="下拉字段" >
+                    <template scope="scope">
+                        <el-select v-model="scope.row.type" placeholder="请选择">
+                            <el-option v-for="item in options.columnType" :key="item.label" :label="item.label" :value="item.value"> </el-option>
+                        </el-select>
+                         <span>{{scope.row.type}}</span>
+                    </template>
+                </el-table-column>-->
                 <el-table-column label="操作" v-if="viewDialog.isEdit" >
                     <template slot-scope="scope">
                         <el-button type="danger" plain size="small" @click="delDetails(scope.$index)" >删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
+            <!-- 新增明细结束 -->
             <span slot="footer" class="dialog-footer" v-show="viewDialog.isEdit">
                 <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading">取 消</el-button>
                 <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
@@ -143,7 +152,6 @@
             this.getOptions();
         },
         data() {
-
             return {
                 options:{
                     columnType:[],
@@ -164,18 +172,17 @@
                     detailEntitys: []
                 },
                 listData: {
-                     loading:false,
+                    loading:false,
                 },
                 rules: {
-                    name: [
+                    name : [
                         { required: false, message: '请输入名称', trigger: 'blur' },
                     ],
-                    number: [
+                    number : [
                         { required: false, message: '请输入编号', trigger: 'blur' },
                     ],
-                    remark: [
+                    remark : [
                         { required: false, message: '请输入备注', trigger: 'blur' },
-
                     ],
                 }
             };
@@ -190,11 +197,11 @@
             //执行搜索
             search() {
                 this.listData.loading = true;
-                if(!this.isEmpty(this.pageData.createTime)){
-                    this.pageData['kCreationTime_ge'] = this.pageData.createTime[0]+'T00:00:00';
-                    this.pageData['kCreationTime_le'] = this.pageData.createTime[1]+'T00:00:00';
+                if(!this.isEmpty(this.pageData.creationTime)){
+                    this.pageData['creationTime_ge'] = this.pageData.creationTime[0]+'T00:00:00';
+                    this.pageData['creationTime_le'] = this.pageData.creationTime[1]+'T00:00:00';
                 }
-                
+
                 this.getHttp("/api/project/findAllPageByParams?"+this.jsonToUrl(this.pageData)).then(result => {
                     this.listData = result;
                     this.listData.loading = false;
@@ -228,6 +235,7 @@
             },
             //打开详情
             goView(id) {
+                this.viewDialog.isEdit = false;
                 this.getHttp("/api/project/view?id="+id,{}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
@@ -243,7 +251,7 @@
             },
             //添加明细
             addDetails() {
-                this.data.detailEntitys.push({});
+                this.data.detailEntitys.push({'parentId':this.data.id});
             },
             //删除明细
             delDetails(index) {
@@ -270,6 +278,6 @@
     };
 </script>
 <style scoped>
-  
-    
+
+
 </style>
