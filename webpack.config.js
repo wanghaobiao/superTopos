@@ -55,9 +55,6 @@ module.exports = (options = {}) => ({
     extensions: ['.js', '.vue', '.json', '.css']
   },
   devServer: {
-    open: true,
-    hot: true,
-    compress: true,
     port: 8010,
     proxy: {
       '/api': {

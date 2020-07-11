@@ -49,5 +49,8 @@
     .tb-edit .current-row .el-select+span {
         display: none
     }
+    .test{
+        color: red;
+    }
 
 </style>
