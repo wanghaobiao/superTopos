@@ -5,13 +5,12 @@
                  background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
             <el-submenu index="1">
                 <template slot="title">数据库工具</template>
-                <el-menu-item index="/project"><router-link to="/project">项目管理</router-link></el-menu-item>
-                <el-menu-item index="/demo/group/index">表结构管理</el-menu-item>
+                <el-menu-item index="1-1" @click="jump('/project')">项目管理</el-menu-item>
+                <el-menu-item index="1-2">表结构管理</el-menu-item>
             </el-submenu>
             <el-submenu index="2">
-                <template slot="title">我的工作台</template>
-                <el-menu-item index="/demo/index">列表</el-menu-item>
-                <el-menu-item index="/demo/group/index">分组</el-menu-item>
+                <template slot="title">系统配置</template>
+                <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
             </el-submenu>
             <el-menu-item index="3"><router-link to="/test">处理中心</router-link></el-menu-item>
         </el-menu>
@@ -20,7 +19,19 @@
 
     </div>
 </template>
-
+<script>
+    export default {
+        data() {
+            return {
+            };
+        },
+        methods: {
+           jump(routerUrl){
+                this.$router.push(routerUrl);
+           }
+        }
+    };
+</script>
 <style>
     a {
     text-decoration: none;
@@ -31,6 +42,13 @@
     .spacing {
         margin-bottom: 10px;
     }
+    /***************************************** 详情样式开始 *****************************************/
+    /* 详情宽度 */
+    .view-dialog{
+        width: 80%;
+        height: 80%;
+    }
+    /* 详情明细 */
     .tb-edit .el-input {
         display: none
     }
@@ -49,8 +67,7 @@
     .tb-edit .current-row .el-select+span {
         display: none
     }
-    .test{
-        color: red;
-    }
+    /***************************************** 详情样式结束 *****************************************/
+    
 
 </style>

@@ -36,7 +36,6 @@
         <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" height="500"  fit border style="width: 100%" >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
-            <el-table-column  property="id" label="主键id" ></el-table-column>
             <el-table-column  property="name" label="名称" ></el-table-column>
             <el-table-column  property="number" label="编号" ></el-table-column>
             <el-table-column  property="remark" label="备注" ></el-table-column>
@@ -59,7 +58,7 @@
                                                :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination></el-col>
         </el-row>
         <!-- 新增/编辑开始 -->
-        <el-dialog :title="viewDialog.isEdit ? '新增' : '查看'" :visible.sync="viewDialog.isShow" width="500" >
+        <el-dialog :title="viewDialog.isEdit ? '新增' : '查看'" :visible.sync="viewDialog.isShow" customClass="view-dialog" >
             <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
                 <el-form-item label="名称" clearable :label-width="formLabelWidth" prop="name">
                     <el-input :disabled="!viewDialog.isEdit" v-model="data.name" placeholder="请输入名称" autocomplete="off"></el-input>
@@ -75,28 +74,42 @@
             <el-row class="spacing" v-show="viewDialog.isEdit">
                 <el-button type="primary" @click.prevent="addDetails()" :loading="viewDialog.butIsLoading">新增</el-button>
             </el-row>
-            <el-table :data="data.detailEntitys"  border style="width: 100%;" height="300" v-loading="viewDialog.butIsLoading" :highlight-current-row="viewDialog.isEdit" class="tb-edit" >
+            <el-table :data="data.detailEntitys"  border height="350"  v-loading="viewDialog.butIsLoading" :highlight-current-row="viewDialog.isEdit" class="tb-edit" >
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
                 <el-table-column label="名称" >
                     <template scope="scope">
                         <el-input  v-model="scope.row.name" placeholder="请输入名称" clearable></el-input> <span>{{scope.row.name}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="编号" >
+                <el-table-column label="属性名" >
                     <template scope="scope">
-                        <el-input  v-model="scope.row.number" placeholder="请输入编号" clearable></el-input> <span>{{scope.row.number}}</span>
+                        <el-input  v-model="scope.row.number" placeholder="请输入属性名" clearable></el-input> <span>{{scope.row.number}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="字段类型" >
                     <template scope="scope">
-                        <el-input  v-model="scope.row.type" placeholder="请输入字段类型" clearable></el-input> <span>{{scope.row.type}}</span>
+                        <el-select v-model="scope.row.type" placeholder="请选择字段类型">
+                            <el-option v-for="item in getOptions('columnType')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
+                        </el-select>
+                         <span>{{scope.row.type | paramsFmt('columnType')}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="允许为空" >
                     <template scope="scope">
-                        <el-input  v-model="scope.row.allowEmpty" placeholder="请输入允许为空" clearable></el-input> <span>{{scope.row.allowEmpty}}</span>
+                        <el-select v-model="scope.row.allowEmpty" placeholder="请选择">
+                            <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
+                        </el-select>
+                         <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
                     </template>
                 </el-table-column>
+                <el-table-column label="是否主键" >
+                    <template scope="scope">
+                        <el-select v-model="scope.row.isKey " placeholder="请选择">
+                            <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
+                        </el-select>
+                         <span>{{scope.row.isKey | paramsFmt('yesOrNo')}}</span>
+                    </template>
+                </el-table-column>    
                 <el-table-column label="长度" >
                     <template scope="scope">
                         <el-input  v-model="scope.row.length" placeholder="请输入长度" clearable></el-input> <span>{{scope.row.length}}</span>
@@ -122,14 +135,6 @@
                         <el-input  v-model="scope.row.remark" placeholder="请输入备注" clearable></el-input> <span>{{scope.row.remark}}</span>
                     </template>
                 </el-table-column>
-                <!--<el-table-column label="下拉字段" >
-                    <template scope="scope">
-                        <el-select v-model="scope.row.type" placeholder="请选择">
-                            <el-option v-for="item in options.columnType" :key="item.label" :label="item.label" :value="item.value"> </el-option>
-                        </el-select>
-                         <span>{{scope.row.type}}</span>
-                    </template>
-                </el-table-column>-->
                 <el-table-column label="操作" v-if="viewDialog.isEdit" >
                     <template slot-scope="scope">
                         <el-button type="danger" plain size="small" @click="delDetails(scope.$index)" >删除</el-button>
@@ -149,14 +154,10 @@
     export default {
         created() {
             this.search();
-            this.getOptions();
+            this.getParams();
         },
         data() {
             return {
-                options:{
-                    columnType:[],
-                    yesOrNo:[],
-                },
                 pageData:{
                     page:1,
                     size:5,
@@ -188,12 +189,6 @@
             };
         },
         methods: {
-            //获取参数
-            getOptions(){
-                this.getHttp("/api/common/getOptions?"+this.jsonToUrl(this.options)).then(result => {
-                    this.options = result;
-                });
-            },
             //执行搜索
             search() {
                 this.listData.loading = true;
@@ -214,6 +209,10 @@
                         this.search();
                     });
                 }else{
+                    if(this.$refs.listTable.selection.length == 0){
+                        this.$message.warning( '请先勾选删除列' );
+                        return;
+                    }
                     var ids = this.listExtract(this.$refs.listTable.selection,'id');
                     this.postHttp("/api/project/batchDelete",ids).then(result => {
                         this.search();
@@ -251,7 +250,7 @@
             },
             //添加明细
             addDetails() {
-                this.data.detailEntitys.push({'parentId':this.data.id});
+                this.data.detailEntitys.push({'parentId':this.data.id,'allowEmpty':'Y','isKey':'N'});
             },
             //删除明细
             delDetails(index) {
@@ -277,7 +276,8 @@
         }
     };
 </script>
-<style scoped>
+<style >
 
+    
 
 </style>
