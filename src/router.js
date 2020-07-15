@@ -1,22 +1,17 @@
 import VueRouter from 'vue-router'
-import AddBlog from './components/addBlog'
-import UpdateBlog from './components/updateBlog'
-import ProjectList from './components/project'
+import ProjectList from './components/page/databaseTools/project'
+import tableManagement from './components/page/databaseTools/tableManagement'
 import systemConfigParams from './components/page/systemConfig/params'
-import HomeBlog from './components/HomeBlog'
-import Test from './components/test'
 import Vue from 'vue'
 import tools from './../src/components/util/util'
 
 // 1、创建路由对象
 var router = new VueRouter({
     routes: [
-        { path: '/project', component: ProjectList },
+        { path: '/databaseTools/project', component: ProjectList },
+        { path: '/databaseTools/tableManagement', component: tableManagement },
         { path: '/systemConfig/params', component: systemConfigParams },
-        { path: '/test', component: Test },
-        { path: '/addBlog', component: AddBlog },
-        { path: '/updateBlog/:id', component: UpdateBlog },
-        { path: '/', component: HomeBlog }
+        { path: '/', component: ProjectList }
     ]
 })
 

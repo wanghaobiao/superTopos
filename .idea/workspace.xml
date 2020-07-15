@@ -22,7 +22,10 @@
     <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/project.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/project.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/addBlog.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/homeBlog.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/project.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/updateBlog.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,6 +85,8 @@
       <workItem from="1594350652607" duration="580000" />
       <workItem from="1594479811293" duration="9359000" />
       <workItem from="1594689437299" duration="4000" />
+      <workItem from="1594799527515" duration="76000" />
+      <workItem from="1594807839123" duration="220000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -118,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594489228179</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="增删改查 已完善">
+      <created>1594799546367</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1594799546367</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,10 +188,10 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="690" y="285" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594480035322" />
-    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1594489227467">
+    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1594799545489">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1594489227467" />
+    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1594799545489" />
     <state x="92" y="92" width="1736" height="835" key="DiffContextDialog" timestamp="1594487765271">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
@@ -196,17 +208,17 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor/0.0.1920.1019@0.0.1920.1019" timestamp="1594488965699" />
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1594489229519">
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1594799575940">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1594489229519" />
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1594799575940" />
     <state x="662" y="212" width="596" height="594" key="find.popup" timestamp="1594480314138">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="662" y="212" width="596" height="594" key="find.popup/0.0.1920.1019@0.0.1920.1019" timestamp="1594480314138" />
-    <state x="623" y="219" width="672" height="678" key="search.everywhere.popup" timestamp="1594483882079">
+    <state x="623" y="219" width="672" height="678" key="search.everywhere.popup" timestamp="1594807847867">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="623" y="219" width="672" height="678" key="search.everywhere.popup/0.0.1920.1019@0.0.1920.1019" timestamp="1594483882079" />
+    <state x="623" y="219" width="672" height="678" key="search.everywhere.popup/0.0.1920.1019@0.0.1920.1019" timestamp="1594807847867" />
   </component>
 </project>
