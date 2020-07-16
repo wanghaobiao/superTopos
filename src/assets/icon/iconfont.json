@@ -1,0 +1,51 @@
+{
+  "id": "1948567",
+  "name": "superTools",
+  "font_family": "iconfont",
+  "css_prefix_text": "al-icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "724352",
+      "name": "工具",
+      "font_class": "tool",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "1977868",
+      "name": "新增与更新货品档案",
+      "font_class": "add-details",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "15964419",
+      "name": "清单/信息/设备基础信息/工单信息",
+      "font_class": "item-4",
+      "unicode": "e6cb",
+      "unicode_decimal": 59083
+    },
+    {
+      "icon_id": "8361813",
+      "name": "文件夹",
+      "font_class": "item-2",
+      "unicode": "e6c9",
+      "unicode_decimal": 59081
+    },
+    {
+      "icon_id": "12550621",
+      "name": "表格",
+      "font_class": "item-3",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "15963399",
+      "name": "项目",
+      "font_class": "item-1",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 <template>
     <div>
         <el-row :gutter="20">
-            <el-col :span="6">
+            <el-col :span="8">
                 <!-- 列表框开始 -->
                 <div class="custom-tree-container tree-node">
                     <div class="block">
@@ -10,8 +10,9 @@
                              <span class="custom-tree-node" slot-scope="{ node, data }">
                                 <span><i :class="data.icon" :style="{color : data.color}"></i>  {{ node.label }}</span>
                                 <span>
+                                    <el-button type="warning" icon="al-icon-tool" size="small" circle @click="() => goView(data)"></el-button>
                                     <el-button type="info" icon="el-icon-search" size="small" circle @click="() => goView(data)"></el-button>
-                                    <el-button type="success" icon="el-icon-add-location" size="small" circle @click="() => goAdd(data)"></el-button>
+                                    <el-button type="success" icon="al-icon-add-details" size="small" circle @click="() => goAdd(data)"></el-button>
                                     <el-button type="primary" icon="el-icon-edit" size="small" circle @click="() => goEdit(data)"></el-button>
                                     <el-button type="danger" icon="el-icon-delete" size="small" circle @click="() => batchDel(data.id)" ></el-button>
                                 </span>
@@ -21,7 +22,7 @@
                 </div>
                 <!-- 列表框结束 -->
             </el-col>
-            <el-col :span="18">
+            <el-col :span="16">
                 <div class="div-view" v-show="viewDialog.isShow">
                     <!-- 新增/编辑开始 -->
                     <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm">
