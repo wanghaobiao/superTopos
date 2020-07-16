@@ -9,14 +9,17 @@ import Moment from 'moment'
 import axios from 'axios';
 import axiosConfig from './../src/components/util/axiosConfig';
 import global from './../src/components/util/global'
-//自定义的过滤器
 import xfilters from './../src/components/util/xfilters'
+//自定义的过滤器
+import iconfont from './../src/assets/icon/iconfont.css'
 for(let key in xfilters){
   Vue.filter(key,xfilters[key]);
 }
 //自定义的公用方法
 import {tools} from './../src/components/util/util'
 Vue.prototype.$axios = axios;
+//三方图标
+Vue.use(iconfont);
 //公共方法
 Vue.use(global);
 

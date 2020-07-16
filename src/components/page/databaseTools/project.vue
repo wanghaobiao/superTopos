@@ -80,68 +80,82 @@
             </el-row>
             <el-table :data="data.detailEntitys"  border height="320"  v-loading="viewDialog.butIsLoading" :highlight-current-row="viewDialog.isEdit" class="tb-edit" >
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
-                <el-table-column label="名称" >
+                <el-table-column label="名称">
                     <template scope="scope">
-                        <el-input  v-model="scope.row.name" placeholder="请输入名称" clearable></el-input> <span>{{scope.row.name}}</span>
+                        <el-input v-model="scope.row.name" placeholder="请输入名称" clearable></el-input>
+                        <span>{{scope.row.name}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="属性名" >
+                <el-table-column label="属性名" width="150" >
                     <template scope="scope">
-                        <el-input  v-model="scope.row.number" placeholder="请输入属性名" clearable></el-input> <span>{{scope.row.number}}</span>
+                        <el-input v-model="scope.row.number" placeholder="请输入属性名" clearable></el-input>
+                        <span>{{scope.row.number}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="字段类型" >
+                <el-table-column label="字段属性" width="150" >
                     <template scope="scope">
-                        <el-select v-model="scope.row.type" placeholder="请选择字段类型">
+                        <el-select v-model="scope.row.columnProperties" placeholder="请选择字段属性" @change="columnPropertiesChange(scope.row)">
+                            <el-option v-for="item in getOptions('columnProperties')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
+                        </el-select>
+                        <span>{{scope.row.columnProperties | paramsFmt('columnProperties')}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="字段类型" width="200" >
+                    <template scope="scope">
+                        <el-select v-model="scope.row.type" placeholder="请选择字段类型" :disabled="scope.row.columnProperties != 'baseColumn'" @change="typeChange(scope.row)">
                             <el-option v-for="item in getOptions('columnType')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
                         </el-select>
-                         <span>{{scope.row.type | paramsFmt('columnType')}}</span>
+                        <span>{{scope.row.type | paramsFmt('columnType')}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="允许为空" >
+                <el-table-column label="关联表" width="150" >
                     <template scope="scope">
-                        <el-select v-model="scope.row.allowEmpty" placeholder="请选择">
-                            <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
+                        <el-select v-model="scope.row.linkTable" placeholder="请选择关联表" :disabled="scope.row.columnProperties != 'linkColumn'">
+                            <el-option v-for="item in tableOptions" :key="item.label" :label="item.label" :value="item.value"> </el-option>
                         </el-select>
-                         <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
+                        <span>{{scope.row.linkTable | optionsFmt(tableOptions)}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="是否主键" >
+                <el-table-column label="关联参数" >
                     <template scope="scope">
-                        <el-select v-model="scope.row.isKey " placeholder="请选择">
-                            <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
+                        <el-input  v-model="scope.row.linkParam" placeholder="请输入关联参数" clearable :disabled="scope.row.columnProperties != 'paramColumn'"></el-input> <span>{{scope.row.linkParam}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="允许为空">
+                    <template scope="scope">
+                        <el-select v-model="scope.row.allowEmpty" placeholder="请选择" >
+                            <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
                         </el-select>
-                         <span>{{scope.row.isKey | paramsFmt('yesOrNo')}}</span>
-                    </template>
-                </el-table-column>    
-                <el-table-column label="长度" >
-                    <template scope="scope">
-                        <el-input  v-model="scope.row.length" placeholder="请输入长度" clearable></el-input> <span>{{scope.row.length}}</span>
+                        <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="精度" >
+                <el-table-column label="长度">
                     <template scope="scope">
-                        <el-input  v-model="scope.row.accuracy" placeholder="请输入精度" clearable></el-input> <span>{{scope.row.accuracy}}</span>
+                        <el-input v-model="scope.row.length" placeholder="请输入长度" clearable :disabled="scope.row.columnProperties != 'baseColumn'"></el-input>
+                        <span>{{scope.row.length}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="小数位" >
+                <el-table-column label="小数位">
                     <template scope="scope">
-                        <el-input  v-model="scope.row.places" placeholder="请输入小数位" clearable></el-input> <span>{{scope.row.places}}</span>
+                        <el-input v-model="scope.row.places" placeholder="请输入小数位" clearable :disabled="scope.row.columnProperties != 'baseColumn'"></el-input>
+                        <span>{{scope.row.places}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="默认值" >
+                <el-table-column label="默认值">
                     <template scope="scope">
-                        <el-input  v-model="scope.row.defaultValue" placeholder="请输入默认值" clearable></el-input> <span>{{scope.row.defaultValue}}</span>
+                        <el-input v-model="scope.row.defaultValue" placeholder="请输入默认值" clearable :disabled="scope.row.columnProperties != 'baseColumn'"></el-input>
+                        <span>{{scope.row.defaultValue}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="备注" >
+                <!-- <el-table-column label="备注">
                     <template scope="scope">
-                        <el-input  v-model="scope.row.remark" placeholder="请输入备注" clearable></el-input> <span>{{scope.row.remark}}</span>
+                        <el-input v-model="scope.row.remark" placeholder="请输入备注" clearable></el-input>
+                        <span>{{scope.row.remark}}</span>
                     </template>
-                </el-table-column>
-                <el-table-column label="操作" v-if="viewDialog.isEdit" >
+                </el-table-column> -->
+                <el-table-column label="操作" v-if="viewDialog.isEdit">
                     <template slot-scope="scope">
-                        <el-button type="danger" plain size="small" @click="delDetails(scope.$index)" >删除</el-button>
+                        <el-button type="danger" plain size="small" @click="delDetails(scope.$index)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -172,6 +186,7 @@
                     isEdit: false,
                     butIsLoading: false,
                 },
+                tableOptions:[],
                 formLabelWidth: "120px",
                 data: {
                     detailEntitys: []
@@ -232,6 +247,7 @@
             },
             //打开新增
             goAdd() {
+                this.tableOptions = [];
                 this.viewDialog.isShow = true;
                 this.viewDialog.isEdit = true;
                 this.data = {
@@ -241,6 +257,7 @@
             },
             //打开详情
             goView(id) {
+                this.getTableOptions(id);
                 this.viewDialog.isEdit = false;
                 this.getHttp("/api/project/view?id="+id,{}).then(result => {
                     this.viewDialog.isShow = true;
@@ -249,6 +266,7 @@
             },
             //打开编辑
             goEdit(id) {
+                this.getTableOptions(id);
                 this.viewDialog.isEdit = true;
                 this.getHttp("/api/project/view?id="+id).then(result => {
                     this.viewDialog.isShow = true;
@@ -257,7 +275,14 @@
             },
             //添加明细
             addDetails() {
-                this.data.detailEntitys.push({'parentId':this.data.id,'allowEmpty':'Y','isKey':'N'});
+                this.data.detailEntitys.push({
+                    parentId: this.data.id,
+                    allowEmpty: "Y",
+                    columnProperties : 'baseColumn',
+                    type : 'varchar',
+                    length : '200',
+                    isKey: "N"
+                });
             },
             //删除明细
             delDetails(index) {
@@ -279,6 +304,50 @@
                         return false;
                     }
                 });
+            },
+             //获取table 下拉参数
+            getTableOptions(id) {
+                this.getHttp("/api/project/getTableOptions?id="+id,{}).then(result => {
+                    this.tableOptions = result;
+                });
+            },
+            //字段属性改变
+            columnPropertiesChange(data){
+                var columnProperties = data.columnProperties;
+                if(columnProperties == 'baseColumn'){
+                    data.type = 'varchar'; 
+                    data.length = '200'; 
+                }else if(columnProperties == 'linkColumn'){
+                    data.type = ''; 
+                    data.length = ''; 
+                }else if(columnProperties == 'paramColumn'){
+                    data.type = ''; 
+                    data.length = ''; 
+                }
+                data.linkTable = ''; 
+                data.linkParam = ''; 
+                data.allowEmpty = 'Y';
+            },
+             //字段类型改变
+            typeChange(data){
+                var type = data.type;
+                if(type == 'int'){
+                    data.length = '11'; 
+                    data.places = '0'; 
+                }else if(type == 'varchar'){
+                    data.length = '200'; 
+                    data.places = ''; 
+                }else if(type == 'decimal'){
+                    data.length = '11'; 
+                    data.places = '2'; 
+                }else if(type == 'datetime'){
+                    data.length = ''; 
+                    data.places = ''; 
+                }else if(type == 'char'){
+                    data.length = '1'; 
+                    data.places = ''; 
+                }
+                data.defaultValue = ''; 
             },
         }
     };

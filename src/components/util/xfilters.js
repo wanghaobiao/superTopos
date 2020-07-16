@@ -5,6 +5,24 @@ const xfilters = {
 		return arg1[value];
     },
     //参数格式化 
+	optionsFmt: function(code,options) {
+		if (code == null || code == undefined || code == '') {
+            return '';
+        }
+		if (options == null || options == undefined || options == '') {
+            return code;
+        }
+        for(var i = 0 ; i < options.length ; i++){
+            var value = options[i].value;
+            var label = options[i].label;
+            if(code == value){
+                return label;
+            }
+        }
+        return code;        
+        
+    },
+     //参数格式化 
 	paramsFmt: function(code,paramsName) {
 		if (code == null || code == undefined || code == '') {
             return '';
