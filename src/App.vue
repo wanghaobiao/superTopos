@@ -51,22 +51,33 @@
     .tb-edit .el-input {
         display: none
     }
-    .tb-edit .current-row .el-input {
+    .tb-edit .edit-row .el-input {
         display: block
     }
-    .tb-edit .current-row .el-input+span {
+    .tb-edit .edit-row .el-input+span {
         display: none
     }
     .tb-edit .el-select {
         display: none
     }
-    .tb-edit .current-row .el-select {
+    .tb-edit .edit-row .el-select {
         display: block
     }
-    .tb-edit .current-row .el-select+span {
+    .tb-edit .edit-row .el-select+span {
         display: none
     }
     /***************************************** 详情样式结束 *****************************************/
+    /***************************************** 覆盖样式开始 *****************************************/
+    /* table鼠标悬停颜色 */
+    .el-table--enable-row-hover .el-table__body tr:hover>td{
+        background-color: rgb(108, 184, 250) !important;
+    }
+    /* table鼠标选中颜色 */
+    .el-table--striped .el-table__body tr.el-table__row--striped.current-row td, .el-table__body tr.current-row>td {
+        color: #fff;
+        background-color: rgb(108, 184, 250) !important;
+    }
+    /***************************************** 覆盖样式结束 *****************************************/
     
 
 </style>

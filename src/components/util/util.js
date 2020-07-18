@@ -154,6 +154,19 @@ Vue.prototype.userInfoInit = function (){
     }
 }
 /**********************云之家相关方法结束*********************/
+Vue.prototype.copy = function (data) {
+    let url = data
+    let oInput = document.createElement('input')
+    oInput.value = url
+    document.body.appendChild(oInput)
+    oInput.select() // 选择对象
+    document.execCommand("Copy") // 执行浏览器复制命令
+    this.$message({
+        message: '复制成功',
+        type: 'success'
+    })
+    oInput.remove()
+},
 //JSON转url
  Vue.prototype.jsonToUrl = function (data) {
     return Object.keys(data).map(function (key) {
@@ -416,7 +429,31 @@ Vue.prototype.urlEncodeURIComponent = function (param) {
         return param;
     }
 
+    
 }
+ //上移
+ Vue.prototype.upIndex = function (arr,index)
+ {
+    var temp;
+    if(index<1||index>arr.length-1){
+        return arr;
+    }
+    temp = arr[index-1];
+    arr = arr.copyWithin(index-1,index,index+1);//target, start, end
+    arr[index] = temp;
+    return arr; 
+ }
+ //下移
+ Vue.prototype.downIndex = function (arr,index){
+     var temp;
+     if(index<0||index>arr.length-1){
+        return arr;
+     }
+     temp = arr[index+1];
+     arr = arr.copyWithin(index+1,index,index+1);
+     arr[index] = temp;
+     return arr; 
+ }
 //删除数组中指定的元素
 Vue.prototype.removeByValue = function (arr, val) {
     for (var i = 0; i < arr.length; i++) {

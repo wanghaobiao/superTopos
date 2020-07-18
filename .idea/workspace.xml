@@ -19,18 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/demo.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/demo_index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.woff2" afterDir="false" />
+    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="完成树形菜单结构">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/util/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/util/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +60,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="com.sjhy.plugin.ui.TemplateSettingPanel" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="settings.editor.splitter.proportion" value="0.11777189" />
   </component>
   <component name="RebelAgentSelection">
@@ -95,7 +90,12 @@
       <workItem from="1594861227728" duration="778000" />
       <workItem from="1594862128792" duration="746000" />
       <workItem from="1594862953308" duration="60000" />
-      <workItem from="1594890919014" duration="638000" />
+      <workItem from="1594890919014" duration="1429000" />
+      <workItem from="1594899221493" duration="479000" />
+      <workItem from="1594899797325" duration="297000" />
+      <workItem from="1594948257123" duration="293000" />
+      <workItem from="1594956172386" duration="73000" />
+      <workItem from="1595037929141" duration="1982000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -160,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594890949378</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="完成树形菜单结构">
+      <created>1594892116337</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1594892116337</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +214,8 @@
     <MESSAGE value="超级工具代码提交" />
     <MESSAGE value="代码完善" />
     <MESSAGE value="增删改查 已完善" />
-    <option name="LAST_COMMIT_MESSAGE" value="增删改查 已完善" />
+    <MESSAGE value="完成树形菜单结构" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成树形菜单结构" />
   </component>
   <component name="WindowStateProjectService">
     <state x="828" y="137" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594863007395">
@@ -218,30 +226,30 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="690" y="285" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594480035322" />
-    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1594890948537">
+    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1594900092746">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1594890948537" />
-    <state x="92" y="92" width="1736" height="835" key="DiffContextDialog" timestamp="1594487765271">
+    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1594900092746" />
+    <state x="92" y="92" width="1736" height="835" key="DiffContextDialog" timestamp="1595039583861">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="92" y="92" width="1736" height="835" key="DiffContextDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594487765271" />
+    <state x="92" y="92" width="1736" height="835" key="DiffContextDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1595039583861" />
     <state x="740" y="264" key="FileChooserDialogImpl" timestamp="1594483566999">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="740" y="264" key="FileChooserDialogImpl/0.0.1920.1019@0.0.1920.1019" timestamp="1594483566999" />
-    <state x="749" y="211" key="RollbackChangesDialog" timestamp="1594487766499">
+    <state x="749" y="211" key="RollbackChangesDialog" timestamp="1595039585423">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="749" y="211" key="RollbackChangesDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594487766499" />
-    <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor" timestamp="1594814113192">
+    <state x="749" y="211" key="RollbackChangesDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1595039585423" />
+    <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor" timestamp="1594948529733">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor/0.0.1920.1019@0.0.1920.1019" timestamp="1594814113192" />
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1594890950457">
+    <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor/0.0.1920.1019@0.0.1920.1019" timestamp="1594948529733" />
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1594892118703">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1594890950457" />
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1594892118703" />
     <state x="662" y="212" width="596" height="594" key="find.popup" timestamp="1594480314138">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>

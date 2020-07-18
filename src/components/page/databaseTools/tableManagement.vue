@@ -10,7 +10,7 @@
                              <span class="custom-tree-node" slot-scope="{ node, data }">
                                 <span><i :class="data.icon" :style="{color : data.color}"></i>  {{ node.label }}</span>
                                 <span>
-                                    <el-button type="warning" icon="al-icon-tool" size="small" circle @click="() => goView(data)"></el-button>
+                                    <el-button type="warning" icon="al-icon-tool" size="small" circle @click="() => goTools(data)"></el-button>
                                     <el-button type="info" icon="el-icon-search" size="small" circle @click="() => goView(data)"></el-button>
                                     <el-button type="success" icon="al-icon-add-details" size="small" circle @click="() => goAdd(data)"></el-button>
                                     <el-button type="primary" icon="el-icon-edit" size="small" circle @click="() => goEdit(data)"></el-button>
@@ -38,15 +38,21 @@
                         <el-form-item label="父对象"  clearable :label-width="formLabelWidth" prop="prefix">
                             <el-input :disabled="true" v-model="data.projectEntity.name" autocomplete="off" ></el-input>
                         </el-form-item>
+                        <el-form-item label="SQL"  clearable :label-width="formLabelWidth" v-if="viewDialog.isTools">
+                            <div class="sql-div" ref="sqlDiv" v-html="data.sql"  @click="sqlCopy()" >
+                            </div>
+                        </el-form-item>
                     </el-form>
                     <!-- 新增明细开始 -->
-                    <div v-if="data.level != 2">
+                    <div v-if="data.level != 2 && !viewDialog.isTools">
                         <el-row class="spacing" v-show="viewDialog.isEdit">
-                            <el-button type="primary"  @click.prevent="addDetails()" :loading="viewDialog.butIsLoading" >新增 </el-button>
+                            <el-button type="primary"  @click.prevent="addDetails()" :loading="viewDialog.butIsLoading" >新增</el-button>
+                            <el-button type="primary"  @click.prevent="up()" :loading="viewDialog.butIsLoading" >上移</el-button>
+                            <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" >下移</el-button>
                         </el-row>
-                        <el-table :data="data.detailEntitys" border height="320" v-loading="viewDialog.butIsLoading" :highlight-current-row="viewDialog.isEdit" class="tb-edit">
+                        <el-table ref="tbEdit" :data="data.detailEntitys" border height="320" v-loading="viewDialog.butIsLoading" highlight-current-row :row-class-name="tableRowClassName"  @current-change="currentChange" class="tb-edit">
                             <el-table-column width="50" type="index" label="序号"></el-table-column>
-                            <el-table-column label="名称">
+                            <el-table-column label="名称" width="150">
                                 <template scope="scope">
                                     <el-input v-model="scope.row.name" placeholder="请输入名称" clearable></el-input>
                                     <span>{{scope.row.name}}</span>
@@ -121,7 +127,7 @@
                             </el-table-column> -->
                             <el-table-column label="操作" v-if="viewDialog.isEdit">
                                 <template slot-scope="scope">
-                                    <el-button type="danger" plain size="small" @click="delDetails(scope.$index)">删除</el-button>
+                                    <el-button type="danger" plain size="small" @click="delDetails(scope.$index)" v-if="isEmpty(scope.row.id)">删除</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -150,12 +156,14 @@
                     sort: "creationTime,DESC"
                 },
                 viewDialog: {
+                    isTools: false,
                     isShow: false,
                     isEdit: false,
                     butIsLoading: false
                 },
                 tableOptions:[],
                 formLabelWidth: "120px",
+                currentIndex: null,
                 data: {
                     projectEntity:{},
                     detailEntitys: []
@@ -212,50 +220,77 @@
                 })
                 
             },
-            //页码更新
-            handleCurrentChange(val) {
-                this.pageData.page = val;
-                this.search();
-            },
             //打开新增
             goAdd(row) {
                 var projectId = this.isEmpty(row.projectId) ? row.id : row.projectId;
+                this.getTableOptions(projectId);
                 this.viewDialog.isEdit = true;
+                this.viewDialog.isTools = false;
                 this.getHttp("/api/project/simpleView?id=" + projectId, {}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = {
                         prefix : result.prefix,
                         level : row.level + 1,
                         projectId : projectId,
-                        projectEntity :{
-                            id : row.id,
-                            name : row.label,
-                        },
+                        projectEntity :{ id : row.id, name : row.label},
                         parentId : row.id,
-                        detailEntitys : []
+                        detailEntitys : result.detailEntitys
                     }
-                    console.log(JSON.stringify(this.data));
+                    if(row.level > 2){
+                        this.data.detailEntitys.push(
+                            {
+                                id:row.id,
+                                name: '父对象关联',
+                                number:'parentId',
+                                linkTable : row.id,
+                                allowEmpty: "N",
+                                columnProperties : 'linkColumn',
+                                isKey: "N"
+                            }
+                        );
+                    }
+                    for(var i = 0 ; i < this.data.detailEntitys.length ; i++){
+                        this.data.detailEntitys[i].isNoEdit = true;
+                        this.data.detailEntitys[i].parentId = null;
+                    }
+                    
                 });
               
+            },
+            //打开工具箱
+            goTools(row) {
+                this.getTableOptions(this.isEmpty(row.projectId) ? row.id : row.projectId);
+                this.viewDialog.isTools = true;
+                this.getHttp("/api/project/tools?id=" + row.id, {}).then(result => {
+                    this.viewDialog.isShow = true;
+                    this.data = result;
+                    this.data.projectEntity  = {id : row.parentId,name : row.parentName};
+                });
+            },
+            //复制语句
+            sqlCopy(){
+                this.copy(this.$refs.sqlDiv.innerText);
             },
             //打开详情
             goView(row) {
                 this.getTableOptions(this.isEmpty(row.projectId) ? row.id : row.projectId);
                 this.viewDialog.isEdit = false;
+                this.viewDialog.isTools = false;
                 this.getHttp("/api/project/view?id=" + row.id, {}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
-                    this.data.projectEntity  = {id : row.id,name : row.label};
+                    this.data.projectEntity  = {id : row.parentId,name : row.parentName};
                 });
             },
             //打开编辑
             goEdit(row) {
                 this.getTableOptions(this.isEmpty(row.projectId) ? row.id : row.projectId);
                 this.viewDialog.isEdit = true;
+                this.viewDialog.isTools = false;
                 this.getHttp("/api/project/view?id=" + row.id).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
-                    this.data.projectEntity = {id : row.id,name : row.label};
+                    this.data.projectEntity = {id : row.parentId,name : row.parentName};
                 });
             },
             //添加明细
@@ -269,6 +304,38 @@
                     isKey: "N"
                 });
             },
+            //上移
+            up(){
+                if(this.currentIndex == 0){
+                    return;
+                }
+                this.data.detailEntitys = Object.assign([],this.upIndex(this.data.detailEntitys,this.currentIndex));
+                this.data.detailEntitys[this.currentIndex].index = this.currentIndex-1;
+                this.data.detailEntitys[this.currentIndex-1].index = this.currentIndex+1;
+                this.currentIndex = this.currentIndex-1;
+            },
+            //下移
+            down(){
+                if(this.currentIndex == this.data.detailEntitys.length -1){
+                    return;
+                }
+                this.data.detailEntitys = Object.assign([],this.downIndex(this.data.detailEntitys,this.currentIndex)); 
+                this.data.detailEntitys[this.currentIndex].index = this.currentIndex+1;
+                this.data.detailEntitys[this.currentIndex+1].index = this.currentIndex-1;
+                this.currentIndex = this.currentIndex+1;
+            },
+            tableRowClassName({row, rowIndex}) {
+                row.index = rowIndex;
+                if (row.isNoEdit) {
+                    return 'warning-row';
+                } else { 
+                    return 'edit-row';
+                    
+                }
+            },
+            currentChange(row) {
+                this.currentIndex = row.index;
+            },
             //删除明细
             delDetails(index) {
                 this.data.detailEntitys.splice(index, 1);
@@ -278,6 +345,9 @@
                 this.$refs.ruleForm.validate(valid => {
                     if (valid) {
                         this.viewDialog.butIsLoading = true;
+                        for(var i = 0 ; i < this.data.detailEntitys.length ; i++){
+                            this.data.detailEntitys[i].id = null;
+                        }
                         this.postHttp("/api/project/save", this.data).then(result => {
                             this.viewDialog.butIsLoading = false;
                             if (result.code == 200) {
@@ -378,4 +448,23 @@
         height: 42px;
         cursor: pointer;
     }
+    .sql-div{
+        background-color: #F5F7FA;
+        border-color: #E4E7ED;
+        color: #C0C4CC;
+        cursor: not-allowed;
+        -webkit-appearance: none;
+
+        border-radius: 4px;
+        border: 1px solid #DCDFE6;
+        color: #606266;
+        padding: 0 15px;
+    }
+    .el-table .warning-row {
+        background: #F5F7FA;
+    }
+    .el-table .edit-row {
+        background: #ffffff;
+    }
+    
 </style>
