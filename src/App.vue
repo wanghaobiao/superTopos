@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
         <el-menu class="el-menu-demo" mode="horizontal"
                  background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
@@ -14,18 +14,24 @@
             </el-submenu>
             <el-menu-item index="3">处理中心</el-menu-item>
         </el-menu>
-        <br>
-        <router-view></router-view>
-
+        <router-view style="margin-top: 8px;"></router-view>
     </div>
 </template>
 <script>
     export default {
+        created() {
+          
+            this.refreshScreenSize();
+            this.screenSize = this.screenSize;
+           
+        },
         data() {
             return {
+                screenSize:{}
             };
         },
         methods: {
+         
            jump(routerUrl){
                 this.$router.push(routerUrl);
            }
@@ -40,7 +46,17 @@
     display: table-cell!important;
     }
     .spacing {
+        margin-bottom: 22px;
+    }
+    .save-spacing{
+        text-align: right;
+        padding-top:  22px;
+    }
+    /* 分页样式  */
+    .pagination{
+        margin-top: 10px;
         margin-bottom: 10px;
+        text-align: right;
     }
     /***************************************** 详情样式开始 *****************************************/
     /* 详情宽度 */

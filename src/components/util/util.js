@@ -680,9 +680,10 @@ Vue.prototype.jumpOutLinks = function (url, urlName) {
     });
 }
 //刷新屏幕尺寸缓存
-Vue.prototype.refreshScreenSize = function (url, urlName) {
-    this.screenHeight = window.screen.height;
-    this.screenWidth = window.screen.width;
+Vue.prototype.refreshScreenSize = function () {
+
+    this.screenHeight = (document.documentElement.clientHeight || document.body.clientHeight) - 130;
+    this.screenWidth = (document.documentElement.clientWidth || document.body.clientWidth) - 18;
     this.screenSize = {width:this.screenWidth,height: this.screenHeight};
 }
 //去异常页面

@@ -1,8 +1,8 @@
 <!--项目表(project)-->
 <template>
-    <div>
-        <el-row :gutter="20">
-            <el-col :span="8">
+    <div :style="{height:(screenSize.height)+'px'}">
+        <el-row :gutter="10" style="height:100%">
+            <el-col :span="8" style="height:100%">
                 <!-- 列表框开始 -->
                 <div class="custom-tree-container tree-node">
                     <div class="block">
@@ -22,7 +22,7 @@
                 </div>
                 <!-- 列表框结束 -->
             </el-col>
-            <el-col :span="16">
+            <el-col :span="16" style="height:100%">
                 <div class="div-view" v-show="viewDialog.isShow">
                     <!-- 新增/编辑开始 -->
                     <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm">
@@ -50,7 +50,7 @@
                             <el-button type="primary"  @click.prevent="up()" :loading="viewDialog.butIsLoading" >上移</el-button>
                             <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" >下移</el-button>
                         </el-row>
-                        <el-table ref="tbEdit" :data="data.detailEntitys" border height="320" v-loading="viewDialog.butIsLoading" highlight-current-row :row-class-name="tableRowClassName"  @current-change="currentChange" class="tb-edit">
+                        <el-table ref="tbEdit" :data="data.detailEntitys" border :height="screenSize.height - 374" v-loading="viewDialog.butIsLoading" highlight-current-row :row-class-name="tableRowClassName"  @current-change="currentChange" class="tb-edit">
                             <el-table-column width="50" type="index" label="序号"></el-table-column>
                             <el-table-column label="名称" width="150">
                                 <template scope="scope">
@@ -147,6 +147,7 @@
         created() {
             this.search();
             this.getParams();
+            this.refreshScreenSize();
         },
         data() {
             return {
@@ -333,7 +334,8 @@
                     
                 }
             },
-            currentChange(row) {
+        
+    currentChange(row) {
                 this.currentIndex = row.index;
             },
             //删除明细
@@ -409,20 +411,18 @@
 </script>
 <style>
     .tree-node {
-        height: 600px;
-        border-radius: 25px;
-        padding: 8px;
-        border: 2px solid #ADADAD;
-    }
-    .div-view {
+        height: 100%;
         border-radius: 25px;
         padding: 20px;
         border: 2px solid #ADADAD;
     }
-    .save-spacing{
-        text-align: right;
-        padding-top:  20px;
+    .div-view {
+        height:100%;
+        border-radius: 25px;
+        padding: 20px;
+        border: 2px solid #ADADAD;
     }
+
 
     .custom-tree-node {
         flex: 1;

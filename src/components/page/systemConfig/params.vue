@@ -1,6 +1,6 @@
 <!--(params)-->
 <template>
-    <div>
+    <div :style="{height:(screenSize.height)+'px'}">
         <!-- 搜索框开始 -->
         <el-row :gutter="10">
             <el-col :span="12">
@@ -33,7 +33,7 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" row-key="id" height="500"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}">
+        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" row-key="id"  :height="screenSize.height - 190"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}">
             <el-table-column  property="name" label="参数名称" ></el-table-column>
             <el-table-column  property="number" label="参数编码" ></el-table-column>
             <el-table-column  property="isEnable" label="是否启用" ></el-table-column>
@@ -49,7 +49,7 @@
             </el-table-column>
         </el-table>
         <!-- 列表框结束 -->
-        <el-row :gutter="10">
+        <el-row :gutter="10" class="pagination" >
             <el-col :span="24" ><el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange"  
             :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination></el-col>
         </el-row>
@@ -96,6 +96,7 @@
         created() {
             this.search();
             this.getOptions();
+            this.refreshScreenSize();
         },
         data() {
             return {

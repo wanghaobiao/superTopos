@@ -1,6 +1,6 @@
 <!--项目表(project)-->
 <template>
-    <div>
+    <div :style="{height:(screenSize.height)+'px'}">
         <!-- 搜索框开始 -->
         <el-row :gutter="10">
             <el-col :span="12">
@@ -33,7 +33,7 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" height="500"  fit border style="width: 100%" >
+        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" :height="screenSize.height - 190"  fit border style="width: 100%" >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
             <el-table-column  property="name" label="名称" ></el-table-column>
@@ -54,7 +54,7 @@
             </el-table-column>
         </el-table>
         <!-- 列表框结束 -->
-        <el-row :gutter="10">
+        <el-row :gutter="10" class="pagination">
             <el-col :span="24" ><el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange"
                                                :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination></el-col>
         </el-row>
@@ -173,6 +173,7 @@
         created() {
             this.search();
             this.getParams();
+            this.refreshScreenSize();
         },
         data() {
             return {
@@ -276,7 +277,6 @@
             //添加明细
             addDetails() {
                 this.data.detailEntitys.push({
-                    parentId: this.data.id,
                     allowEmpty: "Y",
                     columnProperties : 'baseColumn',
                     type : 'varchar',
@@ -290,6 +290,7 @@
             },
             //保存
             save(){
+                console.log(JSON.stringify(this.data));
                 this.$refs.ruleForm.validate((valid) => {
                     if (valid) {
                         this.viewDialog.butIsLoading = true;
