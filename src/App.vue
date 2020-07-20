@@ -59,6 +59,12 @@
         text-align: right;
     }
     /***************************************** 详情样式开始 *****************************************/
+    .el-table .warning-row {
+        background: #F5F7FA;
+    }
+    .el-table .edit-row {
+        background: #ffffff;
+    }
     /* 详情宽度 */
     .view-dialog{
         width: 80%;

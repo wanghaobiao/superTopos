@@ -2,7 +2,7 @@
 <template>
     <div :style="{height:(screenSize.height)+'px'}">
         <el-row :gutter="10" style="height:100%">
-            <el-col :span="8" style="height:100%">
+            <el-col :span="6" style="height:100%">
                 <!-- 列表框开始 -->
                 <div class="custom-tree-container tree-node">
                     <div class="block">
@@ -22,24 +22,36 @@
                 </div>
                 <!-- 列表框结束 -->
             </el-col>
-            <el-col :span="16" style="height:100%">
+            <el-col :span="18" style="height:100%">
                 <div class="div-view" v-show="viewDialog.isShow">
                     <!-- 新增/编辑开始 -->
                     <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm">
-                        <el-form-item label="名称" clearable :label-width="formLabelWidth" prop="name">
-                            <el-input :disabled="!viewDialog.isEdit" v-model="data.name" placeholder="请输入名称"  autocomplete="off" ></el-input>
-                        </el-form-item>
-                        <el-form-item label="编号" clearable :label-width="formLabelWidth" prop="number">
-                            <el-input :disabled="!viewDialog.isEdit" v-model="data.number"  placeholder="请输入编号"  autocomplete="off" ></el-input>
-                        </el-form-item>
-                        <el-form-item label="备注" clearable :label-width="formLabelWidth" prop="remark">
-                            <el-input :disabled="!viewDialog.isEdit" v-model="data.remark" placeholder="请输入备注" autocomplete="off" ></el-input>
-                        </el-form-item>
-                        <el-form-item label="父对象"  clearable :label-width="formLabelWidth" prop="prefix">
-                            <el-input :disabled="true" v-model="data.projectEntity.name" autocomplete="off" ></el-input>
-                        </el-form-item>
+                        <el-row >
+                            <el-col :span="12">
+                                 <el-form-item label="名称" clearable :label-width="formLabelWidth" prop="name">
+                                    <el-input :disabled="!viewDialog.isEdit" v-model="data.name" placeholder="请输入名称"  autocomplete="off" ></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="编号" clearable :label-width="formLabelWidth" prop="number">
+                                    <el-input :disabled="!viewDialog.isEdit" v-model="data.number"  placeholder="请输入编号"  autocomplete="off" ></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>        
+                        <el-row >
+                            <el-col :span="12">
+                                <el-form-item label="备注" clearable :label-width="formLabelWidth" prop="remark">
+                                    <el-input :disabled="!viewDialog.isEdit" v-model="data.remark" placeholder="请输入备注" autocomplete="off" ></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="父对象"  clearable :label-width="formLabelWidth" prop="prefix">
+                                    <el-input :disabled="true" v-model="data.projectEntity.name" autocomplete="off" ></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>        
                         <el-form-item label="SQL"  clearable :label-width="formLabelWidth" v-if="viewDialog.isTools">
-                            <div class="sql-div" ref="sqlDiv" v-html="data.sql"  @click="sqlCopy()" >
+                            <div class="sql-div" ref="sqlDiv" v-html="data.sql"  @click="sqlCopy()" :style="{height:(screenSize.height - 140)+'px'}" >
                             </div>
                         </el-form-item>
                     </el-form>
@@ -50,23 +62,23 @@
                             <el-button type="primary"  @click.prevent="up()" :loading="viewDialog.butIsLoading" >上移</el-button>
                             <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" >下移</el-button>
                         </el-row>
-                        <el-table ref="tbEdit" :data="data.detailEntitys" border :height="screenSize.height - 374" v-loading="viewDialog.butIsLoading" highlight-current-row :row-class-name="tableRowClassName"  @current-change="currentChange" class="tb-edit">
+                        <el-table ref="tbEdit" :data="data.detailEntitys" border :height="screenSize.height - (viewDialog.isEdit ? 250 : 124)" v-loading="viewDialog.butIsLoading" highlight-current-row :row-class-name="tableRowClassName"  @current-change="currentChange" class="tb-edit">
                             <el-table-column width="50" type="index" label="序号"></el-table-column>
                             <el-table-column label="名称" width="150">
                                 <template scope="scope">
-                                    <el-input v-model="scope.row.name" placeholder="请输入名称" clearable></el-input>
+                                    <el-input v-model="scope.row.name" placeholder="请输入名称" :disabled="scope.row.columnProperties == 'linkColumn'" clearable></el-input>
                                     <span>{{scope.row.name}}</span>
                                 </template>
                             </el-table-column>
                             <el-table-column label="属性名" width="150" >
                                 <template scope="scope">
-                                    <el-input v-model="scope.row.number" placeholder="请输入属性名" clearable></el-input>
+                                    <el-input v-model="scope.row.number" placeholder="请输入属性名" :disabled="scope.row.columnProperties == 'linkColumn'" clearable></el-input>
                                     <span>{{scope.row.number}}</span>
                                 </template>
                             </el-table-column>
                             <el-table-column label="字段属性" width="150" >
                                 <template scope="scope">
-                                    <el-select v-model="scope.row.columnProperties" placeholder="请选择字段属性" @change="columnPropertiesChange(scope.row)">
+                                    <el-select v-model="scope.row.columnProperties" placeholder="请选择字段属性"  @change="columnPropertiesChange(scope.row)">
                                         <el-option v-for="item in getOptions('columnProperties')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
                                     </el-select>
                                     <span>{{scope.row.columnProperties | paramsFmt('columnProperties')}}</span>
@@ -82,13 +94,13 @@
                             </el-table-column>
                             <el-table-column label="关联表" width="150" >
                                 <template scope="scope">
-                                    <el-select v-model="scope.row.linkTable" placeholder="请选择关联表" :disabled="scope.row.columnProperties != 'linkColumn'">
+                                    <el-select v-model="scope.row.linkTable" placeholder="请选择关联表" :disabled="scope.row.columnProperties != 'linkColumn'"  @change="linkTableChange(scope.row)">
                                         <el-option v-for="item in tableOptions" :key="item.label" :label="item.label" :value="item.value"> </el-option>
                                     </el-select>
                                     <span>{{scope.row.linkTable | optionsFmt(tableOptions)}}</span>
                                 </template>
                             </el-table-column>
-                            <el-table-column label="关联参数" >
+                            <el-table-column label="关联参数" width="150">
                                 <template scope="scope">
                                     <el-input  v-model="scope.row.linkParam" placeholder="请输入关联参数" clearable :disabled="scope.row.columnProperties != 'paramColumn'"></el-input> <span>{{scope.row.linkParam}}</span>
                                 </template>
@@ -193,7 +205,7 @@
                     this.pageData["creationTime_le"] =
                         this.pageData.creationTime[1] + "T00:00:00";
                 }
-                this.pageData.parentId_isNull = null;
+                this.pageData.projectId_isNull = null;
                 this.getHttp(
                     "/api/project/findAll?" + this.jsonToUrl(this.pageData)
                 ).then(result => {
@@ -250,11 +262,6 @@
                             }
                         );
                     }
-                    for(var i = 0 ; i < this.data.detailEntitys.length ; i++){
-                        this.data.detailEntitys[i].isNoEdit = true;
-                        this.data.detailEntitys[i].parentId = null;
-                    }
-                    
                 });
               
             },
@@ -270,14 +277,14 @@
             },
             //复制语句
             sqlCopy(){
-                this.copy(this.$refs.sqlDiv.innerText);
+                //this.copy(this.$refs.sqlDiv.innerText);
             },
             //打开详情
             goView(row) {
                 this.getTableOptions(this.isEmpty(row.projectId) ? row.id : row.projectId);
                 this.viewDialog.isEdit = false;
                 this.viewDialog.isTools = false;
-                this.getHttp("/api/project/view?id=" + row.id, {}).then(result => {
+                this.getHttp("/api/project/editView?id=" + row.id, {}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
                     this.data.projectEntity  = {id : row.parentId,name : row.parentName};
@@ -288,7 +295,7 @@
                 this.getTableOptions(this.isEmpty(row.projectId) ? row.id : row.projectId);
                 this.viewDialog.isEdit = true;
                 this.viewDialog.isTools = false;
-                this.getHttp("/api/project/view?id=" + row.id).then(result => {
+                this.getHttp("/api/project/editView?id=" + row.id).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
                     this.data.projectEntity = {id : row.parentId,name : row.parentName};
@@ -325,17 +332,18 @@
                 this.data.detailEntitys[this.currentIndex+1].index = this.currentIndex-1;
                 this.currentIndex = this.currentIndex+1;
             },
+            //动态修改类名
             tableRowClassName({row, rowIndex}) {
                 row.index = rowIndex;
-                if (row.isNoEdit) {
+                if (this.isNotEmpty(row.id) || row.number == 'parentId') {
                     return 'warning-row';
                 } else { 
                     return 'edit-row';
                     
                 }
             },
-        
-    currentChange(row) {
+            //记录下标
+            currentChange(row) {
                 this.currentIndex = row.index;
             },
             //删除明细
@@ -347,9 +355,14 @@
                 this.$refs.ruleForm.validate(valid => {
                     if (valid) {
                         this.viewDialog.butIsLoading = true;
+                        var detailEntitysTemp = [];
                         for(var i = 0 ; i < this.data.detailEntitys.length ; i++){
-                            this.data.detailEntitys[i].id = null;
+                            if(this.isEmpty(this.data.detailEntitys[i].id) || this.data.detailEntitys[i].number == 'parentId'){
+                                this.data.detailEntitys[i].id = null;
+                                detailEntitysTemp.push(this.data.detailEntitys[i]);
+                            }
                         }
+                        this.data.detailEntitys = detailEntitysTemp;
                         this.postHttp("/api/project/save", this.data).then(result => {
                             this.viewDialog.butIsLoading = false;
                             if (result.code == 200) {
@@ -374,15 +387,20 @@
                 if(columnProperties == 'baseColumn'){
                     data.type = 'varchar'; 
                     data.length = '200'; 
+                    data.linkTable = ''; 
+                    data.linkParam = ''; 
                 }else if(columnProperties == 'linkColumn'){
                     data.type = ''; 
                     data.length = ''; 
+                    data.linkParam = ''; 
                 }else if(columnProperties == 'paramColumn'){
                     data.type = ''; 
                     data.length = ''; 
+                    data.linkTable = ''; 
+                   
                 }
-                data.linkTable = ''; 
-                data.linkParam = ''; 
+                data.name = ''; 
+                data.number = ''; 
                 data.allowEmpty = 'Y';
             },
              //字段类型改变
@@ -406,7 +424,19 @@
                 }
                 data.defaultValue = ''; 
             },
-        }
+            linkTableChange(data){
+                var id = data.linkTable;
+                for(var i = 0; i < this.tableOptions.length ; i++){
+                    var obj = this.tableOptions[i];
+                    if(id == obj.value){
+                        data.name = obj.label; 
+                        data.number = obj.number;
+                        return;
+                    }
+                }
+            },
+        },
+        
     };
 </script>
 <style>
@@ -449,6 +479,7 @@
         cursor: pointer;
     }
     .sql-div{
+        overflow-y:scroll;
         background-color: #F5F7FA;
         border-color: #E4E7ED;
         color: #C0C4CC;
@@ -460,11 +491,5 @@
         color: #606266;
         padding: 0 15px;
     }
-    .el-table .warning-row {
-        background: #F5F7FA;
-    }
-    .el-table .edit-row {
-        background: #ffffff;
-    }
-    
+  
 </style>

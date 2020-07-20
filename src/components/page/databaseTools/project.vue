@@ -33,7 +33,7 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" :height="screenSize.height - 190"  fit border style="width: 100%" >
+        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" :height="screenSize.height - 190"   fit border style="width: 100%" >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
             <el-table-column  property="name" label="名称" ></el-table-column>
@@ -78,7 +78,7 @@
             <el-row class="spacing" v-show="viewDialog.isEdit">
                 <el-button type="primary" @click.prevent="addDetails()" :loading="viewDialog.butIsLoading">新增</el-button>
             </el-row>
-            <el-table :data="data.detailEntitys"  border height="320"  v-loading="viewDialog.butIsLoading" :highlight-current-row="viewDialog.isEdit" class="tb-edit" >
+            <el-table :data="data.detailEntitys"  border height="250"  v-loading="viewDialog.butIsLoading" row-class-name="edit-row" :highlight-current-row="viewDialog.isEdit" class="tb-edit" >
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
                 <el-table-column label="名称">
                     <template scope="scope">
@@ -216,7 +216,7 @@
                     this.pageData['creationTime_ge'] = this.pageData.creationTime[0]+'T00:00:00';
                     this.pageData['creationTime_le'] = this.pageData.creationTime[1]+'T00:00:00';
                 }
-                this.pageData.parentId_isNull = null;
+                this.pageData.projectId_isNull = null;
                 this.getHttp("/api/project/findAllPageByParams?"+this.jsonToUrl(this.pageData)).then(result => {
                     this.listData = result;
                     this.listData.loading = false;
