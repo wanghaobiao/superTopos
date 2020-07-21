@@ -51,7 +51,7 @@
                             </el-col>
                         </el-row>        
                         <el-form-item label="SQL"  clearable :label-width="formLabelWidth" v-if="viewDialog.isTools">
-                            <div class="sql-div" ref="sqlDiv" v-html="data.sql"  @click="sqlCopy()" :style="{height:(screenSize.height - 140)+'px'}" >
+                            <div class="sql-div" ref="sqlDiv" v-html="data.sql"  @click="sqlCopy()" :style="{height:(screenSize.height - 180)+'px'}" >
                             </div>
                         </el-form-item>
                     </el-form>
@@ -59,8 +59,8 @@
                     <div v-if="data.level != 2 && !viewDialog.isTools">
                         <el-row class="spacing" v-show="viewDialog.isEdit">
                             <el-button type="primary"  @click.prevent="addDetails()" :loading="viewDialog.butIsLoading" >新增</el-button>
-                            <el-button type="primary"  @click.prevent="up()" :loading="viewDialog.butIsLoading" >上移</el-button>
-                            <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" >下移</el-button>
+                            <el-button type="warning"  @click.prevent="up()" :loading="viewDialog.butIsLoading" plain>上移</el-button>
+                            <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" plain>下移</el-button>
                         </el-row>
                         <el-table ref="tbEdit" :data="data.detailEntitys" border :height="screenSize.height - (viewDialog.isEdit ? 250 : 124)" v-loading="viewDialog.butIsLoading" highlight-current-row :row-class-name="tableRowClassName"  @current-change="currentChange" class="tb-edit">
                             <el-table-column width="50" type="index" label="序号"></el-table-column>
@@ -139,15 +139,36 @@
                             </el-table-column> -->
                             <el-table-column label="操作" v-if="viewDialog.isEdit">
                                 <template slot-scope="scope">
-                                    <el-button type="danger" plain size="small" @click="delDetails(scope.$index)" v-if="isEmpty(scope.row.id)">删除</el-button>
+                                    <el-button type="danger" plain size="small" @click="delDetails(scope.$index)" v-if="isEmpty(scope.row.id) && scope.row.number != 'parentId'">删除</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
                     </div>
+                     <el-row class="tool-spacing" v-show="viewDialog.isTools">
+                        <el-button @click="viewDialog.isShow = false" >执行SQL</el-button>
+                        <el-button type="primary" @click="buildFileDialog.isShow = true" :loading="viewDialog.butIsLoading" v-if="data.level == 3" >生成代码</el-button>
+                    </el-row>
                     <el-row class="save-spacing" v-show="viewDialog.isEdit">
                         <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading">取 消</el-button>
                         <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
                     </el-row>
+                    <el-dialog title="生成代码" :visible.sync="buildFileDialog.isShow" width="30%" >
+                        <el-checkbox-group v-model="buildFileDialog.fileTypes" >
+                            <div  v-for="item in (parseInt(getOptions('fileType').length / 3) + 1)" :key="item.label">
+                                <el-row :class="item != 1 ? 'margin-top-22' : ''" >
+                                    <el-col :span="8" v-if="((item - 1)*3+0) < getOptions('fileType').length" ><el-checkbox v-model="getOptions('fileType')[(item - 1)*3+0].value" :label="getOptions('fileType')[(item - 1)*3+0].value" border></el-checkbox></el-col>
+                                    <el-col :span="8" v-if="((item - 1)*3+1) < getOptions('fileType').length" ><el-checkbox v-model="getOptions('fileType')[(item - 1)*3+1].value" :label="getOptions('fileType')[(item - 1)*3+1].value" border></el-checkbox></el-col>
+                                    <el-col :span="8" v-if="((item - 1)*3+2) < getOptions('fileType').length" ><el-checkbox v-model="getOptions('fileType')[(item - 1)*3+2].value" :label="getOptions('fileType')[(item - 1)*3+2].value" border></el-checkbox></el-col>
+                                </el-row> 
+                            </div>
+                        </el-checkbox-group>   
+                        <span slot="footer" >
+                            <el-button @click="buildFileDialog.isShow = false">取 消</el-button>
+                            <el-button  :type="this.buildFileDialog.isAllSelect ? 'warning' : 'primary'" plain  @click="fileTypesAll">{{this.buildFileDialog.isAllSelect ? '取消全选' : '全 选'}}</el-button>
+                            <el-button type="primary"  @click="buildFile">确 定</el-button>
+                        </span>
+                    </el-dialog>
+
                     <!-- 新增/编辑结束 -->
                 </div>
             </el-col>
@@ -174,6 +195,12 @@
                     isEdit: false,
                     butIsLoading: false
                 },
+                buildFileDialog: {
+                    isAllSelect:false,
+                    isShow: false,
+                    butIsLoading: false,
+                    fileTypes:[],
+                },
                 tableOptions:[],
                 formLabelWidth: "120px",
                 currentIndex: null,
@@ -192,7 +219,7 @@
                     remark: [
                         {required: false, message: "请输入备注", trigger: "blur"}
                     ]
-                }
+                },
             };
         },
         methods: {
@@ -262,6 +289,7 @@
                             }
                         );
                     }
+                    console.log(JSON.stringify(this.data));
                 });
               
             },
@@ -272,6 +300,7 @@
                 this.getHttp("/api/project/tools?id=" + row.id, {}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
+                    this.data.level = row.level;
                     this.data.projectEntity  = {id : row.parentId,name : row.parentName};
                 });
             },
@@ -383,6 +412,10 @@
             },
             //字段属性改变
             columnPropertiesChange(data){
+                data = {
+                    allowEmpty: "Y",
+                    isKey: "N"
+                };
                 var columnProperties = data.columnProperties;
                 if(columnProperties == 'baseColumn'){
                     data.type = 'varchar'; 
@@ -390,20 +423,11 @@
                     data.linkTable = ''; 
                     data.linkParam = ''; 
                 }else if(columnProperties == 'linkColumn'){
-                    data.type = ''; 
-                    data.length = ''; 
-                    data.linkParam = ''; 
                 }else if(columnProperties == 'paramColumn'){
-                    data.type = ''; 
-                    data.length = ''; 
-                    data.linkTable = ''; 
-                   
                 }
-                data.name = ''; 
-                data.number = ''; 
-                data.allowEmpty = 'Y';
+                
             },
-             //字段类型改变
+            //字段类型改变
             typeChange(data){
                 var type = data.type;
                 if(type == 'int'){
@@ -424,6 +448,7 @@
                 }
                 data.defaultValue = ''; 
             },
+            //关联表改变了
             linkTableChange(data){
                 var id = data.linkTable;
                 for(var i = 0; i < this.tableOptions.length ; i++){
@@ -431,9 +456,27 @@
                     if(id == obj.value){
                         data.name = obj.label; 
                         data.number = obj.number;
+                        data.remark = obj.parentNumber;
                         return;
                     }
                 }
+            },
+            //全选
+            fileTypesAll(){
+                this.buildFileDialog.isAllSelect = !this.buildFileDialog.isAllSelect;
+                this.buildFileDialog.fileTypes = [];
+                if(this.buildFileDialog.isAllSelect){
+                    for(var i = 0 ; i < this.getOptions('fileType').length; i++){
+                        this.buildFileDialog.fileTypes.push(this.getOptions('fileType')[i].value);
+                    }
+                }
+            },
+            //生成文件
+            buildFile(){
+                console.log(JSON.stringify(this.buildFileDialog.fileTypes));
+                this.postHttp("/api/project/buildFile?id="+this.data.id, this.buildFileDialog.fileTypes).then(result => {
+                    this.search();
+                });
             },
         },
         
@@ -491,5 +534,7 @@
         color: #606266;
         padding: 0 15px;
     }
-  
+    .tool-spacing{
+        text-align: right;
+    }
 </style>

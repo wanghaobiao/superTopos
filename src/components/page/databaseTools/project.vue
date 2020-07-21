@@ -33,7 +33,7 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" :height="screenSize.height - 190"   fit border style="width: 100%" >
+        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - 190"   fit border style="width: 100%" >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
             <el-table-column  property="name" label="名称" ></el-table-column>
@@ -46,7 +46,7 @@
             <el-table-column  property="lastUpdateTime" label="最后修改时间" ></el-table-column>
             <el-table-column  property="audit" label="审核人" ></el-table-column>
             <el-table-column  property="auditTime" label="审核时间" ></el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作"  fixed="right">
                 <template slot-scope="scope">
                     <el-button type="success" plain size="small" @click="goView(scope.row.id)">查看</el-button>
                     <el-button type="primary" plain size="small" @click="goEdit(scope.row.id)">编辑</el-button>
@@ -77,6 +77,8 @@
             <!-- 新增明细开始 -->
             <el-row class="spacing" v-show="viewDialog.isEdit">
                 <el-button type="primary" @click.prevent="addDetails()" :loading="viewDialog.butIsLoading">新增</el-button>
+                <el-button type="warning"  @click.prevent="up()" :loading="viewDialog.butIsLoading" plain>上移</el-button>
+                <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" plain>下移</el-button>
             </el-row>
             <el-table :data="data.detailEntitys"  border height="250"  v-loading="viewDialog.butIsLoading" row-class-name="edit-row" :highlight-current-row="viewDialog.isEdit" class="tb-edit" >
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
@@ -153,7 +155,7 @@
                         <span>{{scope.row.remark}}</span>
                     </template>
                 </el-table-column> -->
-                <el-table-column label="操作" v-if="viewDialog.isEdit">
+                <el-table-column label="操作" v-if="viewDialog.isEdit"  fixed="right">
                     <template slot-scope="scope">
                         <el-button type="danger" plain size="small" @click="delDetails(scope.$index)">删除</el-button>
                     </template>
@@ -349,6 +351,26 @@
                     data.places = ''; 
                 }
                 data.defaultValue = ''; 
+            },
+            //上移
+            up(){
+                if(this.currentIndex == 0){
+                    return;
+                }
+                this.data.detailEntitys = Object.assign([],this.upIndex(this.data.detailEntitys,this.currentIndex));
+                this.data.detailEntitys[this.currentIndex].index = this.currentIndex-1;
+                this.data.detailEntitys[this.currentIndex-1].index = this.currentIndex+1;
+                this.currentIndex = this.currentIndex-1;
+            },
+            //下移
+            down(){
+                if(this.currentIndex == this.data.detailEntitys.length -1){
+                    return;
+                }
+                this.data.detailEntitys = Object.assign([],this.downIndex(this.data.detailEntitys,this.currentIndex)); 
+                this.data.detailEntitys[this.currentIndex].index = this.currentIndex+1;
+                this.data.detailEntitys[this.currentIndex+1].index = this.currentIndex-1;
+                this.currentIndex = this.currentIndex+1;
             },
         }
     };
