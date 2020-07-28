@@ -391,8 +391,9 @@
                                 detailEntitysTemp.push(this.data.detailEntitys[i]);
                             }
                         }
-                        this.data.detailEntitys = detailEntitysTemp;
-                        this.postHttp("/api/project/save", this.data).then(result => {
+                        var dataSave = Object.assign({},this.data);
+                        dataSave.detailEntitys = detailEntitysTemp;
+                        this.postHttp("/api/project/save", dataSave).then(result => {
                             this.viewDialog.butIsLoading = false;
                             if (result.code == 200) {
                                 this.viewDialog.isShow = false;

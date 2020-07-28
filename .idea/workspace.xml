@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="" />
+    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/mallManagement/orderManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/mallManagement/orderManagement.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,6 +99,7 @@
       <workItem from="1595327418023" duration="38000" />
       <workItem from="1595379826919" duration="661000" />
       <workItem from="1595918797494" duration="276000" />
+      <workItem from="1595920175267" duration="642000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -202,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595918835983</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="完成树形菜单结构">
+      <created>1595920216022</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1595920216022</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,10 +282,10 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="690" y="285" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594480035322" />
-    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1595918835359">
+    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1595920215251">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1595918835359" />
+    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1595920215251" />
     <state x="92" y="92" width="1736" height="835" key="DiffContextDialog" timestamp="1595088111343">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
@@ -291,10 +302,10 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor/0.0.1920.1019@0.0.1920.1019" timestamp="1594948529733" />
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1595918837110">
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1595920217536">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1595918837110" />
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1595920217536" />
     <state x="92" y="92" width="1736" height="835" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1595079496898">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>

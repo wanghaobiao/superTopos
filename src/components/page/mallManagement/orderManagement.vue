@@ -114,7 +114,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item  label="商品类型" :label-width="formLabelWidth" prop="productTypes">
+                        <el-form-item  label="商品类型" :label-width="formLabelWidth" prop="productTypesEntity">
                             <el-select :disabled="viewDialog.isView" v-model="data.productTypesEntity" value-key="id" clearable placeholder="请选择商品类型" style="width: 100%">
                                 <el-option v-for="item in entityOptions.productTypes" :key="item.label" :label="item.label" :value="item"> </el-option>
                             </el-select>
@@ -252,7 +252,7 @@
                     remark : [
                         { required: false, message: '请输入备注', trigger: 'blur' },
                     ],
-                    productTypes : [
+                    productTypesEntity : [
                         { required: true, message: '请输入商品类型', trigger: 'blur' },
                     ],
                     isEffective : [
