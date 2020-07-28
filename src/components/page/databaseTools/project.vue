@@ -2,27 +2,37 @@
 <template>
     <div :style="{height:(screenSize.height)+'px'}">
         <!-- 搜索框开始 -->
-        <el-row :gutter="10">
-            <el-col :span="12">
-                <el-form :inline="true"  class="demo-form-inline">
-                    <el-form-item label="名称" >
-                        <el-input v-model="pageData.name_eq" placeholder="请输入名称"></el-input>
-                    </el-form-item>
-                    <el-form-item label="编号" >
-                        <el-input v-model="pageData.number_eq" placeholder="请输入编号"></el-input>
-                    </el-form-item>
-                    <el-form-item label="创建人" >
-                        <el-input v-model="pageData.create_eq" placeholder="请输入创建人"></el-input>
-                    </el-form-item>
-                </el-form>
-                <el-form :inline="true"  class="demo-form-inline">
-                    <el-form-item label="创建时间" >
-                        <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
-                    </el-form-item>
+        <el-row  >
+            <el-col :span="18">
+                <el-form  class="demo-form-inline">
+                    <el-row>
+                        <el-col :span="8">
+                            <el-form-item  label="名称" :label-width="formLabelWidth">
+                                <el-input v-model="pageData.name_eq" placeholder="请输入名称" autocomplete="off"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item label="编号" :label-width="formLabelWidth">
+                                <el-input v-model="pageData.number_eq" placeholder="请输入编号"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item label="创建人" :label-width="formLabelWidth">
+                                <el-input v-model="pageData.create_eq" placeholder="请输入创建人" ></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :span="8">
+                            <el-form-item label="创建时间" :label-width="formLabelWidth" >
+                                <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width:100%"></el-date-picker>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
                 </el-form>
             </el-col>
-            <el-col :span="6">
-                <el-button type="primary" @click.prevent="search()">搜索</el-button>
+            <el-col :span="4" :offset="2">
+                <el-button type="primary"  @click.prevent="search()">搜索</el-button>
             </el-col>
         </el-row>
         <!-- 搜索框结束 -->
@@ -33,19 +43,20 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - 190"   fit border style="width: 100%" >
+        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - 190" fit border >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
             <el-table-column  property="name" label="名称" ></el-table-column>
             <el-table-column  property="number" label="编号" ></el-table-column>
             <el-table-column  property="remark" label="备注" ></el-table-column>
             <el-table-column  property="prefix" label="前缀" ></el-table-column>
+            <el-table-column  property="dataBaseType" label="数据库类型" ></el-table-column>
             <el-table-column  property="create" label="创建人" ></el-table-column>
             <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
             <el-table-column  property="lastUpdateUser" label="最后修改人" ></el-table-column>
-            <el-table-column  property="lastUpdateTime" label="最后修改时间" ></el-table-column>
+            <!-- <el-table-column  property="lastUpdateTime" label="最后修改时间" ></el-table-column> -->
             <el-table-column  property="audit" label="审核人" ></el-table-column>
-            <el-table-column  property="auditTime" label="审核时间" ></el-table-column>
+            <!-- <el-table-column  property="auditTime" label="审核时间" ></el-table-column> -->
             <el-table-column label="操作"  fixed="right">
                 <template slot-scope="scope">
                     <el-button type="success" plain size="small" @click="goView(scope.row.id)">查看</el-button>
@@ -55,32 +66,52 @@
         </el-table>
         <!-- 列表框结束 -->
         <el-row :gutter="10" class="pagination">
-            <el-col :span="24" ><el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange"
-                                               :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination></el-col>
+            <el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange" :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination>
         </el-row>
         <!-- 新增/编辑开始 -->
-        <el-dialog :title="viewDialog.isEdit ? '新增' : '查看'" :visible.sync="viewDialog.isShow" customClass="view-dialog" >
+        <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" >
             <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
-                <el-form-item label="名称" clearable :label-width="formLabelWidth" prop="name">
-                    <el-input :disabled="!viewDialog.isEdit" v-model="data.name" placeholder="请输入名称" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="编号" clearable :label-width="formLabelWidth" prop="number">
-                    <el-input :disabled="!viewDialog.isEdit" v-model="data.number" placeholder="请输入编号" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="备注" clearable :label-width="formLabelWidth" prop="remark">
-                    <el-input :disabled="!viewDialog.isEdit" v-model="data.remark" placeholder="请输入备注" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="前缀" clearable :label-width="formLabelWidth" prop="prefix">
-                    <el-input :disabled="!viewDialog.isEdit" v-model="data.prefix" placeholder="请输入前缀" autocomplete="off"></el-input>
-                </el-form-item>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="名称" clearable :label-width="formLabelWidth" prop="name">
+                            <el-input :disabled="viewDialog.isView" v-model="data.name" placeholder="请输入名称" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="编号" clearable :label-width="formLabelWidth" prop="number">
+                            <el-input :disabled="viewDialog.isView" v-model="data.number" placeholder="请输入编号" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="备注" clearable :label-width="formLabelWidth" prop="remark">
+                            <el-input :disabled="viewDialog.isView" v-model="data.remark" placeholder="请输入备注" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="前缀" clearable :label-width="formLabelWidth" prop="prefix">
+                            <el-input :disabled="viewDialog.isView" v-model="data.prefix" placeholder="请输入前缀" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="数据库类型" clearable :label-width="formLabelWidth" prop="remark">
+                            <el-select v-model="data.dataBaseType" placeholder="请选择" :disabled="viewDialog.isView" >
+                                <el-option v-for="item in getOptions('dataBaseType')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                            </el-select>                        
+                        </el-form-item>
+                    </el-col>
+                </el-row>
             </el-form>
             <!-- 新增明细开始 -->
-            <el-row class="spacing" v-show="viewDialog.isEdit">
+            <el-row class="spacing" v-show="!viewDialog.isView">
                 <el-button type="primary" @click.prevent="addDetails()" :loading="viewDialog.butIsLoading">新增</el-button>
                 <el-button type="warning"  @click.prevent="up()" :loading="viewDialog.butIsLoading" plain>上移</el-button>
                 <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" plain>下移</el-button>
             </el-row>
-            <el-table :data="data.detailEntitys"  border height="250"  v-loading="viewDialog.butIsLoading" row-class-name="edit-row" :highlight-current-row="viewDialog.isEdit" class="tb-edit" >
+            <el-table :data="data.detailEntitys"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit" >
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
                 <el-table-column label="名称">
                     <template scope="scope">
@@ -149,20 +180,14 @@
                         <span>{{scope.row.defaultValue}}</span>
                     </template>
                 </el-table-column>
-                <!-- <el-table-column label="备注">
-                    <template scope="scope">
-                        <el-input v-model="scope.row.remark" placeholder="请输入备注" clearable></el-input>
-                        <span>{{scope.row.remark}}</span>
-                    </template>
-                </el-table-column> -->
-                <el-table-column label="操作" v-if="viewDialog.isEdit"  fixed="right">
+                <el-table-column label="操作" v-if="!viewDialog.isView"  fixed="right">
                     <template slot-scope="scope">
                         <el-button type="danger" plain size="small" @click="delDetails(scope.$index)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
             <!-- 新增明细结束 -->
-            <span slot="footer" class="dialog-footer" v-show="viewDialog.isEdit">
+            <span slot="footer" class="dialog-footer" v-show="!viewDialog.isView">
                 <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading">取 消</el-button>
                 <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
             </span>
@@ -179,24 +204,25 @@
         },
         data() {
             return {
+                formLabelWidth: "100px",
                 pageData:{
                     page:1,
                     size:5,
                     sort:'creationTime,DESC',
                 },
-                viewDialog:{
-                    isShow: false,
-                    isEdit: false,
-                    butIsLoading: false,
-                },
-                tableOptions:[],
-                formLabelWidth: "120px",
-                data: {
-                    detailEntitys: []
-                },
                 listData: {
                     loading:false,
                 },
+                viewDialog:{
+                    isShow: false,
+                    isView: false,
+                    butIsLoading: false,
+                },
+                tableOptions:[],
+                data: {
+                    detailEntitys: []
+                },
+                currentIndex:null,
                 rules: {
                     name : [
                         { required: false, message: '请输入名称', trigger: 'blur' },
@@ -213,6 +239,7 @@
         methods: {
             //执行搜索
             search() {
+                
                 this.listData.loading = true;
                 if(!this.isEmpty(this.pageData.creationTime)){
                     this.pageData['creationTime_ge'] = this.pageData.creationTime[0]+'T00:00:00';
@@ -252,7 +279,7 @@
             goAdd() {
                 this.tableOptions = [];
                 this.viewDialog.isShow = true;
-                this.viewDialog.isEdit = true;
+                this.viewDialog.isView = null;
                 this.data = {
                     level: 1,
                     detailEntitys: []
@@ -261,7 +288,7 @@
             //打开详情
             goView(id) {
                 this.getTableOptions(id);
-                this.viewDialog.isEdit = false;
+                this.viewDialog.isView = true;
                 this.getHttp("/api/project/view?id="+id,{}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
@@ -270,7 +297,7 @@
             //打开编辑
             goEdit(id) {
                 this.getTableOptions(id);
-                this.viewDialog.isEdit = true;
+                this.viewDialog.isView = false;
                 this.getHttp("/api/project/view?id="+id).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
@@ -278,7 +305,9 @@
             },
             //添加明细
             addDetails() {
+                var length = this.data.detailEntitys.length;
                 this.data.detailEntitys.push({
+                    index : length,
                     allowEmpty: "Y",
                     columnProperties : 'baseColumn',
                     type : 'varchar',
@@ -292,10 +321,12 @@
             },
             //保存
             save(){
-                console.log(JSON.stringify(this.data));
                 this.$refs.ruleForm.validate((valid) => {
                     if (valid) {
                         this.viewDialog.butIsLoading = true;
+                        for(var i = 0; i < this.data.detailEntitys.length; i++){
+                            this.data.detailEntitys[i].id = null;
+                        }
                         this.postHttp("/api/project/save",this.data).then(result => {
                             this.viewDialog.butIsLoading = false;
                             if(result.code == 200){
@@ -308,7 +339,7 @@
                     }
                 });
             },
-             //获取table 下拉参数
+            //获取table 下拉参数
             getTableOptions(id) {
                 this.getHttp("/api/project/getTableOptions?id="+id,{}).then(result => {
                     this.tableOptions = result;
@@ -351,6 +382,19 @@
                     data.places = ''; 
                 }
                 data.defaultValue = ''; 
+            },
+            //记录下标
+            currentChange(row) {
+                this.currentIndex = row.index;
+            },
+            //动态修改类名
+            tableRowClassName({row, rowIndex}) {
+                row.index = rowIndex;
+                if(this.isView){
+                    return 'warning-row';
+                } else { 
+                    return 'edit-row';
+                }
             },
             //上移
             up(){

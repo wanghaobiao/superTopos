@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "10292039",
+      "name": "删 除",
+      "font_class": "del",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "14444810",
+      "name": "查看",
+      "font_class": "chakan",
+      "unicode": "e716",
+      "unicode_decimal": 59158
+    },
+    {
+      "icon_id": "4511736",
+      "name": "修改记录",
+      "font_class": "edit",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
       "icon_id": "724352",
       "name": "工具",
       "font_class": "tool",
@@ -22,7 +43,7 @@
     {
       "icon_id": "15964419",
       "name": "清单/信息/设备基础信息/工单信息",
-      "font_class": "item-4",
+      "font_class": "view",
       "unicode": "e6cb",
       "unicode_decimal": 59083
     },

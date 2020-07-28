@@ -10,11 +10,11 @@
                              <span class="custom-tree-node" slot-scope="{ node, data }">
                                 <span><i :class="data.icon" :style="{color : data.color}"></i>  {{ node.label }}</span>
                                 <span>
-                                    <el-button type="warning" icon="al-icon-tool" size="small" circle @click="() => goTools(data)"></el-button>
-                                    <el-button type="info" icon="el-icon-search" size="small" circle @click="() => goView(data)"></el-button>
-                                    <el-button type="success" icon="al-icon-add-details" size="small" circle @click="() => goAdd(data)"></el-button>
-                                    <el-button type="primary" icon="el-icon-edit" size="small" circle @click="() => goEdit(data)"></el-button>
-                                    <el-button type="danger" icon="el-icon-delete" size="small" circle @click="() => batchDel(data.id)" ></el-button>
+                                    <el-button type="warning" icon="al-icon-tool" size="small" class="operat-but" circle @click="() => goTools(data)"></el-button>
+                                    <el-button type="info" icon="al-icon-view" size="small" class="operat-but" circle @click="() => goView(data)"></el-button>
+                                    <el-button type="success" icon="al-icon-add-details" size="small" class="operat-but" circle @click="() => goAdd(data)"></el-button>
+                                    <el-button type="primary" icon="al-icon-edit" size="small" class="operat-but" circle @click="() => goEdit(data)"></el-button>
+                                    <el-button type="danger" icon="al-icon-del" size="small" class="operat-but" circle @click="() => batchDel(data.id)" ></el-button>
                                 </span>
                              </span>
                         </el-tree>
@@ -46,7 +46,8 @@
                             </el-col>
                             <el-col :span="12">
                                 <el-form-item label="父对象"  clearable :label-width="formLabelWidth" prop="prefix">
-                                    <el-input :disabled="true" v-model="data.projectEntity.name" autocomplete="off" ></el-input>
+                                    <el-input :disabled="true" v-if="data.projectEntity != undefined" v-model="data.projectEntity.name" autocomplete="off" ></el-input>
+                                    <el-input :disabled="true" v-if="data.projectEntity == undefined" v-model="data.projectEntity" autocomplete="off" ></el-input>
                                 </el-form-item>
                             </el-col>
                         </el-row>        
@@ -78,7 +79,7 @@
                             </el-table-column>
                             <el-table-column label="字段属性" width="150" >
                                 <template scope="scope">
-                                    <el-select v-model="scope.row.columnProperties" placeholder="请选择字段属性"  @change="columnPropertiesChange(scope.row)">
+                                    <el-select v-model="scope.row.columnProperties" placeholder="请选择字段属性"  @change="columnPropertiesChange(scope.$index,scope.row.columnProperties)">
                                         <el-option v-for="item in getOptions('columnProperties')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
                                     </el-select>
                                     <span>{{scope.row.columnProperties | paramsFmt('columnProperties')}}</span>
@@ -131,12 +132,6 @@
                                     <span>{{scope.row.defaultValue}}</span>
                                 </template>
                             </el-table-column>
-                            <!-- <el-table-column label="备注">
-                                <template scope="scope">
-                                    <el-input v-model="scope.row.remark" placeholder="请输入备注" clearable></el-input>
-                                    <span>{{scope.row.remark}}</span>
-                                </template>
-                            </el-table-column> -->
                             <el-table-column label="操作" v-if="viewDialog.isEdit">
                                 <template slot-scope="scope">
                                     <el-button type="danger" plain size="small" @click="delDetails(scope.$index)" v-if="isEmpty(scope.row.id) && scope.row.number != 'parentId'">删除</el-button>
@@ -156,15 +151,15 @@
                         <el-checkbox-group v-model="buildFileDialog.fileTypes" >
                             <div  v-for="item in (parseInt(getOptions('fileType').length / 3) + 1)" :key="item.label">
                                 <el-row :class="item != 1 ? 'margin-top-22' : ''" >
-                                    <el-col :span="8" v-if="((item - 1)*3+0) < getOptions('fileType').length" ><el-checkbox v-model="getOptions('fileType')[(item - 1)*3+0].value" :label="getOptions('fileType')[(item - 1)*3+0].value" border></el-checkbox></el-col>
-                                    <el-col :span="8" v-if="((item - 1)*3+1) < getOptions('fileType').length" ><el-checkbox v-model="getOptions('fileType')[(item - 1)*3+1].value" :label="getOptions('fileType')[(item - 1)*3+1].value" border></el-checkbox></el-col>
-                                    <el-col :span="8" v-if="((item - 1)*3+2) < getOptions('fileType').length" ><el-checkbox v-model="getOptions('fileType')[(item - 1)*3+2].value" :label="getOptions('fileType')[(item - 1)*3+2].value" border></el-checkbox></el-col>
-                                </el-row> 
+                                    <el-col :span="8" v-if="((item - 1)*3+0) < getOptions('fileType').length" ><el-checkbox class="fileType-checkbox" v-model="getOptions('fileType')[(item - 1)*3+0].value" :label="getOptions('fileType')[(item - 1)*3+0].value" border></el-checkbox></el-col>
+                                    <el-col :span="8" v-if="((item - 1)*3+1) < getOptions('fileType').length" ><el-checkbox class="fileType-checkbox" v-model="getOptions('fileType')[(item - 1)*3+1].value" :label="getOptions('fileType')[(item - 1)*3+1].value" border></el-checkbox></el-col>
+                                    <el-col :span="8" v-if="((item - 1)*3+2) < getOptions('fileType').length" ><el-checkbox class="fileType-checkbox" v-model="getOptions('fileType')[(item - 1)*3+2].value" :label="getOptions('fileType')[(item - 1)*3+2].value" border></el-checkbox></el-col>
+                                </el-row> fileType-
                             </div>
                         </el-checkbox-group>   
                         <span slot="footer" >
                             <el-button @click="buildFileDialog.isShow = false">取 消</el-button>
-                            <el-button  :type="this.buildFileDialog.isAllSelect ? 'warning' : 'primary'" plain  @click="fileTypesAll">{{this.buildFileDialog.isAllSelect ? '取消全选' : '全 选'}}</el-button>
+                            <el-button  :type="this.buildFileDialog.isAllSelect ? 'success' : 'primary'" plain  @click="fileTypesAll">{{this.buildFileDialog.isAllSelect ? '取消全选' : '全 选'}}</el-button>
                             <el-button type="primary"  @click="buildFile">确 定</el-button>
                         </span>
                     </el-dialog>
@@ -296,6 +291,7 @@
             //打开工具箱
             goTools(row) {
                 this.getTableOptions(this.isEmpty(row.projectId) ? row.id : row.projectId);
+                this.viewDialog.isEdit = false;
                 this.viewDialog.isTools = true;
                 this.getHttp("/api/project/tools?id=" + row.id, {}).then(result => {
                     this.viewDialog.isShow = true;
@@ -306,8 +302,13 @@
             },
             //复制语句
             sqlCopy(){
-                //this.copy(this.$refs.sqlDiv.innerText);
-            },
+                var selection = window.getSelection();
+                var range = document.createRange();
+                range.selectNodeContents(this.$refs.sqlDiv);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                //this.copy(text);
+            },  
             //打开详情
             goView(row) {
                 this.getTableOptions(this.isEmpty(row.projectId) ? row.id : row.projectId);
@@ -316,7 +317,7 @@
                 this.getHttp("/api/project/editView?id=" + row.id, {}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
-                    this.data.projectEntity  = {id : row.parentId,name : row.parentName};
+                    //this.data.projectEntity  = {id : row.parentId,name : row.parentName};
                 });
             },
             //打开编辑
@@ -327,7 +328,7 @@
                 this.getHttp("/api/project/editView?id=" + row.id).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
-                    this.data.projectEntity = {id : row.parentId,name : row.parentName};
+                    //this.data.projectEntity = {id : row.parentId,name : row.parentName};
                 });
             },
             //添加明细
@@ -368,7 +369,6 @@
                     return 'warning-row';
                 } else { 
                     return 'edit-row';
-                    
                 }
             },
             //记录下标
@@ -411,21 +411,20 @@
                 });
             },
             //字段属性改变
-            columnPropertiesChange(data){
-                data = {
+            columnPropertiesChange(index,columnProperties){
+                this.data.detailEntitys[index] = {
+                    columnProperties: columnProperties,
+                    parentId: this.data.id,
                     allowEmpty: "Y",
                     isKey: "N"
                 };
-                var columnProperties = data.columnProperties;
                 if(columnProperties == 'baseColumn'){
-                    data.type = 'varchar'; 
-                    data.length = '200'; 
-                    data.linkTable = ''; 
-                    data.linkParam = ''; 
+                    this.data.detailEntitys[index].type = 'varchar'; 
+                    this.data.detailEntitys[index].length = '200'; 
                 }else if(columnProperties == 'linkColumn'){
                 }else if(columnProperties == 'paramColumn'){
                 }
-                
+                this.data.detailEntitys = Object.assign([],this.data.detailEntitys);
             },
             //字段类型改变
             typeChange(data){
@@ -486,7 +485,7 @@
     .tree-node {
         height: 100%;
         border-radius: 25px;
-        padding: 20px;
+        padding: 15px;
         border: 2px solid #ADADAD;
     }
     .div-view {
@@ -536,5 +535,14 @@
     }
     .tool-spacing{
         text-align: right;
+    }
+    .operat-but{
+        width: 35px;
+    }
+    .el-button+.el-button {
+        margin-left: 0px;
+    }
+    .fileType-checkbox {
+        width: 150px;
     }
 </style>

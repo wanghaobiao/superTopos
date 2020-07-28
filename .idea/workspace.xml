@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="" />
+    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,6 +95,8 @@
       <workItem from="1595088099141" duration="2932000" />
       <workItem from="1595121418501" duration="87000" />
       <workItem from="1595214932738" duration="198000" />
+      <workItem from="1595327418023" duration="38000" />
+      <workItem from="1595379826919" duration="661000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -185,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595214960913</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="完成树形菜单结构">
+      <created>1595327432887</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1595327432887</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,18 +257,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="完成树形菜单结构" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="828" y="137" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595079526411">
+    <state x="828" y="137" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595380475704">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="828" y="137" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1595079526411" />
+    <state x="828" y="137" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1595380475704" />
     <state x="690" y="285" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1594480035322">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="690" y="285" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594480035322" />
-    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1595214960346">
+    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1595327432318">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1595214960346" />
+    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1595327432318" />
     <state x="92" y="92" width="1736" height="835" key="DiffContextDialog" timestamp="1595088111343">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
@@ -274,10 +285,10 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor/0.0.1920.1019@0.0.1920.1019" timestamp="1594948529733" />
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1595214962565">
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1595327434635">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1595214962565" />
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1595327434635" />
     <state x="92" y="92" width="1736" height="835" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1595079496898">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>

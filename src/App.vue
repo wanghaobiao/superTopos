@@ -12,6 +12,11 @@
                 <template slot="title">系统配置</template>
                 <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
             </el-submenu>
+            <el-submenu index="3">
+                <template slot="title">商场管理</template>
+                <el-menu-item index="3-1" @click="jump('/mallManagement/orderManagement')">订单管理</el-menu-item>
+                <el-menu-item index="3-2" @click="jump('/mallManagement/productTypes')">商品类型</el-menu-item>
+            </el-submenu>
             <el-menu-item index="3">处理中心</el-menu-item>
         </el-menu>
         <router-view style="margin-top: 8px;"></router-view>
@@ -45,6 +50,9 @@
     }
     .margin-top-22{
         margin-top: 22px;
+    }
+    .text-align-right{
+        text-align: right;
     }
     /***************************************** 基础样式开始 *****************************************/
 
@@ -107,6 +115,14 @@
     .el-table--striped .el-table__body tr.el-table__row--striped.current-row td, .el-table__body tr.current-row>td {
         color: #fff;
         background-color: rgb(108, 184, 250) !important;
+    }
+    .dialog-button {
+        padding: 10px ;
+        text-align: right;
+        box-sizing: border-box;
+    }
+    .el-table__fixed-right{
+        height: 100% !important;
     }
     /***************************************** 覆盖样式结束 *****************************************/
     
