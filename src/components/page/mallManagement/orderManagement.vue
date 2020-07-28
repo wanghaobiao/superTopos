@@ -115,7 +115,7 @@
                     </el-col>
                     <el-col :span="12">
                         <el-form-item  label="商品类型" :label-width="formLabelWidth" prop="productTypes">
-                            <el-select :disabled="viewDialog.isView" v-model="data.productTypes" value-key="id" clearable placeholder="请选择商品类型" style="width: 100%">
+                            <el-select :disabled="viewDialog.isView" v-model="data.productTypesEntity" value-key="id" clearable placeholder="请选择商品类型" style="width: 100%">
                                 <el-option v-for="item in entityOptions.productTypes" :key="item.label" :label="item.label" :value="item"> </el-option>
                             </el-select>
                         </el-form-item>
@@ -177,7 +177,7 @@
                 </el-table-column>
                 <el-table-column label="商品类型">
                     <template scope="scope">
-                        <el-select v-model="scope.row.productTypes" value-key="id" clearable placeholder="请选择商品类型" >
+                        <el-select v-model="scope.row.productTypesEntity" value-key="id" clearable placeholder="请选择商品类型" >
                             <el-option v-for="item in entityOptions.productTypes" :key="item.label" :label="item.label" :value="item"> </el-option>
                         </el-select>
                         <span>{{scope.row.productTypes}}</span>
