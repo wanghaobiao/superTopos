@@ -284,7 +284,6 @@
                             }
                         );
                     }
-                    console.log(JSON.stringify(this.data));
                 });
               
             },
@@ -317,7 +316,7 @@
                 this.getHttp("/api/project/editView?id=" + row.id, {}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
-                    //this.data.projectEntity  = {id : row.parentId,name : row.parentName};
+                    this.data.projectEntity = { id : row.id, name : row.label};
                 });
             },
             //打开编辑
@@ -328,7 +327,7 @@
                 this.getHttp("/api/project/editView?id=" + row.id).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
-                    //this.data.projectEntity = {id : row.parentId,name : row.parentName};
+                    this.data.projectEntity = { id : row.id, name : row.label};
                 });
             },
             //添加明细
@@ -473,7 +472,6 @@
             },
             //生成文件
             buildFile(){
-                console.log(JSON.stringify(this.buildFileDialog.fileTypes));
                 this.postHttp("/api/project/buildFile?id="+this.data.id, this.buildFileDialog.fileTypes).then(result => {
                     this.search();
                 });
@@ -486,7 +484,7 @@
     .tree-node {
         height: 100%;
         border-radius: 25px;
-        padding: 15px;
+        padding: 20px;
         border: 2px solid #ADADAD;
     }
     .div-view {
