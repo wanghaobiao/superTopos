@@ -148,19 +148,27 @@
                         <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
                     </el-row>
                     <el-dialog title="生成代码" :visible.sync="buildFileDialog.isShow" width="30%" >
-                        <el-checkbox-group v-model="buildFileDialog.fileTypes" >
-                            <div  v-for="item in (parseInt(getOptions('fileType').length / 3) + 1)" :key="item.label">
-                                <el-row :class="item != 1 ? 'margin-top-22' : ''" >
-                                    <el-col :span="8" v-if="((item - 1)*3+0) < getOptions('fileType').length" ><el-checkbox class="fileType-checkbox" v-model="getOptions('fileType')[(item - 1)*3+0].value" :label="getOptions('fileType')[(item - 1)*3+0].value" border></el-checkbox></el-col>
-                                    <el-col :span="8" v-if="((item - 1)*3+1) < getOptions('fileType').length" ><el-checkbox class="fileType-checkbox" v-model="getOptions('fileType')[(item - 1)*3+1].value" :label="getOptions('fileType')[(item - 1)*3+1].value" border></el-checkbox></el-col>
-                                    <el-col :span="8" v-if="((item - 1)*3+2) < getOptions('fileType').length" ><el-checkbox class="fileType-checkbox" v-model="getOptions('fileType')[(item - 1)*3+2].value" :label="getOptions('fileType')[(item - 1)*3+2].value" border></el-checkbox></el-col>
-                                </el-row> fileType-
-                            </div>
-                        </el-checkbox-group>   
+                        <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm">
+                            <el-checkbox-group v-model="buildFileDialog.fileTypes" >
+                                <div  v-for="item in (parseInt(getOptions('fileType').length / 3) + 1)" :key="item.label">
+                                    <el-row :class="item != 1 ? 'margin-top-22' : ''" :gutter="20" >
+                                        <el-col :span="8" v-if="((item - 1)*3+0) < getOptions('fileType').length" ><el-checkbox class="fileType-checkbox" v-model="getOptions('fileType')[(item - 1)*3+0].value" :label="getOptions('fileType')[(item - 1)*3+0].value" border></el-checkbox></el-col>
+                                        <el-col :span="8" v-if="((item - 1)*3+1) < getOptions('fileType').length" ><el-checkbox class="fileType-checkbox" v-model="getOptions('fileType')[(item - 1)*3+1].value" :label="getOptions('fileType')[(item - 1)*3+1].value" border></el-checkbox></el-col>
+                                        <el-col :span="8" v-if="((item - 1)*3+2) < getOptions('fileType').length" ><el-checkbox class="fileType-checkbox" v-model="getOptions('fileType')[(item - 1)*3+2].value" :label="getOptions('fileType')[(item - 1)*3+2].value" border></el-checkbox></el-col>
+                                    </el-row>
+                                </div>
+                            </el-checkbox-group>   
+                            <!-- <el-form-item class="margin-top-22">
+                                <el-input v-model="buildFileDialog.javaPath"  placeholder="请选择后端代码根目录"  autocomplete="off" ></el-input>
+                            </el-form-item>
+                            <el-form-item class="margin-top-22">
+                                <el-input v-model="buildFileDialog.vuePath"  placeholder="请选择前端代码根目录"  autocomplete="off" ></el-input>
+                            </el-form-item> -->
+                        </el-form>
                         <span slot="footer" >
                             <el-button @click="buildFileDialog.isShow = false">取 消</el-button>
                             <el-button  :type="this.buildFileDialog.isAllSelect ? 'success' : 'primary'" plain  @click="fileTypesAll">{{this.buildFileDialog.isAllSelect ? '取消全选' : '全 选'}}</el-button>
-                            <el-button type="primary"  @click="buildFile">确 定</el-button>
+                            <el-button type="primary"  @click="buildFile()">确 定</el-button>
                         </span>
                     </el-dialog>
 
@@ -181,7 +189,7 @@
             return {
                 pageData: {
                     page: 1,
-                    size: 5,
+                    size: 10,
                     sort: "creationTime,DESC"
                 },
                 viewDialog: {
@@ -195,6 +203,8 @@
                     isShow: false,
                     butIsLoading: false,
                     fileTypes:[],
+                    javaPath:'',
+                    vuePath:'',
                 },
                 tableOptions:[],
                 formLabelWidth: "120px",
@@ -542,6 +552,6 @@
         margin-left: 0px;
     }
     .fileType-checkbox {
-        width: 150px;
+        width: 100%;
     }
 </style>

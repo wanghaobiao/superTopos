@@ -27,7 +27,7 @@
                     <el-row>
                         <el-col :span="8">
                             <el-form-item  label="创建时间" :label-width="formLabelWidth">
-                                <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+                                <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width:100%"></el-date-picker>
                             </el-form-item>
                         </el-col>
                     </el-row>

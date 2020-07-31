@@ -2,27 +2,37 @@
 <template>
     <div :style="{height:(screenSize.height)+'px'}">
         <!-- 搜索框开始 -->
-        <el-row :gutter="10">
-            <el-col :span="12">
-                <el-form :inline="true"  class="demo-form-inline">
-                    <el-form-item label="参数名称" >
-                        <el-input v-model="pageData.name_eq" placeholder="请输入参数名称"></el-input>
-                    </el-form-item>
-                    <el-form-item label="参数编码" >
-                        <el-input v-model="pageData.number_eq" placeholder="请输入参数编码"></el-input>
-                    </el-form-item>
-                    <el-form-item label="创建人" >
-                        <el-input v-model="pageData.create_eq" placeholder="请输入创建人"></el-input>
-                    </el-form-item>
-                </el-form>
-                <el-form :inline="true"  class="demo-form-inline">
-                    <el-form-item label="创建时间" >
-                         <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
-                    </el-form-item>
+        <el-row  >
+            <el-col :span="18">
+                <el-form  class="demo-form-inline">
+                    <el-row>
+                        <el-col :span="8">
+                            <el-form-item  label="名称" :label-width="formLabelWidth">
+                                <el-input v-model="pageData.name_eq" placeholder="请输入名称" autocomplete="off"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item  label="编号" :label-width="formLabelWidth">
+                                <el-input v-model="pageData.number_eq" placeholder="请输入编号" autocomplete="off"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item  label="创建人" :label-width="formLabelWidth">
+                                <el-input v-model="pageData.create_eq" placeholder="请输入创建人" autocomplete="off"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :span="8">
+                            <el-form-item  label="创建时间" :label-width="formLabelWidth">
+                                <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width:100%"></el-date-picker>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
                 </el-form>
             </el-col>
-            <el-col :span="6">
-                <el-button type="primary" @click.prevent="search()">搜索</el-button>
+            <el-col :span="4" :offset="2">
+                <el-button type="primary"  @click.prevent="search()">搜索</el-button>
             </el-col>
         </el-row>
         <!-- 搜索框结束 -->
@@ -106,7 +116,7 @@
                 },
                 pageData:{
                     page:1,
-                    size:5,
+                    size:10,
                     sort:'creationTime,DESC',
                 },
                 viewDialog:{

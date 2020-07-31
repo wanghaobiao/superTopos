@@ -51,6 +51,7 @@
             <el-table-column  property="remark" label="备注" ></el-table-column>
             <el-table-column  property="prefix" label="前缀" ></el-table-column>
             <el-table-column  property="dataBaseType" label="数据库类型" ></el-table-column>
+            <el-table-column  property="dataBaseName" label="数据库名称" ></el-table-column>
             <el-table-column  property="create" label="创建人" ></el-table-column>
             <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
             <el-table-column  property="lastUpdateUser" label="最后修改人" ></el-table-column>
@@ -97,10 +98,15 @@
                 </el-row>
                 <el-row>
                     <el-col :span="12">
-                        <el-form-item label="数据库类型" clearable :label-width="formLabelWidth" prop="remark">
-                            <el-select v-model="data.dataBaseType" placeholder="请选择" :disabled="viewDialog.isView" >
+                        <el-form-item label="数据库类型" clearable :label-width="formLabelWidth" prop="remark" >
+                            <el-select v-model="data.dataBaseType" placeholder="请选择" :disabled="viewDialog.isView" style="width:100%">
                                 <el-option v-for="item in getOptions('dataBaseType')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
                             </el-select>                        
+                        </el-form-item>
+                    </el-col>
+                      <el-col :span="12">
+                        <el-form-item label="数据库名称" clearable :label-width="formLabelWidth" prop="number">
+                            <el-input :disabled="viewDialog.isView" v-model="data.dataBaseName" placeholder="请输入数据库名称" autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>

@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
-    </list>
+    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,6 +97,7 @@
       <workItem from="1595379826919" duration="661000" />
       <workItem from="1595918797494" duration="276000" />
       <workItem from="1595920175267" duration="2142000" />
+      <workItem from="1595927715705" duration="41000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
