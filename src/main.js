@@ -13,6 +13,7 @@ import xfilters from './../src/components/util/xfilters'
 
 
 router.beforeEach((to, from, next) => {
+    document.querySelector('body').setAttribute('style', ' margin: 8px;')
     if (to.meta.title) {
       document.title = to.meta.title
     }

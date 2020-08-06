@@ -67,9 +67,6 @@ Vue.prototype.postHttp = function(url,data) {
 }
 
 Vue.prototype.resultDealWith = function(result,resolve) {
-    if(this.isEmpty(result)){
-        this.$router.push("/login/login");
-    }
     if(this.isEmpty(result.code)){
         resolve(result);
     }else if(result.code == 200){
@@ -81,6 +78,9 @@ Vue.prototype.resultDealWith = function(result,resolve) {
         }
     }else if(result.code == 308){
         this.$message.warning( result.message);
+    }else if(result.code == 402){
+        this.$message.warning( result.message);
+        this.$router.push("/login/login");
     }else if(result.code == 505){
         this.$message.error( result.message);
         console.error(JSON.stringify(result.errorMag));

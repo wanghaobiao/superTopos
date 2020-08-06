@@ -1,29 +1,32 @@
 <template>
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
-        <el-menu v-if="!$route.meta.showNav" class="el-menu-demo" mode="horizontal"
+        <div  v-show="!$route.meta.showNav">
+            <el-menu class="el-menu-demo" mode="horizontal"
                  background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-            <el-submenu index="1">
-                <template slot="title">数据库工具</template>
-                <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
-                <el-menu-item index="1-2" @click="jump('/databaseTools/tableManagement')">表结构管理</el-menu-item>
-            </el-submenu>
-            <el-submenu index="2">
-                <template slot="title">系统配置</template>
-                <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
-            </el-submenu>
-            <el-submenu index="3">
-                <template slot="title">商场管理</template>
-                <el-menu-item index="3-1" @click="jump('/mallManagement/orderManagement')">订单管理</el-menu-item>
-                <el-menu-item index="3-2" @click="jump('/mallManagement/productTypes')">商品类型</el-menu-item>
-            </el-submenu>
-            <el-submenu index="4">
-                <template slot="title">用户管理</template>
-                <el-menu-item index="4-1" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
-            </el-submenu>
-            <el-menu-item index="5">处理中心</el-menu-item>
-        </el-menu>
-        <router-view style="margin-top: 8px;"></router-view>
+                <el-submenu index="1">
+                    <template slot="title">数据库工具</template>
+                    <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
+                    <el-menu-item index="1-2" @click="jump('/databaseTools/tableManagement')">表结构管理</el-menu-item>
+                </el-submenu>
+                <el-submenu index="2">
+                    <template slot="title">系统配置</template>
+                    <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
+                </el-submenu>
+                <el-submenu index="3">
+                    <template slot="title">商场管理</template>
+                    <el-menu-item index="3-1" @click="jump('/mallManagement/orderManagement')">订单管理</el-menu-item>
+                    <el-menu-item index="3-2" @click="jump('/mallManagement/productTypes')">商品类型</el-menu-item>
+                </el-submenu>
+                <el-submenu index="4">
+                    <template slot="title">用户管理</template>
+                    <el-menu-item index="4-1" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="5">处理中心</el-menu-item>
+            </el-menu>
+        </div>
+        
+        <router-view :style="{'margin-top':  !$route.meta.showNav ? '8px' : '0px'}" class="router-view"></router-view>
     </div>
 </template>
 <script>
@@ -48,6 +51,9 @@
     };
 </script>
 <style>
+    .router-view{
+        margin: 0px;
+    }
     /***************************************** 基础样式开始 *****************************************/
     .text-align-center{
         text-align: center;
