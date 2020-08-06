@@ -1,6 +1,6 @@
 
 
-<!--订单管理( OrderManagementVue ))-->
+<!--用户管理( UserManagementVue ))-->
 <template>
     <div :style="{height:(screenSize.height)+'px'}">
         <!-- 搜索框开始 -->
@@ -28,20 +28,6 @@
                         <el-col :span="8">
                             <el-form-item  label="创建时间" :label-width="formLabelWidth">
                                 <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width: 100%"></el-date-picker>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="8">
-                            <el-form-item  label="商品类型" :label-width="formLabelWidth">
-                                <el-select v-model="pageData.productTypesId_eq" clearable placeholder="请选择商品类型" style="width: 100%">
-                                    <el-option v-for="item in entityOptions.productTypes" :key="item.label" :label="item.label" :value="item.value"> </el-option>
-                                </el-select>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="8">
-                            <el-form-item  label="是否有效" :label-width="formLabelWidth">
-                                <el-select v-model="pageData.isEffective_eq" clearable placeholder="请选择是否有效" style="width: 100%">
-                                    <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
-                                </el-select>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -73,14 +59,9 @@
             <el-table-column  property="audit" label="审核人" ></el-table-column>
             <el-table-column  property="auditTime" label="审核时间" ></el-table-column>
             <el-table-column  property="id" label="主键id" ></el-table-column>
-            <el-table-column  label="商品类型" >
-                <template slot-scope="scope">{{ scope.row.productTypesId | optionsFmt(entityOptions.productTypes) }}</template>
-            </el-table-column>
-            <el-table-column  label="是否有效" >
-                <template slot-scope="scope">{{ scope.row.isEffective | paramsFmt('yesOrNo') }}</template>
-            </el-table-column>
-            <el-table-column  property="amountOfGoods" label="商品数量" ></el-table-column>
-            <el-table-column  property="totalOrderPrice" label="订单总价" ></el-table-column>
+            <el-table-column  property="password" label="密码" ></el-table-column>
+            <el-table-column  property="accountNumber" label="账号" ></el-table-column>
+            <el-table-column  property="dateOfBirth" label="出生日期" ></el-table-column>
             <el-table-column label="操作"  fixed="right">
                 <template slot-scope="scope">
                     <el-button type="success" plain size="small" @click="goView(scope.row.id)">查看</el-button>
@@ -114,90 +95,24 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item  label="商品类型" :label-width="formLabelWidth" prop="productTypesEntity">
-                            <el-select :disabled="viewDialog.isView" v-model="data.productTypesEntity" value-key="id" clearable placeholder="请选择商品类型" style="width: 100%">
-                                <el-option v-for="item in entityOptions.productTypes" :key="item.label" :label="item.label" :value="item"> </el-option>
-                            </el-select>
+                        <el-form-item label="密码" clearable :label-width="formLabelWidth" prop="password">
+                            <el-input :disabled="viewDialog.isView" v-model="data.password" placeholder="请输入密码" maxlength="2000"  autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
-                        <el-form-item  label="是否有效" :label-width="formLabelWidth" prop="isEffective">
-                            <el-select :disabled="viewDialog.isView" v-model="data.isEffective" clearable placeholder="请选择是否有效" style="width: 100%">
-                                <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
-                            </el-select>
+                        <el-form-item label="账号" clearable :label-width="formLabelWidth" prop="accountNumber">
+                            <el-input :disabled="viewDialog.isView" v-model="data.accountNumber" placeholder="请输入账号" maxlength="200"  autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="商品数量" clearable :label-width="formLabelWidth" prop="amountOfGoods">
-                            <el-input :disabled="viewDialog.isView" v-model="data.amountOfGoods" placeholder="请输入商品数量" oninput ="value=value.replace(/[^\d]/g,'')"  autocomplete="off"></el-input>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="订单总价" clearable :label-width="formLabelWidth" prop="totalOrderPrice">
-                            <el-input :disabled="viewDialog.isView" v-model="data.totalOrderPrice" placeholder="请输入订单总价" oninput ="value=value.replace(/[^0-9.]/g,'')"  autocomplete="off"></el-input>
+                        <el-form-item label="出生日期" clearable :label-width="formLabelWidth" prop="dateOfBirth">
+                            <el-date-picker :disabled="viewDialog.isView" v-model="data.dateOfBirth" type="date" placeholder="选择出生日期" style="width: 100%"> </el-date-picker>
                         </el-form-item>
                     </el-col>
                 </el-row>
             </el-form>
-            <!-- 新增明细开始 -->
-            <el-row class="spacing" v-show="!viewDialog.isView">
-                <el-button type="primary" @click.prevent="addDetails('orderDetails')" :loading="viewDialog.butIsLoading">新增</el-button>
-                <el-button type="warning"  @click.prevent="up('orderDetails')" :loading="viewDialog.butIsLoading" plain>上移</el-button>
-                <el-button type="primary"  @click.prevent="down('orderDetails')" :loading="viewDialog.butIsLoading" plain>下移</el-button>
-            </el-row>
-            <el-table :data="data.orderDetails"  border  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit" >
-                <el-table-column width="50" type="index" label="序号"></el-table-column>
-                <el-table-column label="名称">
-                    <template scope="scope">
-                        <el-input v-model="scope.row.name" placeholder="请输入名称" clearable maxlength="200"  ></el-input>
-                        <span>{{scope.row.name}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="编号">
-                    <template scope="scope">
-                        <el-input v-model="scope.row.number" placeholder="请输入编号" clearable maxlength="200"  ></el-input>
-                        <span>{{scope.row.number}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="备注">
-                    <template scope="scope">
-                        <el-input v-model="scope.row.remark" placeholder="请输入备注" clearable maxlength="200"  ></el-input>
-                        <span>{{scope.row.remark}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="过期时间">
-                    <template scope="scope">
-                        <el-date-picker v-model="scope.row.expiration" type="date" placeholder="选择过期时间" style="width: 100%"> </el-date-picker>
-                        <span>{{scope.row.expiration | dateFormat}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="商品类型">
-                    <template scope="scope">
-                        <el-select v-model="scope.row.productTypesEntity" value-key="id" clearable placeholder="请选择商品类型" >
-                            <el-option v-for="item in entityOptions.productTypes" :key="item.label" :label="item.label" :value="item"> </el-option>
-                        </el-select>
-                        <span>{{scope.row.productTypes}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="是否有效">
-                    <template scope="scope">
-                        <el-select v-model="scope.row.isEffective" clearable placeholder="请选择是否有效" style="width: 100%" >
-                            <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
-                        </el-select>
-                        <span>{{scope.row.isEffective}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="操作" v-if="!viewDialog.isView"  fixed="right">
-                    <template slot-scope="scope">
-                        <el-button type="danger" plain size="small" @click="delDetails(scope.$index,'orderDetails')">删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <!-- 新增明细结束 -->
             <span slot="footer" class="dialog-footer" v-show="!viewDialog.isView">
                 <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading">取 消</el-button>
                 <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
@@ -222,7 +137,6 @@
                 },
                 formLabelWidth: "100px",
                 entityOptions:{
-                    productTypes : "",
                 },
                 pageData:{
                     page:1,
@@ -239,7 +153,6 @@
                 },
                 tableOptions:[],
                 data: {
-                    orderDetails : [],
                 },
                 currentIndex:null,
                 rules: {
@@ -252,17 +165,14 @@
                     remark : [
                         { required: false, message: '请输入备注', trigger: 'blur' },
                     ],
-                    productTypesEntity : [
-                        { required: true, message: '请输入商品类型', trigger: 'blur' },
+                    password : [
+                        { required: false, message: '请输入密码', trigger: 'blur' },
                     ],
-                    isEffective : [
-                        { required: true, message: '请输入是否有效', trigger: 'blur' },
+                    accountNumber : [
+                        { required: false, message: '请输入账号', trigger: 'blur' },
                     ],
-                    amountOfGoods : [
-                        { required: true, message: '请输入商品数量', trigger: 'blur' },
-                    ],
-                    totalOrderPrice : [
-                        { required: false, message: '请输入订单总价', trigger: 'blur' },
+                    dateOfBirth : [
+                        { required: false, message: '请输入出生日期', trigger: 'blur' },
                     ],
                 }
             };
@@ -275,7 +185,7 @@
                     this.pageData['creationTime_ge'] = this.pageData.creationTime[0]+'T00:00:00';
                     this.pageData['creationTime_le'] = this.pageData.creationTime[1]+'T00:00:00';
                 }
-                this.getHttp("/api/mallManagement/orderManagement/findAllPageByParams?"+this.jsonToUrl(this.pageData)).then(result => {
+                this.getHttp("/api/userManagement/userManagement/findAllPageByParams?"+this.jsonToUrl(this.pageData)).then(result => {
                     this.listData = result;
                     this.listData.loading = false;
                 });
@@ -288,12 +198,12 @@
                 }
                 this.$confirm('确定要进行删除操作吗?', '提示', {confirmButtonText: '确定',cancelButtonText: '取消',type: 'warning'}).then(() => {
                     if(this.isNotEmpty(id)){
-                        this.getHttp("/api/mallManagement/orderManagement/delete?id="+id).then(result => {
+                        this.getHttp("/api/userManagement/userManagement/delete?id="+id).then(result => {
                             this.search();
                         });
                     }else{
                         var ids = this.listExtract(this.$refs.listTable.selection,'id');
-                        this.postHttp("/api/mallManagement/orderManagement/batchDelete",ids).then(result => {
+                        this.postHttp("/api/userManagement/userManagement/batchDelete",ids).then(result => {
                             this.search();
                         });
                     }
@@ -310,13 +220,12 @@
                 this.viewDialog.isShow = true;
                 this.viewDialog.isView = null;
                 this.data = {
-                    orderDetails : [],
                 };
             },
             //打开详情
             goView(id) {
                 this.viewDialog.isView = true;
-                this.getHttp("/api/mallManagement/orderManagement/view?id="+id,{}).then(result => {
+                this.getHttp("/api/userManagement/userManagement/view?id="+id,{}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
                 });
@@ -324,7 +233,7 @@
             //打开编辑
             goEdit(id) {
                 this.viewDialog.isView = false;
-                this.getHttp("/api/mallManagement/orderManagement/view?id="+id).then(result => {
+                this.getHttp("/api/userManagement/userManagement/view?id="+id).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
                 });
@@ -345,10 +254,7 @@
                 this.$refs.ruleForm.validate((valid) => {
                     if (valid) {
                         this.viewDialog.butIsLoading = true;
-                        for(var i = 0; i < this.data.orderDetails.length; i++){
-                            this.data.orderDetails[i].id = null;
-                        }
-                        this.postHttp("/api/mallManagement/orderManagement/save",this.data).then(result => {
+                        this.postHttp("/api/userManagement/userManagement/save",this.data).then(result => {
                             this.viewDialog.butIsLoading = false;
                             if(result.code == 200){
                                 this.viewDialog.isShow = false;

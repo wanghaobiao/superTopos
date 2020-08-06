@@ -103,7 +103,10 @@
                             </el-table-column>
                             <el-table-column label="关联参数" width="150">
                                 <template scope="scope">
-                                    <el-input  v-model="scope.row.linkParam" placeholder="请输入关联参数" clearable :disabled="scope.row.columnProperties != 'paramColumn'"></el-input> <span>{{scope.row.linkParam}}</span>
+                                    <el-select v-model="scope.row.linkParam" placeholder="请选择关联参数" :disabled="scope.row.columnProperties == 'linkColumn'">
+                                        <el-option v-for="item in getBaseOptions()" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                                    </el-select>
+                                    <span>{{scope.row.linkParam | optionsFmt(getBaseOptions())}}</span>
                                 </template>
                             </el-table-column>
                             <el-table-column label="允许为空">

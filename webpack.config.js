@@ -37,7 +37,12 @@ module.exports = (options = {}) => ({
             limit: 10000
           }
         }]
-      }
+      },
+      {
+        test: /\.less$/,
+        loader: "style-loader!css-loader!less-loader"
+     }
+    
     ]
   },
   plugins: [

@@ -51,7 +51,6 @@ Vue.prototype.getHttp = function(url,data) {
     return new Promise((resolve) => {
         this.$axios.get(url).then(result => {
             this.resultDealWith(result,resolve);
-            
         }, (response) => {
         })
     });
@@ -68,6 +67,9 @@ Vue.prototype.postHttp = function(url,data) {
 }
 
 Vue.prototype.resultDealWith = function(result,resolve) {
+    if(this.isEmpty(result)){
+        this.$router.push("/login/login");
+    }
     if(this.isEmpty(result.code)){
         resolve(result);
     }else if(result.code == 200){
@@ -87,13 +89,40 @@ Vue.prototype.resultDealWith = function(result,resolve) {
 
 }    
 /**********************http访问方法结束*********************/
-
+/**
+ * Created by Schon on 2018/9/13 0013.
+ */
+//设置cookie
+Vue.prototype.setCookie = function (key,value){
+    var exdate = new Date(); //获取时间
+    exdate.setTime(exdate.getTime() + 1 * 60 * 60 * 1000 ); //保存的天数，我这里写的是1小时
+    //字符串拼接cookie
+    window.document.cookie = key + "=" + value + ";path=/;expires=" + exdate.toGMTString();
+};
+//读取cookie
+Vue.prototype.getCookie = function (param){
+    var c_param = '';
+    if (document.cookie.length > 0) {
+      var arr = document.cookie.split('; '); //这里显示的格式需要切割一下自己可输出看下
+      for (var i = 0; i < arr.length; i++) {
+        var arr2 = arr[i].split('='); //再次切割
+        //判断查找相对应的值
+        if (arr2[0] == param) {
+          c_param = arr2[1];
+          //保存到保存数据的地方
+        }
+      }
+      return c_param;
+    }
+};
+  
 /**********************缓存的公共方法开始*********************/
 //刷新缓存
 Vue.prototype.refreshParams = function (message){
     this.getHttp("/api/params/refreshParams").then(result => {
         window.sessionStorage.filterParams = JSON.stringify(result.filterParams);
         window.sessionStorage.optionsParams = JSON.stringify(result.optionsParams);
+        window.sessionStorage.optionsBaseParams = JSON.stringify(result.optionsBaseParams);
         if(this.isNotEmpty(message)){
             this.$message.success( message);
         }
@@ -103,13 +132,20 @@ Vue.prototype.refreshParams = function (message){
 Vue.prototype.getOptions = function (paramsName){
     var optionsParams = JSON.parse(window.sessionStorage.optionsParams);
     return optionsParams[paramsName];  
-
 }
+
+//获取缓存
+Vue.prototype.getBaseOptions = function (){
+    var optionsBaseParams = JSON.parse(window.sessionStorage.optionsBaseParams);
+    return optionsBaseParams;  
+}
+
 //获取缓存
 Vue.prototype.getParams = function (){
     this.getHttp("/api/params/getParams").then(result => {
         window.sessionStorage.filterParams = JSON.stringify(result.filterParams);
         window.sessionStorage.optionsParams = JSON.stringify(result.optionsParams);
+        window.sessionStorage.optionsBaseParams = JSON.stringify(result.optionsBaseParams);
     });
 }
 /**********************缓存的公共方法结束*********************/

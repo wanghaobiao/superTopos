@@ -1,7 +1,7 @@
 <template>
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
-        <el-menu class="el-menu-demo" mode="horizontal"
+        <el-menu v-if="!$route.meta.showNav" class="el-menu-demo" mode="horizontal"
                  background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
             <el-submenu index="1">
                 <template slot="title">数据库工具</template>
@@ -17,7 +17,11 @@
                 <el-menu-item index="3-1" @click="jump('/mallManagement/orderManagement')">订单管理</el-menu-item>
                 <el-menu-item index="3-2" @click="jump('/mallManagement/productTypes')">商品类型</el-menu-item>
             </el-submenu>
-            <el-menu-item index="3">处理中心</el-menu-item>
+            <el-submenu index="4">
+                <template slot="title">用户管理</template>
+                <el-menu-item index="4-1" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
+            </el-submenu>
+            <el-menu-item index="5">处理中心</el-menu-item>
         </el-menu>
         <router-view style="margin-top: 8px;"></router-view>
     </div>
