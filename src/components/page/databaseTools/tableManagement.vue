@@ -345,14 +345,21 @@
             },
             //添加明细
             addDetails() {
-                this.data.detailEntitys.push({
+                var insertIndex = this.data.insertIndex;
+                for(var i = 0; i < this.data.detailEntitys.length ; i++){
+                    if(this.isEmpty(this.data.detailEntitys[i].id)){
+                        insertIndex++;
+                    }
+                }
+                var detail = {
                     parentId: this.data.id,
                     allowEmpty: "Y",
                     columnProperties : 'baseColumn',
                     type : 'varchar',
                     length : '200',
                     isKey: "N"
-                });
+                };
+                this.data.detailEntitys.splice(insertIndex,0,detail);
             },
             //上移
             up(){

@@ -1,7 +1,7 @@
 <template>
    <div class="login-container" >
       <el-form ref="form" :rules="rules" :model="form" label-width="80px" class="login-form">
-         <h2 class="login-title">管理系统</h2>
+         <h2 class="login-title">CODE EDA SYSTEM</h2>
          <el-form-item label="用户名" prop="accountNumber">
             <el-input v-model="form.accountNumber"></el-input>
          </el-form-item>
@@ -72,10 +72,12 @@ export default {
 .login-container {
    position: absolute;
    /* 
-    background: url("./../../../../src/assets/login.png"); */
-   width: calc(100% - 0px);
-   height: calc(100% - 0px);
-   background-color: #545c64;
+    background: url("./../../../../src/assets/login-bg.jpg"); */
+    background-image: url("./../../../../src/assets/login-bg.jpg");
+    background-size: 100%;
+    width: calc(100% - 0px);
+    height: calc(100% - 0px);
+   /* background-color: #545c64; */
 }
 
 /* 标题 */

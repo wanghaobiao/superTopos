@@ -52,9 +52,10 @@
             <el-table-column  property="prefix" label="前缀" ></el-table-column>
             <el-table-column  property="dataBaseType" label="数据库类型" ></el-table-column>
             <el-table-column  property="dataBaseName" label="数据库名称" ></el-table-column>
+            <el-table-column  property="insertIndex" label="继承字段插入列" ></el-table-column>
             <el-table-column  property="create" label="创建人" ></el-table-column>
             <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
-            <el-table-column  property="lastUpdateUser" label="最后修改人" ></el-table-column>
+            <!-- <el-table-column  property="lastUpdateUser" label="最后修改人" ></el-table-column> -->
             <!-- <el-table-column  property="lastUpdateTime" label="最后修改时间" ></el-table-column> -->
             <el-table-column  property="audit" label="审核人" ></el-table-column>
             <!-- <el-table-column  property="auditTime" label="审核时间" ></el-table-column> -->
@@ -107,6 +108,15 @@
                       <el-col :span="12">
                         <el-form-item label="数据库名称" clearable :label-width="formLabelWidth" prop="number">
                             <el-input :disabled="viewDialog.isView" v-model="data.dataBaseName" placeholder="请输入数据库名称" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="继承字段插入列" clearable :label-width="formLabelWidth" prop="insertIndex" >
+                            <el-select v-model="data.insertIndex" placeholder="请选择" :disabled="viewDialog.isView" style="width:100%">
+                                <el-option v-for="item in data.detailEntitys.length" :key="item" :label="item" :value="item" ></el-option>
+                            </el-select>                        
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -210,7 +220,7 @@
         },
         data() {
             return {
-                formLabelWidth: "100px",
+                formLabelWidth: "110px",
                 pageData:{
                     page:1,
                     size:5,

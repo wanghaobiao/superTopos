@@ -79,7 +79,6 @@ Vue.prototype.resultDealWith = function(result,resolve) {
     }else if(result.code == 308){
         this.$message.warning( result.message);
     }else if(result.code == 402){
-        this.$message.warning( result.message);
         this.$router.push("/login/login");
     }else if(result.code == 505){
         this.$message.error( result.message);

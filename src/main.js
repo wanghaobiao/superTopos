@@ -7,6 +7,7 @@ import router from './router.js'
 import VueResource from 'vue-resource'
 import Moment from 'moment'
 import axios from 'axios';
+
 import axiosConfig from './../src/components/util/axiosConfig';
 import global from './../src/components/util/global'
 import xfilters from './../src/components/util/xfilters'
