@@ -19,14 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/login/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/mallManagement/orderManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/mallManagement/orderManagement.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/userManagement/userManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/userManagement/userManagement.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/util/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/util/util.js" afterDir="false" />
-    </list>
+    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,6 +105,7 @@
       <workItem from="1596696980490" duration="2293000" />
       <workItem from="1596705266553" duration="1474000" />
       <workItem from="1596771287075" duration="2917000" />
+      <workItem from="1596785600267" duration="684000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -253,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596703949503</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="完成登录功能  wanghb">
+      <created>1596785664399</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1596785664399</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,10 +324,10 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="690" y="285" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594480035322" />
-    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1596703948738">
+    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1596785663519">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1596703948738" />
+    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1596785663519" />
     <state x="92" y="92" width="1736" height="835" key="DiffContextDialog" timestamp="1596705285805">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
@@ -335,18 +336,18 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="740" y="264" key="FileChooserDialogImpl/0.0.1920.1019@0.0.1920.1019" timestamp="1594483566999" />
-    <state x="749" y="211" key="RollbackChangesDialog" timestamp="1596771329988">
+    <state x="749" y="211" key="RollbackChangesDialog" timestamp="1596785605670">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="749" y="211" key="RollbackChangesDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1596771329988" />
+    <state x="749" y="211" key="RollbackChangesDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1596785605670" />
     <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor" timestamp="1594948529733">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor/0.0.1920.1019@0.0.1920.1019" timestamp="1594948529733" />
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1596703950722">
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1596785665625">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1596703950722" />
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1596785665625" />
     <state x="92" y="92" width="1736" height="835" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1595079496898">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>

@@ -25,7 +25,6 @@
                 <el-menu-item index="5">处理中心</el-menu-item>
             </el-menu>
         </div>
-        
         <router-view :style="{'margin-top':  !$route.meta.showNav ? '8px' : '0px'}" class="router-view"></router-view>
     </div>
 </template>

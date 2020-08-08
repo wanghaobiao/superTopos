@@ -1,12 +1,4 @@
 import VueRouter from 'vue-router'
-import ProjectList from './components/page/databaseTools/project'
-import tableManagement from './components/page/databaseTools/tableManagement'
-import systemConfigParams from './components/page/systemConfig/params'
-import orderManagement from './components/page/mallManagement/orderManagement'
-import productTypes from './components/page/mallManagement/productTypes'
-import userManagement from './components/page/userManagement/userManagement'
-import login from './components/page/login/login'
-import main from './components/page/login/main'
 import Vue from 'vue'
 import tools from './../src/components/util/util'
 
@@ -20,7 +12,8 @@ var router = new VueRouter({
                 title: '项目列表',
                 requireAuth: true,
             },
-            component: ProjectList 
+            component: () => import('./components/page/databaseTools/project'),
+
         },
         {   
             path: '/databaseTools/tableManagement',
@@ -29,7 +22,8 @@ var router = new VueRouter({
                 title: '表管理',
                 requireAuth: true,
             },
-            component: tableManagement 
+            component: () => import('./components/page/databaseTools/tableManagement'),
+
         },
         {   
             path: '/systemConfig/params', 
@@ -38,7 +32,7 @@ var router = new VueRouter({
                 title: '系统参数',
                 requireAuth: true,
             },
-            component: systemConfigParams 
+            component: () => import('./components/page/systemConfig/params'),
         },
         {   
             path: '/userManagement/userManagement', 
@@ -47,7 +41,7 @@ var router = new VueRouter({
                 title: '用户管理',
                 requireAuth: true,
             },
-            component: userManagement 
+            component: () => import('./components/page/userManagement/userManagement'),
         },
         {   
             path: '/mallManagement/orderManagement', 
@@ -56,7 +50,9 @@ var router = new VueRouter({
                 title: '订单管理',
                 requireAuth: true,
             },
-            component: orderManagement },
+            component: () => import('./components/page/mallManagement/orderManagement'),
+        },
+
         {   
             path: '/mallManagement/productTypes', 
             name: 'productTypes',
@@ -64,7 +60,8 @@ var router = new VueRouter({
                 title: '商品类型',
                 requireAuth: true,
             },
-            component: productTypes },
+            component: () => import('./components/page/mallManagement/productTypes'),
+        },
             
         {   
             path: '/login/login', 
@@ -74,7 +71,8 @@ var router = new VueRouter({
                 requireAuth: false,
                 showNav: true
             },
-            component: login },
+            component: () => import('./components/page/login/login'),
+        },
         {   
             path: '/login/main', 
             name: 'main',
@@ -83,7 +81,7 @@ var router = new VueRouter({
                 requireAuth: true,
                 showNav: true
             },
-            component: main 
+            component: () => import('./components/page/login/main'),
         
         },
         {
@@ -96,3 +94,5 @@ var router = new VueRouter({
 
 // 2、把路由对象暴露出去
 export default router
+
+
