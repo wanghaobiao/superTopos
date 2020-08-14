@@ -7,7 +7,7 @@
         <el-row  >
             <el-col :span="18">
                 <el-form  class="demo-form-inline">
-                    <el-row  >
+                    <el-row >
                         <el-col :span="8">
                             <el-form-item  label="名称" :label-width="formLabelWidth">
                                 <el-input v-model="pageData.name_eq" placeholder="请输入名称" autocomplete="off"></el-input>
@@ -19,29 +19,29 @@
                             </el-form-item>
                         </el-col>
                         <el-col :span="8">
-                            <el-form-item  label="创建人" :label-width="formLabelWidth">
-                                <el-input v-model="pageData.create_eq" placeholder="请输入创建人" autocomplete="off"></el-input>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row  v-show="moreIsShow.query"   >
-                        <el-col :span="8">
-                            <el-form-item  label="创建时间" :label-width="formLabelWidth">
-                                <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width: 100%"></el-date-picker>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="8">
                             <el-form-item  label="商品类型" :label-width="formLabelWidth">
                                 <el-select v-model="pageData.productTypesId_eq" clearable placeholder="请选择商品类型" style="width: 100%">
                                     <el-option v-for="item in entityOptions.productTypes" :key="item.label" :label="item.label" :value="item.value"> </el-option>
                                 </el-select>
                             </el-form-item>
                         </el-col>
+                    </el-row>
+                    <el-row  v-show="moreIsShow.query" >
                         <el-col :span="8">
                             <el-form-item  label="是否有效" :label-width="formLabelWidth">
                                 <el-select v-model="pageData.isEffective_eq" clearable placeholder="请选择是否有效" style="width: 100%">
                                     <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value"> </el-option>
                                 </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item  label="创建人" :label-width="formLabelWidth">
+                                <el-input v-model="pageData.create_eq" placeholder="请输入创建人" autocomplete="off"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-form-item  label="创建时间" :label-width="formLabelWidth">
+                                <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width: 100%"></el-date-picker>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -63,16 +63,10 @@
         <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - (66 + 62 * (moreIsShow.query ? 2 : 1))" fit border >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
+            <el-table-column  property="id" label="主键id" ></el-table-column>
             <el-table-column  property="name" label="名称" ></el-table-column>
             <el-table-column  property="number" label="编号" ></el-table-column>
             <el-table-column  property="remark" label="备注" ></el-table-column>
-            <el-table-column  property="create" label="创建人" ></el-table-column>
-            <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
-            <el-table-column  property="lastUpdateUser" label="最后更新人" ></el-table-column>
-            <el-table-column  property="lastUpdateTime" label="最后更新时间" ></el-table-column>
-            <el-table-column  property="audit" label="审核人" ></el-table-column>
-            <el-table-column  property="auditTime" label="审核时间" ></el-table-column>
-            <el-table-column  property="id" label="主键id" ></el-table-column>
             <el-table-column  label="商品类型" >
                 <template slot-scope="scope">{{ scope.row.productTypesId | optionsFmt(entityOptions.productTypes) }}</template>
             </el-table-column>
@@ -81,6 +75,12 @@
             </el-table-column>
             <el-table-column  property="amountOfGoods" label="商品数量" ></el-table-column>
             <el-table-column  property="totalOrderPrice" label="订单总价" ></el-table-column>
+            <el-table-column  property="create" label="创建人" ></el-table-column>
+            <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
+            <el-table-column  property="lastUpdateUser" label="最后更新人" ></el-table-column>
+            <el-table-column  property="lastUpdateTime" label="最后更新时间" ></el-table-column>
+            <el-table-column  property="audit" label="审核人" ></el-table-column>
+            <el-table-column  property="auditTime" label="审核时间" ></el-table-column>
             <el-table-column label="操作"  fixed="right">
                 <template slot-scope="scope">
                     <el-button type="success" plain size="small" @click="goView(scope.row.id)">查看</el-button>

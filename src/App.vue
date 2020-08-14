@@ -2,8 +2,7 @@
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
         <div  v-show="!$route.meta.showNav">
-            <el-menu class="el-menu-demo" mode="horizontal"
-                 background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+            <el-menu class="el-menu-demo" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
                 <el-submenu index="1">
                     <template slot="title">数据库工具</template>
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
@@ -31,21 +30,30 @@
 <script>
     export default {
         created() {
-          
             this.refreshScreenSize();
+            this.search();
             this.screenSize = this.screenSize;
            
         },
         data() {
             return {
+                menuData:[],
                 screenSize:{}
             };
         },
         methods: {
-         
-           jump(routerUrl){
-                this.$router.push(routerUrl);
-           }
+            jump(routerUrl){
+                    this.$router.push(routerUrl);
+            },
+            //执行搜索
+            search() {
+                this.getHttp(
+                    "/api/project/findAll"
+                ).then(result => {
+                    this.menuData = result.content;
+
+                });
+            },
         }
     };
 </script>

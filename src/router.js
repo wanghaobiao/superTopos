@@ -1,6 +1,4 @@
 import VueRouter from 'vue-router'
-import Vue from 'vue'
-import tools from './../src/components/util/util'
 
 // 1、创建路由对象
 var router = new VueRouter({
@@ -52,7 +50,6 @@ var router = new VueRouter({
             },
             component: () => import('./components/page/mallManagement/orderManagement'),
         },
-
         {   
             path: '/mallManagement/productTypes', 
             name: 'productTypes',
@@ -91,8 +88,6 @@ var router = new VueRouter({
      
     ]
 })
-
-// 2、把路由对象暴露出去
 export default router
 
 

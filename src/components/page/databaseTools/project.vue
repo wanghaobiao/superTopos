@@ -92,12 +92,17 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="前缀" clearable :label-width="formLabelWidth" prop="prefix">
-                            <el-input :disabled="viewDialog.isView" v-model="data.prefix" placeholder="请输入前缀" autocomplete="off"></el-input>
+                        <el-form-item label="字段前缀" clearable :label-width="formLabelWidth" prop="prefix">
+                            <el-input :disabled="viewDialog.isView" v-model="data.prefix" placeholder="请输入字段前缀" autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
+                 <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="实体后缀" clearable :label-width="formLabelWidth" prop="prefix">
+                            <el-input :disabled="viewDialog.isView" v-model="data.suffixEntity" placeholder="请输入实体后缀" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
                     <el-col :span="12">
                         <el-form-item label="数据库类型" clearable :label-width="formLabelWidth" prop="remark" >
                             <el-select v-model="data.dataBaseType" placeholder="请选择" :disabled="viewDialog.isView" style="width:100%">
@@ -105,18 +110,39 @@
                             </el-select>                        
                         </el-form-item>
                     </el-col>
-                      <el-col :span="12">
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
                         <el-form-item label="数据库名称" clearable :label-width="formLabelWidth" prop="number">
                             <el-input :disabled="viewDialog.isView" v-model="data.dataBaseName" placeholder="请输入数据库名称" autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
-                </el-row>
-                <el-row>
                     <el-col :span="12">
                         <el-form-item label="继承字段插入列" clearable :label-width="formLabelWidth" prop="insertIndex" >
                             <el-select v-model="data.insertIndex" placeholder="请选择" :disabled="viewDialog.isView" style="width:100%">
                                 <el-option v-for="item in data.detailEntitys.length" :key="item" :label="item" :value="item" ></el-option>
                             </el-select>                        
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="代码模板" clearable :label-width="formLabelWidth" prop="codeTemplate">
+                             <el-select v-model="data.codeTemplate" placeholder="请选择代码模板" :disabled="viewDialog.isView" style="width:100%">
+                                <el-option v-for="item in getOptions('codeTemplate')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                            </el-select> 
+                        </el-form-item>
+                    </el-col>
+                     <el-col :span="12">
+                        <el-form-item label="项目前端路径" clearable :label-width="formLabelWidth" prop="projectBeforePath">
+                            <el-input :disabled="viewDialog.isView" v-model="data.projectBeforePath" placeholder="请输入项目前端路径" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="项目后端路径" clearable :label-width="formLabelWidth" prop="projectAfterPath">
+                            <el-input :disabled="viewDialog.isView" v-model="data.projectAfterPath" placeholder="请输入项目后端路径" autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -168,6 +194,14 @@
                 <el-table-column label="关联参数" >
                     <template scope="scope">
                         <el-input  v-model="scope.row.linkParam" placeholder="请输入关联参数" clearable :disabled="scope.row.columnProperties != 'paramColumn'"></el-input> <span>{{scope.row.linkParam}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="是否主键">
+                    <template scope="scope">
+                        <el-select v-model="scope.row.isKey" placeholder="请选择" >
+                            <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                        </el-select>
+                        <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="允许为空">

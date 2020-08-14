@@ -129,8 +129,12 @@ Vue.prototype.refreshParams = function (message){
 }
 //获取缓存
 Vue.prototype.getOptions = function (paramsName){
-    var optionsParams = JSON.parse(window.sessionStorage.optionsParams);
-    return optionsParams[paramsName];  
+    if(window.sessionStorage.optionsParams){
+        var optionsParams = JSON.parse(window.sessionStorage.optionsParams);
+        return optionsParams[paramsName];  
+    }
+    return '';
+    
 }
 
 //获取缓存

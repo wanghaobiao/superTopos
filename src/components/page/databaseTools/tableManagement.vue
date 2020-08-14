@@ -109,6 +109,14 @@
                                     <span>{{scope.row.linkParam | optionsFmt(getBaseOptions())}}</span>
                                 </template>
                             </el-table-column>
+                            <el-table-column label="是否主键">
+                                <template scope="scope">
+                                    <el-select v-model="scope.row.isKey" placeholder="请选择" >
+                                        <el-option v-for="item in getOptions('yesOrNo')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                                    </el-select>
+                                    <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
+                                </template>
+                            </el-table-column>
                             <el-table-column label="允许为空">
                                 <template scope="scope">
                                     <el-select v-model="scope.row.allowEmpty" placeholder="请选择" >
@@ -346,6 +354,7 @@
             //添加明细
             addDetails() {
                 var insertIndex = this.data.insertIndex;
+                insertIndex = this.isEmpty(insertIndex) ? this.data.detailEntitys.length :  insertIndex;
                 for(var i = 0; i < this.data.detailEntitys.length ; i++){
                     if(this.isEmpty(this.data.detailEntitys[i].id)){
                         insertIndex++;
