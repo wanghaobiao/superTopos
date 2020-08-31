@@ -5,10 +5,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
-    </list>
+    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,6 +94,7 @@
       <workItem from="1596771287075" duration="2917000" />
       <workItem from="1596785600267" duration="684000" />
       <workItem from="1596872139804" duration="614000" />
+      <workItem from="1597384602537" duration="1629000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -252,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596872150430</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="完成登录功能  wanghb">
+      <created>1597384644262</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1597384644262</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,10 +327,10 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="690" y="285" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594480035322" />
-    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1596872149659">
+    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1597384643497">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1596872149659" />
+    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1597384643497" />
     <state x="92" y="92" width="1736" height="835" key="DiffContextDialog" timestamp="1596705285805">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
@@ -342,10 +347,10 @@
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
     <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor/0.0.1920.1019@0.0.1920.1019" timestamp="1594948529733" />
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1596872151988">
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1597384645245">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1596872151988" />
+    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1597384645245" />
     <state x="92" y="92" width="1736" height="835" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1595079496898">
       <screen x="0" y="0" width="1920" height="1019" />
     </state>

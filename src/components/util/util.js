@@ -221,6 +221,18 @@ Vue.prototype.listExtract = function (listPararm,column) {
     }
     return arr;
 },
+//list 提取  
+Vue.prototype.toComma = function (arr) {
+    var commaStr = "";
+    for (var i = 0; i < arr.length; i++) {
+        var value = arr[i];
+        if(commaStr != ""){
+            commaStr += ",";
+        }
+        commaStr += value;
+    }
+    return commaStr;
+},
 //判断是否为数字
 Vue.prototype.isNumber = function (param) {
     return !isNaN(parseInt(param));

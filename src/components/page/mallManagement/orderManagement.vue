@@ -1,6 +1,6 @@
 
 
-<!--订单管理( OrderManagementVue ))-->
+<!--订单管理( OrderManagement ))-->
 <template>
     <div :style="{height:(screenSize.height)+'px'}">
         <!-- 搜索框开始 -->
