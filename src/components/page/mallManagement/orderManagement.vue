@@ -88,6 +88,7 @@
                 </template>
             </el-table-column>
         </el-table>
+
         <!-- 列表框结束 -->
         <el-row :gutter="10" class="pagination">
             <el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange" :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination>
