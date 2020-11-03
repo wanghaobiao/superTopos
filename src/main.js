@@ -12,6 +12,12 @@ import axiosConfig from './../src/components/util/axiosConfig';
 import global from './../src/components/util/global'
 import xfilters from './../src/components/util/xfilters'
 
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Vue.use(VueQuillEditor);
+
 
 router.beforeEach((to, from, next) => {
     document.querySelector('body').setAttribute('style', ' margin: 8px;')

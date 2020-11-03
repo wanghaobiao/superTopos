@@ -8,6 +8,7 @@
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
                     <el-menu-item index="1-2" @click="jump('/databaseTools/tableManagement')">表结构管理</el-menu-item>
                 </el-submenu>
+                <el-menu-item index="5" @click="jump('/systemConfig/codeReserve')">代码储备</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">系统配置</template>
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
@@ -21,7 +22,7 @@
                     <template slot="title">用户管理</template>
                     <el-menu-item index="4-1" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="5">处理中心</el-menu-item>
+                
             </el-menu>
         </div>
         <router-view :style="{'margin-top':  !$route.meta.showNav ? '8px' : '0px'}" class="router-view"></router-view>
@@ -58,6 +59,16 @@
     };
 </script>
 <style>
+    .atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow {
+    border-top-color: pink;
+    }
+    .atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow:after {
+    border-top-color: pink;
+    }
+    .atooltip {
+    background: pink !important;
+    }
+
     .router-view{
         margin: 0px;
     }
@@ -68,8 +79,17 @@
     .margin-top-22{
         margin-top: 22px;
     }
+    .margin-top-10{
+        margin-top: 10px;
+    }
     .text-align-right{
         text-align: right;
+    }
+    .height-100{
+        height: 100%;
+    }
+    .border-2-adadad{
+        border: 2px solid #adadad;
     }
     /***************************************** 基础样式开始 *****************************************/
 

@@ -33,6 +33,15 @@ var router = new VueRouter({
             component: () => import('./components/page/systemConfig/params'),
         },
         {   
+            path: '/systemConfig/codeReserve', 
+            name: 'systemConfigCodeReserve',
+            meta:{
+                title: '代码储备',
+                requireAuth: true,
+            },
+            component: () => import('./components/page/systemConfig/codeReserve'),
+        },
+        {   
             path: '/userManagement/userManagement', 
             name: 'userManagement',
             meta:{
@@ -83,7 +92,7 @@ var router = new VueRouter({
         },
         {
             path:'*',
-            redirect:'/databaseTools/project'
+            redirect:'/databaseTools/tableManagement'
         }
      
     ]

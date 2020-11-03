@@ -46,10 +46,11 @@
         <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - 190" fit border >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
-            <el-table-column  property="name" label="名称" ></el-table-column>
+            <el-table-column  property="name" label="名称" width="250" ></el-table-column>
             <el-table-column  property="number" label="编号" ></el-table-column>
             <el-table-column  property="remark" label="备注" ></el-table-column>
-            <el-table-column  property="prefix" label="前缀" ></el-table-column>
+            <el-table-column  property="tablePrefix" label="表名前缀" ></el-table-column>
+            <el-table-column  property="prefix" label="字段前缀" ></el-table-column>
             <el-table-column  property="dataBaseType" label="数据库类型" ></el-table-column>
             <el-table-column  property="dataBaseName" label="数据库名称" ></el-table-column>
             <el-table-column  property="insertIndex" label="继承字段插入列" ></el-table-column>
@@ -57,7 +58,7 @@
             <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
             <!-- <el-table-column  property="lastUpdateUser" label="最后修改人" ></el-table-column> -->
             <!-- <el-table-column  property="lastUpdateTime" label="最后修改时间" ></el-table-column> -->
-            <el-table-column  property="audit" label="审核人" ></el-table-column>
+            <!-- <el-table-column  property="audit" label="审核人" ></el-table-column> -->
             <!-- <el-table-column  property="auditTime" label="审核时间" ></el-table-column> -->
             <el-table-column label="操作"  fixed="right">
                 <template slot-scope="scope">
@@ -86,9 +87,9 @@
                     </el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="备注" clearable :label-width="formLabelWidth" prop="remark">
-                            <el-input :disabled="viewDialog.isView" v-model="data.remark" placeholder="请输入备注" autocomplete="off"></el-input>
+                     <el-col :span="12">
+                        <el-form-item label="表名前缀" clearable :label-width="formLabelWidth" prop="tablePrefix">
+                            <el-input :disabled="viewDialog.isView" v-model="data.tablePrefix" placeholder="请输入表名前缀" autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -98,6 +99,7 @@
                     </el-col>
                 </el-row>
                  <el-row>
+                   
                     <el-col :span="12">
                         <el-form-item label="实体后缀" clearable :label-width="formLabelWidth" prop="prefix">
                             <el-input :disabled="viewDialog.isView" v-model="data.suffixEntity" placeholder="请输入实体后缀" autocomplete="off"></el-input>
@@ -143,6 +145,11 @@
                     <el-col :span="12">
                         <el-form-item label="项目后端路径" clearable :label-width="formLabelWidth" prop="projectAfterPath">
                             <el-input :disabled="viewDialog.isView" v-model="data.projectAfterPath" placeholder="请输入项目后端路径" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="备注" clearable :label-width="formLabelWidth" prop="remark">
+                            <el-input :disabled="viewDialog.isView" v-model="data.remark" placeholder="请输入备注" autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>

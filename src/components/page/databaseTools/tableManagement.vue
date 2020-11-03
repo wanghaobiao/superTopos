@@ -9,14 +9,24 @@
                   <el-tree
                      :data="listData.content"
                      node-key="id"
-                     default-expand-all
                      :expand-on-click-node="false"
+                     ref="tree"
+                     @node-click="treeCheck"
                   >
                      <span class="custom-tree-node" slot-scope="{ node, data }">
-                        <span>
-                           <i :class="data.icon" :style="{color : data.color}"></i>
-                           {{ node.label }}
-                        </span>
+                        <el-tooltip
+                           class="item"
+                           effect="dark"
+                           :content="node.label"
+                           :disabled="node.label.length <= 10"
+                           placement="top-start"
+                        >
+                           <span>
+                              <i :class="data.icon" :style="{color : data.color}"></i>
+                              {{ node.label | titleSub(10)}}
+                           </span>
+                        </el-tooltip>
+
                         <span>
                            <el-button
                               type="warning"
@@ -154,7 +164,6 @@
                         class="sql-div"
                         ref="sqlDiv"
                         v-html="data.sql"
-                        @click="sqlCopy()"
                         :style="{height:(screenSize.height - 180)+'px'}"
                      ></div>
                   </el-form-item>
@@ -189,6 +198,7 @@
                      highlight-current-row
                      :row-class-name="tableRowClassName"
                      @current-change="currentChange"
+                     fixed
                      class="tb-edit"
                   >
                      <el-table-column width="50" type="index" label="序号"></el-table-column>
@@ -343,8 +353,14 @@
                            <span>{{scope.row.defaultValue}}</span>
                         </template>
                      </el-table-column>
-                     <el-table-column label="操作" v-if="viewDialog.isEdit">
+                     <el-table-column label="操作" v-if="viewDialog.isEdit" fixed="right" width="150">
                         <template slot-scope="scope">
+                           <el-button
+                              type="success"
+                              plain
+                              size="small"
+                              @click="buildPartialDialog.isShow = true"
+                           >生成</el-button>
                            <el-button
                               type="danger"
                               plain
@@ -357,7 +373,7 @@
                   </el-table>
                </div>
                <el-row class="tool-spacing" v-show="viewDialog.isTools">
-                  <el-button @click="viewDialog.isShow = false">执行SQL</el-button>
+                  <el-button @click="sqlCopy()" plain type="success">复制SQL</el-button>
                   <el-button
                      type="primary"
                      @click="buildFileDialog.isShow = true"
@@ -439,7 +455,26 @@
                      <el-button type="primary" @click="buildFile()">确 定</el-button>
                   </span>
                </el-dialog>
+               <el-dialog title="生成局部代码" :visible.sync="buildPartialDialog.isShow" width="30%">
+                  <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
+                    <div>
+                        <el-row :gutter="20" v-show="false"><!--   -->
+                            <textarea ref="buildPartialRef" v-html="buildPartialDialog.sql" ></textarea>
+                        </el-row>
+                        <el-row :gutter="20">
+                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="warning" plain @click="copySql">SQL</el-button></el-col>
+                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="primary" plain @click="copyEntity">实体</el-button></el-col>
+                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="info" plain>无用</el-button></el-col>
+                        </el-row>
 
+                        <!-- <el-row :gutter="20" class="margin-top-22">
+                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="warning" plain @click="copySql">SQL</el-button></el-col>
+                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="primary" plain>实体</el-button></el-col>
+                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="info" plain>无用</el-button></el-col>
+                        </el-row> -->
+                    </div>
+                  </el-form>
+               </el-dialog>
                <!-- 新增/编辑结束 -->
             </div>
          </el-col>
@@ -473,6 +508,15 @@ export default {
             fileTypes: [],
             javaPath: "",
             vuePath: "",
+         },
+         buildPartialDialog: {
+            isAllSelect: false,
+            isShow: false,
+            butIsLoading: false,
+            fileTypes: [],
+            javaPath: "",
+            vuePath: "",
+            sql: "",
          },
          tableOptions: [],
          formLabelWidth: "120px",
@@ -547,6 +591,7 @@ export default {
                this.viewDialog.isShow = true;
                this.data = {
                   prefix: result.prefix,
+                  insertIndex: result.insertIndex,
                   level: row.level + 1,
                   projectId: projectId,
                   projectEntity: { id: row.id, name: row.label },
@@ -554,18 +599,28 @@ export default {
                   detailEntitys: result.detailEntitys,
                };
                if (row.level > 2) {
-                  this.data.detailEntitys.push({
-                     id: row.id,
-                     name: "父对象关联",
+                   console.log(JSON.stringify(this.data));
+                    var temp = [{},{
+                     name: this.data.projectEntity.name + 'id',
                      number: "parentId",
                      linkTable: row.id,
                      allowEmpty: "N",
                      columnProperties: "linkColumn",
                      isKey: "N",
-                  });
+                    }];
+                    for (var i = 1; i < this.data.detailEntitys.length; i++) {
+                        temp.push(this.data.detailEntitys[i]);
+                    }
+                    temp[0] = this.data.detailEntitys;
+                    this.data.detailEntitys = temp;
                }
             }
          );
+      },
+      treeCheck(data) {
+         this.$refs.tree.store.nodesMap[data.id].expanded = !this.$refs.tree
+            .store.nodesMap[data.id].expanded;
+         data.unfold = !data.unfold;
       },
       //打开工具箱
       goTools(row) {
@@ -584,15 +639,7 @@ export default {
             };
          });
       },
-      //复制语句
-      sqlCopy() {
-         var selection = window.getSelection();
-         var range = document.createRange();
-         range.selectNodeContents(this.$refs.sqlDiv);
-         selection.removeAllRanges();
-         selection.addRange(range);
-         //this.copy(text);
-      },
+     
       //打开详情
       goView(row) {
          this.getTableOptions(
@@ -624,9 +671,7 @@ export default {
       //添加明细
       addDetails() {
          var insertIndex = this.data.insertIndex;
-         insertIndex = this.isEmpty(insertIndex)
-            ? this.data.detailEntitys.length
-            : insertIndex;
+         insertIndex = this.isEmpty(insertIndex) ? this.data.detailEntitys.length : insertIndex;
          for (var i = 0; i < this.data.detailEntitys.length; i++) {
             if (this.isEmpty(this.data.detailEntitys[i].id)) {
                insertIndex++;
@@ -685,6 +730,60 @@ export default {
       currentChange(row) {
          this.currentIndex = row.index;
       },
+      //复制SQL
+      copySql() {
+        var row =  this.data.detailEntitys[this.currentIndex];
+        var previousColumnNumber = this.currentIndex == 0 ? "" : this.data.detailEntitys[this.currentIndex - 1].number;
+        this.postHttp(
+           "/api/project/oneSql?id=" +
+              this.data.projectId +
+              "&tableNumber=" +
+              this.data.number+
+              "&previousColumnNumber=" +
+              previousColumnNumber,
+           row
+        ).then((result) => {
+            this.buildPartialDialog.sql = result;
+            this.copy(result);
+        });
+      },
+       //复制语句
+      sqlCopy() {
+         var selection = window.getSelection();
+         var range = document.createRange();
+         range.selectNodeContents(this.$refs.sqlDiv);
+         selection.removeAllRanges();
+         selection.addRange(range);
+        if (document.execCommand('copy')) {
+            document.execCommand('copy');
+            this.$message({ message: '复制成功', type: 'success' });
+        }
+        selection.removeAllRanges();
+      },
+      //复制实体
+      copyEntity() {
+        var row =  this.data.detailEntitys[this.currentIndex];
+        this.postHttp(
+           "/api/project/oneEntity?id=" +
+              this.data.projectId +
+              "&tableNumber=" +
+              this.data.number,
+           row
+        ).then((result) => {
+            this.buildPartialDialog.sql = result;
+            // 使用textarea支持换行，使用input不支持换行
+            const textarea = document.createElement('textarea');
+            textarea.value = result;
+            document.body.appendChild(textarea);
+            textarea.select();
+            if (document.execCommand('copy')) {
+                document.execCommand('copy');
+                 this.$message({ message: '复制成功', type: 'success' });
+            }
+            //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
+            document.body.removeChild(textarea);
+        });
+      },
       //删除明细
       delDetails(index) {
          this.data.detailEntitys.splice(index, 1);
@@ -710,7 +809,9 @@ export default {
                   this.viewDialog.butIsLoading = false;
                   if (result.code == 200) {
                      this.viewDialog.isShow = false;
-                     this.search();
+                     if (this.isEmpty(dataSave.id)) {
+                        this.search();
+                     }
                   }
                });
             } else {
@@ -790,20 +891,33 @@ export default {
       },
       //生成文件
       buildFile() {
-        this.postHttp("/api/project/buildFile?id=" + this.data.id,this.buildFileDialog.fileTypes
-        ).then((result) => {
-        this.search();
-        });
+         this.postHttp(
+            "/api/project/buildFile?id=" + this.data.id,
+            this.buildFileDialog.fileTypes
+         ).then((result) => {});
       },
       //下载文件
       downloadFile() {
-        var fileTypes = this.urlEncodeURIComponent(this.toComma(this.buildFileDialog.fileTypes));
-        window.open("/api/project/downloadFile?id=" + this.data.id + "&fileTypes=" + fileTypes,)
+         var fileTypes = this.urlEncodeURIComponent(
+            this.toComma(this.buildFileDialog.fileTypes)
+         );
+         window.open(
+            "/api/project/downloadFile?id=" +
+               this.data.id +
+               "&fileTypes=" +
+               fileTypes
+         );
       },
    },
 };
 </script>
 <style>
+.frame-col {
+    text-align: center;
+}
+.frame-but {
+    width: 100%;
+}
 .tree-node {
    height: 100%;
    border-radius: 25px;
@@ -846,7 +960,7 @@ export default {
    background-color: #f5f7fa;
    border-color: #e4e7ed;
    color: #c0c4cc;
-   cursor: not-allowed;
+   cursor: text;
    -webkit-appearance: none;
 
    border-radius: 4px;
@@ -866,4 +980,10 @@ export default {
 .fileType-checkbox {
    width: 100%;
 }
+.el-form-item__content {
+    line-height: 22px;
+    position: relative;
+    font-size: 14px;
+}
+
 </style>
