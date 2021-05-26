@@ -211,6 +211,7 @@ Vue.prototype.copy = function (data) {
     return Object.keys(data).map(function (key) {
         return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
     }).join("&");
+   
 },
 //list 提取  
 Vue.prototype.listExtract = function (listPararm,column) {

@@ -1,19 +1,13 @@
 <!--项目表(project)-->
 <template>
    <div :style="{height:(screenSize.height)+'px'}">
-      <el-row :gutter="10" style="height:100%">
-         <el-col :span="6" style="height:100%">
+      <el-row :gutter="10" style="height:100%;">
+         <el-col :span="6" style="height:100%;" >
             <!-- 列表框开始 -->
-            <div class="custom-tree-container tree-node">
-               <div class="block">
-                  <el-tree
-                     :data="listData.content"
-                     node-key="id"
-                     :expand-on-click-node="false"
-                     ref="tree"
-                     @node-click="treeCheck"
-                  >
-                     <span class="custom-tree-node" slot-scope="{ node, data }">
+            <div class="custom-tree-container tree-node" >
+                <div >
+                  <el-tree :data="listData.content" node-key="id" :expand-on-click-node="false" ref="tree" @node-click="treeCheck" >
+                     <div class="custom-tree-node" slot-scope="{ node, data }" >
                         <el-tooltip
                            class="item"
                            effect="dark"
@@ -21,10 +15,10 @@
                            :disabled="node.label.length <= 10"
                            placement="top-start"
                         >
-                           <span>
-                              <i :class="data.icon" :style="{color : data.color}"></i>
-                              {{ node.label | titleSub(10)}}
-                           </span>
+                        <span @click="goView(data)">
+                            <i :class="data.icon" :style="{color : data.color}"></i>
+                            {{ node.label | titleSub(10)}}
+                        </span>
                         </el-tooltip>
 
                         <span>
@@ -36,14 +30,14 @@
                               circle
                               @click="() => goTools(data)"
                            ></el-button>
-                           <el-button
+                           <!-- <el-button
                               type="info"
                               icon="al-icon-view"
                               size="small"
                               class="operat-but"
                               circle
                               @click="() => goView(data)"
-                           ></el-button>
+                           ></el-button> -->
                            <el-button
                               type="success"
                               icon="al-icon-add-details"
@@ -69,9 +63,9 @@
                               @click="() => batchDel(data.id)"
                            ></el-button>
                         </span>
-                     </span>
+                     </div>
                   </el-tree>
-               </div>
+                </div>
             </div>
             <!-- 列表框结束 -->
          </el-col>
@@ -202,23 +196,23 @@
                      class="tb-edit"
                   >
                      <el-table-column width="50" type="index" label="序号"></el-table-column>
-                     <el-table-column label="名称" width="150">
+                     <el-table-column label="名称" width="200">
                         <template scope="scope">
                            <el-input
                               v-model="scope.row.name"
                               placeholder="请输入名称"
-                              :disabled="scope.row.columnProperties == 'linkColumn'"
+                              :disabled="!viewDialog.isEdit || scope.row.columnProperties == 'linkColumn'"
                               clearable
                            ></el-input>
                            <span>{{scope.row.name}}</span>
                         </template>
                      </el-table-column>
-                     <el-table-column label="属性名" width="150">
+                     <el-table-column label="属性名" width="200">
                         <template scope="scope">
                            <el-input
                               v-model="scope.row.number"
                               placeholder="请输入属性名"
-                              :disabled="scope.row.columnProperties == 'linkColumn'"
+                              :disabled="!viewDialog.isEdit || scope.row.columnProperties == 'linkColumn'"
                               clearable
                            ></el-input>
                            <span>{{scope.row.number}}</span>
@@ -227,6 +221,7 @@
                      <el-table-column label="字段属性" width="150">
                         <template scope="scope">
                            <el-select
+                            :disabled="!viewDialog.isEdit"
                               v-model="scope.row.columnProperties"
                               placeholder="请选择字段属性"
                               @change="columnPropertiesChange(scope.$index,scope.row.columnProperties)"
@@ -246,7 +241,7 @@
                            <el-select
                               v-model="scope.row.type"
                               placeholder="请选择字段类型"
-                              :disabled="scope.row.columnProperties != 'baseColumn'"
+                              :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
                               @change="typeChange(scope.row)"
                            >
                               <el-option
@@ -259,12 +254,45 @@
                            <span>{{scope.row.type | paramsFmt('columnType')}}</span>
                         </template>
                      </el-table-column>
+                      <el-table-column label="长度" width="110">
+                        <template scope="scope">
+                           <el-input
+                              v-model="scope.row.length"
+                              placeholder="请输入长度"
+                              clearable
+                              :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
+                           ></el-input>
+                           <span>{{scope.row.length}}</span>
+                        </template>
+                     </el-table-column>
+                     <el-table-column label="默认值">
+                        <template scope="scope">
+                           <el-input
+                              v-model="scope.row.defaultValue"
+                              placeholder="请输入默认值"
+                              clearable
+                              :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
+                           ></el-input>
+                           <span>{{scope.row.defaultValue}}</span>
+                        </template>
+                     </el-table-column>
+                      <el-table-column label="小数位">
+                        <template scope="scope">
+                           <el-input
+                              v-model="scope.row.places"
+                              placeholder="请输入小数位"
+                              clearable
+                              :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
+                           ></el-input>
+                           <span>{{scope.row.places}}</span>
+                        </template>
+                     </el-table-column>
                      <el-table-column label="关联表" width="150">
                         <template scope="scope">
                            <el-select
                               v-model="scope.row.linkTable"
                               placeholder="请选择关联表"
-                              :disabled="scope.row.columnProperties != 'linkColumn'"
+                              :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'linkColumn'"
                               @change="linkTableChange(scope.row)"
                            >
                               <el-option
@@ -282,7 +310,7 @@
                            <el-select
                               v-model="scope.row.linkParam"
                               placeholder="请选择关联参数"
-                              :disabled="scope.row.columnProperties == 'linkColumn'"
+                              :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'paramColumn'"
                            >
                               <el-option
                                  v-for="item in getBaseOptions()"
@@ -296,7 +324,7 @@
                      </el-table-column>
                      <el-table-column label="是否主键">
                         <template scope="scope">
-                           <el-select v-model="scope.row.isKey" placeholder="请选择">
+                           <el-select v-model="scope.row.isKey" :disabled="!viewDialog.isEdit" placeholder="请选择">
                               <el-option
                                  v-for="item in getOptions('yesOrNo')"
                                  :key="item.label"
@@ -309,7 +337,7 @@
                      </el-table-column>
                      <el-table-column label="允许为空">
                         <template scope="scope">
-                           <el-select v-model="scope.row.allowEmpty" placeholder="请选择">
+                           <el-select v-model="scope.row.allowEmpty" :disabled="!viewDialog.isEdit" placeholder="请选择">
                               <el-option
                                  v-for="item in getOptions('yesOrNo')"
                                  :key="item.label"
@@ -318,39 +346,6 @@
                               ></el-option>
                            </el-select>
                            <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
-                        </template>
-                     </el-table-column>
-                     <el-table-column label="长度">
-                        <template scope="scope">
-                           <el-input
-                              v-model="scope.row.length"
-                              placeholder="请输入长度"
-                              clearable
-                              :disabled="scope.row.columnProperties != 'baseColumn'"
-                           ></el-input>
-                           <span>{{scope.row.length}}</span>
-                        </template>
-                     </el-table-column>
-                     <el-table-column label="小数位">
-                        <template scope="scope">
-                           <el-input
-                              v-model="scope.row.places"
-                              placeholder="请输入小数位"
-                              clearable
-                              :disabled="scope.row.columnProperties != 'baseColumn'"
-                           ></el-input>
-                           <span>{{scope.row.places}}</span>
-                        </template>
-                     </el-table-column>
-                     <el-table-column label="默认值">
-                        <template scope="scope">
-                           <el-input
-                              v-model="scope.row.defaultValue"
-                              placeholder="请输入默认值"
-                              clearable
-                              :disabled="scope.row.columnProperties != 'baseColumn'"
-                           ></el-input>
-                           <span>{{scope.row.defaultValue}}</span>
                         </template>
                      </el-table-column>
                      <el-table-column label="操作" v-if="viewDialog.isEdit" fixed="right" width="150">
@@ -483,6 +478,8 @@
 </template>
 <script>
 export default {
+    name:'tableManagement',
+
    created() {
       this.search();
       this.getParams();
@@ -539,9 +536,12 @@ export default {
          },
       };
    },
+    
+
    methods: {
       //执行搜索
       search() {
+          //alert(this.$route.params.projectType);
          this.listData.loading = true;
          if (!this.isEmpty(this.pageData.creationTime)) {
             this.pageData["creationTime_ge"] =
@@ -549,6 +549,7 @@ export default {
             this.pageData["creationTime_le"] =
                this.pageData.creationTime[1] + "T00:00:00";
          }
+         this.pageData["projectType_eq"] = "DQ";
          this.pageData.projectId_isNull = null;
          this.getHttp(
             "/api/project/findAll?" + this.jsonToUrl(this.pageData)
@@ -599,7 +600,6 @@ export default {
                   detailEntitys: result.detailEntitys,
                };
                if (row.level > 2) {
-                   console.log(JSON.stringify(this.data));
                     var temp = [{},{
                      name: this.data.projectEntity.name + 'id',
                      number: "parentId",
@@ -611,13 +611,14 @@ export default {
                     for (var i = 1; i < this.data.detailEntitys.length; i++) {
                         temp.push(this.data.detailEntitys[i]);
                     }
-                    temp[0] = this.data.detailEntitys;
+                    temp[0] = this.data.detailEntitys[0];
                     this.data.detailEntitys = temp;
                }
+               this.addDetails();
             }
          );
       },
-      treeCheck(data) {
+      treeCheck(data,test) {
          this.$refs.tree.store.nodesMap[data.id].expanded = !this.$refs.tree
             .store.nodesMap[data.id].expanded;
          data.unfold = !data.unfold;
@@ -832,6 +833,8 @@ export default {
          this.data.detailEntitys[index] = {
             columnProperties: columnProperties,
             parentId: this.data.id,
+            name:  this.data.detailEntitys[index].name,
+            number:  this.data.detailEntitys[index].number,
             allowEmpty: "Y",
             isKey: "N",
          };
@@ -911,7 +914,7 @@ export default {
    },
 };
 </script>
-<style>
+<style >
 .frame-col {
     text-align: center;
 }
@@ -920,12 +923,9 @@ export default {
 }
 .tree-node {
    height: 100%;
-   border-radius: 25px;
-   padding: 20px;
-   border: 2px solid #adadad;
-}
-.div-view {
-   height: 100%;
+   /* 
+   position: absolute;
+   overflow: auto; */
    border-radius: 25px;
    padding: 20px;
    border: 2px solid #adadad;
@@ -940,6 +940,15 @@ export default {
    padding-right: 8px;
    border-radius: 15px;
 }
+
+.div-view {
+   height: 100%;
+   border-radius: 25px;
+   padding: 20px;
+   border: 2px solid #adadad;
+}
+
+
 
 .el-tree-node {
    white-space: nowrap;
@@ -956,6 +965,7 @@ export default {
    cursor: pointer;
 }
 .sql-div {
+    line-height: 25px;
    overflow-y: scroll;
    background-color: #f5f7fa;
    border-color: #e4e7ed;
@@ -980,10 +990,6 @@ export default {
 .fileType-checkbox {
    width: 100%;
 }
-.el-form-item__content {
-    line-height: 22px;
-    position: relative;
-    font-size: 14px;
-}
+
 
 </style>

@@ -1,22 +1,32 @@
 <template>
+
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
         <div  v-show="!$route.meta.showNav">
             <el-menu class="el-menu-demo" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-                <el-submenu index="1">
+                <!-- <el-submenu index="1">
                     <template slot="title">数据库工具</template>
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
-                    <el-menu-item index="1-2" @click="jump('/databaseTools/tableManagement')">表结构管理</el-menu-item>
-                </el-submenu>
+                    <el-menu-item index="1-2" @click="jumpForTable('tableManagement','DQ')">表结构管理</el-menu-item>
+                    <!-- <el-menu-item index="1-3" @click="jumpForTable('tableManagement','LS')">表结构管理(历史)</el-menu-item>
+                </el-submenu> -->
+                <el-menu-item index="1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
+                <el-menu-item index="2" @click="jumpForTable('tableManagement','DQ')">表结构管理</el-menu-item>
                 <el-menu-item index="5" @click="jump('/systemConfig/codeReserve')">代码储备</el-menu-item>
                 <el-submenu index="2">
                     <template slot="title">系统配置</template>
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
+                    <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
                 </el-submenu>
-                <el-submenu index="3">
+                <!-- <el-submenu index="3">
                     <template slot="title">商场管理</template>
                     <el-menu-item index="3-1" @click="jump('/mallManagement/orderManagement')">订单管理</el-menu-item>
                     <el-menu-item index="3-2" @click="jump('/mallManagement/productTypes')">商品类型</el-menu-item>
+                </el-submenu> -->
+                <el-submenu index="3">
+                    <template slot="title">技能储备</template>
+                    <el-menu-item index="3-1" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>
+                    <el-menu-item index="3-2" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item></el-menu-item>
                 </el-submenu>
                 <el-submenu index="4">
                     <template slot="title">用户管理</template>
@@ -25,6 +35,8 @@
                 
             </el-menu>
         </div>
+       
+
         <router-view :style="{'margin-top':  !$route.meta.showNav ? '8px' : '0px'}" class="router-view"></router-view>
     </div>
 </template>
@@ -38,13 +50,18 @@
         },
         data() {
             return {
+                pages: [],
                 menuData:[],
                 screenSize:{}
             };
         },
         methods: {
             jump(routerUrl){
-                    this.$router.push(routerUrl);
+                this.$router.push(routerUrl);
+            },
+            jumpForTable(routerName,projectType){
+                //this.$router.push({path : '/databaseTools/tableManagement' ,params : {'projectType':projectType}});
+                this.$router.push({path : '/databaseTools/tableManagement' ,params : {'projectType':projectType}});
             },
             //执行搜索
             search() {
@@ -55,6 +72,7 @@
 
                 });
             },
+            
         }
     };
 </script>

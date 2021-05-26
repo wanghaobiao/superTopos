@@ -18,7 +18,7 @@ var router = new VueRouter({
             name: 'tableManagement',
             meta:{
                 title: '表管理',
-                requireAuth: true,
+                requireAuth: false,
             },
             component: () => import('./components/page/databaseTools/tableManagement'),
 
@@ -40,6 +40,24 @@ var router = new VueRouter({
                 requireAuth: true,
             },
             component: () => import('./components/page/systemConfig/codeReserve'),
+        },
+        {   
+            path: '/topicManage/topicManage', 
+            name: 'topicManageTopicManage',
+            meta:{
+                title: '题目管理',
+                requireAuth: true,
+            },
+            component: () => import('./components/page/topicManage/topicManage'),
+        },
+        {   
+            path: '/topicManage/topicTest', 
+            name: 'topicManageTopicTest',
+            meta:{
+                title: '技能考核',
+                requireAuth: true,
+            },
+            component: () => import('./components/page/topicManage/topicTest'),
         },
         {   
             path: '/userManagement/userManagement', 

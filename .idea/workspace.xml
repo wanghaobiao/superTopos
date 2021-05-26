@@ -6,10 +6,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/util/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/util/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,11 +52,12 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="settings.editor.splitter.proportion" value="0.11777189" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -105,6 +111,11 @@
       <workItem from="1598863508912" duration="8000" />
       <workItem from="1602576633814" duration="113000" />
       <workItem from="1603691998283" duration="14000" />
+      <workItem from="1604393382091" duration="876000" />
+      <workItem from="1608171381009" duration="30000" />
+      <workItem from="1608172134888" duration="13000" />
+      <workItem from="1610008843167" duration="332000" />
+      <workItem from="1612505494918" duration="96000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -274,11 +285,18 @@
       <option name="project" value="LOCAL" />
       <updated>1598842020293</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="完成登录功能  wanghb">
+      <created>1604393421777</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1604393421777</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -334,59 +352,5 @@
     <MESSAGE value="完成树形菜单结构" />
     <MESSAGE value="完成登录功能  wanghb" />
     <option name="LAST_COMMIT_MESSAGE" value="完成登录功能  wanghb" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="828" y="137" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1595380475704">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="828" y="137" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1595380475704" />
-    <state x="690" y="285" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1594480035322">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="690" y="285" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1594480035322" />
-    <state x="560" y="97" key="CommitChangelistDialog2" timestamp="1598842019608">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="560" y="97" key="CommitChangelistDialog2/0.0.1920.1019@0.0.1920.1019" timestamp="1598842019608" />
-    <state x="92" y="92" width="1736" height="835" key="DiffContextDialog" timestamp="1596705285805">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="92" y="92" width="1736" height="835" key="DiffContextDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1596705285805" />
-    <state x="740" y="264" key="FileChooserDialogImpl" timestamp="1594483566999">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="740" y="264" key="FileChooserDialogImpl/0.0.1920.1019@0.0.1920.1019" timestamp="1594483566999" />
-    <state x="749" y="211" key="RollbackChangesDialog" timestamp="1596785605670">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="749" y="211" key="RollbackChangesDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1596785605670" />
-    <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor" timestamp="1594948529733">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="-6" y="10" width="1902" height="1009" key="SettingsEditor/0.0.1920.1019@0.0.1920.1019" timestamp="1594948529733" />
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2" timestamp="1598842021934">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="552" y="242" key="Vcs.Push.Dialog.v2/0.0.1920.1019@0.0.1920.1019" timestamp="1598842021934" />
-    <state x="92" y="92" width="1736" height="835" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1595079496898">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="92" y="92" width="1736" height="835" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1595079496898" />
-    <state x="92" y="92" width="1736" height="835" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1595094030133">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="92" y="92" width="1736" height="835" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1019@0.0.1920.1019" timestamp="1595094030133" />
-    <state x="753" y="422" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598841999143">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="753" y="422" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1019@0.0.1920.1019" timestamp="1598841999143" />
-    <state x="662" y="212" width="596" height="594" key="find.popup" timestamp="1594480314138">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="662" y="212" width="596" height="594" key="find.popup/0.0.1920.1019@0.0.1920.1019" timestamp="1594480314138" />
-    <state x="623" y="219" width="672" height="678" key="search.everywhere.popup" timestamp="1594807847867">
-      <screen x="0" y="0" width="1920" height="1019" />
-    </state>
-    <state x="623" y="219" width="672" height="678" key="search.everywhere.popup/0.0.1920.1019@0.0.1920.1019" timestamp="1594807847867" />
   </component>
 </project>

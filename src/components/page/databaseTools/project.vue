@@ -54,7 +54,12 @@
             <el-table-column  property="dataBaseType" label="数据库类型" ></el-table-column>
             <el-table-column  property="dataBaseName" label="数据库名称" ></el-table-column>
             <el-table-column  property="insertIndex" label="继承字段插入列" ></el-table-column>
-            <el-table-column  property="create" label="创建人" ></el-table-column>
+            <el-table-column  prop="projectType" label="项目类型" >
+                  <template scope="scope">
+                    {{ scope.row.projectType | paramsFmt('projectType') }}
+                </template>
+            </el-table-column>
+            <!-- <el-table-column  property="create" label="创建人" ></el-table-column> -->
             <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
             <!-- <el-table-column  property="lastUpdateUser" label="最后修改人" ></el-table-column> -->
             <!-- <el-table-column  property="lastUpdateTime" label="最后修改时间" ></el-table-column> -->
@@ -72,7 +77,7 @@
             <el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange" :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination>
         </el-row>
         <!-- 新增/编辑开始 -->
-        <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" >
+        <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" :close-on-click-modal= "false"  :fullscreen = "true">
             <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
                 <el-row>
                     <el-col :span="12">
@@ -150,6 +155,15 @@
                     <el-col :span="12">
                         <el-form-item label="备注" clearable :label-width="formLabelWidth" prop="remark">
                             <el-input :disabled="viewDialog.isView" v-model="data.remark" placeholder="请输入备注" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                 <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="项目类型" clearable :label-width="formLabelWidth" prop="projectType" >
+                            <el-select v-model="data.projectType" placeholder="请选择" :disabled="viewDialog.isView" style="width:100%">
+                                <el-option v-for="item in getOptions('projectType')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                            </el-select>                        
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -264,7 +278,7 @@
                 formLabelWidth: "110px",
                 pageData:{
                     page:1,
-                    size:5,
+                    size:20,
                     sort:'creationTime,DESC',
                 },
                 listData: {
@@ -476,7 +490,7 @@
         }
     };
 </script>
-<style >
+<style scoped>
 
     
 
