@@ -42,6 +42,7 @@
         <div class="radius-border margin-top-10 border-2-adadad" :style="{height:(screenSize.height - 90)+'px'}" v-if="labelClickIndex != null">
             <div  v-for="(item, index) in this.data.topicDetail"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelDetailClickIndex == index ?  labelColor[(index+1)%4] : ''}">    
                 <span @click="labelDetailClick(index)" class="label-span" :style="{color: labelDetailClickIndex == index ?  'white' : '' }">{{item.name}}</span>
+                <span @click="labelDetailClick(index)" class="focus" :style="{color: labelDetailClickIndex == index ?  'white' : labelColor[(index+1)%4] }">{{item.avgRate}} 分</span>
                 <i class="el-icon-magic-stick focus"  v-if="item.isFocus" ></i>
                 <span class="x-span" v-if="delIsShow" @click="delDetails(index,'topicDetail')">✖</span>
             </div>
@@ -177,10 +178,10 @@
                 currentIndex:null,
                 rules: {
                     name : [
-                        { required: false, message: '请输入名称', trigger: 'blur' },
+                        { required: true, message: '请输入简称', trigger: 'blur' },
                     ],
-                    number : [
-                        { required: false, message: '请输入编号', trigger: 'blur' },
+                    topicName : [
+                        { required: true, message: '请输入题目', trigger: 'blur' },
                     ],
                     remark : [
                         { required: false, message: '请输入备注', trigger: 'blur' },
@@ -357,6 +358,10 @@
             },
             //保存明细
             saveDetail(){
+                if(this.isEmpty(this.topicDetail.name)){
+                     this.$message({ message: '简称不能为空', type: 'error' });
+                     return;
+                }
                 if(this.isEmpty(this.topicDetail.id)){
                     this.data.topicDetail.push(this.topicDetail);
                 }else{
@@ -454,10 +459,12 @@
     border-radius: 10px;
 }
 .label-span {
+    cursor: default;
     margin-left: 5px;
     margin-right: 5px;
 }
 .x-span {
+    cursor: default;
     color: red;
     margin-right: 5px;
 }

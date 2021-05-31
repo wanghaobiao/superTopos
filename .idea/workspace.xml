@@ -5,7 +5,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="" />
+    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,19 +52,6 @@
   </component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -120,7 +114,9 @@
       <workItem from="1612505494918" duration="96000" />
       <workItem from="1622026172400" duration="437000" />
       <workItem from="1622077635490" duration="116000" />
-      <workItem from="1622098261216" duration="368000" />
+      <workItem from="1622098261216" duration="513000" />
+      <workItem from="1622098794883" duration="4000" />
+      <workItem from="1622448856020" duration="334000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -332,7 +328,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622098319806</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="完成登录功能  wanghb">
+      <created>1622098668000</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1622098668000</updated>
+    </task>
+    <task id="LOCAL-00032" summary="完成登录功能  wanghb">
+      <created>1622098705434</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1622098705434</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

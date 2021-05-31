@@ -12,27 +12,14 @@
                 </el-submenu> -->
                 <el-menu-item index="1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
                 <el-menu-item index="2" @click="jumpForTable('tableManagement','DQ')">表结构管理</el-menu-item>
-                <el-menu-item index="5" @click="jump('/systemConfig/codeReserve')">代码储备</el-menu-item>
-                <el-submenu index="2">
+                <el-menu-item index="3" @click="jump('/systemConfig/codeReserve')">代码储备</el-menu-item>
+                <el-menu-item index="4" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>
+                <el-menu-item index="5" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item>
+                 <el-submenu index="2">
                     <template slot="title">系统配置</template>
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
                     <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
                 </el-submenu>
-                <!-- <el-submenu index="3">
-                    <template slot="title">商场管理</template>
-                    <el-menu-item index="3-1" @click="jump('/mallManagement/orderManagement')">订单管理</el-menu-item>
-                    <el-menu-item index="3-2" @click="jump('/mallManagement/productTypes')">商品类型</el-menu-item>
-                </el-submenu> -->
-                <el-submenu index="3">
-                    <template slot="title">技能储备</template>
-                    <el-menu-item index="3-1" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>
-                    <el-menu-item index="3-2" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item></el-menu-item>
-                </el-submenu>
-                <el-submenu index="4">
-                    <template slot="title">用户管理</template>
-                    <el-menu-item index="4-1" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
-                </el-submenu>
-                
             </el-menu>
         </div>
        

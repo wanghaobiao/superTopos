@@ -169,7 +169,7 @@
                 currentIndex:null,
                 rules: {
                     name : [
-                        { required: false, message: '请输入名称', trigger: 'blur' },
+                        { required: true, message: '请输入名称', trigger: 'blur' },
                     ],
                     number : [
                         { required: false, message: '请输入编号', trigger: 'blur' },
@@ -356,6 +356,10 @@
             },
             //保存明细
             saveDetail(){
+                  if(this.isEmpty(this.topicDetail.name)){
+                     this.$message({ message: '名称不能为空', type: 'error' });
+                     return;
+                }
                 if(this.isEmpty(this.codeReserveDetail.id)){
                     this.data.codeReserveDetail.push(this.codeReserveDetail);
                 }else{
@@ -441,10 +445,12 @@
     border-radius: 10px;
 }
 .label-span {
+    cursor: default;
     margin-left: 5px;
     margin-right: 5px;
 }
 .x-span {
+    cursor: default;
     color: red;
     margin-right: 5px;
 }
