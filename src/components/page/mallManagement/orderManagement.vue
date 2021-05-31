@@ -47,7 +47,6 @@
                     </el-row>
                 </el-form>
             </el-col>
-
             <el-col :span="4" :offset="2">
                 <el-button type="primary"  @click.prevent="search()">搜索</el-button>
                 <el-button type="primary"  @click.prevent="moreIsShow.query = !moreIsShow.query">{{moreIsShow.query ? "收起" : "展开"}}</el-button>
