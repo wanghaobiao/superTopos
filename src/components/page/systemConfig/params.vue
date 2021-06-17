@@ -1,7 +1,6 @@
 <!--(params)-->
 <template>
     <div :style="{height:(screenSize.height)+'px'}">
-
         <!-- 搜索框开始 -->
         <el-row  >
             <el-col :span="18">

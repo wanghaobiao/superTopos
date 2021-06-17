@@ -125,6 +125,7 @@
       <workItem from="1622077635490" duration="116000" />
       <workItem from="1622098261216" duration="513000" />
       <workItem from="1622098794883" duration="4000" />
+      <workItem from="1623901521006" duration="314000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -350,7 +351,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622098705434</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="完成登录功能  wanghb">
+      <created>1623901658214</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1623901658214</updated>
+    </task>
+    <task id="LOCAL-00034" summary="完成登录功能  wanghb">
+      <created>1623901829822</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1623901829822</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
