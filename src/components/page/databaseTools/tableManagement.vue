@@ -459,7 +459,7 @@
                         <el-row :gutter="20">
                             <el-col :span="8" class="frame-col"><el-button class="frame-but" type="warning" plain @click="copySql">SQL</el-button></el-col>
                             <el-col :span="8" class="frame-col"><el-button class="frame-but" type="primary" plain @click="copyEntity">实体</el-button></el-col>
-                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="info" plain>无用</el-button></el-col>
+                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="success" plain @click="allCode">全部</el-button></el-button></el-col>
                         </el-row>
 
                         <!-- <el-row :gutter="20" class="margin-top-22">
@@ -745,21 +745,18 @@ export default {
            row
         ).then((result) => {
             this.buildPartialDialog.sql = result;
-            this.copy(result);
+            // 使用textarea支持换行，使用input不支持换行
+            const textarea = document.createElement('textarea');
+            textarea.value = result;
+            document.body.appendChild(textarea);
+            textarea.select();
+            if (document.execCommand('copy')) {
+                document.execCommand('copy');
+                this.$message({ message: '复制成功', type: 'success' });
+            }
+            //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
+            document.body.removeChild(textarea);
         });
-      },
-       //复制语句
-      sqlCopy() {
-         var selection = window.getSelection();
-         var range = document.createRange();
-         range.selectNodeContents(this.$refs.sqlDiv);
-         selection.removeAllRanges();
-         selection.addRange(range);
-        if (document.execCommand('copy')) {
-            document.execCommand('copy');
-            this.$message({ message: '复制成功', type: 'success' });
-        }
-        selection.removeAllRanges();
       },
       //复制实体
       copyEntity() {
@@ -784,6 +781,46 @@ export default {
             //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
             document.body.removeChild(textarea);
         });
+      },
+      allCode(){
+        var row =  this.data.detailEntitys[this.currentIndex];
+        var previousColumnNumber = this.currentIndex == 0 ? "" : this.data.detailEntitys[this.currentIndex - 1].number;
+        this.postHttp(
+        "/api/project/allCode?id=" +
+            this.data.projectId +
+            "&tableNumber=" +
+            this.data.number+
+            "&previousColumnNumber=" +
+            previousColumnNumber,
+        row
+        ).then((result) => {
+                this.buildPartialDialog.sql = result;
+            // 使用textarea支持换行，使用input不支持换行
+            const textarea = document.createElement('textarea');
+            textarea.value = result;
+            document.body.appendChild(textarea);
+            textarea.select();
+            if (document.execCommand('copy')) {
+                document.execCommand('copy');
+                this.$message({ message: '复制成功', type: 'success' });
+            }
+            //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
+            document.body.removeChild(textarea);
+        });
+      },
+     
+      //复制语句
+      sqlCopy() {
+         var selection = window.getSelection();
+         var range = document.createRange();
+         range.selectNodeContents(this.$refs.sqlDiv);
+         selection.removeAllRanges();
+         selection.addRange(range);
+        if (document.execCommand('copy')) {
+            document.execCommand('copy');
+            this.$message({ message: '复制成功', type: 'success' });
+        }
+        selection.removeAllRanges();
       },
       //删除明细
       delDetails(index) {

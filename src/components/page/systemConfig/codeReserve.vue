@@ -97,7 +97,8 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="内容" clearable :label-width="formLabelWidth" prop="remark">
-                            <quill-editor v-if="!viewDetailDialog.isView" ref="myTextEditor" v-model="codeReserveDetail.content"  style="height:450px;"></quill-editor><!-- :options="editorOption" -->
+                             <kindeditor  v-if="!viewDetailDialog.isView"  :content.sync="codeReserveDetail.content" :id="'kin'"  height="450px"  width="100%"/>
+                            <!-- <quill-editor v-if="!viewDetailDialog.isView" ref="myTextEditor" v-model="codeReserveDetail.content"  style="height:450px;"></quill-editor> --><!-- :options="editorOption" -->
                             <div class="text-div" v-if="viewDetailDialog.isView" ref="sqlDiv" v-html="codeReserveDetail.content" :style="{height:'450px'}"></div>
                         </el-form-item>
                     </el-col>
@@ -169,7 +170,7 @@
                 currentIndex:null,
                 rules: {
                     name : [
-                        { required: false, message: '请输入名称', trigger: 'blur' },
+                        { required: true, message: '请输入名称', trigger: 'blur' },
                     ],
                     number : [
                         { required: false, message: '请输入编号', trigger: 'blur' },
@@ -356,6 +357,11 @@
             },
             //保存明细
             saveDetail(){
+                debugger
+                  if(this.isEmpty(this.codeReserveDetail.name)){
+                     this.$message({ message: '名称不能为空', type: 'error' });
+                     return;
+                }
                 if(this.isEmpty(this.codeReserveDetail.id)){
                     this.data.codeReserveDetail.push(this.codeReserveDetail);
                 }else{
@@ -441,10 +447,12 @@
     border-radius: 10px;
 }
 .label-span {
+    cursor: default;
     margin-left: 5px;
     margin-right: 5px;
 }
 .x-span {
+    cursor: default;
     color: red;
     margin-right: 5px;
 }

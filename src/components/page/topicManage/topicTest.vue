@@ -4,70 +4,73 @@
 <template>
     <div :style="{height:(screenSize.height)+'px'}">
         <!-- 搜索框开始 -->
-        <el-row  >
-            <el-col :span="14">
-                <el-form  class="demo-form-inline">
-                    <el-row :gutter="20">
-                        <el-col :span="6">
-                            <el-select v-model="pageData.topicType_eq" placeholder="请选择" @change="getNextTopic()">
-                                <el-option  v-for="item in getOptions('topicType')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
-                            </el-select>
-                        </el-col>
-                        <el-col :span="6">
-                            <el-select v-model="pageData.topicDetailType_eq" placeholder="请选择" @change="getNextTopic()">
-                                <el-option  v-for="item in opicDetailTypeOptions" :key="item.label" :label="item.label" :value="item.value" ></el-option>
-                            </el-select>
-                        </el-col>
-                        <el-col :span="12">
-                                <div  class="label-border-prompt" >    
-                                    <span class="label-span-prompt" >您本次为第 <span style="color: #E6A23C;">{{prompt.count}}</span> 次考核 , 已做 <span style="color: #67C23A;">{{prompt.alreadyCount}}</span> 题 , 未做 <span style="color: #F56C6C;">{{prompt.noCount}}</span> 题。</span>
-                                </div>
-                        </el-col>
-                    </el-row>
-                </el-form>
-            </el-col>
-        </el-row>
+        <el-form  class="demo-form-inline">
+            <el-row :gutter="20">
+                <el-col :span="4">
+                    <el-select v-model="pageData.topicType_eq" placeholder="请选择" @change="getNextTopic()">
+                        <el-option  v-for="item in getOptions('topicType')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                    </el-select>
+                </el-col>
+                <el-col :span="4">
+                    <el-select v-model="pageData.topicDetailType_eq" placeholder="请选择" @change="getNextTopic()">
+                        <el-option  v-for="item in opicDetailTypeOptions" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                    </el-select>
+                </el-col>
+                <el-col :span="10">
+                    <div  class="label-border-prompt" >    
+                        <span class="label-span-prompt" >您本次为第 <span style="color: #E6A23C;">{{prompt.count}}</span> 次考核 , 已做 <span style="color: #67C23A;">{{prompt.alreadyCount}}</span> 题 , 未做 <span style="color: #F56C6C;">{{prompt.noCount}}</span> 题。</span>
+                    </div>
+                </el-col>
+            </el-row>
+        </el-form>
         <!-- 搜索框结束 -->
         <!-- 题目详情开始 -->
         <div class="radius-border margin-top-10 border-2-adadad " :style="{height:(screenSize.height - 20)+'px'}" >
             <el-form class="form-div" :model="data" v-loading="viewDetailDialog.butIsLoading" :rules="rules" ref="ruleForm" >
                 <el-row>
-                    <el-col :span="12">
-                        <el-form-item label="题目" clearable :label-width="formLabelLeftWidth" prop="topicName">
-                            <div class="item-div" v-html="topicDetail.name" ></div>
+                     <el-col :span="12">
+                        <el-form-item label="主题" clearable :label-width="formLabelLeftWidth" prop="topicName">
+                            <el-input disabled v-model="topicDetail.topicType" maxlength="200"  autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="平均评分" clearable :label-width="formLabelWidth" prop="avgRate">
-                            <div class="item-div"> <el-rate disabled class="rate-div" v-model="topicDetail.avgRate"></el-rate></div>
-
+                        <el-form-item label="简称" clearable :label-width="formLabelWidth" prop="topicName">
+                            <el-input :disabled="viewDetailDialog.isView" v-model="topicDetail.name" placeholder="请输入简称" maxlength="200"  autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="题目" clearable :label-width="formLabelLeftWidth" prop="topicName">
-                            <div class="item-div" v-html="topicDetail.topicName" ></div>
+                            <el-input :disabled="viewDetailDialog.isView" v-model="topicDetail.topicName" placeholder="请输入简称" maxlength="200"  autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="内容" clearable :label-width="formLabelLeftWidth" prop="remark">
-                            <div class="text-div" ref="sqlDiv" v-html="topicDetail.content" :style="{height:'520px'}"></div>
+                            <quill-editor v-if="!viewDetailDialog.isView" ref="myTextEditor" v-model="topicDetail.content"  :style="{height:(screenSize.height - 356)+'px'}"></quill-editor><!-- :options="editorOption" -->
+                            <div class="text-div" v-if="viewDetailDialog.isView"  ref="sqlDiv" v-html="topicDetail.content" :style="{height:(screenSize.height - 290)+'px'}"></div>
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
-                    <el-col :span="24">
+                <el-row :style="{'margin-top': viewDetailDialog.isView ? '0px' : '70px'}">
+                     <el-col :span="12">
                         <el-form-item label="评分" clearable :label-width="formLabelLeftWidth" prop="remark">
-                            <div class="item-div"> <el-rate class="rate-div" v-model="topicDetail.thisRate"></el-rate></div>
+                            <div class="item-div"> <el-rate class="rate-div" v-model="topicDetail.thisRate"  ></el-rate></div>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="平均评分" clearable :label-width="formLabelWidth" prop="avgRate">
+                            <div class="item-div" @click="viewDetailDialog.isView = true"> <el-rate disabled class="rate-div" v-model="topicDetail.avgRate"  show-score  text-color="red"></el-rate></div>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-col :span="24"  class="form-but">
-                    <el-button type="success"  :loading="viewDetailDialog.rateIsLoading" @click="saveDetail()">评分</el-button>
+                    <el-button type="success"  :loading="viewDetailDialog.rateIsLoading" @click="saveDetail(false)">评分</el-button>
                     <el-button type="primary"  :loading="viewDetailDialog.nextTopicIsLoading" @click="getNextTopic()">下一题</el-button>
+                    <el-button v-show="viewDetailDialog.isView" type="danger" @click="viewDetailDialog.isView = false" >编辑</el-button>
+                    <el-button v-show="!viewDetailDialog.isView" type="danger" @click="saveDetail(true)" :loading="viewDetailDialog.butIsLoading">保 存</el-button>
                 </el-col>
             </el-form>
                 
@@ -84,7 +87,6 @@
             this.getEntityOptions();
             this.refreshScreenSize();
             this.getTopicDetailTypeOptions();
-            this.getTestCount();
             this.getNextTopic();
         },
         data() {
@@ -124,7 +126,7 @@
                 },
                 viewDetailDialog:{
                     isShow: false,
-                    isView: false,
+                    isView: true,
                     nextTopicIsLoading: false,
                 },
                 tableOptions:[],
@@ -191,8 +193,7 @@
             //打开详情
             getNextTopic() {
                 this.viewDetailDialog.nextTopicIsLoading = true;
-                
-                this.getHttp("/api/topicManage/topic/getNextTopic?topicType="+this.pageData.topicType_eq+"&topicDetailType="+this.pageData.topicDetailType_eq+"&topicDetailId="+this.topicDetail.id).then(result => {
+                this.getHttp("/api/topicManage/topic/getNextTopic?topicType="+this.pageData.topicType_eq+"&topicId="+this.pageData.topicDetailType_eq).then(result => {
                     this.viewDetailDialog.nextTopicIsLoading = false;
                     this.topicDetail = result;
                     this.getTestCount();
@@ -221,12 +222,17 @@
                 this.viewDetailDialog.isShow = true;
             },
             //保存明细
-            saveDetail(){
+            saveDetail(isEdit){
                 this.viewDetailDialog.rateIsLoading = true;
+                this.topicDetail.isEdit = isEdit;
                 this.postHttp("/api/topicManage/topic/saveDetail",this.topicDetail).then(result => {
                     this.viewDetailDialog.rateIsLoading = false;
                     if(result.code == 200){
-                        this.getNextTopic();
+                        if(!isEdit){
+                            this.getNextTopic();
+                        }
+                        this.viewDetailDialog.isView = true;
+                        
                     }
                 });
             },
@@ -236,7 +242,7 @@
                 });
             },
             getTestCount(){
-                this.getHttp("/api/topicManage/topic/getTestCount?topicType="+this.pageData.topicType_eq+"&topicDetailType="+this.pageData.topicDetailType_eq).then(result => {
+                this.getHttp("/api/topicManage/topic/getTestCount?topicType="+this.pageData.topicType_eq+"&topicId="+this.topicDetail.parentId).then(result => {
                      this.prompt =  result;
                 });
             },
@@ -258,6 +264,12 @@
     };
 </script>
 <style  >
+.el-input.is-disabled .el-input__inner {
+    background-color: #F5F7FA;
+    border-color: #E4E7ED;
+    color: #000000;
+    cursor: not-allowed;
+}
 /* 圆框的样式 */
 .input-border .el-input__inner {
     border-radius: 10px;
@@ -266,6 +278,7 @@
     margin-left: 4px;
     height: 42px;
     font-size: 16px;
+    width: 100%;
 }
 /* 下拉框 */
 .el-input--suffix .el-input__inner {
@@ -274,6 +287,7 @@
     border: 2px solid #adadad;
     margin-left: 4px;
     height: 42px;
+    width: 100%;
     font-size: 16px;
 }
 .el-select-dropdown__item {
@@ -287,6 +301,7 @@
     height: 34px;
     line-height: 34px;
     box-sizing: border-box;
+    width: 100%;
     cursor: pointer;
 }
 .el-select-dropdown__item.selected {
@@ -299,6 +314,7 @@
 /* 圆框的样式 */
 .radius-border {
     border-radius: 10px;
+    width: 100%;
     overflow:auto;
 }
 .form-div{
@@ -371,5 +387,6 @@
     text-align: center;
     margin-top: 10px;
 }
+
 
 </style>

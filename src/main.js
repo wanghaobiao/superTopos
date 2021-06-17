@@ -11,6 +11,9 @@ import axios from 'axios';
 import axiosConfig from './../src/components/util/axiosConfig';
 import global from './../src/components/util/global'
 import xfilters from './../src/components/util/xfilters'
+import kindeditor from './../src/components/kindeditor.vue'
+Vue.component('kindeditor',kindeditor);
+
 
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
