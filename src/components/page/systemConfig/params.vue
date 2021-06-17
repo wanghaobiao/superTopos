@@ -11,6 +11,7 @@
                                 <el-input v-model="pageData.name_eq" placeholder="请输入名称" autocomplete="off"></el-input>
                             </el-form-item>
                         </el-col>
+
                         <el-col :span="8">
                             <el-form-item  label="编号" :label-width="formLabelWidth">
                                 <el-input v-model="pageData.number_eq" placeholder="请输入编号" autocomplete="off"></el-input>
