@@ -357,7 +357,6 @@
             },
             //保存明细
             saveDetail(){
-                debugger
                   if(this.isEmpty(this.codeReserveDetail.name)){
                      this.$message({ message: '名称不能为空', type: 'error' });
                      return;
