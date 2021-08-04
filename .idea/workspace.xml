@@ -6,7 +6,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/535877f50039c0cb49a6196a5b7517cd.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/732389ded34cb9c52dd88271f1345af9.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/manifest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/manifest.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/vendor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/vendor.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +36,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1eOLBzLARJ7bwYKhtLeHmLfmITF" />
   <component name="ProjectViewState">
@@ -29,7 +58,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/icon" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -38,6 +67,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -48,18 +78,11 @@
   <component name="RebelAgentSelection">
     <selection>jr</selection>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\VsCodeSpace\superTopos\src\assets\icon" />
+      <recent name="E:\VsCodeSpace\superTopos\src\components\page\databaseTools" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -124,7 +147,11 @@
       <workItem from="1622077635490" duration="116000" />
       <workItem from="1622098261216" duration="513000" />
       <workItem from="1622098794883" duration="4000" />
-      <workItem from="1623901521006" duration="2036000" />
+      <workItem from="1623901521006" duration="2176000" />
+      <workItem from="1627889976119" duration="10796000" />
+      <workItem from="1627952402425" duration="16457000" />
+      <workItem from="1628039346270" duration="3978000" />
+      <workItem from="1628057995799" duration="4663000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -371,7 +398,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623901933570</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="完成登录功能  wanghb">
+      <created>1623911459601</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1623911459601</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

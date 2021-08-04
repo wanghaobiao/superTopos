@@ -13,6 +13,26 @@ var router = new VueRouter({
             component: () => import('./components/page/databaseTools/project'),
 
         },
+        {
+            path: '/databaseTools/dataSource',
+            name: 'dataSource',
+            meta:{
+                title: '数据库管理',
+                requireAuth: false,
+            },
+            component: () => import('./components/page/databaseTools/dataSource'),
+
+        },
+        {
+            path: '/databaseTools/dbManagement',
+            name: 'dbManagement',
+            meta:{
+                title: '数据库管理',
+                requireAuth: false,
+            },
+            component: () => import('./components/page/databaseTools/dbManagement'),
+
+        },
         {   
             path: '/databaseTools/tableManagement',
             name: 'tableManagement',

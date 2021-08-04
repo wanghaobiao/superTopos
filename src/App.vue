@@ -8,9 +8,11 @@
                     <template slot="title">数据库工具</template>
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
                     <el-menu-item index="1-2" @click="jumpForTable('tableManagement','DQ')">表结构管理</el-menu-item>
-                    <!-- <el-menu-item index="1-3" @click="jumpForTable('tableManagement','LS')">表结构管理(历史)</el-menu-item>
+                    <el-menu-item index="1-3" @click="jumpForTable('tableManagement','LS')">表结构管理(历史)</el-menu-item>
                 </el-submenu> -->
                 <el-menu-item index="1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
+                <el-menu-item index="6" @click="jump('/databaseTools/dataSource')">数据库管理</el-menu-item>
+                <el-menu-item index="7" @click="jump('/databaseTools/dbManagement')">数据库逆向</el-menu-item>
                 <el-menu-item index="2" @click="jumpForTable('tableManagement','DQ')">表结构管理</el-menu-item>
                 <el-menu-item index="3" @click="jump('/systemConfig/codeReserve')">代码储备</el-menu-item>
                 <el-menu-item index="4" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>

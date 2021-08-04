@@ -4,7 +4,7 @@
       <el-row :gutter="10" style="height:100%;">
          <el-col :span="6" style="height:100%;" >
             <!-- 列表框开始 -->
-            <div class="custom-tree-container tree-node" >
+            <div class="custom-tree-container tree-node"  style="overflow: auto;" >
                 <div >
                   <el-tree :data="listData.content" node-key="id" :expand-on-click-node="false" ref="tree" @node-click="treeCheck" >
                      <div class="custom-tree-node" slot-scope="{ node, data }" >
@@ -952,6 +952,28 @@ export default {
 };
 </script>
 <style >
+/*修改滚动条样式*/
+div::-webkit-scrollbar{
+  width:4px;
+  height:10px;
+  /**/
+}
+div::-webkit-scrollbar-track{
+  margin-top: 18px;
+  margin-bottom: 18px;
+  background: rgb(239, 239, 239);
+  border-radius:2px;
+}
+div::-webkit-scrollbar-thumb{
+  background: #adadad;
+  border-radius:10px;
+}
+div::-webkit-scrollbar-thumb:hover{
+  background: #333;
+}
+div::-webkit-scrollbar-corner{
+  background: #179a16;
+}
 .frame-col {
     text-align: center;
 }

@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5978708",
+      "name": "my-SQL",
+      "font_class": "al-icon-mysql2",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "15162761",
+      "name": "mysql",
+      "font_class": "mysql",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "15378663",
+      "name": "oracle",
+      "font_class": "oracle",
+      "unicode": "ec48",
+      "unicode_decimal": 60488
+    },
+    {
       "icon_id": "6627732",
       "name": "明细",
       "font_class": "item-4",
