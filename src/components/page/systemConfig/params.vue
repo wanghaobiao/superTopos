@@ -11,7 +11,6 @@
                                 <el-input v-model="pageData.name_eq" placeholder="请输入名称" autocomplete="off"></el-input>
                             </el-form-item>
                         </el-col>
-
                         <el-col :span="8">
                             <el-form-item  label="编号" :label-width="formLabelWidth">
                                 <el-input v-model="pageData.number_eq" placeholder="请输入编号" autocomplete="off"></el-input>
@@ -23,28 +22,21 @@
                             </el-form-item>
                         </el-col>
                     </el-row>
-                    <el-row>
-                        <el-col :span="8">
-                            <el-form-item  label="创建时间" :label-width="formLabelWidth">
-                                <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width:100%"></el-date-picker>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
                 </el-form>
             </el-col>
             <el-col :span="4" :offset="2">
-                <el-button type="primary"  @click.prevent="search()">搜索</el-button>
+                <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
             </el-col>
         </el-row>
         <!-- 搜索框结束 -->
         <!-- 按钮框开始 -->
         <el-row class="spacing">
-            <el-button type="success"  @click.prevent="goAdd()">新增</el-button>
-            <el-button type="primary"  @click.prevent="refreshParams('刷新成功')">刷新缓存</el-button>
+            <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
+            <el-button type="primary" plain @click.prevent="refreshParams('刷新成功')">刷新缓存</el-button>
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" row-key="id"  :height="screenSize.height - 190"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}">
+        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" row-key="id"  :height="screenSize.height - 120"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}">
             <el-table-column  property="name" label="参数名称" ></el-table-column>
             <el-table-column  property="number" label="参数编码" ></el-table-column>
             <el-table-column  property="isEnable" label="是否启用" ></el-table-column>
@@ -61,7 +53,7 @@
         </el-table>
         <!-- 列表框结束 -->
         <el-row :gutter="10" class="pagination" >
-            <el-col :span="24" ><el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange"  
+            <el-col :span="24" ><el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange"
             :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination></el-col>
         </el-row>
         <!-- 新增/编辑开始 -->
@@ -117,7 +109,7 @@
                 },
                 pageData:{
                     page:1,
-                    size:10,
+                    size:20,
                     sort:'creationTime,DESC',
                 },
                 viewDialog:{
@@ -264,6 +256,6 @@
     };
 </script>
 <style scoped>
-  
-    
+
+
 </style>

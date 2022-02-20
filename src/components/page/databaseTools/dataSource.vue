@@ -34,31 +34,34 @@
                 </el-form>
             </el-col>
             <el-col :span="4" :offset="2">
-                <el-button type="primary"  @click.prevent="search()">搜索</el-button>
-                <el-button type="primary"  @click.prevent="moreIsShow.query = !moreIsShow.query">{{moreIsShow.query ? "收起" : "展开"}}</el-button>
+                <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
+                <el-button type="primary" plain @click.prevent="goAdd()">新增</el-button>
+                <el-button type="danger" plain @click.prevent="batchDel()">删除</el-button>
+                <el-button type="warning" plain @click.prevent="moreIsShow.query = !moreIsShow.query">{{moreIsShow.query ? "收起" : "展开"}}</el-button>
             </el-col>
         </el-row>
         <!-- 搜索框结束 -->
         <!-- 按钮框开始 -->
         <el-row class="spacing">
-            <el-button type="primary" @click.prevent="goAdd()">新增</el-button>
-            <el-button type="danger" @click.prevent="batchDel()">删除</el-button>
+
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - (66 + 62 * (moreIsShow.query ? 2 : 1))" fit border >
+        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - (17 + 62 * (moreIsShow.query ? 2 : 1))" fit border >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
           <el-table-column  property="projectNum" label="项目编号" ></el-table-column>
             <el-table-column  property="name" label="名称" ></el-table-column>
+          <el-table-column  label="数据库类型" >
+            <template slot-scope="scope">{{ scope.row.dbType | paramsFmt('dataBaseType') }}</template>
+          </el-table-column>
+            <el-table-column  property="tablePrefix" label="表前缀" ></el-table-column>
+            <el-table-column  property="suffixEntity" label="实体后缀" ></el-table-column>
 <!--            <el-table-column  property="driverName" label="方言" ></el-table-column>
             <el-table-column  property="jdbcUrl" label="url" ></el-table-column>-->
             <el-table-column  property="username" label="用户名" ></el-table-column>
             <!--<el-table-column  property="password" label="密码" ></el-table-column>-->
             <el-table-column  property="remark" label="备注" ></el-table-column>
-            <el-table-column  label="数据库类型" >
-                <template slot-scope="scope">{{ scope.row.dbType | paramsFmt('dataBaseType') }}</template>
-            </el-table-column>
 <!--            <el-table-column  property="path" label="项目路径" ></el-table-column>-->
           <el-table-column  property="create" label="创建人" ></el-table-column>
           <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
@@ -75,7 +78,7 @@
             <el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange" :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination>
         </el-row>
         <!-- 新增/编辑开始 -->
-        <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" >
+        <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" :close-on-click-modal="false" >
             <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
                 <el-row>
                   <el-col :span="12">
@@ -135,14 +138,14 @@
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="表前缀" clearable :label-width="formLabelWidth" prop="tablePrefix">
-                            <el-input :disabled="viewDialog.isView" v-model="data.tablePrefix" placeholder="请输入表前缀" maxlength="20"  autocomplete="off"></el-input>
+                            <el-input :disabled="viewDialog.isView" v-model="data.tablePrefix" placeholder="请输入表前缀" maxlength="100"  autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="字段前缀" clearable :label-width="formLabelWidth" prop="prefix">
-                            <el-input :disabled="viewDialog.isView" v-model="data.prefix" placeholder="请输入字段前缀" maxlength="20"  autocomplete="off"></el-input>
+                            <el-input :disabled="viewDialog.isView" v-model="data.prefix" placeholder="请输入字段前缀" maxlength="100"  autocomplete="off"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -159,6 +162,11 @@
                             </el-select>
                         </el-form-item>
                     </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="数据库名称" clearable :label-width="formLabelWidth" prop="datebaseName">
+                      <el-input :disabled="viewDialog.isView" v-model="data.datebaseName" placeholder="请输入数据库名称" maxlength="200"  autocomplete="off"></el-input>
+                    </el-form-item>
+                  </el-col>
                 </el-row>
             </el-form>
             <span slot="footer" class="dialog-footer" v-show="!viewDialog.isView">
@@ -188,7 +196,7 @@
                 },
                 pageData:{
                     page:1,
-                    size:5,
+                    size:10,
                     sort:'creationTime,DESC',
                 },
                 listData: {

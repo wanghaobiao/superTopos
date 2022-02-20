@@ -187,7 +187,7 @@
                      ref="tbEdit"
                      :data="data.detailEntitys"
                      border
-                     :height="screenSize.height - (viewDialog.isEdit ? 250 : 124)"
+                     :height="screenSize.height - (viewDialog.isEdit ? 230 : 124)"
                      v-loading="viewDialog.butIsLoading"
                      highlight-current-row
                      :row-class-name="tableRowClassName"
@@ -359,7 +359,7 @@
                            <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
                         </template>
                      </el-table-column>
-                     <el-table-column label="操作" v-if="viewDialog.isEdit" fixed="right" width="150">
+                     <el-table-column label="操作" v-if="viewDialog.isEdit" fixed="right" width="166">
                         <template slot-scope="scope">
                            <el-button
                               type="success"
@@ -558,7 +558,7 @@ export default {
          },
       };
    },
-    
+
 
    methods: {
       //执行搜索
@@ -662,7 +662,7 @@ export default {
             };
          });
       },
-     
+
       //打开详情
       goView(row) {
          this.getTableOptions(
@@ -841,7 +841,7 @@ export default {
             document.body.removeChild(textarea);
         });
       },
-     
+
       //复制语句
       sqlCopy() {
          var selection = window.getSelection();
@@ -1018,7 +1018,7 @@ div::-webkit-scrollbar-corner{
 }
 .tree-node {
    height: 100%;
-   /* 
+   /*
    position: absolute;
    overflow: auto; */
    border-radius: 25px;

@@ -17,7 +17,7 @@
                     </el-select>
                 </el-col>
                 <el-col :span="10">
-                    <div  class="label-border-prompt" >    
+                    <div  class="label-border-prompt" >
                         <span class="label-span-prompt" >您本次为第 <span style="color: #E6A23C;">{{prompt.count}}</span> 次考核 , 已做 <span style="color: #67C23A;">{{prompt.alreadyCount}}</span> 题 , 未做 <span style="color: #F56C6C;">{{prompt.noCount}}</span> 题。</span>
                     </div>
                 </el-col>
@@ -73,7 +73,7 @@
                     <el-button v-show="!viewDetailDialog.isView" type="danger" @click="saveDetail(true)" :loading="viewDetailDialog.butIsLoading">保 存</el-button>
                 </el-col>
             </el-form>
-                
+
         </div>
         <!-- 题目详情结束 -->
 
@@ -170,7 +170,7 @@
                 this.pageData.page = val;
                 this.search();
             },
-            
+
             //记录下标
             currentChange(row) {
                 this.currentIndex = row.index;
@@ -232,7 +232,7 @@
                             this.getNextTopic();
                         }
                         this.viewDetailDialog.isView = true;
-                        
+
                     }
                 });
             },
@@ -275,7 +275,7 @@
     border-radius: 10px;
     overflow:auto;
     border: 2px solid #adadad;
-    margin-left: 4px;
+    margin-left: 0px;
     height: 42px;
     font-size: 16px;
     width: 100%;

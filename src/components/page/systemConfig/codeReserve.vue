@@ -2,10 +2,10 @@
 
 <!--代码储备库( CodeReserve ))-->
 <template>
-    <div :style="{height:(screenSize.height)+'px'}">
+    <div :style="{height:(screenSize.height)+'px'}" >
         <!-- 搜索框开始 -->
         <el-row  >
-            <el-col :span="14">
+            <el-col :span="19">
                 <el-form  class="demo-form-inline">
                     <el-row :gutter="20">
                         <el-col :span="8">
@@ -21,34 +21,39 @@
                     </el-row>
                 </el-form>
             </el-col>
-            <el-col :span="8" :offset="2">
-                <el-button type="primary"  @click.prevent="search()">搜索</el-button>
+            <el-col :span="5"  >
+                <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
                 <!-- <el-button type="primary"  @click.prevent="moreIsShow.query = !moreIsShow.query">{{moreIsShow.query ? "收起" : "展开"}}</el-button> -->
-                <el-button type="success" @click.prevent="goAdd()">新增</el-button>
-                <el-button type="primary" @click.prevent="goEdit()">修改</el-button>
-                <el-button type="danger" @click.prevent="delIsShow = !delIsShow">删除</el-button>
+                <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
+                <el-button type="warning" plain @click.prevent="goEdit()">修改</el-button>
+                <el-button type="danger" plain @click.prevent="delIsShow = !delIsShow">删除</el-button>
             </el-col>
         </el-row>
         <!-- 搜索框结束 -->
         <!-- 标签列表开始 -->
         <div class="radius-border">
-            <div  v-for="(item, index) in listData.content"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelClickIndex == index ?  labelColor[(index+1)%4] : ''}">    
+            <div  v-for="(item, index) in listData.content"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelClickIndex == index ?  labelColor[(index+1)%4] : '','margin-left': index == 0 ? '0px' : ''}">
                 <span @click="labelClick(index)" class="label-span" :style="{color: labelClickIndex == index ?  'white' : '' }">{{item.name}}</span>
                 <span class="x-span" v-if="delIsShow" @click="batchDel(item.id)">✖</span>
             </div>
         </div>
         <!-- 标签列表结束 -->
         <!-- 标签详情开始 -->
-        <div class="radius-border margin-top-10 border-2-adadad" :style="{height:(screenSize.height - 90)+'px'}" v-if="labelClickIndex != null">
-            <div  v-for="(item, index) in this.data.codeReserveDetail"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelDetailClickIndex == index ?  labelColor[(index+1)%4] : ''}">    
+        <div class="radius-border margin-top-10 "   v-if="labelClickIndex != null"><!--border-2-adadad :style="{height:(screenSize.height - 90)+'px'}"-->
+            <div  v-for="(item, index) in this.data.codeReserveDetail"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelDetailClickIndex == index ?  labelColor[(index+1)%4] : '','margin-left': index == 0 ? '0px' : ''}">
                 <span @click="labelDetailClick(index)" class="label-span" :style="{color: labelDetailClickIndex == index ?  'white' : '' }">{{item.name}}</span>
                 <span class="x-span" v-if="delIsShow" @click="delDetails(index,'codeReserveDetail')">✖</span>
             </div>
-            <div @click="goDetailAdd()" class="label-border" :style="{border: '2px solid '+labelColor[2],'background-color': labelColor[2]}">    
+            <div @click="goDetailAdd()" class="label-border" :style="{border: '2px solid '+labelColor[2],'background-color': labelColor[2]}">
                 <span  class="label-span" :style="{color: 'white'}">新增</span>
             </div>
         </div>
         <!-- 标签详情结束 -->
+        <!-- 标签内容开始 -->
+        <div class="radius-border margin-top-10 border-2-adadad"   :style="{height:(screenSize.height - 130)+'px'}" v-if="labelDetailClickIndex != null">
+            <div class="text-div2"  ref="sqlDiv" v-html="codeReserveDetail.content" ></div>
+        </div>
+        <!-- 标签内容结束 -->
         <!-- 新增/编辑开始 -->
         <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" :close-on-click-modal="false">
             <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
@@ -105,10 +110,10 @@
                 </el-row>
             </el-form>
             <span slot="footer" class="dialog-footer" >
-                <el-button v-show="viewDetailDialog.isView" @click="viewDetailDialog.isShow = false" :loading="viewDetailDialog.butIsLoading">取 消</el-button>
+                <el-button @click="viewDetailDialog.isShow = false" :loading="viewDetailDialog.butIsLoading">取 消</el-button>
                 <el-button v-show="viewDetailDialog.isView" type="success"  @click="sqlCopy()" >复制</el-button>
                 <el-button v-show="viewDetailDialog.isView" type="primary" @click="viewDetailDialog.isView = false" >编辑</el-button>
-                <el-button v-show="!viewDetailDialog.isView" @click="viewDetailDialog.isView = true" :loading="viewDetailDialog.butIsLoading">取 消</el-button>
+<!--                <el-button v-show="!viewDetailDialog.isView" @click="viewDetailDialog.isView = true" :loading="viewDetailDialog.butIsLoading">取 消</el-button>-->
                 <el-button v-show="!viewDetailDialog.isView" type="primary" @click="saveDetail()" :loading="viewDetailDialog.butIsLoading">保 存</el-button>
             </span>
         </el-dialog>
@@ -118,6 +123,7 @@
 <script>
     export default {
         created() {
+            this.monitorEnter();
             this.search();
             this.getParams();
             this.getEntityOptions();
@@ -263,29 +269,23 @@
                     this.data[mark].splice(index,1);
                     this.save();
                 })
-                
+
             },
             //保存
             save(){
-                this.$refs.ruleForm.validate((valid) => {
-                    if (valid) {
-                        this.viewDialog.butIsLoading = true;
-                        for(var i = 0; i < this.data.codeReserveDetail.length; i++){
-                            this.data.codeReserveDetail[i].id = null;
-                        }
-                        this.postHttp("/api/systemConfig/codeReserve/deleteDetail",this.data).then(result => {
-                            this.viewDialog.butIsLoading = false;
-                            if(result.code == 200){
-                                this.viewDialog.isShow = false;
-                                this.search();
-                            }
-                        });
-                    } else {
-                        return false;
+                this.viewDialog.butIsLoading = true;
+                for(var i = 0; i < this.data.codeReserveDetail.length; i++){
+                    this.data.codeReserveDetail[i].id = null;
+                }
+                this.postHttp("/api/systemConfig/codeReserve/deleteDetail",this.data).then(result => {
+                    this.viewDialog.butIsLoading = false;
+                    if(result.code == 200){
+                        this.viewDialog.isShow = false;
+                        this.search();
                     }
                 });
             },
-            
+
             //记录下标
             currentChange(row) {
                 this.currentIndex = row.index;
@@ -343,7 +343,7 @@
             labelDetailClick(index){
                 this.labelDetailClickIndex = index;
                 this.codeReserveDetail = this.data.codeReserveDetail[this.labelDetailClickIndex];
-                this.goDetailView();
+                //this.goDetailView();
             },
             //打开明细详情
             goDetailView() {
@@ -390,7 +390,16 @@
                 }
                 selection.removeAllRanges();
             },
-
+            //监听enter事件
+            monitorEnter(){
+                var _self = this
+                document.onkeydown = function () {
+                    var key = window.event.keyCode
+                    if (key === 13) {
+                        _self.goDetailEdit();
+                    }
+                };
+            }
         }
     };
 </script>
@@ -398,9 +407,9 @@
 /* 圆框的样式 */
 .input-border .el-input__inner {
     border-radius: 10px;
+    margin-left: 0px;
     overflow:auto;
     border: 2px solid #adadad;
-    margin-left: 4px;
     height: 42px;
     font-size: 16px;
 }
@@ -467,6 +476,16 @@
    border: 1px solid #dcdfe6;
    color: #606266;
    padding: 0 15px;
+}
+.text-div2 {
+    overflow:hidden;
+    border-color: #e4e7ed;
+    color: #c0c4cc;
+    cursor: text;
+    -webkit-appearance: none;
+    border-radius: 4px;
+    color: #606266;
+    padding: 0 15px;
 }
 .el-form-item__content {
     line-height: 15px;

@@ -22,31 +22,31 @@
                 </el-form>
             </el-col>
             <el-col :span="8" :offset="2">
-                <el-button type="primary"  @click.prevent="search()">搜索</el-button>
+                <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
                 <!-- <el-button type="primary"  @click.prevent="moreIsShow.query = !moreIsShow.query">{{moreIsShow.query ? "收起" : "展开"}}</el-button> -->
-                <el-button type="success" @click.prevent="goAdd()">新增</el-button>
-                <el-button type="primary" @click.prevent="goEdit()">修改</el-button>
-                <el-button type="danger" @click.prevent="delIsShow = !delIsShow">删除</el-button>
+                <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
+                <el-button type="warning" plain @click.prevent="goEdit()">修改</el-button>
+                <el-button type="danger" plain @click.prevent="delIsShow = !delIsShow">删除</el-button>
             </el-col>
         </el-row>
         <!-- 搜索框结束 -->
         <!-- 标签列表开始 -->
         <div class="radius-border">
-            <div  v-for="(item, index) in listData.content"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelClickIndex == index ?  labelColor[(index+1)%4] : ''}">    
+            <div  v-for="(item, index) in listData.content"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelClickIndex == index ?  labelColor[(index+1)%4] : '','margin-left': index == 0 ? '0px' : ''}">
                 <span @click="labelClick(index)" class="label-span" :style="{color: labelClickIndex == index ?  'white' : '' }">{{item.name}}</span>
                 <span class="x-span" v-if="delIsShow" @click="batchDel(item.id)">✖</span>
             </div>
         </div>
         <!-- 标签列表结束 -->
         <!-- 标签详情开始 -->
-        <div class="radius-border margin-top-10 border-2-adadad" :style="{height:(screenSize.height - 90)+'px'}" v-if="labelClickIndex != null">
-            <div  v-for="(item, index) in this.data.topicDetail"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelDetailClickIndex == index ?  labelColor[(index+1)%4] : ''}">    
+        <div class="radius-border margin-top-10 " :style="{height:(screenSize.height - 90)+'px'}" v-if="labelClickIndex != null"><!--border-2-adadad-->
+            <div  v-for="(item, index) in this.data.topicDetail"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelDetailClickIndex == index ?  labelColor[(index+1)%4] : '','margin-left': index == 0 ? '0px' : ''}">
                 <span @click="labelDetailClick(index)" class="label-span" :style="{color: labelDetailClickIndex == index ?  'white' : '' }">{{item.name}}</span>
                 <span @click="labelDetailClick(index)" class="focus" :style="{color: labelDetailClickIndex == index ?  'white' : labelColor[(index+1)%4] }">{{item.avgRate}} 分</span>
                 <i class="el-icon-magic-stick focus"  v-if="item.isFocus" ></i>
                 <span class="x-span" v-if="delIsShow" @click="delDetails(index,'topicDetail')">✖</span>
             </div>
-            <div @click="goDetailAdd()" class="label-border" :style="{border: '2px solid '+labelColor[2],'background-color': labelColor[2]}">    
+            <div @click="goDetailAdd()" class="label-border" :style="{border: '2px solid '+labelColor[2],'background-color': labelColor[2]}">
                 <span  class="label-span" :style="{color: 'white'}">新增</span>
             </div>
         </div>
@@ -106,8 +106,8 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="内容" clearable :label-width="formLabelWidth" prop="remark">
-                            <kindeditor  v-if="!viewDetailDialog.isView"  :content.sync="topicDetail.content" :id="'kin'"  height="450px"  width="100%"/>
-                            <!-- <quill-editor v-if="!viewDetailDialog.isView" ref="myTextEditor" v-model="topicDetail.content"  style="height:450px;"></quill-editor> -->
+                           <kindeditor  v-if="!viewDetailDialog.isView"  :content.sync="topicDetail.content" :id="'kin'"  height="450px"  width="100%"/>
+<!--                             <quill-editor v-if="!viewDetailDialog.isView" ref="myTextEditor" v-model="topicDetail.content"  style="height:450px;"></quill-editor>-->
                             <div class="text-div" v-if="viewDetailDialog.isView" ref="sqlDiv" v-html="topicDetail.content" :style="{height:'450px'}"></div>
                         </el-form-item>
                     </el-col>
@@ -272,7 +272,7 @@
                     this.data[mark].splice(index,1);
                     this.save();
                 })
-                
+
             },
             //保存
             save(){
@@ -287,7 +287,7 @@
                     }
                 });
             },
-            
+
             //记录下标
             currentChange(row) {
                 this.currentIndex = row.index;
@@ -402,7 +402,7 @@
     border-radius: 10px;
     overflow:auto;
     border: 2px solid #adadad;
-    margin-left: 4px;
+    margin-left: 0px;
     height: 42px;
     font-size: 16px;
 }

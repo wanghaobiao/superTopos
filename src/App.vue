@@ -1,19 +1,18 @@
 <template>
-
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
         <div  v-show="!$route.meta.showNav">
-            <el-menu class="el-menu-demo" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+            <el-menu class="border-radius-5" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
                 <!-- <el-submenu index="1">
                     <template slot="title">数据库工具</template>
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
                     <el-menu-item index="1-2" @click="jumpForTable('tableManagement','DQ')">表结构管理</el-menu-item>
                     <el-menu-item index="1-3" @click="jumpForTable('tableManagement','LS')">表结构管理(历史)</el-menu-item>
                 </el-submenu> -->
-                <el-menu-item index="1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
+                <el-menu-item index="1" @click="jump('/databaseTools/project')" class="border-radius-5" >项目管理</el-menu-item>
+                <el-menu-item index="2" @click="jumpForTable('tableManagement','DQ')">项目结构管理</el-menu-item>
                 <el-menu-item index="6" @click="jump('/databaseTools/dataSource')">数据库管理</el-menu-item>
                 <el-menu-item index="7" @click="jump('/databaseTools/dbManagement')">数据库逆向</el-menu-item>
-                <el-menu-item index="2" @click="jumpForTable('tableManagement','DQ')">表结构管理</el-menu-item>
                 <el-menu-item index="3" @click="jump('/systemConfig/codeReserve')">代码储备</el-menu-item>
                 <el-menu-item index="4" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>
                 <el-menu-item index="5" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item>
@@ -24,7 +23,7 @@
                 </el-submenu>
             </el-menu>
         </div>
-       
+
 
         <router-view :style="{'margin-top':  !$route.meta.showNav ? '8px' : '0px'}" class="router-view"></router-view>
     </div>
@@ -35,7 +34,7 @@
             this.refreshScreenSize();
             this.search();
             this.screenSize = this.screenSize;
-           
+
         },
         data() {
             return {
@@ -61,19 +60,22 @@
 
                 });
             },
-            
+
         }
     };
 </script>
 <style>
+    .el-menu-demo{
+        border-radius: 10px;
+    }
     .atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow {
-    border-top-color: pink;
+        border-top-color: pink;
     }
     .atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow:after {
-    border-top-color: pink;
+        border-top-color: pink;
     }
     .atooltip {
-    background: pink !important;
+        background: pink !important;
     }
 
     .router-view{
@@ -97,6 +99,9 @@
     }
     .border-2-adadad{
         border: 2px solid #adadad;
+    }
+    .border-radius-5{
+        border-radius: 5px;
     }
     /***************************************** 基础样式开始 *****************************************/
 
@@ -168,7 +173,48 @@
     .el-table__fixed-right{
         height: 100% !important;
     }
+
+    /* 按钮样式 */
+    .el-button {
+        display: inline-block;
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+        -webkit-appearance: none;
+        text-align: center;
+        box-sizing: border-box;
+        outline: 0;
+        margin: 0;
+        transition: .1s;
+        font-weight: 500;
+        padding: 12px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+    }
     /***************************************** 覆盖样式结束 *****************************************/
-    
+    /***************************************** 修改滚动条开始 *****************************************/
+    div::-webkit-scrollbar{
+        width:4px;
+        height:10px;
+        /**/
+    }
+    div::-webkit-scrollbar-track{
+        margin-top: 18px;
+        margin-bottom: 18px;
+        background: rgb(239, 239, 239);
+        border-radius:2px;
+    }
+    div::-webkit-scrollbar-thumb{
+        background: #adadad;
+        border-radius:10px;
+    }
+    div::-webkit-scrollbar-thumb:hover{
+        background: #333;
+    }
+    div::-webkit-scrollbar-corner{
+        background: #179a16;
+    }
+    /***************************************** 修改滚动条结束 *****************************************/
+
 
 </style>

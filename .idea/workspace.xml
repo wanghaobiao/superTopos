@@ -5,29 +5,22 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" afterDir="false" />
+    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="Default Changelist">
+      <change afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/81dcc626-130c-4fa9-b79e-a5a3e07321ca.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/535877f50039c0cb49a6196a5b7517cd.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/732389ded34cb9c52dd88271f1345af9.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/manifest.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/manifest.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/vendor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/vendor.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icon/iconfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/icon/iconfont.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/params.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/params.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/userManagement/userManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/userManagement/userManagement.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +38,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1eOLBzLARJ7bwYKhtLeHmLfmITF" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -53,6 +49,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RESTKit.sync" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -83,6 +80,20 @@
       <recent name="E:\VsCodeSpace\superTopos\src\assets\icon" />
       <recent name="E:\VsCodeSpace\superTopos\src\components\page\databaseTools" />
     </key>
+  </component>
+  <component name="RestServicesNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="Found 971 services" type="ed2a77a6:RestServiceTree$RootNode" />
+        </path>
+        <path>
+          <item name="Found 971 services" type="ed2a77a6:RestServiceTree$RootNode" />
+          <item name="业务服务-1110" type="d145a731:RestServiceTree$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -151,7 +162,25 @@
       <workItem from="1627889976119" duration="10796000" />
       <workItem from="1627952402425" duration="16457000" />
       <workItem from="1628039346270" duration="3978000" />
-      <workItem from="1628057995799" duration="4663000" />
+      <workItem from="1628057995799" duration="6003000" />
+      <workItem from="1628132551493" duration="1479000" />
+      <workItem from="1628153717727" duration="4007000" />
+      <workItem from="1628561178779" duration="15000" />
+      <workItem from="1630326428736" duration="12000" />
+      <workItem from="1630326715657" duration="2039000" />
+      <workItem from="1630380496524" duration="418000" />
+      <workItem from="1630382277760" duration="674000" />
+      <workItem from="1630404503637" duration="829000" />
+      <workItem from="1631183121963" duration="2097000" />
+      <workItem from="1631593219949" duration="1049000" />
+      <workItem from="1636277591381" duration="362000" />
+      <workItem from="1641719909027" duration="372000" />
+      <workItem from="1641720287062" duration="1663000" />
+      <workItem from="1641777649850" duration="633000" />
+      <workItem from="1644624886542" duration="4078000" />
+      <workItem from="1644670391210" duration="4879000" />
+      <workItem from="1645271438496" duration="5196000" />
+      <workItem from="1645319977549" duration="1806000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -405,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623911459601</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="完成登录功能  wanghb">
+      <created>1628073249993</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1628073249993</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,7 +492,6 @@
         <entry key="1" value="TOOL_WINDOW" />
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="超级工具代码提交" />

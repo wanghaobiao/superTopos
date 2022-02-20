@@ -34,34 +34,29 @@
                 </el-form>
             </el-col>
             <el-col :span="4" :offset="2">
-                <el-button type="primary"  @click.prevent="search()">搜索</el-button>
-                <el-button type="primary"  @click.prevent="moreIsShow.query = !moreIsShow.query">{{moreIsShow.query ? "收起" : "展开"}}</el-button>
+                <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
+                <el-button type="warning" plain @click.prevent="moreIsShow.query = !moreIsShow.query">{{moreIsShow.query ? "收起" : "展开"}}</el-button>
             </el-col>
         </el-row>
         <!-- 搜索框结束 -->
         <!-- 按钮框开始 -->
         <el-row class="spacing">
-            <el-button type="primary" @click.prevent="goAdd()">新增</el-button>
-            <el-button type="danger" @click.prevent="batchDel()">删除</el-button>
+            <el-button type="primary" plain @click.prevent="goAdd()">新增</el-button>
+            <el-button type="danger" plain @click.prevent="batchDel()">删除</el-button>
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - (66 + 62 * (moreIsShow.query ? 2 : 1))" fit border >
+        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - (54 + 62 * (moreIsShow.query ? 2 : 1))" fit border >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
-            <el-table-column  property="id" label="主键id" ></el-table-column>
+          <el-table-column  property="accountNumber" label="账号" ></el-table-column>
+          <el-table-column  property="password" label="密码" ></el-table-column>
             <el-table-column  property="name" label="名称" ></el-table-column>
             <el-table-column  property="number" label="编号" ></el-table-column>
             <el-table-column  property="remark" label="备注" ></el-table-column>
-            <el-table-column  property="password" label="密码" ></el-table-column>
-            <el-table-column  property="accountNumber" label="账号" ></el-table-column>
             <el-table-column  property="dateOfBirth" label="出生日期" ></el-table-column>
             <el-table-column  property="create" label="创建人" ></el-table-column>
             <el-table-column  property="creationTime" label="创建时间" ></el-table-column>
-            <el-table-column  property="lastUpdateUser" label="最后更新人" ></el-table-column>
-            <el-table-column  property="lastUpdateTime" label="最后更新时间" ></el-table-column>
-            <el-table-column  property="audit" label="审核人" ></el-table-column>
-            <el-table-column  property="auditTime" label="审核时间" ></el-table-column>
             <el-table-column label="操作"  fixed="right">
                 <template slot-scope="scope">
                     <el-button type="success" plain size="small" @click="goView(scope.row.id)">查看</el-button>

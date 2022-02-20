@@ -158,7 +158,7 @@
                         class="sql-div"
                         ref="sqlDiv"
                         v-html="data.sql"
-                        :style="{height:(screenSize.height - 180)+'px'}"
+                        :style="{height:(screenSize.height - 160)+'px'}"
                      ></div>
                   </el-form-item>
                </el-form>
@@ -187,7 +187,7 @@
                      ref="tbEdit"
                      :data="data.detailEntitys"
                      border
-                     :height="screenSize.height - (viewDialog.isEdit ? 250 : 124)"
+                     :height="screenSize.height - (viewDialog.isEdit ? 230 : 104)"
                      v-loading="viewDialog.butIsLoading"
                      highlight-current-row
                      :row-class-name="tableRowClassName"
@@ -432,12 +432,21 @@
                            </el-row>
                         </div>
                      </el-checkbox-group>
-                     <!-- <el-form-item class="margin-top-22">
-                                <el-input v-model="buildFileDialog.javaPath"  placeholder="请选择后端代码根目录"  autocomplete="off" ></el-input>
-                            </el-form-item>
-                            <el-form-item class="margin-top-22">
-                                <el-input v-model="buildFileDialog.vuePath"  placeholder="请选择前端代码根目录"  autocomplete="off" ></el-input>
-                     </el-form-item>-->
+                      <el-form-item class="margin-top-22">
+                          <el-select v-model="buildFileDialog.vuePath" clearable placeholder="请选择前端代码根目录" :disabled="viewDialog.isView"  style="width:100%">
+                              <el-option v-for="item in getOptions('vuePath')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                          </el-select>
+                      </el-form-item>
+                      <el-form-item class="margin-top-22">
+                          <el-select v-model="buildFileDialog.javaPath" clearable placeholder="请选择后端代码根目录" :disabled="viewDialog.isView"  style="width:100%">
+                              <el-option v-for="item in getOptions('javaPath')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                          </el-select>
+                      </el-form-item>
+                      <el-form-item class="margin-top-22">
+                          <el-select v-model="buildFileDialog.codeTemplate" clearable placeholder="请选择代码模板" :disabled="viewDialog.isView"  style="width:100%">
+                            <el-option v-for="item in getOptions('codeTemplate')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
+                          </el-select>
+                      </el-form-item>
                   </el-form>
                   <span slot="footer">
                      <el-button @click="buildFileDialog.isShow = false">取 消</el-button>
@@ -459,7 +468,7 @@
                         <el-row :gutter="20">
                             <el-col :span="8" class="frame-col"><el-button class="frame-but" type="warning" plain @click="copySql">SQL</el-button></el-col>
                             <el-col :span="8" class="frame-col"><el-button class="frame-but" type="primary" plain @click="copyEntity">实体</el-button></el-col>
-                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="success" plain @click="allCode">全部</el-button></el-button></el-col>
+                            <el-col :span="8" class="frame-col"><el-button class="frame-but" type="success" plain @click="allCode">全部</el-button></el-col>
                         </el-row>
 
                         <!-- <el-row :gutter="20" class="margin-top-22">
@@ -516,7 +525,8 @@ export default {
             sql: "",
          },
          tableOptions: [],
-         formLabelWidth: "120px",
+         formLabelWidth: "80px",
+         formLabelWidthFirst: "80px",
          currentIndex: null,
          data: {
             projectEntity: {},
@@ -536,7 +546,7 @@ export default {
          },
       };
    },
-    
+
 
    methods: {
       //执行搜索
@@ -640,7 +650,7 @@ export default {
             };
          });
       },
-     
+
       //打开详情
       goView(row) {
          this.getTableOptions(
@@ -808,7 +818,7 @@ export default {
             document.body.removeChild(textarea);
         });
       },
-     
+
       //复制语句
       sqlCopy() {
          var selection = window.getSelection();
@@ -931,10 +941,9 @@ export default {
       },
       //生成文件
       buildFile() {
-         this.postHttp(
-            "/api/project/buildFile?id=" + this.data.id,
-            this.buildFileDialog.fileTypes
-         ).then((result) => {});
+          this.buildFileDialog.id = this.data.id;
+          this.postHttp("/api/project/buildFile" ,this.buildFileDialog
+          ).then((result) => {});
       },
       //下载文件
       downloadFile() {
@@ -952,28 +961,7 @@ export default {
 };
 </script>
 <style >
-/*修改滚动条样式*/
-div::-webkit-scrollbar{
-  width:4px;
-  height:10px;
-  /**/
-}
-div::-webkit-scrollbar-track{
-  margin-top: 18px;
-  margin-bottom: 18px;
-  background: rgb(239, 239, 239);
-  border-radius:2px;
-}
-div::-webkit-scrollbar-thumb{
-  background: #adadad;
-  border-radius:10px;
-}
-div::-webkit-scrollbar-thumb:hover{
-  background: #333;
-}
-div::-webkit-scrollbar-corner{
-  background: #179a16;
-}
+
 .frame-col {
     text-align: center;
 }
@@ -982,7 +970,7 @@ div::-webkit-scrollbar-corner{
 }
 .tree-node {
    height: 100%;
-   /* 
+   /*
    position: absolute;
    overflow: auto; */
    border-radius: 25px;
