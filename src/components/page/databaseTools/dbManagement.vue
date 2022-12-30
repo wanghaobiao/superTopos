@@ -762,7 +762,7 @@ export default {
         var previousColumnNumber = this.currentIndex == 0 ? "" : this.data.detailEntitys[this.currentIndex - 1].number;
         this.postHttp(
            "/api/project/oneSql?id=" +
-              this.data.projectId +
+              0 +
               "&tableNumber=" +
               this.data.number+
               "&previousColumnNumber=" +
@@ -796,7 +796,7 @@ export default {
         var row =  this.data.detailEntitys[this.currentIndex];
         this.postHttp(
            "/api/project/oneEntity?id=" +
-              this.data.projectId +
+              0 +
               "&tableNumber=" +
               this.data.number,
            row
@@ -820,7 +820,7 @@ export default {
         var previousColumnNumber = this.currentIndex == 0 ? "" : this.data.detailEntitys[this.currentIndex - 1].number;
         this.postHttp(
         "/api/project/allCode?id=" +
-            this.data.projectId +
+            0 +
             "&tableNumber=" +
             this.data.number+
             "&previousColumnNumber=" +

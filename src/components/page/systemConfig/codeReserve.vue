@@ -369,8 +369,9 @@
                 for(var i = 0; i < this.data.codeReserveDetail.length; i++){
                     this.data.codeReserveDetail[i].id = null;
                 }
+                this.viewDetailDialog.butIsLoading = true;
                 this.postHttp("/api/systemConfig/codeReserve/save",this.data).then(result => {
-                    this.viewDialog.butIsLoading = false;
+                    this.viewDetailDialog.butIsLoading = false;
                     if(result.code == 200){
                         this.viewDetailDialog.isShow = false;
                             this.labelClick(this.labelClickIndex);

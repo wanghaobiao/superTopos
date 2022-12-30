@@ -6,21 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="Default Changelist">
-      <change afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/81dcc626-130c-4fa9-b79e-a5a3e07321ca.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/params.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/params.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/userManagement/userManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/userManagement/userManagement.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,31 +37,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mysql" />
-    <property name="RESTKit.sync" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/icon" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-    <property name="settings.editor.splitter.proportion" value="0.11777189" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RESTKit.sync&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/IdeaSpace_ZxWx/template_zx&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
   </component>
@@ -180,7 +156,20 @@
       <workItem from="1644624886542" duration="4078000" />
       <workItem from="1644670391210" duration="4879000" />
       <workItem from="1645271438496" duration="5196000" />
-      <workItem from="1645319977549" duration="1806000" />
+      <workItem from="1645319977549" duration="2060000" />
+      <workItem from="1645359972879" duration="937000" />
+      <workItem from="1645405704460" duration="517000" />
+      <workItem from="1645497582206" duration="979000" />
+      <workItem from="1646202474973" duration="3268000" />
+      <workItem from="1649991278591" duration="761000" />
+      <workItem from="1653050449081" duration="105000" />
+      <workItem from="1657851318818" duration="2263000" />
+      <workItem from="1657872803184" duration="203000" />
+      <workItem from="1658313461763" duration="41000" />
+      <workItem from="1660453853282" duration="622000" />
+      <workItem from="1661226927822" duration="22000" />
+      <workItem from="1667384864601" duration="20000" />
+      <workItem from="1669397536798" duration="657000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -441,7 +430,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628073249993</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Default Changelist">
+      <created>1645321852364</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1645321852365</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,6 +481,11 @@
             </State>
           </value>
         </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
       </map>
     </option>
     <option name="OPEN_GENERIC_TABS">
@@ -499,6 +500,7 @@
     <MESSAGE value="增删改查 已完善" />
     <MESSAGE value="完成树形菜单结构" />
     <MESSAGE value="完成登录功能  wanghb" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成登录功能  wanghb" />
+    <MESSAGE value="Default Changelist" />
+    <option name="LAST_COMMIT_MESSAGE" value="Default Changelist" />
   </component>
 </project>

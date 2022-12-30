@@ -158,7 +158,7 @@
                         class="sql-div"
                         ref="sqlDiv"
                         v-html="data.sql"
-                        :style="{height:(screenSize.height - 160)+'px'}"
+                        :style="{height:(screenSize.height - 185)+'px'}"
                      ></div>
                   </el-form-item>
                </el-form>
@@ -187,7 +187,7 @@
                      ref="tbEdit"
                      :data="data.detailEntitys"
                      border
-                     :height="screenSize.height - (viewDialog.isEdit ? 230 : 104)"
+                     :height="screenSize.height - (viewDialog.isEdit ? 245  : 124)"
                      v-loading="viewDialog.butIsLoading"
                      highlight-current-row
                      :row-class-name="tableRowClassName"
@@ -348,7 +348,7 @@
                            <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
                         </template>
                      </el-table-column>
-                     <el-table-column label="操作" v-if="viewDialog.isEdit" fixed="right" width="150">
+                     <el-table-column label="操作" v-if="viewDialog.isEdit" fixed="right" width="168">
                         <template slot-scope="scope">
                            <el-button
                               type="success"
