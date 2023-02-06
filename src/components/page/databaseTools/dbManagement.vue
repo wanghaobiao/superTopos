@@ -1,6 +1,6 @@
 <!--项目表(project)-->
 <template>
-   <div :style="{height:(screenSize.height)+'px'}">
+   <div :style="{height:(screenSize.height)+'px'}" v-loading="fullscreenLoading">
       <el-row :gutter="10" style="height:100%;">
          <el-col :span="6" style="height:100%;" >
             <!-- 列表框开始 -->
@@ -17,7 +17,7 @@
                         >-->
                         <span @click="goEdit(data)">
                             <i :class="data.icon" :style="{color : data.color}"></i>
-                            {{ node.label}}
+                            {{ node.label }}<span style="color: red">{{ data.tips }}</span>
                         </span>
 <!--                        </el-tooltip>-->
 
@@ -187,7 +187,7 @@
                      ref="tbEdit"
                      :data="data.detailEntitys"
                      border
-                     :height="screenSize.height - (viewDialog.isEdit ? 230 : 124)"
+                     :height="screenSize.height - (viewDialog.isEdit ? 245 : 124)"
                      v-loading="viewDialog.butIsLoading"
                      highlight-current-row
                      :row-class-name="tableRowClassName"
@@ -509,6 +509,7 @@ export default {
    },
    data() {
       return {
+         fullscreenLoading:false,
          pageData: {
             page: 1,
             size: 10,
@@ -565,6 +566,7 @@ export default {
       search() {
           //alert(this.$route.params.projectType);
          this.listData.loading = true;
+         this.fullscreenLoading = true;
          if (!this.isEmpty(this.pageData.creationTime)) {
             this.pageData["creationTime_ge"] =
                this.pageData.creationTime[0] + "T00:00:00";
@@ -576,6 +578,7 @@ export default {
          this.getHttp(
             "/api/databaseTools/dataSource/findAll?" + this.jsonToUrl(this.pageData)
          ).then((result) => {
+             this.fullscreenLoading = false;
             this.listData = result;
             this.listData.loading = false;
          });

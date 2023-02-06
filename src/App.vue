@@ -14,12 +14,12 @@
                 <el-menu-item index="6" @click="jump('/databaseTools/dataSource')">数据库管理</el-menu-item>
                 <el-menu-item index="7" @click="jump('/databaseTools/dbManagement')">数据库逆向</el-menu-item>
                 <el-menu-item index="3" @click="jump('/systemConfig/codeReserve')">代码储备</el-menu-item>
-                <el-menu-item index="4" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>
-                <el-menu-item index="5" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item>
+<!--                <el-menu-item index="4" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>-->
+<!--                <el-menu-item index="5" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item>-->
                  <el-submenu index="2">
                     <template slot="title">系统配置</template>
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
-                    <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
+<!--                    <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>-->
                 </el-submenu>
             </el-menu>
         </div>

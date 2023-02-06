@@ -1,7 +1,7 @@
 <!--项目表(project)-->
 <template>
-   <div :style="{height:(screenSize.height)+'px'}">
-      <el-row :gutter="10" style="height:100%;">
+   <div :style="{height:(screenSize.height)+'px'}" >
+      <el-row :gutter="10" style="height:100%;"  v-loading="fullscreenLoading">
          <el-col :span="6" style="height:100%;" >
             <!-- 列表框开始 -->
             <div class="custom-tree-container tree-node"  style="overflow: auto;" >
@@ -496,6 +496,7 @@ export default {
    },
    data() {
       return {
+         fullscreenLoading: false,
          pageData: {
             page: 1,
             size: 10,
@@ -561,9 +562,11 @@ export default {
          }
          this.pageData["projectType_eq"] = "DQ";
          this.pageData.projectId_isNull = null;
+         this.fullscreenLoading = true;
          this.getHttp(
             "/api/project/findAll?" + this.jsonToUrl(this.pageData)
          ).then((result) => {
+             this.fullscreenLoading = false;
             this.listData = result;
             this.listData.loading = false;
          });

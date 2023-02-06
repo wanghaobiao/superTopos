@@ -80,7 +80,7 @@
         <!-- 新增/编辑开始 -->
         <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" :close-on-click-modal= "false"  :fullscreen = "true">
             <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
-                <el-row>
+                <el-row :gutter="20">
                     <el-col :span="12">
                         <el-form-item label="名称" clearable :label-width="formLabelWidth" prop="name">
                             <el-input :disabled="viewDialog.isView" v-model="data.name" placeholder="请输入名称" autocomplete="off"></el-input>
@@ -92,7 +92,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
+                <el-row :gutter="20">
                      <el-col :span="12">
                         <el-form-item label="表名前缀" clearable :label-width="formLabelWidth" prop="tablePrefix">
                             <el-input :disabled="viewDialog.isView" v-model="data.tablePrefix" placeholder="请输入表名前缀" autocomplete="off"></el-input>
@@ -104,7 +104,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                 <el-row>
+                 <el-row :gutter="20">
 
                     <el-col :span="12">
                         <el-form-item label="实体后缀" clearable :label-width="formLabelWidth" prop="prefix">
@@ -119,7 +119,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
+                <el-row :gutter="20">
                     <el-col :span="12">
                         <el-form-item label="数据库名称" clearable :label-width="formLabelWidth" prop="number">
                             <el-input :disabled="viewDialog.isView" v-model="data.dataBaseName" placeholder="请输入数据库名称" autocomplete="off"></el-input>
@@ -133,7 +133,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
+                <el-row :gutter="20">
                     <el-col :span="12">
                         <el-form-item label="代码模板" clearable :label-width="formLabelWidth" prop="codeTemplate">
                              <el-select v-model="data.codeTemplate" placeholder="请选择代码模板" :disabled="viewDialog.isView" style="width:100%">
@@ -147,7 +147,7 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
-                <el-row>
+                <el-row :gutter="20">
                     <el-col :span="12">
                         <el-form-item label="项目后端路径" clearable :label-width="formLabelWidth" prop="projectAfterPath">
                             <el-input :disabled="viewDialog.isView" v-model="data.projectAfterPath" placeholder="请输入项目后端路径" autocomplete="off"></el-input>
@@ -155,11 +155,11 @@
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="备注" clearable :label-width="formLabelWidth" prop="remark">
-                            <el-input :disabled="viewDialog.isView" v-model="data.remark" placeholder="请输入备注" autocomplete="off"></el-input>
+                            <el-input :disabled="viewDialog.isView" v-model="data.remark" placeholder="请输入备注" ></el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
-                 <el-row>
+                 <el-row :gutter="20">
                     <el-col :span="12">
                         <el-form-item label="项目类型" clearable :label-width="formLabelWidth" prop="projectType" >
                             <el-select v-model="data.projectType" placeholder="请选择" :disabled="viewDialog.isView" style="width:100%">
@@ -252,19 +252,75 @@
                         <span>{{scope.row.defaultValue}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="操作" v-if="!viewDialog.isView"  fixed="right">
+                <el-table-column label="操作" v-if="!viewDialog.isView"  fixed="right" width="100">
                     <template slot-scope="scope">
                         <el-button type="danger" plain size="small" @click="delDetails(scope.$index)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
             <!-- 新增明细结束 -->
+            <!-- 新增用户开始 -->
+            <el-row class="spacing" v-show="!viewDialog.isView"  style="margin-top: 20px">
+                <el-button type="primary" @click.prevent="goAddUser()" >新增用户</el-button>
+            </el-row>
+            <el-table :data="data.projectRoleUserEntities"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit" >
+                <el-table-column width="50" type="index" label="序号"></el-table-column>
+                <el-table-column label="用户名称" >
+                    <template scope="scope">
+                        <span>{{scope.row.userName}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="添加人" >
+                    <template scope="scope">
+                        <span>{{scope.row.addUserName}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="添加时间" >
+                    <template scope="scope">
+                        <span>{{scope.row.creationTime}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" v-if="!viewDialog.isView"  fixed="right" width="100">
+                    <template slot-scope="scope">
+                        <el-button type="danger" plain size="small" @click="delUser(scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <!-- 新增用户结束 -->
             <span slot="footer" class="dialog-footer" v-show="!viewDialog.isView">
                 <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading">取 消</el-button>
                 <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
             </span>
         </el-dialog>
         <!-- 新增/编辑结束 -->
+        <!-- 新增用户开始 -->
+        <el-dialog title="添加" :visible.sync="addUserDialog.isShow" customClass="view-dialog" :close-on-click-modal= "false"  >
+            <el-table :data="userManagementEntitys"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!addUserDialog.isView" class="tb-edit" >
+                <el-table-column width="50" type="index" label="序号"></el-table-column>
+                <el-table-column label="用户名称" >
+                    <template scope="scope">
+                        <span>{{scope.row.name}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="用户编号" >
+                    <template scope="scope">
+                        <span>{{scope.row.accountNumber}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="创建时间" >
+                    <template scope="scope">
+                        <span>{{scope.row.creationTime}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" v-if="!viewDialog.isView"  fixed="right" width="100">
+                    <template slot-scope="scope">
+                        <el-button type="success" plain size="small" @click="addUser(scope.row)">添加</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-dialog>
+        <!-- 新增用户结束 -->
+
     </div>
 </template>
 <script>
@@ -290,9 +346,16 @@
                     isView: false,
                     butIsLoading: false,
                 },
+                addUserDialog:{
+                    isShow: false,
+                    isView: false,
+                    butIsLoading: false,
+                },
+                userManagementEntitys:[],
                 tableOptions:[],
                 data: {
-                    detailEntitys: []
+                    detailEntitys: [],
+                    projectRoleUserEntities: []
                 },
                 defaultData:{
                   "name": "",
@@ -492,6 +555,41 @@
                     isKey: "N"
                 });
             },
+            //去添加用户
+            goAddUser() {
+                this.addUserDialog.isView = true;
+                this.refreshAddUser();
+            },
+            //刷新添加用户
+            refreshAddUser() {
+                this.getHttp("/api/userManagement/userManagement/findAllByProjectId?projectId=" + this.data.id).then(result => {
+                    this.addUserDialog.isShow = true;
+                    this.userManagementEntitys = result;
+                });
+            },
+            //添加用户
+            addUser(row) {
+                var params = {};
+                params.userAccount = row.accountNumber;
+                params.userName = row.name;
+                params.projectId = this.data.id;
+                this.postHttp("/api/databaseTools/projectRoleUser/save",params).then(result => {
+                    this.refreshRoleUser();
+                    this.refreshAddUser();
+                });
+            },
+            //删除用户
+            delUser(row){
+                this.getHttp("/api/databaseTools/projectRoleUser/delete?id="+row.id).then(result => {
+                    this.refreshRoleUser();
+                });
+            },
+            //刷新权限用户
+            refreshRoleUser() {
+                this.getHttp("/api/databaseTools/projectRoleUser/getListByProjectId?projectId="+this.data.id).then(result => {
+                    this.data.projectRoleUserEntities = Object.assign([], result);
+                });
+            },
             //删除明细
             delDetails(index) {
                 this.data.detailEntitys.splice(index,1);
@@ -596,8 +694,14 @@
         }
     };
 </script>
-<style scoped>
-
-
+<style >
+.el-input__inner {
+    border-radius: 10px;
+    overflow: auto;
+    border: 2px solid #adadad;
+    margin-left: 4px;
+    height: 42px;
+    font-size: 16px;
+}
 
 </style>

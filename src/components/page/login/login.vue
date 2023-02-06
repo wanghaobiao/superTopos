@@ -21,16 +21,16 @@ export default {
       return {
          form: {
             accountNumber: "admin",
-            password: "123456",
+            password: "whb123@!",
          },
          rules: {
             accountNumber: [
                { required: true, message: "用户名不能为空", trigger: "blur" },
-               { min: 3, max: 10, message: "用户名3-5位", trigger: "blur" },
+               { min: 3, max: 60, message: "用户名3-5位", trigger: "blur" },
             ],
             password: [
                { required: true, message: "密码不能为空", trigger: "blur" },
-               { min: 3, max: 10, message: "密码3-5位", trigger: "blur" },
+               { min: 3, max: 60, message: "密码3-5位", trigger: "blur" },
             ],
          },
       };
@@ -45,7 +45,8 @@ export default {
             if (valid) {
                // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
                 this.getHttp("/api/login?"+this.jsonToUrl(this.form)).then(result => {
-                    this.setCookie('accountNumber',result);
+                    this.setCookie('accountNumber',result.accountNumber);
+                    this.setCookie('accountName',result.accountName);
                     console.log(JSON.stringify(this.getCookie('accountNumber')));
                     this.$router.push("/main");
                 });
@@ -71,7 +72,7 @@ export default {
 /* 背景 */
 .login-container {
    position: absolute;
-   /* 
+   /*
     background: url("./../../../../src/assets/login-bg.jpg"); */
     background-image: url("./../../../../src/assets/login-bg.jpg");
     background-size: 100%;
