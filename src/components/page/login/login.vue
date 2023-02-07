@@ -20,8 +20,8 @@ export default {
    data() {
       return {
          form: {
-            accountNumber: "admin",
-            password: "whb123@!",
+            accountNumber: "",
+            password: "",
          },
          rules: {
             accountNumber: [

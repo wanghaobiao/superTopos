@@ -5,14 +5,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="Default Changelist">
+    <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="代码提交">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/login/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +176,10 @@
       <workItem from="1673869964614" duration="2355000" />
       <workItem from="1675532135975" duration="2121000" />
       <workItem from="1675646190330" duration="840000" />
-      <workItem from="1675647249737" duration="2492000" />
+      <workItem from="1675647249737" duration="2606000" />
+      <workItem from="1675667677486" duration="762000" />
+      <workItem from="1675680875524" duration="642000" />
+      <workItem from="1675738029186" duration="2077000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -455,7 +454,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672403566516</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="代码提交">
+      <created>1675663132720</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1675663132720</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -519,6 +525,7 @@
     <MESSAGE value="完成树形菜单结构" />
     <MESSAGE value="完成登录功能  wanghb" />
     <MESSAGE value="Default Changelist" />
-    <option name="LAST_COMMIT_MESSAGE" value="Default Changelist" />
+    <MESSAGE value="代码提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="代码提交" />
   </component>
 </project>
