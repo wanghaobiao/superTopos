@@ -12,6 +12,8 @@ import axiosConfig from './../src/components/util/axiosConfig';
 import global from './../src/components/util/global'
 import xfilters from './../src/components/util/xfilters'
 import kindeditor from './../src/components/kindeditor.vue'
+import VueClipBoard from 'vue-clipboard2'
+
 Vue.component('kindeditor',kindeditor);
 
 
@@ -21,30 +23,31 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 Vue.use(VueQuillEditor);
 
+Vue.use(VueClipBoard)
 // 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err)
+    return originalPush.call(this, location).catch(err => err)
 }
 router.beforeEach((to, from, next) => {
     document.querySelector('body').setAttribute('style', ' margin: 8px;')
     if (to.meta.title) {
-      document.title = to.meta.title
+        document.title = to.meta.title
     }
     const requireAuth = to.meta.requireAuth
     // 判断该路由是否需要登录权限
     if (requireAuth) {
         var accountNumber = '';
         if (document.cookie.length > 0) {
-          var arr = document.cookie.split('; '); //这里显示的格式需要切割一下自己可输出看下
-          for (var i = 0; i < arr.length; i++) {
-            var arr2 = arr[i].split('='); //再次切割
-            //判断查找相对应的值
-            if (arr2[0] == 'accountNumber') {
-                accountNumber = arr2[1];
-                //保存到保存数据的地方
+            var arr = document.cookie.split('; '); //这里显示的格式需要切割一下自己可输出看下
+            for (var i = 0; i < arr.length; i++) {
+                var arr2 = arr[i].split('='); //再次切割
+                //判断查找相对应的值
+                if (arr2[0] == 'accountNumber') {
+                    accountNumber = arr2[1];
+                    //保存到保存数据的地方
+                }
             }
-          }
         }
         if (accountNumber) {
             next();
@@ -52,14 +55,14 @@ router.beforeEach((to, from, next) => {
             next('/login/login')
         }
     } else {
-      next()  // 确保一定要有next()被调用
+        next()  // 确保一定要有next()被调用
     }
-  })
+})
 
 //自定义的过滤器
 import iconfont from './../src/assets/icon/iconfont.css'
 for(let key in xfilters){
-  Vue.filter(key,xfilters[key]);
+    Vue.filter(key,xfilters[key]);
 }
 
 //自定义的公用方法
@@ -89,9 +92,9 @@ Vue.http.options.root = 'http://127.0.0.1:8011';
 Vue.http.options.emulateJSON = true;
 
 new Vue({
-  el: '#app',
-  render: h => h(App),
-  // 挂在路由对象到 VM 实例上
-  router
+    el: '#app',
+    render: h => h(App),
+    // 挂在路由对象到 VM 实例上
+    router
 })
 

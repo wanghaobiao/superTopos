@@ -1,46 +1,47 @@
 {
-  "name": "superTools",
-  "description": "A Vue.js project",
-  "author": "yi.shyang@ele.me",
-  "private": true,
-  "scripts": {
-    "dev": "webpack-dev-server --inline --hot --env.dev",
-    "build": "rimraf dist && webpack -p --progress --hide-modules"
-  },
-  "dependencies": {
-    "axios": "^0.19.2",
-    "element-ui": "^2.3.4",
-    "kindeditor": "^4.1.10",
-    "less": "^3.12.2",
-    "less-loader": "^6.2.0",
-    "moment": "^2.22.2",
-    "sortablejs": "^1.10.2",
-    "vue": "^2.5.16",
-    "vue-quill-editor": "^3.0.6",
-    "vue-resource": "^1.5.1",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.6.0"
-  },
-  "engines": {
-    "node": ">=6"
-  },
-  "devDependencies": {
-    "autoprefixer": "^6.6.0",
-    "babel-core": "^6.24.1",
-    "babel-loader": "^6.4.0",
-    "babel-preset-vue-app": "^1.2.0",
-    "css-loader": "^0.27.0",
-    "file-loader": "^0.10.1",
-    "html-webpack-plugin": "^2.24.1",
-    "node-sass": "^4.14.1",
-    "postcss-loader": "^1.3.3",
-    "rimraf": "^2.5.4",
-    "sass-loader": "^9.0.3",
-    "style-loader": "^0.13.2",
-    "url-loader": "^0.5.8",
-    "vue-loader": "^13.3.0",
-    "vue-template-compiler": "^2.5.16",
-    "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.2"
-  }
+    "name": "superTools",
+    "description": "A Vue.js project",
+    "author": "yi.shyang@ele.me",
+    "private": true,
+    "scripts": {
+        "dev": "webpack-dev-server --inline --hot --host 0.0.0.0 --env.dev",
+        "build": "rimraf dist && webpack -p --progress --hide-modules"
+    },
+    "dependencies": {
+        "axios": "^0.19.2",
+        "element-ui": "^2.3.4",
+        "kindeditor": "^4.1.10",
+        "less": "^3.12.2",
+        "less-loader": "^6.2.0",
+        "moment": "^2.22.2",
+        "sortablejs": "^1.10.2",
+        "vue": "^2.5.16",
+        "vue-clipboard2": "^0.3.3",
+        "vue-quill-editor": "^3.0.6",
+        "vue-resource": "^1.5.1",
+        "vue-router": "^3.0.1",
+        "vuex": "^3.6.0"
+    },
+    "engines": {
+        "node": ">=6"
+    },
+    "devDependencies": {
+        "autoprefixer": "^6.6.0",
+        "babel-core": "^6.24.1",
+        "babel-loader": "^6.4.0",
+        "babel-preset-vue-app": "^1.2.0",
+        "css-loader": "^0.27.0",
+        "file-loader": "^0.10.1",
+        "html-webpack-plugin": "^2.24.1",
+        "node-sass": "^4.14.1",
+        "postcss-loader": "^1.3.3",
+        "rimraf": "^2.5.4",
+        "sass-loader": "^9.0.3",
+        "style-loader": "^0.13.2",
+        "url-loader": "^0.5.8",
+        "vue-loader": "^13.3.0",
+        "vue-template-compiler": "^2.5.16",
+        "webpack": "^2.4.1",
+        "webpack-dev-server": "^2.4.2"
+    }
 }
