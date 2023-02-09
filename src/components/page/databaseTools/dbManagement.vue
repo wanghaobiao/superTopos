@@ -1079,9 +1079,7 @@ div::-webkit-scrollbar-corner{
 .tool-spacing {
    text-align: right;
 }
-.operat-but {
-   width: 35px;
-}
+
 .el-button + .el-button {
    margin-left: 0px;
 }

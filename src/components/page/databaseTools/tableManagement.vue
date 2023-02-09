@@ -1065,6 +1065,7 @@ export default {
 /* .operat-but {
     width: 2rem;
 } */
+
 .el-button + .el-button {
     margin-left: 0px;
 }
