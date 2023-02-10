@@ -71,6 +71,10 @@
 body {
     background-color: #282c34;
 }
+.el-popover{
+  background: #282c34 !important;
+  border: 1px solid #282c34;
+}
 .el-menu--horizontal {
     border-right: none;
     border-bottom: solid 0px #e6e6e6;

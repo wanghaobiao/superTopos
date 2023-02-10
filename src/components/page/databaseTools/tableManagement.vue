@@ -11,6 +11,7 @@
                                     placement="right"
                                     trigger="hover"
                                     width="100"
+                                    popper-class="popperOver"
                                 >
                                     <div class="popoverPadding">
                                         <div class="tips" style="display: flex; justify-content: center;" @click="() => goTools(data)">
@@ -1128,7 +1129,7 @@ export default {
     word-break: break-all;
 }
 .popoverPadding {
-    border: 2px dashed #adadad;
+    border: 2px dashed #495e9b;
     border-radius: 25px;
     padding: 15px;
 }
@@ -1214,6 +1215,5 @@ background-color: #282c34;
 .el-form-item {
     margin-bottom: 1.6vh;
 }
-
 
 </style>
