@@ -6,7 +6,7 @@
             <dv-border-box-13 class="dvBox8">
                 <div class="leftBox">
                 <el-tree :data="listData.content" node-key="id" :expand-on-click-node="false" ref="tree" @node-click="treeCheck" class="treeNode" >
-                            <div class="custom-tree-node" slot-scope="{ node, data }">
+                            <div class="custom-tree-node" slot-scope="{ node, data }" @click="() => goTools(data)">
                                 <el-popover
                                     placement="right"
                                     trigger="hover"
@@ -157,7 +157,7 @@
                                 class="sql-div"
                                 ref="sqlDiv"
                                 v-html="data.sql"
-                                :style="{height:(screenSize.height - 185)+'px'}"
+                                :style="{height:(screenSize.height - 195)+'px'}"
                             ></div>
                         </el-form-item>
                     </el-form>
@@ -1088,7 +1088,7 @@ export default {
     cursor: text;
     -webkit-appearance: none;
     border-radius: 4px;
-    border: 1px solid #dcdfe6;
+    border: 2px solid #495e9b;
     color: #606266;
     padding: 0 15px;
 }
