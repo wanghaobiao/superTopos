@@ -459,6 +459,7 @@
     cursor: default;
     margin-left: 5px;
     margin-right: 5px;
+    color: white;
 }
 .x-span {
     cursor: default;

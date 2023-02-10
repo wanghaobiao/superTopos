@@ -1206,43 +1206,6 @@ background-color: #282c34;
 .el-form-item {
     margin-bottom: 1.6vh;
 }
-.el-table {
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
-  margin: 0 auto;
-  background-color: #282c34;
-}
-/deep/.el-table th {
-  border: 1px solid black !important;
-  border-right: none !important;
-  border-bottom: none !important;
-}
 
-/deep/.el-table td {
-  border: 1px solid black;
-  border-right: none !important;
-}
 
-/deep/.el-table--border, .el-table--group {
-    border: 1px solid black;
-}
-
-/deep/.el-input.is-disabled .el-input__inner {
-    background-color: #141414;
-    border-color: #4c4d4f;
-    color: #C0C4CC;
-    cursor: not-allowed;
-}
-/deep/.el-input .el-input__inner {
-    background-color: #141414;
-    border-color: #4c4d4f;
-    color: #C0C4CC;
-    cursor: not-allowed;
-}
-/deep/.el-select .el-input__inner {
-    background-color: #141414;
-    border-color: #4c4d4f;
-    color: #C0C4CC;
-    cursor: not-allowed;
-}
 </style>

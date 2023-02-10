@@ -18,11 +18,11 @@
                                 <el-input v-model="pageData.create_eq" placeholder="请输入创建人" autocomplete="off"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="8">
+<!--                        <el-col :span="8">
                             <el-form-item  label="创建时间" :label-width="formLabelWidth">
                                 <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width: 100%"></el-date-picker>
                             </el-form-item>
-                        </el-col>
+                        </el-col>-->
                     </el-row>
                     <el-row  v-show="moreIsShow.query" >
                         <el-col :span="8">

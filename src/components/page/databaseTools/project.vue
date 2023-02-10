@@ -2,41 +2,43 @@
 <template>
     <div :style="{height:(screenSize.height)+'px'}">
         <!-- 搜索框开始 -->
-        <el-row  >
-            <el-col :span="18">
-                <el-form  class="demo-form-inline">
-                    <el-row>
-                        <el-col :span="8">
-                            <el-form-item  label="名称" :label-width="formLabelWidth">
-                                <el-input v-model="pageData.name_eq" placeholder="请输入名称" autocomplete="off"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="8">
-                            <el-form-item label="编号" :label-width="formLabelWidth">
-                                <el-input v-model="pageData.number_eq" placeholder="请输入编号"></el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="8">
-                            <el-form-item label="创建人" :label-width="formLabelWidth">
-                                <el-input v-model="pageData.create_eq" placeholder="请输入创建人" ></el-input>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>
-<!--                    <el-row>
-                        <el-col :span="8">
-                            <el-form-item label="创建时间" :label-width="formLabelWidth" >
-                                <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width:100%"></el-date-picker>
-                            </el-form-item>
-                        </el-col>
-                    </el-row>-->
-                </el-form>
-            </el-col>
-            <el-col :span="4" :offset="2">
-                <el-button type="primary" plain  @click.prevent="search()">搜索</el-button>
-                <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
-                <el-button type="danger" plain @click.prevent="batchDel()">删除</el-button>
-            </el-col>
-        </el-row>
+        <dv-border-box-12 style="height: 78px;background-color: #282c34;color: #fff; z-index: 11;margin-top: 15px;">
+            <el-row style="margin-top: -10px" >
+                <el-col :span="18">
+                    <el-form  class="demo-form-inline">
+                        <el-row style="margin-top: 17px">
+                            <el-col :span="8">
+                                <el-form-item  label="名称" :label-width="formLabelWidth">
+                                    <el-input v-model="pageData.name_eq" placeholder="请输入名称" autocomplete="off"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="8">
+                                <el-form-item label="编号" :label-width="formLabelWidth">
+                                    <el-input v-model="pageData.number_eq" placeholder="请输入编号"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="8">
+                                <el-form-item label="创建人" :label-width="formLabelWidth">
+                                    <el-input v-model="pageData.create_eq" placeholder="请输入创建人" ></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+    <!--                    <el-row>
+                            <el-col :span="8">
+                                <el-form-item label="创建时间" :label-width="formLabelWidth" >
+                                    <el-date-picker value-format="yyyy-MM-dd" v-model="pageData.creationTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" style="width:100%"></el-date-picker>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>-->
+                    </el-form>
+                </el-col>
+                <el-col :span="4" :offset="2" style="margin-top: 17px">
+                    <el-button type="primary" plain  @click.prevent="search()">搜索</el-button>
+                    <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
+                    <el-button type="danger" plain @click.prevent="batchDel()">删除</el-button>
+                </el-col>
+            </el-row>
+        </dv-border-box-12>
         <!-- 搜索框结束 -->
         <!-- 按钮框开始 -->
         <el-row class="spacing">
@@ -44,7 +46,9 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - 75" fit border >
+        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - 83" fit border
+                  :header-cell-style="{ background: 'rgb(55 76 135)',color: '#fff',}"
+                  :row-style="{background: '#282c34', color: '#fff',}">
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
             <el-table-column  property="name" label="名称" width="250" ></el-table-column>
@@ -703,5 +707,6 @@
     height: 42px;
     font-size: 16px;
 }
+
 
 </style>

@@ -63,167 +63,213 @@
         }
     };
 </script>
+
+
+
 <style>
-    body {
-        background-color: #282c34;
-    }
-    .el-menu--horizontal {
-        border-right: none;
-        border-bottom: solid 0px #e6e6e6;
-    }
-    .el-menu-demo{
-        border-radius: 10px;
-    }
-    .dvBox13 {
-        height: 30px;
-    }
-    .atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow {
-        border-top-color: pink;
-    }
-    .atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow:after {
-        border-top-color: pink;
-    }
-    .atooltip {
-        background: pink !important;
-    }
+body {
+    background-color: #282c34;
+}
+.el-menu--horizontal {
+    border-right: none;
+    border-bottom: solid 0px #e6e6e6;
+}
+.el-menu-demo{
+    border-radius: 10px;
+}
+.dvBox13 {
+    height: 30px;
+}
+.atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow {
+    border-top-color: pink;
+}
+.atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow:after {
+    border-top-color: pink;
+}
+.atooltip {
+    background: pink !important;
+}
 
-    .router-view{
-        margin: 0px;
-    }
-    /***************************************** 基础样式开始 *****************************************/
-    .text-align-center{
-        text-align: center;
-    }
-    .margin-top-22{
-        margin-top: 22px;
-    }
-    .margin-top-10{
-        margin-top: 10px;
-    }
-    .text-align-right{
-        text-align: right;
-    }
-    .height-100{
-        height: 100%;
-    }
-    .border-2-adadad{
-        border: 2px solid #adadad;
-    }
-    .border-radius-5{
-        border-radius: 5px;
-    }
-    /***************************************** 基础样式开始 *****************************************/
+.router-view{
+    margin: 0px;
+}
+/***************************************** 基础样式开始 *****************************************/
+.text-align-center{
+    text-align: center;
+}
+.margin-top-22{
+    margin-top: 22px;
+}
+.margin-top-10{
+    margin-top: 10px;
+}
+.text-align-right{
+    text-align: right;
+}
+.height-100{
+    height: 100%;
+}
+.border-2-adadad{
+    border: 2px solid #adadad;
+}
+.border-radius-5{
+    border-radius: 5px;
+}
+/***************************************** 基础样式开始 *****************************************/
 
-    a {
+a {
     text-decoration: none;
-    }
-    body .el-table th.gutter{
+}
+body .el-table th.gutter{
     display: table-cell!important;
-    }
-    .spacing {
-        margin-bottom: 22px;
-    }
-    .save-spacing{
-        text-align: right;
-        padding-top:  22px;
-    }
-    /* 分页样式  */
-    .pagination{
-        margin-top: 10px;
-        margin-bottom: 10px;
-        text-align: right;
-    }
-    /***************************************** 详情样式开始 *****************************************/
-    .el-table .warning-row {
-        background: #F5F7FA;
-    }
-    .el-table .edit-row {
-        background: #ffffff;
-    }
-    /* 详情宽度 */
-    .view-dialog{
-        width: 80%;
-    }
-    /* 详情明细 */
-    .tb-edit .el-input {
-        display: none
-    }
-    .tb-edit .edit-row .el-input {
-        display: block
-    }
-    .tb-edit .edit-row .el-input+span {
-        display: none
-    }
-    .tb-edit .el-select {
-        display: none
-    }
-    .tb-edit .edit-row .el-select {
-        display: block
-    }
-    .tb-edit .edit-row .el-select+span {
-        display: none
-    }
-    /***************************************** 详情样式结束 *****************************************/
-    /***************************************** 覆盖样式开始 *****************************************/
-    /* table鼠标悬停颜色 */
-    .el-table--enable-row-hover .el-table__body tr:hover>td{
-        background-color: rgb(108, 184, 250) !important;
-    }
-    /* table鼠标选中颜色 */
-    .el-table--striped .el-table__body tr.el-table__row--striped.current-row td, .el-table__body tr.current-row>td {
-        color: #fff;
-        background-color: rgb(108, 184, 250) !important;
-    }
-    .dialog-button {
-        padding: 10px ;
-        text-align: right;
-        box-sizing: border-box;
-    }
-    .el-table__fixed-right{
-        height: 100% !important;
-    }
+}
+.spacing {
+    margin-bottom: 11px;
+}
+.save-spacing{
+    text-align: right;
+    padding-top:  22px;
+}
+/* 分页样式  */
+.pagination{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+/***************************************** 详情样式开始 *****************************************/
+.el-table .warning-row {
+    background: #F5F7FA;
+}
+.el-table .edit-row {
+    background: #ffffff;
+}
+/* 详情宽度 */
+.view-dialog{
+    width: 80%;
+}
+/* 详情明细 */
+.tb-edit .el-input {
+    display: none
+}
+.tb-edit .edit-row .el-input {
+    display: block
+}
+.tb-edit .edit-row .el-input+span {
+    display: none
+}
+.tb-edit .el-select {
+    display: none
+}
+.tb-edit .edit-row .el-select {
+    display: block
+}
+.tb-edit .edit-row .el-select+span {
+    display: none
+}
+/***************************************** 详情样式结束 *****************************************/
+/***************************************** 覆盖样式开始 *****************************************/
+/* table鼠标悬停颜色 */
+.el-table--enable-row-hover .el-table__body tr:hover>td{
+    background-color: rgb(108, 184, 250) !important;
+}
+/* table鼠标选中颜色 */
+.el-table--striped .el-table__body tr.el-table__row--striped.current-row td, .el-table__body tr.current-row>td {
+    color: #fff;
+    background-color: rgb(108, 184, 250) !important;
+}
+.dialog-button {
+    padding: 10px ;
+    text-align: right;
+    box-sizing: border-box;
+}
+.el-table__fixed-right{
+    height: 100% !important;
+}
 
-    /* 按钮样式 */
-    .el-button {
-        display: inline-block;
-        line-height: 1;
-        white-space: nowrap;
-        cursor: pointer;
-        -webkit-appearance: none;
-        text-align: center;
-        box-sizing: border-box;
-        outline: 0;
-        margin: 0;
-        transition: .1s;
-        font-weight: 500;
-        padding: 12px 20px;
-        font-size: 14px;
-        border-radius: 5px;
-    }
-    /***************************************** 覆盖样式结束 *****************************************/
-    /***************************************** 修改滚动条开始 *****************************************/
-    div::-webkit-scrollbar{
-        width:4px;
-        height:10px;
-        /**/
-    }
-    div::-webkit-scrollbar-track{
-        margin-top: 18px;
-        margin-bottom: 18px;
-        background: rgb(239, 239, 239);
-        border-radius:2px;
-    }
-    div::-webkit-scrollbar-thumb{
-        background: #adadad;
-        border-radius:10px;
-    }
-    div::-webkit-scrollbar-thumb:hover{
-        background: #333;
-    }
-    div::-webkit-scrollbar-corner{
-        background: #179a16;
-    }
-    /***************************************** 修改滚动条结束 *****************************************/
+/* 按钮样式 */
+.el-button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+/***************************************** 覆盖样式结束 *****************************************/
+/***************************************** 修改滚动条开始 *****************************************/
+div::-webkit-scrollbar{
+    width:4px;
+    height:10px;
+    /**/
+}
+div::-webkit-scrollbar-track{
+    margin-top: 18px;
+    margin-bottom: 18px;
+    background: rgb(239, 239, 239);
+    border-radius:2px;
+}
+div::-webkit-scrollbar-thumb{
+    background: #adadad;
+    border-radius:10px;
+}
+div::-webkit-scrollbar-thumb:hover{
+    background: #333;
+}
+div::-webkit-scrollbar-corner{
+    background: #179a16;
+}
+/***************************************** 修改滚动条结束 *****************************************/
+/***************************************** 修改表格的默认样式开始 *****************************************/
+.el-table {
+    background-color: #282c34;
+}
+.el-table td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-right: 1px solid #495e9b;
+    border-bottom: 1px solid #495e9b;
+}
+.el-table th.is-leaf{
+    border-bottom: 1px solid #495e9b;
+    border-right: 1px solid #495e9b;
+}
+.el-table--border{
+    border: 1px solid #495e9b;
+}
+.el-table--border::after,
+.el-table--group::after,
+.el-table::before,
+.el-table__fixed:before,
+.el-table__fixed-right:before {
+    background-color: transparent;
+}
 
+.el-input.is-disabled .el-input__inner {
+    background-color: #141414;
+    border-color: #4c4d4f;
+    color: #C0C4CC;
+    cursor: not-allowed;
+}
+.el-input .el-input__inner {
+    background-color: #141414;
+    border-color: #4c4d4f;
+    color: #C0C4CC;
+    cursor: not-allowed;
+}
+.el-select .el-input__inner {
+    background-color: #141414;
+    border-color: #4c4d4f;
+    color: #C0C4CC;
+    cursor: not-allowed;
+}
+/***************************************** 修改表格的默认样式结束 *****************************************/
 
 </style>
