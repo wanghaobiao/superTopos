@@ -2,7 +2,7 @@
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
         <dv-border-box-13 style="height: 60px;background-color: #282c34;color: #fff; z-index: 11">
-            <el-menu  mode="horizontal" background-color="rgba(165, 42, 42, 0)" text-color="#fff" active-text-color="#ffd04b" >
+            <el-menu class="elmenu"  mode="horizontal" background-color="rgba(165, 42, 42, 0)" text-color="#fff" active-text-color="#ffd04b" >
                 <!-- <el-submenu index="1">
                     <template slot="title">数据库工具</template>
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
@@ -67,6 +67,7 @@
 
 
 <style>
+
 body {
     background-color: #282c34;
 }
@@ -74,6 +75,13 @@ body {
     border-right: none;
     border-bottom: solid 0px #e6e6e6;
 }
+.el-submenu__title:hover{
+    background-color: rgb(255, 255, 255, 0) !important; 
+    }
+    .el-menu-item:hover {
+    background-color: rgb(255, 255, 255, 0) !important;
+    }
+
 .el-menu-demo{
     border-radius: 10px;
 }

@@ -1200,6 +1200,14 @@ export default {
 .dialog .el-dialog__footer{
 background-color: #282c34;
 }
+.el-checkbox.is-bordered {
+    padding: 9px 20px 9px 10px;
+    border-radius: 4px;
+    border: 1px solid #495e9b;
+    box-sizing: border-box;
+    line-height: normal;
+    height: 40px;
+}
 </style>
 
 <style scoped>
