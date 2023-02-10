@@ -1,5 +1,24 @@
 <template>
-   <div class="login-container" >
+
+        <div class="login-container" >
+            <div class="card login-form">
+                <el-form ref="form" :rules="rules" :model="form" label-width="80px" style="z-index: 10">
+                    <h2 class="login-title">CODE EDA SYSTEM</h2>
+                    <el-form-item label="用户名" prop="accountNumber">
+                        <el-input v-model="form.accountNumber"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码" prop="password">
+                        <el-input type="password" v-model="form.password"></el-input>
+                    </el-form-item>
+
+                    <el-form-item>
+                        <el-button type="primary" @click="submitForm('form')">登录</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </div>
+
+<!--   <div class="login-container" >
       <el-form ref="form" :rules="rules" :model="form" label-width="80px" class="login-form">
          <h2 class="login-title">CODE EDA SYSTEM</h2>
          <el-form-item label="用户名" prop="accountNumber">
@@ -13,7 +32,7 @@
             <el-button type="primary" @click="submitForm('form')">登录</el-button>
          </el-form-item>
       </el-form>
-   </div>
+   </div>-->
 </template>
 <script>
 export default {
@@ -61,7 +80,56 @@ export default {
 </script>
 
   <style >
-.login-form {
+  .card {
+      width: 190px;
+      height: 254px;
+      background: white;
+      position: relative;
+      display: flex;
+      place-content: center;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 20px;
+  }
+
+
+  .card::before {
+
+      content: '';
+      position: absolute;
+      width: 150px;
+      background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+      height: 180%;
+      animation: rotBGimg 3s linear infinite;
+      transition: all 0.2s linear;
+  }
+
+  @keyframes rotBGimg {
+      from {
+          transform: rotate(0deg);
+      }
+
+      to {
+          transform: rotate(360deg);
+      }
+  }
+
+  .card::after {
+      content: '';
+      position: absolute;
+      background:  white;
+  ;
+      inset: 5px;
+      border-radius: 15px;
+  }
+  /*.card:hover:before {
+      background-image: linear-gradient(220deg, rgb(81, 255, 0), purple);
+      animation: rotBGimg 3.5s linear infinite;
+  }*/
+
+
+  .login-form {
+      z-index: 100;
    width: 350px;
    margin: 160px auto; /* 上下间距160px，左右自动居中*/
    background-color: rgb(255, 255, 255, 0.8); /* 透明背景色 */
@@ -83,7 +151,8 @@ export default {
 
 /* 标题 */
 .login-title {
-   color: #303133;
-   text-align: center;
+    z-index: 10;
+    color: black;
+    text-align: center;
 }
 </style>
