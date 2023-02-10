@@ -1,7 +1,7 @@
 <!--项目表(project)-->
 <template>
-      <div style="background-color: #282c34">
-        <el-row :gutter="10" >
+      <div style="background-color: #282c34;">
+        <el-row  :gutter="10">
           <el-col :span="5">
             <dv-border-box-13 class="dvBox8">
                 <div class="leftBox">
@@ -390,7 +390,7 @@
                         >取 消</el-button>
                         <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
                     </el-row>
-                    <el-dialog title="生成代码" :visible.sync="buildFileDialog.isShow" width="30%">
+                    <el-dialog custom-class="dialog" title="生成代码" :visible.sync="buildFileDialog.isShow" width="30%">
                         <el-form
                             :model="data"
                             v-loading="viewDialog.butIsLoading"
@@ -466,7 +466,7 @@
                      <el-button type="primary" @click="buildFile()">确 定</el-button>
                   </span>
                     </el-dialog>
-                    <el-dialog title="生成局部代码" :visible.sync="buildPartialDialog.isShow" width="30%">
+                    <el-dialog custom-class="dialog" title="生成局部代码" :visible.sync="buildPartialDialog.isShow" width="30%">
                         <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
                             <div>
                                 <el-row :gutter="20" v-show="false"><!--   -->
@@ -1104,6 +1104,7 @@ export default {
 }
 .fileType-checkbox {
     width: 100%;
+    color: #fff;
 }
 .tips:hover {
     cursor: pointer;
@@ -1132,7 +1133,7 @@ export default {
     padding: 15px;
 }
 .dvBox8 {
-    height: calc(90vh - 20px);
+    height: calc(93vh - 20px);
 }
 .leftBox {
     padding: 0.5vw;
@@ -1145,7 +1146,7 @@ export default {
     overflow: auto;
 }
 .detailInfo {
-    margin: 0.5vw;
+    padding: 0.5vw;
     height: calc(90vh - 20px - 2vw);
     overflow-x: auto;
     overflow-y: hidden;
@@ -1184,6 +1185,21 @@ export default {
   transform: translate(0);
  }
 }
+.dialog .el-dialog__header  {
+    background-color: #282c34;
+  }
+  .dialog .el-dialog__title {
+    line-height: 24px;
+    font-size: 18px;
+    color: #fff;
+}
+  /*body背景色*/
+.dialog .el-dialog__body  {
+    background-color: #282c34;
+}
+.dialog .el-dialog__footer{
+background-color: #282c34;
+}
 </style>
 
 <style scoped>
@@ -1194,6 +1210,7 @@ export default {
   border-bottom: 1px solid black;
   border-right: 1px solid black;
   margin: 0 auto;
+  background-color: #282c34;
 }
 /deep/.el-table th {
   border: 1px solid black !important;
@@ -1205,6 +1222,11 @@ export default {
   border: 1px solid black;
   border-right: none !important;
 }
+
+/deep/.el-table--border, .el-table--group {
+    border: 1px solid black;
+}
+
 /deep/.el-input.is-disabled .el-input__inner {
     background-color: #141414;
     border-color: #4c4d4f;

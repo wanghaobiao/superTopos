@@ -12,7 +12,7 @@
                     </el-form-item>
 
                     <el-form-item>
-                        <button @click="submitForm('form')">
+                        <button type="button" @click="submitForm('form')">
                            登录
                            <div class="arrow-wrapper">
                               <div class="arrow"></div>
