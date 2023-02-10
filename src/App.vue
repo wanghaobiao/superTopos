@@ -1,8 +1,8 @@
 <template>
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
-        <div  v-show="!$route.meta.showNav">
-            <el-menu class="border-radius-5" mode="horizontal" background-color="#282c34" text-color="#fff" active-text-color="#ffd04b">
+        <dv-border-box-13 style="height: 60px;background-color: #282c34;color: #fff; z-index: 11">
+            <el-menu  mode="horizontal" background-color="rgba(165, 42, 42, 0)" text-color="#fff" active-text-color="#ffd04b" >
                 <!-- <el-submenu index="1">
                     <template slot="title">数据库工具</template>
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
@@ -14,19 +14,18 @@
                 <el-menu-item index="6" @click="jump('/databaseTools/dataSource')">数据库管理</el-menu-item>
                 <el-menu-item index="7" @click="jump('/databaseTools/dbManagement')">数据库逆向</el-menu-item>
                 <el-menu-item index="3" @click="jump('/systemConfig/codeReserve')">代码储备</el-menu-item>
-<!--                <el-menu-item index="4" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>-->
-<!--                <el-menu-item index="5" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item>-->
-                 <el-submenu index="2">
+                <!--                <el-menu-item index="4" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>-->
+                <!--                <el-menu-item index="5" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item>-->
+                <el-submenu index="2">
                     <template slot="title">系统配置</template>
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
-<!--                    <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>-->
+                    <!--                    <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>-->
                 </el-submenu>
             </el-menu>
-        </div>
-
-
+        </dv-border-box-13>
         <router-view :style="{'margin-top':  !$route.meta.showNav ? '8px' : '0px'}" class="router-view"></router-view>
     </div>
+
 </template>
 <script>
     export default {
@@ -65,8 +64,18 @@
     };
 </script>
 <style>
+    body {
+        background-color: #282c34;
+    }
+    .el-menu--horizontal {
+        border-right: none;
+        border-bottom: solid 0px #e6e6e6;
+    }
     .el-menu-demo{
         border-radius: 10px;
+    }
+    .dvBox13 {
+        height: 30px;
     }
     .atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow {
         border-top-color: pink;

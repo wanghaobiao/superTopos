@@ -1,10 +1,9 @@
 <!--项目表(project)-->
 <template>
-    <dv-border-box-7 style="height: 90vh;background-color: #282c34;color: #fff;">
-      <div>
-        <el-row :gutter="10" style="padding: 10px;">
+      <div style="background-color: #282c34">
+        <el-row :gutter="10" >
           <el-col :span="5">
-            <dv-border-box-8 class="dvBox8">
+            <dv-border-box-13 class="dvBox8">
                 <div class="leftBox">
                 <el-tree :data="listData.content" node-key="id" :expand-on-click-node="false" ref="tree" @node-click="treeCheck" class="treeNode" >
                             <div class="custom-tree-node" slot-scope="{ node, data }">
@@ -65,10 +64,10 @@
                             </div>
                         </el-tree>
                     </div>
-            </dv-border-box-8>
+            </dv-border-box-13>
         </el-col>
           <el-col :span="19">
-            <dv-border-box-8 :reverse="true" class="dvBox8">
+            <dv-border-box-13 :reverse="true" class="dvBox8">
                 <div class="div-view" v-show="viewDialog.isShow">
                     <!-- 新增/编辑开始 -->
                     <div class="detailInfo">
@@ -484,11 +483,10 @@
                     <!-- 新增/编辑结束 -->
                 </div>
                 </div>
-            </dv-border-box-8>
+            </dv-border-box-13>
         </el-col>
         </el-row>
       </div>
-    </dv-border-box-7>
 </template>
 <script>
 export default {
