@@ -179,7 +179,16 @@
                 <el-button type="warning"  @click.prevent="up()" :loading="viewDialog.butIsLoading" plain>上移</el-button>
                 <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" plain>下移</el-button>
             </el-row>
-            <el-table :data="data.detailEntitys"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit" >
+            <el-table :data="data.detailEntitys"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit" 
+            :header-cell-style="{
+                                background: '#141414',
+                                color: '#fff',
+                            }"
+                            :row-style="{
+                               background: '#282c34',
+                                color: '#fff',
+                            }"
+            >
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
                 <el-table-column label="名称">
                     <template scope="scope">
@@ -267,7 +276,16 @@
             <el-row class="spacing" v-show="!viewDialog.isView"  style="margin-top: 20px">
                 <el-button type="primary" @click.prevent="goAddUser()" >新增用户</el-button>
             </el-row>
-            <el-table :data="data.projectRoleUserEntities"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit" >
+            <el-table :data="data.projectRoleUserEntities"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit" 
+            :header-cell-style="{
+                                background: '#141414',
+                                color: '#fff',
+                            }"
+                            :row-style="{
+                               background: '#282c34',
+                                color: '#fff',
+                            }"
+            >
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
                 <el-table-column label="用户名称" >
                     <template scope="scope">
@@ -299,7 +317,16 @@
         <!-- 新增/编辑结束 -->
         <!-- 新增用户开始 -->
         <el-dialog title="添加" :visible.sync="addUserDialog.isShow" customClass="view-dialog" :close-on-click-modal= "false"  >
-            <el-table :data="userManagementEntitys"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!addUserDialog.isView" class="tb-edit" >
+            <el-table :data="userManagementEntitys"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!addUserDialog.isView" class="tb-edit"
+            :header-cell-style="{
+                                background: '#141414',
+                                color: '#fff',
+                            }"
+                            :row-style="{
+                               background: '#282c34',
+                                color: '#fff',
+                            }"
+            >
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
                 <el-table-column label="用户名称" >
                     <template scope="scope">
@@ -707,6 +734,20 @@
     height: 42px;
     font-size: 16px;
 }
-
+.view-dialog .el-dialog__header  {
+    background-color: #282c34;
+  }
+  .view-dialog .el-dialog__title {
+    line-height: 24px;
+    font-size: 18px;
+    color: #fff;
+}
+  /*body背景色*/
+.view-dialog .el-dialog__body  {
+    background-color: #282c34;
+}
+.view-dialog .el-dialog__footer{
+background-color: #282c34;
+}
 
 </style>
