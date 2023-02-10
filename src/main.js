@@ -23,6 +23,9 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 Vue.use(VueQuillEditor);
 
+import dataV from '@jiaminghi/data-view'
+Vue.use(dataV)
+
 Vue.use(VueClipBoard)
 // 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
 const originalPush = VueRouter.prototype.push;

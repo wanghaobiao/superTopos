@@ -8,6 +8,7 @@
         "build": "rimraf dist && webpack -p --progress --hide-modules"
     },
     "dependencies": {
+        "@jiaminghi/data-view": "^2.10.0",
         "axios": "^0.19.2",
         "element-ui": "^2.3.4",
         "kindeditor": "^4.1.10",

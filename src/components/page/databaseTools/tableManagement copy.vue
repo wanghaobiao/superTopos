@@ -1,12 +1,12 @@
 <!--项目表(project)-->
 <template>
-    <dv-border-box-7 style="height: 90vh;background-color: #282c34;color: #fff;">
-      <div>
-        <el-row :gutter="10" style="padding: 10px;">
-          <el-col :span="5">
-            <dv-border-box-8 class="dvBox8">
-                <div class="leftBox">
-                <el-tree :data="listData.content" node-key="id" :expand-on-click-node="false" ref="tree" @node-click="treeCheck" class="treeNode" >
+    <div :style="{height:(screenSize.height)+'px'}" >
+        <el-row :gutter="10" style="height:100%;"  v-loading="fullscreenLoading">
+            <el-col :span="5" style="height:100%;" >
+                <!-- 列表框开始 -->
+                <div class="custom-tree-container tree-node"  style="overflow: auto;" >
+                    <div >
+                        <el-tree :data="listData.content" node-key="id" :expand-on-click-node="false" ref="tree" @node-click="treeCheck" >
                             <div class="custom-tree-node" slot-scope="{ node, data }">
                                 <el-popover
                                     placement="right"
@@ -62,16 +62,18 @@
                            </span>
                                     </div>
                                 </el-popover>
+                                <!-- <span>
+                                      <i class="el-icon-s-tools" style="color: #228be6" ></i>
+                                   </span> -->
                             </div>
                         </el-tree>
                     </div>
-            </dv-border-box-8>
-        </el-col>
-          <el-col :span="19">
-            <dv-border-box-8 :reverse="true" class="dvBox8">
+                </div>
+                <!-- 列表框结束 -->
+            </el-col>
+            <el-col :span="19" style="height:100%">
                 <div class="div-view" v-show="viewDialog.isShow">
                     <!-- 新增/编辑开始 -->
-                    <div class="detailInfo">
                     <el-form
                         :model="data"
                         v-loading="viewDialog.butIsLoading"
@@ -194,14 +196,6 @@
                             @current-change="currentChange"
                             fixed
                             class="tb-edit"
-                            :header-cell-style="{
-                                background: '#141414',
-                                color: '#fff',
-                            }"
-                            :row-style="{
-                               background: '#282c34',
-                                color: '#fff',
-                            }"
                         >
                             <el-table-column width="50" type="index" label="序号"></el-table-column>
                             <el-table-column label="名称" width="200">
@@ -478,23 +472,30 @@
                                     <el-col :span="8" class="frame-col"><el-button class="frame-but" type="primary" plain @click="copyEntity">实体</el-button></el-col>
                                     <el-col :span="8" class="frame-col"><el-button class="frame-but" type="success" plain @click="allCode">全部</el-button></el-col>
                                 </el-row>
+
+                                <!-- <el-row :gutter="20" class="margin-top-22">
+                                    <el-col :span="8" class="frame-col"><el-button class="frame-but" type="warning" plain @click="copySql">SQL</el-button></el-col>
+                                    <el-col :span="8" class="frame-col"><el-button class="frame-but" type="primary" plain>实体</el-button></el-col>
+                                    <el-col :span="8" class="frame-col"><el-button class="frame-but" type="info" plain>无用</el-button></el-col>
+                                </el-row> -->
                             </div>
                         </el-form>
                     </el-dialog>
                     <!-- 新增/编辑结束 -->
                 </div>
-                </div>
-            </dv-border-box-8>
-        </el-col>
+            </el-col>
         </el-row>
-      </div>
-    </dv-border-box-7>
+    </div>
 </template>
 <script>
 export default {
-    name: "tableManagement",
+    name:'tableManagement',
 
     created() {
+        // if(document.body.clientWidth < 1280) {
+        //    this.$message.warning("放大网页，体验更佳！")
+        //    return
+        // }
         this.search();
         this.getParams();
         this.refreshScreenSize();
@@ -505,13 +506,13 @@ export default {
             pageData: {
                 page: 1,
                 size: 10,
-                sort: "creationTime,DESC"
+                sort: "creationTime,DESC",
             },
             viewDialog: {
                 isTools: false,
                 isShow: false,
                 isEdit: false,
-                butIsLoading: false
+                butIsLoading: false,
             },
             buildFileDialog: {
                 isAllSelect: false,
@@ -519,7 +520,7 @@ export default {
                 butIsLoading: false,
                 fileTypes: [],
                 javaPath: "",
-                vuePath: ""
+                vuePath: "",
             },
             buildPartialDialog: {
                 isAllSelect: false,
@@ -528,7 +529,7 @@ export default {
                 fileTypes: [],
                 javaPath: "",
                 vuePath: "",
-                sql: ""
+                sql: "",
             },
             tableOptions: [],
             formLabelWidth: "80px",
@@ -536,25 +537,24 @@ export default {
             currentIndex: null,
             data: {
                 projectEntity: {},
-                detailEntitys: []
+                detailEntitys: [],
             },
             listData: {
-                loading: false
+                loading: false,
             },
             rules: {
-                name: [
-                    { required: true, message: "请输入名称", trigger: "blur" }
-                ],
+                name: [{ required: true, message: "请输入名称", trigger: "blur" }],
                 number: [
-                    { required: true, message: "请输入编号", trigger: "blur" }
+                    { required: true, message: "请输入编号", trigger: "blur" },
                 ],
                 remark: [
-                    { required: false, message: "请输入备注", trigger: "blur" }
-                ]
+                    { required: false, message: "请输入备注", trigger: "blur" },
+                ],
             },
             screenWidth: document.body.clientWidth
         };
     },
+
 
     methods: {
         //执行搜索
@@ -572,7 +572,7 @@ export default {
             this.fullscreenLoading = true;
             this.getHttp(
                 "/api/project/findAll?" + this.jsonToUrl(this.pageData)
-            ).then(result => {
+            ).then((result) => {
                 this.fullscreenLoading = false;
                 this.listData = result;
                 this.listData.loading = false;
@@ -580,48 +580,36 @@ export default {
         },
         //批量删除
         batchDel(id) {
-            if (
-                this.isEmpty(id) &&
-                this.$refs.listTable.selection.length == 0
-            ) {
+            if (this.isEmpty(id) && this.$refs.listTable.selection.length == 0) {
                 this.$message.warning("请先勾选删除列");
                 return;
             }
             this.$confirm("确定要进行删除操作吗?", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
-                type: "warning"
+                type: "warning",
             }).then(() => {
                 if (this.isNotEmpty(id)) {
-                    this.getHttp("/api/project/delete?id=" + id).then(
-                        result => {
-                            this.search();
-                        }
-                    );
+                    this.getHttp("/api/project/delete?id=" + id).then((result) => {
+                        this.search();
+                    });
                 } else {
-                    var ids = this.listExtract(
-                        this.$refs.listTable.selection,
-                        "id"
-                    );
-                    this.postHttp("/api/project/batchDelete", ids).then(
-                        result => {
-                            this.search();
-                        }
-                    );
+                    var ids = this.listExtract(this.$refs.listTable.selection, "id");
+                    this.postHttp("/api/project/batchDelete", ids).then((result) => {
+                        this.search();
+                    });
                 }
             });
         },
         //打开新增
         goAdd(row) {
-            this.resetForm("ruleForm");
-            var projectId = this.isEmpty(row.projectId)
-                ? row.id
-                : row.projectId;
+            this.resetForm("ruleForm")
+            var projectId = this.isEmpty(row.projectId) ? row.id : row.projectId;
             this.getTableOptions(projectId);
             this.viewDialog.isEdit = true;
             this.viewDialog.isTools = false;
             this.getHttp("/api/project/simpleView?id=" + projectId, {}).then(
-                result => {
+                (result) => {
                     this.viewDialog.isShow = true;
                     this.data = {
                         prefix: result.prefix,
@@ -630,25 +618,18 @@ export default {
                         projectId: projectId,
                         projectEntity: { id: row.id, name: row.label },
                         parentId: row.id,
-                        detailEntitys: result.detailEntitys
+                        detailEntitys: result.detailEntitys,
                     };
                     if (row.level > 2) {
-                        var temp = [
-                            {},
-                            {
-                                name: this.data.projectEntity.name + "id",
-                                number: "parentId",
-                                linkTable: row.id,
-                                allowEmpty: "N",
-                                columnProperties: "linkColumn",
-                                isKey: "N"
-                            }
-                        ];
-                        for (
-                            var i = 1;
-                            i < this.data.detailEntitys.length;
-                            i++
-                        ) {
+                        var temp = [{},{
+                            name: this.data.projectEntity.name + 'id',
+                            number: "parentId",
+                            linkTable: row.id,
+                            allowEmpty: "N",
+                            columnProperties: "linkColumn",
+                            isKey: "N",
+                        }];
+                        for (var i = 1; i < this.data.detailEntitys.length; i++) {
                             temp.push(this.data.detailEntitys[i]);
                         }
                         temp[0] = this.data.detailEntitys[0];
@@ -658,7 +639,7 @@ export default {
                 }
             );
         },
-        treeCheck(data, test) {
+        treeCheck(data,test) {
             this.$refs.tree.store.nodesMap[data.id].expanded = !this.$refs.tree
                 .store.nodesMap[data.id].expanded;
             data.unfold = !data.unfold;
@@ -670,13 +651,13 @@ export default {
             );
             this.viewDialog.isEdit = false;
             this.viewDialog.isTools = true;
-            this.getHttp("/api/project/tools?id=" + row.id, {}).then(result => {
+            this.getHttp("/api/project/tools?id=" + row.id, {}).then((result) => {
                 this.viewDialog.isShow = true;
                 this.data = result;
                 this.data.level = row.level;
                 this.data.projectEntity = {
                     id: row.parentId,
-                    name: row.parentName
+                    name: row.parentName,
                 };
             });
         },
@@ -689,8 +670,7 @@ export default {
             this.viewDialog.isEdit = false;
             this.viewDialog.isTools = false;
             this.getHttp("/api/project/editView?id=" + row.id, {}).then(
-                result => {
-                    isEmpty;
+                (result) => {isEmpty
                     this.viewDialog.isShow = true;
                     this.data = result;
                     this.data.projectEntity = { id: row.id, name: row.label };
@@ -702,13 +682,13 @@ export default {
         },
         //打开编辑
         goEdit(row) {
-            this.resetForm("ruleForm");
+            this.resetForm("ruleForm")
             this.getTableOptions(
                 this.isEmpty(row.projectId) ? row.id : row.projectId
             );
             this.viewDialog.isEdit = true;
             this.viewDialog.isTools = false;
-            this.getHttp("/api/project/editView?id=" + row.id).then(result => {
+            this.getHttp("/api/project/editView?id=" + row.id).then((result) => {
                 this.viewDialog.isShow = true;
                 this.data = result;
                 this.data.projectEntity = { id: row.id, name: row.label };
@@ -717,9 +697,7 @@ export default {
         //添加明细
         addDetails() {
             var insertIndex = this.data.insertIndex;
-            insertIndex = this.isEmpty(insertIndex)
-                ? this.data.detailEntitys.length
-                : insertIndex;
+            insertIndex = this.isEmpty(insertIndex) ? this.data.detailEntitys.length : insertIndex;
             for (var i = 0; i < this.data.detailEntitys.length; i++) {
                 if (this.isEmpty(this.data.detailEntitys[i].id)) {
                     insertIndex++;
@@ -731,7 +709,7 @@ export default {
                 columnProperties: "baseColumn",
                 type: "varchar",
                 length: "200",
-                isKey: "N"
+                isKey: "N",
             };
             this.data.detailEntitys.splice(insertIndex, 0, detail);
         },
@@ -780,29 +758,26 @@ export default {
         },
         //复制SQL
         copySql() {
-            var row = this.data.detailEntitys[this.currentIndex];
-            var previousColumnNumber =
-                this.currentIndex == 0
-                    ? ""
-                    : this.data.detailEntitys[this.currentIndex - 1].number;
+            var row =  this.data.detailEntitys[this.currentIndex];
+            var previousColumnNumber = this.currentIndex == 0 ? "" : this.data.detailEntitys[this.currentIndex - 1].number;
             this.postHttp(
                 "/api/project/oneSql?id=" +
-                    this.data.projectId +
-                    "&tableNumber=" +
-                    this.data.number +
-                    "&previousColumnNumber=" +
-                    previousColumnNumber,
+                this.data.projectId +
+                "&tableNumber=" +
+                this.data.number+
+                "&previousColumnNumber=" +
+                previousColumnNumber,
                 row
-            ).then(result => {
+            ).then((result) => {
                 this.buildPartialDialog.sql = result;
                 // 使用textarea支持换行，使用input不支持换行
-                const textarea = document.createElement("textarea");
+                const textarea = document.createElement('textarea');
                 textarea.value = result;
                 document.body.appendChild(textarea);
                 textarea.select();
-                if (document.execCommand("copy")) {
-                    document.execCommand("copy");
-                    this.$message({ message: "复制成功", type: "success" });
+                if (document.execCommand('copy')) {
+                    document.execCommand('copy');
+                    this.$message({ message: '复制成功', type: 'success' });
                 }
                 //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
                 document.body.removeChild(textarea);
@@ -810,52 +785,49 @@ export default {
         },
         //复制实体
         copyEntity() {
-            var row = this.data.detailEntitys[this.currentIndex];
+            var row =  this.data.detailEntitys[this.currentIndex];
             this.postHttp(
                 "/api/project/oneEntity?id=" +
-                    this.data.projectId +
-                    "&tableNumber=" +
-                    this.data.number,
+                this.data.projectId +
+                "&tableNumber=" +
+                this.data.number,
                 row
-            ).then(result => {
+            ).then((result) => {
                 this.buildPartialDialog.sql = result;
                 // 使用textarea支持换行，使用input不支持换行
-                const textarea = document.createElement("textarea");
+                const textarea = document.createElement('textarea');
                 textarea.value = result;
                 document.body.appendChild(textarea);
                 textarea.select();
-                if (document.execCommand("copy")) {
-                    document.execCommand("copy");
-                    this.$message({ message: "复制成功", type: "success" });
+                if (document.execCommand('copy')) {
+                    document.execCommand('copy');
+                    this.$message({ message: '复制成功', type: 'success' });
                 }
                 //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
                 document.body.removeChild(textarea);
             });
         },
-        allCode() {
-            var row = this.data.detailEntitys[this.currentIndex];
-            var previousColumnNumber =
-                this.currentIndex == 0
-                    ? ""
-                    : this.data.detailEntitys[this.currentIndex - 1].number;
+        allCode(){
+            var row =  this.data.detailEntitys[this.currentIndex];
+            var previousColumnNumber = this.currentIndex == 0 ? "" : this.data.detailEntitys[this.currentIndex - 1].number;
             this.postHttp(
                 "/api/project/allCode?id=" +
-                    this.data.projectId +
-                    "&tableNumber=" +
-                    this.data.number +
-                    "&previousColumnNumber=" +
-                    previousColumnNumber,
+                this.data.projectId +
+                "&tableNumber=" +
+                this.data.number+
+                "&previousColumnNumber=" +
+                previousColumnNumber,
                 row
-            ).then(result => {
+            ).then((result) => {
                 this.buildPartialDialog.sql = result;
                 // 使用textarea支持换行，使用input不支持换行
-                const textarea = document.createElement("textarea");
+                const textarea = document.createElement('textarea');
                 textarea.value = result;
                 document.body.appendChild(textarea);
                 textarea.select();
-                if (document.execCommand("copy")) {
-                    document.execCommand("copy");
-                    this.$message({ message: "复制成功", type: "success" });
+                if (document.execCommand('copy')) {
+                    document.execCommand('copy');
+                    this.$message({ message: '复制成功', type: 'success' });
                 }
                 //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
                 document.body.removeChild(textarea);
@@ -869,9 +841,9 @@ export default {
             range.selectNodeContents(this.$refs.sqlDiv);
             selection.removeAllRanges();
             selection.addRange(range);
-            if (document.execCommand("copy")) {
-                document.execCommand("copy");
-                this.$message({ message: "复制成功", type: "success" });
+            if (document.execCommand('copy')) {
+                document.execCommand('copy');
+                this.$message({ message: '复制成功', type: 'success' });
             }
             selection.removeAllRanges();
         },
@@ -881,7 +853,7 @@ export default {
         },
         //保存
         save() {
-            this.$refs.ruleForm.validate(valid => {
+            this.$refs.ruleForm.validate((valid) => {
                 if (valid) {
                     var detailEntitysTemp = [];
                     for (var i = 0; i < this.data.detailEntitys.length; i++) {
@@ -893,39 +865,37 @@ export default {
                             detailEntitysTemp.push(this.data.detailEntitys[i]);
                         }
                     }
-                    let isAllOk = false;
+                    let isAllOk = false
                     for (let k = 0; k < this.data.detailEntitys.length; k++) {
-                        let li = this.data.detailEntitys[k];
-                        if (!li.name || li.name === "") {
-                            let msg = `请填写第${k + 1}行名称字段`;
-                            this.$message.warning(msg);
-                            isAllOk = true;
-                            break;
+                        let li = this.data.detailEntitys[k]
+                        if(!li.name || li.name === "") {
+                            let msg = `请填写第${k + 1}行名称字段`
+                            this.$message.warning(msg)
+                            isAllOk = true
+                            break
                         }
-                        if (!li.number || li.number === "") {
-                            let msg = `请填写第${k + 1}行属性名字段`;
-                            this.$message.warning(msg);
-                            isAllOk = true;
-                            break;
+                        if(!li.number || li.number === "") {
+                            let msg = `请填写第${k + 1}行属性名字段`
+                            this.$message.warning(msg)
+                            isAllOk = true
+                            break
                         }
                     }
-                    if (isAllOk) {
-                        return;
+                    if(isAllOk) {
+                        return
                     }
                     var dataSave = Object.assign({}, this.data);
                     dataSave.detailEntitys = detailEntitysTemp;
                     this.viewDialog.butIsLoading = true;
-                    this.postHttp("/api/project/save", dataSave).then(
-                        result => {
-                            this.viewDialog.butIsLoading = false;
-                            if (result.code == 200) {
-                                this.viewDialog.isShow = false;
-                                if (this.isEmpty(dataSave.id)) {
-                                    this.search();
-                                }
+                    this.postHttp("/api/project/save", dataSave).then((result) => {
+                        this.viewDialog.butIsLoading = false;
+                        if (result.code == 200) {
+                            this.viewDialog.isShow = false;
+                            if (this.isEmpty(dataSave.id)) {
+                                this.search();
                             }
                         }
-                    );
+                    });
                 } else {
                     return false;
                 }
@@ -934,7 +904,7 @@ export default {
         //获取table 下拉参数
         getTableOptions(id) {
             this.getHttp("/api/project/getTableOptions?id=" + id, {}).then(
-                result => {
+                (result) => {
                     this.tableOptions = result;
                 }
             );
@@ -944,10 +914,10 @@ export default {
             this.data.detailEntitys[index] = {
                 columnProperties: columnProperties,
                 parentId: this.data.id,
-                name: this.data.detailEntitys[index].name,
-                number: this.data.detailEntitys[index].number,
+                name:  this.data.detailEntitys[index].name,
+                number:  this.data.detailEntitys[index].number,
                 allowEmpty: "Y",
-                isKey: "N"
+                isKey: "N",
             };
             if (columnProperties == "baseColumn") {
                 this.data.detailEntitys[index].type = "varchar";
@@ -955,10 +925,7 @@ export default {
             } else if (columnProperties == "linkColumn") {
             } else if (columnProperties == "paramColumn") {
             }
-            this.data.detailEntitys = Object.assign(
-                [],
-                this.data.detailEntitys
-            );
+            this.data.detailEntitys = Object.assign([], this.data.detailEntitys);
         },
         //字段类型改变
         typeChange(data) {
@@ -996,8 +963,7 @@ export default {
         },
         //全选
         fileTypesAll() {
-            this.buildFileDialog.isAllSelect = !this.buildFileDialog
-                .isAllSelect;
+            this.buildFileDialog.isAllSelect = !this.buildFileDialog.isAllSelect;
             this.buildFileDialog.fileTypes = [];
             if (this.buildFileDialog.isAllSelect) {
                 for (var i = 0; i < this.getOptions("fileType").length; i++) {
@@ -1010,10 +976,8 @@ export default {
         //生成文件
         buildFile() {
             this.buildFileDialog.id = this.data.id;
-            this.postHttp(
-                "/api/project/buildFile",
-                this.buildFileDialog
-            ).then(result => {});
+            this.postHttp("/api/project/buildFile" ,this.buildFileDialog
+            ).then((result) => {});
         },
         //下载文件
         downloadFile() {
@@ -1022,15 +986,16 @@ export default {
             );
             window.open(
                 "/api/project/downloadFile?id=" +
-                    this.data.id +
-                    "&fileTypes=" +
-                    fileTypes
+                this.data.id +
+                "&fileTypes=" +
+                fileTypes
             );
-        }
-    }
+        },
+    },
 };
 </script>
-<style>
+<style >
+
 .frame-col {
     text-align: center;
 }
@@ -1058,8 +1023,13 @@ export default {
 }
 
 .div-view {
-    padding: 0.5vw;
+    height: 100%;
+    border-radius: 25px;
+    padding: 20px;
+    border: 2px solid #adadad;
 }
+
+
 
 .el-tree-node {
     white-space: nowrap;
@@ -1075,20 +1045,15 @@ export default {
     height: 42px;
     cursor: pointer;
 }
-.el-tree-node__content:hover {
-    background-color: #5c5e61;
-}
-.el-tree-node:focus>.el-tree-node__content {
-    background-color: #5c5e61;
-}
 .sql-div {
     line-height: 25px;
     overflow-y: scroll;
-    background-color: #141414;
-    border-color: #4c4d4f;
+    background-color: #f5f7fa;
+    border-color: #e4e7ed;
     color: #c0c4cc;
     cursor: text;
     -webkit-appearance: none;
+
     border-radius: 4px;
     border: 1px solid #dcdfe6;
     color: #606266;
@@ -1100,7 +1065,6 @@ export default {
 /* .operat-but {
     width: 2rem;
 } */
-
 .el-button + .el-button {
     margin-left: 0px;
 }
@@ -1115,7 +1079,7 @@ export default {
 }
 .el-popover {
     position: absolute;
-    background: #fff;
+    background: #FFF;
     min-width: 110px;
     margin: 6px;
     /* border: 2px solid #adadad; */
@@ -1125,7 +1089,7 @@ export default {
     line-height: 1.4;
     text-align: justify;
     font-size: 14px;
-    box-shadow: 0 2px 12px 0rgba (0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px 0rgba(0,0,0,.1);
     word-break: break-all;
 }
 .popoverPadding {
@@ -1133,62 +1097,5 @@ export default {
     border-radius: 25px;
     padding: 15px;
 }
-.dvBox8 {
-    height: calc(90vh - 20px);
-}
-.leftBox {
-    padding: 0.5vw;
-}
-.treeNode {
-    margin: 0.5vw;
-    height: calc(90vh - 20px - 2vw);
-    background-color:  #282c34;
-    color: #fff;
-    overflow: auto;
-}
-.detailInfo {
-    margin: 0.5vw;
-    height: calc(90vh - 20px - 2vw);
-    overflow-x: auto;
-    overflow-y: hidden;
-}
 </style>
 
-<style scoped>
-.el-form-item {
-    margin-bottom: 1.6vh;
-}
-.el-table {
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
-  margin: 0 auto;
-}
-/deep/.el-table th {
-  border: 1px solid black !important;
-  border-right: none !important;
-  border-bottom: none !important;
-}
-
-/deep/.el-table td {
-  border: 1px solid black;
-  border-right: none !important;
-}
-/deep/.el-input.is-disabled .el-input__inner {
-    background-color: #141414;
-    border-color: #4c4d4f;
-    color: #C0C4CC;
-    cursor: not-allowed;
-}
-/deep/.el-input .el-input__inner {
-    background-color: #141414;
-    border-color: #4c4d4f;
-    color: #C0C4CC;
-    cursor: not-allowed;
-}
-/deep/.el-select .el-input__inner {
-    background-color: #141414;
-    border-color: #4c4d4f;
-    color: #C0C4CC;
-    cursor: not-allowed;
-}
-</style>
