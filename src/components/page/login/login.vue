@@ -103,7 +103,7 @@ export default {
 
       content: '';
       position: absolute;
-      width: 150px;
+      width: 200px;
       background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
       height: 180%;
       animation: rotBGimg 3s linear infinite;
@@ -163,10 +163,10 @@ export default {
 }
 
 button {
-  --primary-color: #645bff;
+  --primary-color: rgb(0, 183, 255);
   --secondary-color: #fff;
-  --hover-color: #111;
-  --arrow-width: 10px;
+  --hover-color: rgb(255, 48, 255);
+  --arrow-width: 40px;
   --arrow-stroke: 2px;
   box-sizing: border-box;
   border: 0;
@@ -180,7 +180,6 @@ button {
   gap: 0.6em;
   font-weight: bold;
 }
-
 button .arrow-wrapper {
   display: flex;
   justify-content: center;

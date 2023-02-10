@@ -1004,7 +1004,7 @@ div::-webkit-scrollbar-track{
   border-radius:5px;
 }
 div::-webkit-scrollbar-thumb{
-  background: #adadad;
+  background: #495e9b;
   border-radius:10px;
 }
 div::-webkit-scrollbar-thumb:hover{
@@ -1026,7 +1026,7 @@ div::-webkit-scrollbar-corner{
    overflow: auto; */
    border-radius: 25px;
    padding: 20px;
-   border: 2px solid #adadad;
+   border: 2px solid #495e9b;
 }
 
 .custom-tree-node {
@@ -1043,7 +1043,7 @@ div::-webkit-scrollbar-corner{
    height: 100%;
    border-radius: 25px;
    padding: 20px;
-   border: 2px solid #adadad;
+   border: 2px solid #495e9b;
 }
 
 

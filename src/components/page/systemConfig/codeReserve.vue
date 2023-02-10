@@ -39,7 +39,7 @@
         </div>
         <!-- 标签列表结束 -->
         <!-- 标签详情开始 -->
-        <div class="radius-border margin-top-10 "   v-if="labelClickIndex != null"><!--border-2-adadad :style="{height:(screenSize.height - 90)+'px'}"-->
+        <div class="radius-border margin-top-10 "   v-if="labelClickIndex != null"><!--border-2-495e9b :style="{height:(screenSize.height - 90)+'px'}"-->
             <div  v-for="(item, index) in this.data.codeReserveDetail"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelDetailClickIndex == index ?  labelColor[(index+1)%4] : '','margin-left': index == 0 ? '0px' : ''}">
                 <span @click="labelDetailClick(index)" class="label-span" :style="{color: labelDetailClickIndex == index ?  'white' : '' }">{{item.name}}</span>
                 <span class="x-span" v-if="delIsShow" @click="delDetails(index,'codeReserveDetail')">✖</span>
@@ -50,7 +50,7 @@
         </div>
         <!-- 标签详情结束 -->
         <!-- 标签内容开始 -->
-        <div class="radius-border margin-top-10 border-2-adadad"   :style="{height:(screenSize.height - 130)+'px'}" v-if="labelDetailClickIndex != null">
+        <div class="radius-border margin-top-10 border-2-495e9b"   :style="{height:(screenSize.height - 130)+'px'}" v-if="labelDetailClickIndex != null">
             <div class="text-div2"  ref="sqlDiv" v-html="codeReserveDetail.content" ></div>
         </div>
         <!-- 标签内容结束 -->
@@ -410,7 +410,7 @@
     border-radius: 10px;
     margin-left: 0px;
     overflow:auto;
-    border: 2px solid #adadad;
+    border: 2px solid #495e9b;
     height: 42px;
     font-size: 16px;
 }
@@ -418,7 +418,7 @@
 .el-input--suffix .el-input__inner {
      border-radius: 10px;
     overflow:auto;
-    border: 2px solid #adadad;
+    border: 2px solid #495e9b;
     margin-left: 4px;
     height: 42px;
     font-size: 16px;

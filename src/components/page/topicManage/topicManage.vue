@@ -39,7 +39,7 @@
         </div>
         <!-- 标签列表结束 -->
         <!-- 标签详情开始 -->
-        <div class="radius-border margin-top-10 " :style="{height:(screenSize.height - 90)+'px'}" v-if="labelClickIndex != null"><!--border-2-adadad-->
+        <div class="radius-border margin-top-10 " :style="{height:(screenSize.height - 90)+'px'}" v-if="labelClickIndex != null"><!--border-2-495e9b-->
             <div  v-for="(item, index) in this.data.topicDetail"  :key="index" class="label-border" :style="{border: '2px solid '+labelColor[(index+1)%4],'background-color': labelDetailClickIndex == index ?  labelColor[(index+1)%4] : '','margin-left': index == 0 ? '0px' : ''}">
                 <span @click="labelDetailClick(index)" class="label-span" :style="{color: labelDetailClickIndex == index ?  'white' : '' }">{{item.name}}</span>
                 <span @click="labelDetailClick(index)" class="focus" :style="{color: labelDetailClickIndex == index ?  'white' : labelColor[(index+1)%4] }">{{item.avgRate}} 分</span>
@@ -401,7 +401,7 @@
 .input-border .el-input__inner {
     border-radius: 10px;
     overflow:auto;
-    border: 2px solid #adadad;
+    border: 2px solid #495e9b;
     margin-left: 0px;
     height: 42px;
     font-size: 16px;
@@ -410,7 +410,7 @@
 .el-input--suffix .el-input__inner {
      border-radius: 10px;
     overflow:auto;
-    border: 2px solid #adadad;
+    border: 2px solid #495e9b;
     margin-left: 4px;
     height: 42px;
     font-size: 16px;
@@ -418,7 +418,7 @@
 .select-option {
      border-radius: 10px;
     overflow:auto;
-    border: 2px solid #adadad;
+    border: 2px solid #495e9b;
     margin-left: 4px;
     height: 42px;
     font-size: 16px;

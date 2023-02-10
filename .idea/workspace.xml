@@ -11,9 +11,15 @@
     <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="代码提交">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement copy.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/login/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/params.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/params.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +204,7 @@
       <workItem from="1675766024145" duration="1743000" />
       <workItem from="1675918032423" duration="3974000" />
       <workItem from="1676007763700" duration="2781000" />
-      <workItem from="1676010735538" duration="13784000" />
+      <workItem from="1676010735538" duration="15849000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>

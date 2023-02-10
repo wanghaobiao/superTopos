@@ -76,7 +76,7 @@ body {
     border-bottom: solid 0px #e6e6e6;
 }
 .el-submenu__title:hover{
-    background-color: rgb(255, 255, 255, 0) !important; 
+    background-color: rgb(255, 255, 255, 0) !important;
     }
     .el-menu-item:hover {
     background-color: rgb(255, 255, 255, 0) !important;
@@ -117,8 +117,8 @@ body {
 .height-100{
     height: 100%;
 }
-.border-2-adadad{
-    border: 2px solid #adadad;
+.border-2-495e9b{
+    border: 2px solid #495e9b;
 }
 .border-radius-5{
     border-radius: 5px;
@@ -225,7 +225,7 @@ div::-webkit-scrollbar-track{
     border-radius:2px;
 }
 div::-webkit-scrollbar-thumb{
-    background: #adadad;
+    background: #495e9b;
     border-radius:10px;
 }
 div::-webkit-scrollbar-thumb:hover{
@@ -262,19 +262,19 @@ div::-webkit-scrollbar-corner{
 
 .el-input.is-disabled .el-input__inner {
     background-color: #141414;
-    border-color: #4c4d4f;
+    border-color: #495e9b;
     color: #C0C4CC;
     cursor: not-allowed;
 }
 .el-input .el-input__inner {
     background-color: #141414;
-    border-color: #4c4d4f;
+    border-color: #495e9b;
     color: #C0C4CC;
     cursor: not-allowed;
 }
 .el-select .el-input__inner {
     background-color: #141414;
-    border-color: #4c4d4f;
+    border-color: #495e9b;
     color: #C0C4CC;
     cursor: not-allowed;
 }

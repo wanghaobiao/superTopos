@@ -47,7 +47,15 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - (17 + 62 * (moreIsShow.query ? 2 : 1))" fit border >
+        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - (17 + 62 * (moreIsShow.query ? 2 : 1))" fit border
+                  :header-cell-style="{
+                                background: '#141414',
+                                color: '#fff',
+                            }"
+                  :row-style="{
+                               background: '#282c34',
+                                color: '#fff',
+                            }" >
             <el-table-column  type="selection"></el-table-column>
             <el-table-column width="50" type="index" label="序号"></el-table-column>
           <el-table-column  property="projectNum" label="项目编号" ></el-table-column>

@@ -702,7 +702,7 @@
 .el-input__inner {
     border-radius: 10px;
     overflow: auto;
-    border: 2px solid #adadad;
+    border: 2px solid #495e9b;
     margin-left: 4px;
     height: 42px;
     font-size: 16px;

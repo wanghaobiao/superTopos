@@ -1042,7 +1042,7 @@ export default {
     overflow: auto; */
     border-radius: 25px;
     padding: 20px;
-    /* border: 2px solid #adadad; */
+    /* border: 2px solid #495e9b; */
 }
 
 .custom-tree-node {
@@ -1083,7 +1083,7 @@ export default {
     line-height: 25px;
     overflow-y: scroll;
     background-color: #141414;
-    border-color: #4c4d4f;
+    border-color: #495e9b;
     color: #c0c4cc;
     cursor: text;
     -webkit-appearance: none;
@@ -1117,7 +1117,7 @@ export default {
     background: #fff;
     min-width: 110px;
     margin: 6px;
-    /* border: 2px solid #adadad; */
+    /* border: 2px solid #495e9b; */
     padding: 6px;
     z-index: 2000;
     color: #606266;
@@ -1128,7 +1128,7 @@ export default {
     word-break: break-all;
 }
 .popoverPadding {
-    border: 2px dashed #adadad;
+    border: 2px dashed #495e9b;
     border-radius: 25px;
     padding: 15px;
 }

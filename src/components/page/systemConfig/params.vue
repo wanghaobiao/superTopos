@@ -36,7 +36,14 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" row-key="id"  :height="screenSize.height - 120"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}">
+        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" row-key="id"  :height="screenSize.height - 120"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}" :header-cell-style="{
+                                background: '#141414',
+                                color: '#fff',
+                            }"
+                  :row-style="{
+                               background: '#282c34',
+                                color: '#fff',
+                            }">
             <el-table-column  property="name" label="参数名称" ></el-table-column>
             <el-table-column  property="number" label="参数编码" ></el-table-column>
             <el-table-column  property="isEnable" label="是否启用" ></el-table-column>

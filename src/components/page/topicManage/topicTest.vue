@@ -25,7 +25,7 @@
         </el-form>
         <!-- 搜索框结束 -->
         <!-- 题目详情开始 -->
-        <div class="radius-border margin-top-10 border-2-adadad " :style="{height:(screenSize.height - 20)+'px'}" >
+        <div class="radius-border margin-top-10 border-2-495e9b " :style="{height:(screenSize.height - 20)+'px'}" >
             <el-form class="form-div" :model="data" v-loading="viewDetailDialog.butIsLoading" :rules="rules" ref="ruleForm" >
                 <el-row>
                      <el-col :span="12">
@@ -274,7 +274,7 @@
 .input-border .el-input__inner {
     border-radius: 10px;
     overflow:auto;
-    border: 2px solid #adadad;
+    border: 2px solid #495e9b;
     margin-left: 0px;
     height: 42px;
     font-size: 16px;
@@ -284,7 +284,7 @@
 .el-input--suffix .el-input__inner {
      border-radius: 10px;
     overflow:auto;
-    border: 2px solid #adadad;
+    border: 2px solid #495e9b;
     margin-left: 4px;
     height: 42px;
     width: 100%;
@@ -332,7 +332,7 @@
     margin-right: 5px;
 }
 .label-border-prompt {
-    border: 2px solid #adadad;
+    border: 2px solid #495e9b;
     height: 39px;
     line-height: 39px;
     text-align: center;
@@ -340,7 +340,7 @@
     border-radius: 10px;
 }
 .label-span-prompt {
-    /* color: #adadad; */
+    /* color: #495e9b; */
     margin-left: 15px;
     margin-right: 15px;
 }
