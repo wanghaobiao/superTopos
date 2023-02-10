@@ -2,11 +2,12 @@
 <template>
     <div :style="{height:(screenSize.height)+'px'}">
         <!-- 搜索框开始 -->
-        <el-row  >
+        <dv-border-box-12 style="height: 78px;background-color: #282c34;color: #fff; z-index: 11;margin-top: 15px;">
+        <el-row style="margin-top: -10px" >
             <el-col :span="18">
                 <el-form  class="demo-form-inline">
-                    <el-row>
-                        <el-col :span="8">
+                    <el-row style="margin-top: 17px">
+                    <el-col :span="8">
                             <el-form-item  label="名称" :label-width="formLabelWidth">
                                 <el-input v-model="pageData.name_eq" placeholder="请输入名称" autocomplete="off"></el-input>
                             </el-form-item>
@@ -24,10 +25,11 @@
                     </el-row>
                 </el-form>
             </el-col>
-            <el-col :span="4" :offset="2">
+            <el-col :span="4" :offset="2" style="margin-top: 17px">
                 <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
             </el-col>
         </el-row>
+        </dv-border-box-12>
         <!-- 搜索框结束 -->
         <!-- 按钮框开始 -->
         <el-row class="spacing">
@@ -36,14 +38,9 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable"  v-loading="listData.loading" row-key="id"  :height="screenSize.height - 120"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}" :header-cell-style="{
-                                background: '#141414',
-                                color: '#fff',
-                            }"
-                  :row-style="{
-                               background: '#282c34',
-                                color: '#fff',
-                            }">
+        <dv-loading v-if="listData.loading" style="color: white">Loading...</dv-loading>
+        <el-table :data="listData.content" ref="listTable" row-key="id"  :height="screenSize.height - 120"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}"
+                  :header-cell-style="{background: 'rgb(55 76 135)',color: '#fff',}" :row-style="{background: '#282c34',color: '#fff',}">
             <el-table-column  property="name" label="参数名称" ></el-table-column>
             <el-table-column  property="number" label="参数编码" ></el-table-column>
             <el-table-column  property="isEnable" label="是否启用" ></el-table-column>

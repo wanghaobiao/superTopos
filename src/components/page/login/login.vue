@@ -24,21 +24,6 @@
             </div>
         </div>
 
-<!--   <div class="login-container" >
-      <el-form ref="form" :rules="rules" :model="form" label-width="80px" class="login-form">
-         <h2 class="login-title">CODE EDA SYSTEM</h2>
-         <el-form-item label="用户名" prop="accountNumber">
-            <el-input v-model="form.accountNumber"></el-input>
-         </el-form-item>
-         <el-form-item label="密码" prop="password">
-            <el-input type="password" v-model="form.password"></el-input>
-         </el-form-item>
-
-         <el-form-item>
-            <el-button type="primary" @click="submitForm('form')">登录</el-button>
-         </el-form-item>
-      </el-form>
-   </div>-->
 </template>
 <script>
 export default {
@@ -85,7 +70,7 @@ export default {
 };
 </script>
 
-  <style >
+  <style scoped>
   .card {
       width: 190px;
       height: 254px;
@@ -97,7 +82,6 @@ export default {
       overflow: hidden;
       border-radius: 20px;
   }
-
 
   .card::before {
 
@@ -135,9 +119,9 @@ export default {
 
 
   .login-form {
-      z-index: 100;
-   width: 350px;
-   margin: 160px auto; /* 上下间距160px，左右自动居中*/
+   z-index: 100;
+   width: 400px;
+   margin: 300px auto; /* 上下间距160px，左右自动居中*/
    background-color: rgb(255, 255, 255, 0.8); /* 透明背景色 */
    padding: 30px;
    border-radius: 20px; /* 圆角 */
@@ -157,6 +141,7 @@ export default {
 
 /* 标题 */
 .login-title {
+    margin-bottom: 12px;
     z-index: 10;
     color: black;
     text-align: center;
@@ -184,6 +169,12 @@ button .arrow-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.el-input .el-input__inner {
+  background-color: #e8f0fe;
+  border-color: #C0C4CC;
+  color: #C0C4CC;
+  cursor: not-allowed;
 }
 
 button .arrow {
@@ -220,10 +211,7 @@ button:hover .arrow {
 button:hover .arrow:before {
   right: 0;
 }
-</style>
-
-<style scoped>
-.el-button {
-   border: 0px solid;
-}
+  .el-button {
+      border: 0px solid;
+  }
 </style>

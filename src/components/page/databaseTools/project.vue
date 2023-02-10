@@ -46,7 +46,10 @@
         </el-row>
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <el-table :data="listData.content" ref="listTable" fixed v-loading="listData.loading" :height="screenSize.height - 83" fit border
+
+        <dv-loading v-if="listData.loading" style="color: white">Loading...</dv-loading>
+
+        <el-table :data="listData.content" ref="listTable" fixed  :height="screenSize.height - 83" fit border
                   :header-cell-style="{ background: 'rgb(55 76 135)',color: '#fff',}"
                   :row-style="{background: '#282c34', color: '#fff',}">
             <el-table-column  type="selection"></el-table-column>
@@ -82,7 +85,7 @@
             <el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange" :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination>
         </el-row>
         <!-- 新增/编辑开始 -->
-        <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" :close-on-click-modal= "false"  :fullscreen = "true">
+        <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'"  customClass="dialog"  :visible.sync="viewDialog.isShow":close-on-click-modal= "false"  :fullscreen = "true">
             <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
                 <el-row :gutter="20">
                     <el-col :span="12">
@@ -179,7 +182,9 @@
                 <el-button type="warning"  @click.prevent="up()" :loading="viewDialog.butIsLoading" plain>上移</el-button>
                 <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" plain>下移</el-button>
             </el-row>
-            <el-table :data="data.detailEntitys"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit" >
+            <el-table :data="data.detailEntitys"  border  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit"
+                      :header-cell-style="{ background: 'rgb(55 76 135)',color: '#fff',}"
+                      :row-style="{background: '#282c34', color: '#fff',}">
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
                 <el-table-column label="名称">
                     <template scope="scope">
@@ -267,7 +272,10 @@
             <el-row class="spacing" v-show="!viewDialog.isView"  style="margin-top: 20px">
                 <el-button type="primary" @click.prevent="goAddUser()" >新增用户</el-button>
             </el-row>
-            <el-table :data="data.projectRoleUserEntities"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit" >
+            <el-table :data="data.projectRoleUserEntities"  border  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit"
+                      :header-cell-style="{ background: 'rgb(55 76 135)',color: '#fff',}"
+                      :row-style="{background: '#282c34', color: '#fff',}">
+
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
                 <el-table-column label="用户名称" >
                     <template scope="scope">
@@ -298,8 +306,10 @@
         </el-dialog>
         <!-- 新增/编辑结束 -->
         <!-- 新增用户开始 -->
-        <el-dialog title="添加" :visible.sync="addUserDialog.isShow" customClass="view-dialog" :close-on-click-modal= "false"  >
-            <el-table :data="userManagementEntitys"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!addUserDialog.isView" class="tb-edit" >
+        <el-dialog title="添加"  customClass="dialog" :visible.sync="addUserDialog.isShow" :close-on-click-modal= "false"  >
+            <el-table :data="userManagementEntitys"  border :height="screenSize.height - 400"  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!addUserDialog.isView" class="tb-edit"
+                      :header-cell-style="{ background: 'rgb(55 76 135)',color: '#fff',}"
+                      :row-style="{background: '#282c34', color: '#fff',}">
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
                 <el-table-column label="用户名称" >
                     <template scope="scope">
@@ -698,7 +708,7 @@
         }
     };
 </script>
-<style >
+<style scoped>
 .el-input__inner {
     border-radius: 10px;
     overflow: auto;
@@ -707,6 +717,12 @@
     height: 42px;
     font-size: 16px;
 }
+
+
+
+</style>
+<style >
+
 
 
 </style>

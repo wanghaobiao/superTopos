@@ -1,7 +1,7 @@
 <template>
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
-        <dv-border-box-13 style="height: 60px;background-color: #282c34;color: #fff; z-index: 11">
+        <dv-border-box-13 style="height: 60px;background-color: #282c34;color: #fff; z-index: 11" v-show="!$route.meta.showNav">
             <el-menu class="elmenu"  mode="horizontal" background-color="rgba(165, 42, 42, 0)" text-color="#fff" active-text-color="#ffd04b" >
                 <!-- <el-submenu index="1">
                     <template slot="title">数据库工具</template>
@@ -136,7 +136,7 @@ body .el-table th.gutter{
 }
 .save-spacing{
     text-align: right;
-    padding-top:  22px;
+    padding-top:  13px;
 }
 /* 分页样式  */
 .pagination{
@@ -144,6 +144,46 @@ body .el-table th.gutter{
     margin-bottom: 10px;
     text-align: right;
 }
+/***************************************** dialog样式开始 *****************************************/
+
+.dialog .el-dialog__header {
+    background-color: #282c34;
+}
+
+.dialog .el-dialog__title {
+    line-height: 24px;
+    font-size: 18px;
+    color: #fff;
+}
+
+/*body背景色*/
+.dialog .el-dialog__body {
+    background-color: #282c34;
+}
+
+.dialog .el-dialog__footer {
+    background-color: #282c34;
+}
+.view-dialog .el-dialog__header {
+    background-color: #282c34;
+}
+
+.view-dialog .el-dialog__title {
+    line-height: 24px;
+    font-size: 18px;
+    color: #fff;
+}
+
+/*body背景色*/
+.view-dialog .el-dialog__body {
+    background-color: #282c34;
+}
+
+.view-dialog .el-dialog__footer {
+    background-color: #282c34;
+}
+
+/***************************************** dialog样式结束 *****************************************/
 /***************************************** 详情样式开始 *****************************************/
 .el-table .warning-row {
     background: #F5F7FA;
@@ -178,12 +218,13 @@ body .el-table th.gutter{
 /***************************************** 覆盖样式开始 *****************************************/
 /* table鼠标悬停颜色 */
 .el-table--enable-row-hover .el-table__body tr:hover>td{
-    background-color: rgb(108, 184, 250) !important;
+    background-color: rgb(53 67 108) !important;
 }
+
 /* table鼠标选中颜色 */
 .el-table--striped .el-table__body tr.el-table__row--striped.current-row td, .el-table__body tr.current-row>td {
     color: #fff;
-    background-color: rgb(108, 184, 250) !important;
+    background-color: rgb(53 67 108) !important;
 }
 .dialog-button {
     padding: 10px ;
@@ -215,7 +256,7 @@ body .el-table th.gutter{
 /***************************************** 修改滚动条开始 *****************************************/
 div::-webkit-scrollbar{
     width:4px;
-    height:10px;
+    height:5px;
     /**/
 }
 div::-webkit-scrollbar-track{
@@ -261,23 +302,60 @@ div::-webkit-scrollbar-corner{
 }
 
 .el-input.is-disabled .el-input__inner {
-    background-color: #141414;
+    background-color: rgb(53 67 108);
     border-color: #495e9b;
     color: #C0C4CC;
     cursor: not-allowed;
 }
 .el-input .el-input__inner {
-    background-color: #141414;
+    background-color: rgb(53 67 108);
     border-color: #495e9b;
     color: #C0C4CC;
     cursor: not-allowed;
 }
 .el-select .el-input__inner {
-    background-color: #141414;
+    background-color: rgb(53 67 108);
     border-color: #495e9b;
     color: #C0C4CC;
     cursor: not-allowed;
 }
 /***************************************** 修改表格的默认样式结束 *****************************************/
+/***************************************** 修改按钮默认样式开始 *****************************************/
+.el-button--primary.is-plain {
+    color: white;
+    background: #495e9b;
+    border-color: #4d79fb;
+}
+.el-button--success.is-plain {
+    color: white;
+    background: #0f4e28;
+    border-color: #1e703f;
+}
+.el-button--danger.is-plain {
+    color: white;
+    background: #af2e2e;
+    border-color: #d13b3b;
+}
+.el-button--warning.is-plain {
+    color: white;
+    background: #c78323;
+    border-color: #f9bb5c;
+}
+/***************************************** 修改按钮默认样式结束 *****************************************/
+.el-pagination.is-background .btn-next.disabled, .el-pagination.is-background .btn-next:disabled, .el-pagination.is-background .btn-prev.disabled, .el-pagination.is-background .btn-prev:disabled, .el-pagination.is-background .el-pager li.disabled {
+    color: white;
+}
 
+.el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
+    margin: 0 5px;
+    background-color: #495e9b;
+    color: white;
+    min-width: 30px;
+    border-radius: 2px;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #495e9b;
+    color: #fff;
+}
 </style>

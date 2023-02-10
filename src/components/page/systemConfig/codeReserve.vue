@@ -4,10 +4,11 @@
 <template>
     <div :style="{height:(screenSize.height)+'px'}" >
         <!-- 搜索框开始 -->
-        <el-row  >
+        <dv-border-box-12 style="height: 78px;background-color: #282c34;color: #fff; z-index: 11;margin-top: 15px;">
+        <el-row style="margin-top: -10px" >
             <el-col :span="19">
                 <el-form  class="demo-form-inline">
-                    <el-row :gutter="20">
+                    <el-row :gutter="20" style="margin-top: 17px;margin-left: 20px">
                         <el-col :span="8">
                             <el-form-item  >
                                 <el-input class="input-border" v-model="pageData.name_eq" placeholder="请输入名称" autocomplete="off"></el-input>
@@ -21,7 +22,7 @@
                     </el-row>
                 </el-form>
             </el-col>
-            <el-col :span="5"  >
+            <el-col :span="5" style="margin-top: 17px" >
                 <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
                 <!-- <el-button type="primary"  @click.prevent="moreIsShow.query = !moreIsShow.query">{{moreIsShow.query ? "收起" : "展开"}}</el-button> -->
                 <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
@@ -29,6 +30,7 @@
                 <el-button type="danger" plain @click.prevent="delIsShow = !delIsShow">删除</el-button>
             </el-col>
         </el-row>
+        </dv-border-box-12>
         <!-- 搜索框结束 -->
         <!-- 标签列表开始 -->
         <div class="radius-border">
@@ -50,7 +52,8 @@
         </div>
         <!-- 标签详情结束 -->
         <!-- 标签内容开始 -->
-        <div class="radius-border margin-top-10 border-2-495e9b"   :style="{height:(screenSize.height - 130)+'px'}" v-if="labelDetailClickIndex != null">
+
+        <div class="radius-border margin-top-10 border-2-495e9b"   :style="{height:(screenSize.height - 150)+'px', 'background-color' : 'black'}" v-if="labelDetailClickIndex != null">
             <div class="text-div2"  ref="sqlDiv" v-html="codeReserveDetail.content" ></div>
         </div>
         <!-- 标签内容结束 -->

@@ -18,8 +18,6 @@
       <change beforePath="$PROJECT_DIR$/src/components/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/login/login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/params.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/params.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicManage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/topicManage/topicTest.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,6 +203,7 @@
       <workItem from="1675918032423" duration="3974000" />
       <workItem from="1676007763700" duration="2781000" />
       <workItem from="1676010735538" duration="15849000" />
+      <workItem from="1676039354617" duration="17089000" />
     </task>
     <task id="LOCAL-00001" summary="超级工具代码提交">
       <created>1594187644227</created>
@@ -535,12 +534,13 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
+    <option name="COLUMN_ID_ORDER">
       <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
       </list>
     </option>
   </component>

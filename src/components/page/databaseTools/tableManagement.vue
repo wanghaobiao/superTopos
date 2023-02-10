@@ -1,11 +1,13 @@
 <!--项目表(project)-->
 <template>
-      <div style="background-color: #282c34;">
-        <el-row  :gutter="10">
-          <el-col :span="5">
-            <dv-border-box-13 class="dvBox8">
-                <div class="leftBox">
-                <el-tree :data="listData.content" node-key="id" :expand-on-click-node="false" ref="tree" @node-click="treeCheck" class="treeNode" >
+    <div style="background-color: #282c34;">
+        <dv-loading v-if="listData.loading" style="color: white;margin-top: 20%">Loading...</dv-loading>
+        <el-row :gutter="10" v-if="!listData.loading">
+            <el-col :span="5">
+                <dv-border-box-13 class="dvBox8">
+                    <div class="leftBox">
+                        <el-tree :data="listData.content" node-key="id" :expand-on-click-node="false" ref="tree"
+                                 @node-click="treeCheck" class="treeNode">
                             <div class="custom-tree-node" slot-scope="{ node, data }" @click="() => goTools(data)">
                                 <el-popover
                                     placement="right"
@@ -13,7 +15,8 @@
                                     width="100"
                                 >
                                     <div class="popoverPadding">
-                                        <div class="tips" style="display: flex; justify-content: center;" @click="() => goTools(data)">
+                                        <div class="tips" style="display: flex; justify-content: center;"
+                                             @click="() => goTools(data)">
                                             <el-button
                                                 type="warning"
                                                 icon="al-icon-tool"
@@ -23,7 +26,9 @@
                                             ><span style="margin-left: 6px;">工具</span></el-button>
                                             <!-- <span  style="line-height: 2rem;margin-left: 8px;font-weight: bold;">工具</span> -->
                                         </div>
-                                        <div class="tips" style="display: flex; justify-content: center; padding-top: 8px;" @click="() => goAdd(data)">
+                                        <div class="tips"
+                                             style="display: flex; justify-content: center; padding-top: 8px;"
+                                             @click="() => goAdd(data)">
                                             <el-button
                                                 type="success"
                                                 icon="al-icon-add-details"
@@ -33,7 +38,9 @@
                                             ><span style="margin-left: 6px;">新增</span></el-button>
                                             <!-- <span style="line-height: 2rem;margin-left: 8px;font-weight: bold;">新增</span> -->
                                         </div>
-                                        <div class="tips" style="display: flex; justify-content: center; padding-top: 8px;" @click="() => goEdit(data)">
+                                        <div class="tips"
+                                             style="display: flex; justify-content: center; padding-top: 8px;"
+                                             @click="() => goEdit(data)">
                                             <el-button
                                                 type="primary"
                                                 icon="al-icon-edit"
@@ -43,7 +50,9 @@
                                             ><span style="margin-left: 6px;">修改</span></el-button>
                                             <!-- <span  style="line-height: 2rem;margin-left: 8px;font-weight: bold;">修改</span> -->
                                         </div>
-                                        <div class="tips" style="display: flex; justify-content: center; padding-top: 8px;" @click="() => batchDel(data.id)">
+                                        <div class="tips"
+                                             style="display: flex; justify-content: center; padding-top: 8px;"
+                                             @click="() => batchDel(data.id)">
                                             <el-button
                                                 type="danger"
                                                 icon="al-icon-del"
@@ -57,436 +66,464 @@
                                     <div slot="reference">
                            <span @click="goView(data)">
                               <i :class="data.icon" :style="{color : data.color}"></i>
-                              {{ node.label}}
+                              {{ node.label }}
                            </span>
                                     </div>
                                 </el-popover>
                             </div>
                         </el-tree>
                     </div>
-            </dv-border-box-13>
-        </el-col>
-          <el-col :span="19">
-            <dv-border-box-13 :reverse="true" class="dvBox8">
-                <div class="div-view" v-show="viewDialog.isShow">
-                    <!-- 新增/编辑开始 -->
-                    <div class="detailInfo">
-                    <el-form
-                        :model="data"
-                        v-loading="viewDialog.butIsLoading"
-                        :rules="rules"
-                        ref="ruleForm"
-                    >
-                        <el-row>
-                            <el-col :span="12">
+                </dv-border-box-13>
+            </el-col>
+            <el-col :span="19">
+                <dv-loading v-if="viewDialog.isLoading" style="color: white;margin-top: 25%">Loading...</dv-loading>
+                <dv-border-box-13 :reverse="true" class="dvBox8" v-show="viewDialog.isShow && !viewDialog.isLoading">
+                    <div class="div-view">
+                        <!-- 新增/编辑开始 -->
+                        <div class="detailInfo">
+                            <el-form
+                                :model="data"
+                                :rules="rules"
+                                ref="ruleForm"
+                            >
+                                <el-row>
+                                    <el-col :span="12">
+                                        <el-form-item
+                                            label="名称"
+                                            clearable
+                                            :label-width="formLabelWidth"
+                                            prop="name"
+                                        >
+                                            <el-input
+                                                :disabled="!viewDialog.isEdit"
+                                                v-model="data.name"
+                                                placeholder="请输入名称"
+                                                autocomplete="off"
+                                            ></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item
+                                            label="编号"
+                                            clearable
+                                            :label-width="formLabelWidth"
+                                            prop="number"
+                                        >
+                                            <el-input
+                                                :disabled="!viewDialog.isEdit"
+                                                v-model="data.number"
+                                                placeholder="请输入编号"
+                                                autocomplete="off"
+                                            ></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+                                <el-row>
+                                    <el-col :span="12">
+                                        <el-form-item
+                                            label="备注"
+                                            clearable
+                                            :label-width="formLabelWidth"
+                                            prop="remark"
+                                        >
+                                            <el-input
+                                                :disabled="!viewDialog.isEdit"
+                                                v-model="data.remark"
+                                                placeholder="请输入备注"
+                                                autocomplete="off"
+                                            ></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item
+                                            label="父对象"
+                                            clearable
+                                            :label-width="formLabelWidth"
+                                            prop="prefix"
+                                        >
+                                            <el-input
+                                                :disabled="true"
+                                                v-if="data.projectEntity != undefined"
+                                                v-model="data.projectEntity.name"
+                                                autocomplete="off"
+                                            ></el-input>
+                                            <el-input
+                                                :disabled="true"
+                                                v-if="data.projectEntity == undefined"
+                                                v-model="data.projectEntity"
+                                                autocomplete="off"
+                                            ></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
                                 <el-form-item
-                                    label="名称"
+                                    label="SQL"
                                     clearable
                                     :label-width="formLabelWidth"
-                                    prop="name"
+                                    v-if="viewDialog.isTools"
                                 >
-                                    <el-input
-                                        :disabled="!viewDialog.isEdit"
-                                        v-model="data.name"
-                                        placeholder="请输入名称"
-                                        autocomplete="off"
-                                    ></el-input>
+                                    <div
+                                        class="sql-div"
+                                        ref="sqlDiv"
+                                        v-html="data.sql"
+                                        :style="{height:(screenSize.height - 170)+'px'}"
+                                    ></div>
                                 </el-form-item>
-                            </el-col>
-                            <el-col :span="12">
-                                <el-form-item
-                                    label="编号"
-                                    clearable
-                                    :label-width="formLabelWidth"
-                                    prop="number"
-                                >
-                                    <el-input
-                                        :disabled="!viewDialog.isEdit"
-                                        v-model="data.number"
-                                        placeholder="请输入编号"
-                                        autocomplete="off"
-                                    ></el-input>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="12">
-                                <el-form-item
-                                    label="备注"
-                                    clearable
-                                    :label-width="formLabelWidth"
-                                    prop="remark"
-                                >
-                                    <el-input
-                                        :disabled="!viewDialog.isEdit"
-                                        v-model="data.remark"
-                                        placeholder="请输入备注"
-                                        autocomplete="off"
-                                    ></el-input>
-                                </el-form-item>
-                            </el-col>
-                            <el-col :span="12">
-                                <el-form-item
-                                    label="父对象"
-                                    clearable
-                                    :label-width="formLabelWidth"
-                                    prop="prefix"
-                                >
-                                    <el-input
-                                        :disabled="true"
-                                        v-if="data.projectEntity != undefined"
-                                        v-model="data.projectEntity.name"
-                                        autocomplete="off"
-                                    ></el-input>
-                                    <el-input
-                                        :disabled="true"
-                                        v-if="data.projectEntity == undefined"
-                                        v-model="data.projectEntity"
-                                        autocomplete="off"
-                                    ></el-input>
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <el-form-item
-                            label="SQL"
-                            clearable
-                            :label-width="formLabelWidth"
-                            v-if="viewDialog.isTools"
-                        >
-                            <div
-                                class="sql-div"
-                                ref="sqlDiv"
-                                v-html="data.sql"
-                                :style="{height:(screenSize.height - 195)+'px'}"
-                            ></div>
-                        </el-form-item>
-                    </el-form>
-                    <!-- 新增明细开始 -->
-                    <div v-if="data.level != 2 && !viewDialog.isTools">
-                        <el-row class="spacing" v-show="viewDialog.isEdit">
-                            <el-button
-                                type="primary"
-                                @click.prevent="addDetails()"
-                                :loading="viewDialog.butIsLoading"
-                            >新增</el-button>
-                            <el-button
-                                type="warning"
-                                @click.prevent="up()"
-                                :loading="viewDialog.butIsLoading"
-                                plain
-                            >上移</el-button>
-                            <el-button
-                                type="primary"
-                                @click.prevent="down()"
-                                :loading="viewDialog.butIsLoading"
-                                plain
-                            >下移</el-button>
-                        </el-row>
-                        <el-table
-                            ref="tbEdit"
-                            :data="data.detailEntitys"
-                            border
-                            :height="screenSize.height - (viewDialog.isEdit ? 245  : 124)"
-                            v-loading="viewDialog.butIsLoading"
-                            highlight-current-row
-                            :row-class-name="tableRowClassName"
-                            @current-change="currentChange"
-                            fixed
-                            class="tb-edit"
-                            :header-cell-style="{
-                                background: '#141414',
-                                color: '#fff',
-                            }"
-                            :row-style="{
-                               background: '#282c34',
-                                color: '#fff',
-                            }"
-                        >
-                            <el-table-column width="50" type="index" label="序号"></el-table-column>
-                            <el-table-column label="名称" width="200">
-                                <template scope="scope">
-                                    <el-input
-                                        v-model="scope.row.name"
-                                        placeholder="请输入名称"
-                                        :disabled="!viewDialog.isEdit || scope.row.columnProperties == 'linkColumn'"
-                                        clearable
-                                    ></el-input>
-                                    <span>{{scope.row.name}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="属性名" width="200">
-                                <template scope="scope">
-                                    <el-input
-                                        v-model="scope.row.number"
-                                        placeholder="请输入属性名"
-                                        :disabled="!viewDialog.isEdit || scope.row.columnProperties == 'linkColumn'"
-                                        clearable
-                                    ></el-input>
-                                    <span>{{scope.row.number}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="字段属性" width="150">
-                                <template scope="scope">
-                                    <el-select
-                                        :disabled="!viewDialog.isEdit"
-                                        v-model="scope.row.columnProperties"
-                                        placeholder="请选择字段属性"
-                                        @change="columnPropertiesChange(scope.$index,scope.row.columnProperties)"
-                                    >
-                                        <el-option
-                                            v-for="item in getOptions('columnProperties')"
-                                            :key="item.label"
-                                            :label="item.label"
-                                            :value="item.value"
-                                        ></el-option>
-                                    </el-select>
-                                    <span>{{scope.row.columnProperties | paramsFmt('columnProperties')}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="字段类型" width="200">
-                                <template scope="scope">
-                                    <el-select
-                                        v-model="scope.row.type"
-                                        placeholder="请选择字段类型"
-                                        :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
-                                        @change="typeChange(scope.row)"
-                                    >
-                                        <el-option
-                                            v-for="item in getOptions('columnType')"
-                                            :key="item.label"
-                                            :label="item.label"
-                                            :value="item.value"
-                                        ></el-option>
-                                    </el-select>
-                                    <span>{{scope.row.type | paramsFmt('columnType')}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="长度" width="110">
-                                <template scope="scope">
-                                    <el-input
-                                        v-model="scope.row.length"
-                                        placeholder="请输入长度"
-                                        clearable
-                                        :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
-                                    ></el-input>
-                                    <span>{{scope.row.length}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="默认值">
-                                <template scope="scope">
-                                    <el-input
-                                        v-model="scope.row.defaultValue"
-                                        placeholder="请输入默认值"
-                                        clearable
-                                        :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
-                                    ></el-input>
-                                    <span>{{scope.row.defaultValue}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="小数位">
-                                <template scope="scope">
-                                    <el-input
-                                        v-model="scope.row.places"
-                                        placeholder="请输入小数位"
-                                        clearable
-                                        :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
-                                    ></el-input>
-                                    <span>{{scope.row.places}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="关联表" width="150">
-                                <template scope="scope">
-                                    <el-select
-                                        v-model="scope.row.linkTable"
-                                        placeholder="请选择关联表"
-                                        :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'linkColumn'"
-                                        @change="linkTableChange(scope.row)"
-                                    >
-                                        <el-option
-                                            v-for="item in tableOptions"
-                                            :key="item.label"
-                                            :label="item.label"
-                                            :value="item.value"
-                                        ></el-option>
-                                    </el-select>
-                                    <span>{{scope.row.linkTable | optionsFmt(tableOptions)}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="关联参数" width="150">
-                                <template scope="scope">
-                                    <el-select
-                                        v-model="scope.row.linkParam"
-                                        placeholder="请选择关联参数"
-                                        :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'paramColumn'"
-                                    >
-                                        <el-option
-                                            v-for="item in getBaseOptions()"
-                                            :key="item.label"
-                                            :label="item.label"
-                                            :value="item.value"
-                                        ></el-option>
-                                    </el-select>
-                                    <span>{{scope.row.linkParam | optionsFmt(getBaseOptions())}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="是否主键">
-                                <template scope="scope">
-                                    <el-select v-model="scope.row.isKey" :disabled="!viewDialog.isEdit" placeholder="请选择">
-                                        <el-option
-                                            v-for="item in getOptions('yesOrNo')"
-                                            :key="item.label"
-                                            :label="item.label"
-                                            :value="item.value"
-                                        ></el-option>
-                                    </el-select>
-                                    <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="允许为空">
-                                <template scope="scope">
-                                    <el-select v-model="scope.row.allowEmpty" :disabled="!viewDialog.isEdit" placeholder="请选择">
-                                        <el-option
-                                            v-for="item in getOptions('yesOrNo')"
-                                            :key="item.label"
-                                            :label="item.label"
-                                            :value="item.value"
-                                        ></el-option>
-                                    </el-select>
-                                    <span>{{scope.row.allowEmpty | paramsFmt('yesOrNo')}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="操作" v-if="viewDialog.isEdit" fixed="right" width="168">
-                                <template slot-scope="scope">
+                            </el-form>
+                            <!-- 新增明细开始 -->
+                            <div v-if="data.level != 2 && !viewDialog.isTools">
+                                <el-row class="spacing" v-show="viewDialog.isEdit">
                                     <el-button
-                                        type="success"
-                                        plain
-                                        size="small"
-                                        @click="buildPartialDialog.isShow = true"
-                                    >生成</el-button>
+                                        type="primary"
+                                        @click.prevent="addDetails()"
+                                        :loading="viewDialog.butIsLoading"
+                                    >新增
+                                    </el-button>
                                     <el-button
-                                        type="danger"
+                                        type="warning"
+                                        @click.prevent="up()"
+                                        :loading="viewDialog.butIsLoading"
                                         plain
-                                        size="small"
-                                        @click="delDetails(scope.$index)"
-                                        v-if="isEmpty(scope.row.id) && scope.row.number != 'parentId'"
-                                    >删除</el-button>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                    </div>
-                    <el-row class="tool-spacing" v-show="viewDialog.isTools">
-                        <el-button @click="sqlCopy()" plain type="success">复制SQL</el-button>
-                        <el-button
-                            type="primary"
-                            @click="buildFileDialog.isShow = true"
-                            :loading="viewDialog.butIsLoading"
-                            v-if="data.level == 3"
-                        >生成代码</el-button>
-                    </el-row>
-                    <el-row class="save-spacing" v-show="viewDialog.isEdit">
-                        <el-button
-                            @click="viewDialog.isShow = false"
-                            :loading="viewDialog.butIsLoading"
-                        >取 消</el-button>
-                        <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
-                    </el-row>
-                    <el-dialog custom-class="dialog" title="生成代码" :visible.sync="buildFileDialog.isShow" width="30%">
-                        <el-form
-                            :model="data"
-                            v-loading="viewDialog.butIsLoading"
-                            :rules="rules"
-                            ref="ruleForm"
-                        >
-                            <el-checkbox-group v-model="buildFileDialog.fileTypes">
-                                <div
-                                    v-for="item in (parseInt(getOptions('fileType').length / 3) + 1)"
-                                    :key="item.label"
+                                    >上移
+                                    </el-button>
+                                    <el-button
+                                        type="primary"
+                                        @click.prevent="down()"
+                                        :loading="viewDialog.butIsLoading"
+                                        plain
+                                    >下移
+                                    </el-button>
+                                </el-row>
+                                <el-table
+                                    ref="tbEdit"
+                                    :data="data.detailEntitys"
+                                    border
+                                    :height="screenSize.height - (viewDialog.isEdit ? 220  : 124)"
+                                    v-loading="viewDialog.butIsLoading"
+                                    highlight-current-row
+                                    :row-class-name="tableRowClassName"
+                                    @current-change="currentChange"
+                                    fixed
+                                    class="tb-edit"
+                                    style="margin-top: 20px"
+                                    :header-cell-style="{background: 'rgb(55 76 135)',color: '#fff', }"
+                                    :row-style="{background: '#282c34',color: '#fff',}"
                                 >
-                                    <el-row :class="item != 1 ? 'margin-top-22' : ''" :gutter="20">
-                                        <el-col
-                                            :span="8"
-                                            v-if="((item - 1)*3+0) < getOptions('fileType').length"
+                                    <el-table-column width="50" type="index" label="序号"></el-table-column>
+                                    <el-table-column label="名称" width="200">
+                                        <template scope="scope">
+                                            <el-input
+                                                v-model="scope.row.name"
+                                                placeholder="请输入名称"
+                                                :disabled="!viewDialog.isEdit || scope.row.columnProperties == 'linkColumn'"
+                                                clearable
+                                            ></el-input>
+                                            <span>{{ scope.row.name }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="属性名" width="200">
+                                        <template scope="scope">
+                                            <el-input
+                                                v-model="scope.row.number"
+                                                placeholder="请输入属性名"
+                                                :disabled="!viewDialog.isEdit || scope.row.columnProperties == 'linkColumn'"
+                                                clearable
+                                            ></el-input>
+                                            <span>{{ scope.row.number }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="字段属性" width="150">
+                                        <template scope="scope">
+                                            <el-select
+                                                :disabled="!viewDialog.isEdit"
+                                                v-model="scope.row.columnProperties"
+                                                placeholder="请选择字段属性"
+                                                @change="columnPropertiesChange(scope.$index,scope.row.columnProperties)"
+                                            >
+                                                <el-option
+                                                    v-for="item in getOptions('columnProperties')"
+                                                    :key="item.label"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                ></el-option>
+                                            </el-select>
+                                            <span>{{ scope.row.columnProperties | paramsFmt('columnProperties') }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="字段类型" width="200">
+                                        <template scope="scope">
+                                            <el-select
+                                                v-model="scope.row.type"
+                                                placeholder="请选择字段类型"
+                                                :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
+                                                @change="typeChange(scope.row)"
+                                            >
+                                                <el-option
+                                                    v-for="item in getOptions('columnType')"
+                                                    :key="item.label"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                ></el-option>
+                                            </el-select>
+                                            <span>{{ scope.row.type | paramsFmt('columnType') }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="长度" width="110">
+                                        <template scope="scope">
+                                            <el-input
+                                                v-model="scope.row.length"
+                                                placeholder="请输入长度"
+                                                clearable
+                                                :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
+                                            ></el-input>
+                                            <span>{{ scope.row.length }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="默认值">
+                                        <template scope="scope">
+                                            <el-input
+                                                v-model="scope.row.defaultValue"
+                                                placeholder="请输入默认值"
+                                                clearable
+                                                :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
+                                            ></el-input>
+                                            <span>{{ scope.row.defaultValue }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="小数位">
+                                        <template scope="scope">
+                                            <el-input
+                                                v-model="scope.row.places"
+                                                placeholder="请输入小数位"
+                                                clearable
+                                                :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'baseColumn'"
+                                            ></el-input>
+                                            <span>{{ scope.row.places }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="关联表" width="150">
+                                        <template scope="scope">
+                                            <el-select
+                                                v-model="scope.row.linkTable"
+                                                placeholder="请选择关联表"
+                                                :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'linkColumn'"
+                                                @change="linkTableChange(scope.row)"
+                                            >
+                                                <el-option
+                                                    v-for="item in tableOptions"
+                                                    :key="item.label"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                ></el-option>
+                                            </el-select>
+                                            <span>{{ scope.row.linkTable | optionsFmt(tableOptions) }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="关联参数" width="150">
+                                        <template scope="scope">
+                                            <el-select
+                                                v-model="scope.row.linkParam"
+                                                placeholder="请选择关联参数"
+                                                :disabled="!viewDialog.isEdit || scope.row.columnProperties != 'paramColumn'"
+                                            >
+                                                <el-option
+                                                    v-for="item in getBaseOptions()"
+                                                    :key="item.label"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                ></el-option>
+                                            </el-select>
+                                            <span>{{ scope.row.linkParam | optionsFmt(getBaseOptions()) }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="是否主键">
+                                        <template scope="scope">
+                                            <el-select v-model="scope.row.isKey" :disabled="!viewDialog.isEdit"
+                                                       placeholder="请选择">
+                                                <el-option
+                                                    v-for="item in getOptions('yesOrNo')"
+                                                    :key="item.label"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                ></el-option>
+                                            </el-select>
+                                            <span>{{ scope.row.allowEmpty | paramsFmt('yesOrNo') }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="允许为空">
+                                        <template scope="scope">
+                                            <el-select v-model="scope.row.allowEmpty" :disabled="!viewDialog.isEdit"
+                                                       placeholder="请选择">
+                                                <el-option
+                                                    v-for="item in getOptions('yesOrNo')"
+                                                    :key="item.label"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                ></el-option>
+                                            </el-select>
+                                            <span>{{ scope.row.allowEmpty | paramsFmt('yesOrNo') }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="操作" v-if="viewDialog.isEdit" fixed="right" width="168">
+                                        <template slot-scope="scope">
+                                            <el-button
+                                                type="success"
+                                                plain
+                                                size="small"
+                                                @click="buildPartialDialog.isShow = true"
+                                            >生成
+                                            </el-button>
+                                            <el-button
+                                                type="danger"
+                                                plain
+                                                size="small"
+                                                @click="delDetails(scope.$index)"
+                                                v-if="isEmpty(scope.row.id) && scope.row.number != 'parentId'"
+                                            >删除
+                                            </el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </div>
+                            <el-row class="tool-spacing" v-show="viewDialog.isTools">
+                                <el-button @click="sqlCopy()" plain type="success">复制SQL</el-button>
+                                <el-button
+                                    type="primary"
+                                    @click="buildFileDialog.isShow = true"
+                                    :loading="viewDialog.butIsLoading"
+                                    v-if="data.level == 3"
+                                >生成代码
+                                </el-button>
+                            </el-row>
+                            <el-row class="save-spacing" v-show="viewDialog.isEdit">
+                                <el-button
+                                    @click="viewDialog.isShow = false"
+                                    :loading="viewDialog.butIsLoading"
+                                >取 消
+                                </el-button>
+                                <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存
+                                </el-button>
+                            </el-row>
+                            <el-dialog custom-class="dialog" title="生成代码" :visible.sync="buildFileDialog.isShow"
+                                       width="30%">
+                                <el-form
+                                    :model="data"
+                                    v-loading="viewDialog.butIsLoading"
+                                    :rules="rules"
+                                    ref="ruleForm"
+                                >
+                                    <el-checkbox-group v-model="buildFileDialog.fileTypes">
+                                        <div
+                                            v-for="item in (parseInt(getOptions('fileType').length / 3) + 1)"
+                                            :key="item.label"
                                         >
-                                            <el-checkbox
-                                                class="fileType-checkbox"
-                                                v-model="getOptions('fileType')[(item - 1)*3+0].value"
-                                                :label="getOptions('fileType')[(item - 1)*3+0].value"
-                                                border
-                                            ></el-checkbox>
-                                        </el-col>
-                                        <el-col
-                                            :span="8"
-                                            v-if="((item - 1)*3+1) < getOptions('fileType').length"
-                                        >
-                                            <el-checkbox
-                                                class="fileType-checkbox"
-                                                v-model="getOptions('fileType')[(item - 1)*3+1].value"
-                                                :label="getOptions('fileType')[(item - 1)*3+1].value"
-                                                border
-                                            ></el-checkbox>
-                                        </el-col>
-                                        <el-col
-                                            :span="8"
-                                            v-if="((item - 1)*3+2) < getOptions('fileType').length"
-                                        >
-                                            <el-checkbox
-                                                class="fileType-checkbox"
-                                                v-model="getOptions('fileType')[(item - 1)*3+2].value"
-                                                :label="getOptions('fileType')[(item - 1)*3+2].value"
-                                                border
-                                            ></el-checkbox>
-                                        </el-col>
-                                    </el-row>
-                                </div>
-                            </el-checkbox-group>
-                            <el-form-item class="margin-top-22">
-                                <el-select v-model="buildFileDialog.vuePath" clearable placeholder="请选择前端代码根目录" :disabled="viewDialog.isView"  style="width:100%">
-                                    <el-option v-for="item in getOptions('vuePath')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
-                                </el-select>
-                            </el-form-item>
-                            <el-form-item class="margin-top-22">
-                                <el-select v-model="buildFileDialog.javaPath" clearable placeholder="请选择后端代码根目录" :disabled="viewDialog.isView"  style="width:100%">
-                                    <el-option v-for="item in getOptions('javaPath')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
-                                </el-select>
-                            </el-form-item>
-                            <el-form-item class="margin-top-22">
-                                <el-select v-model="buildFileDialog.codeTemplate" clearable placeholder="请选择代码模板" :disabled="viewDialog.isView"  style="width:100%">
-                                    <el-option v-for="item in getOptions('codeTemplate')" :key="item.label" :label="item.label" :value="item.value" ></el-option>
-                                </el-select>
-                            </el-form-item>
-                        </el-form>
-                        <span slot="footer">
+                                            <el-row :class="item != 1 ? 'margin-top-22' : ''" :gutter="20">
+                                                <el-col
+                                                    :span="8"
+                                                    v-if="((item - 1)*3+0) < getOptions('fileType').length"
+                                                >
+                                                    <el-checkbox
+                                                        class="fileType-checkbox"
+                                                        v-model="getOptions('fileType')[(item - 1)*3+0].value"
+                                                        :label="getOptions('fileType')[(item - 1)*3+0].value"
+                                                        border
+                                                    ></el-checkbox>
+                                                </el-col>
+                                                <el-col
+                                                    :span="8"
+                                                    v-if="((item - 1)*3+1) < getOptions('fileType').length"
+                                                >
+                                                    <el-checkbox
+                                                        class="fileType-checkbox"
+                                                        v-model="getOptions('fileType')[(item - 1)*3+1].value"
+                                                        :label="getOptions('fileType')[(item - 1)*3+1].value"
+                                                        border
+                                                    ></el-checkbox>
+                                                </el-col>
+                                                <el-col
+                                                    :span="8"
+                                                    v-if="((item - 1)*3+2) < getOptions('fileType').length"
+                                                >
+                                                    <el-checkbox
+                                                        class="fileType-checkbox"
+                                                        v-model="getOptions('fileType')[(item - 1)*3+2].value"
+                                                        :label="getOptions('fileType')[(item - 1)*3+2].value"
+                                                        border
+                                                    ></el-checkbox>
+                                                </el-col>
+                                            </el-row>
+                                        </div>
+                                    </el-checkbox-group>
+                                    <el-form-item class="margin-top-22">
+                                        <el-select v-model="buildFileDialog.vuePath" clearable
+                                                   placeholder="请选择前端代码根目录" :disabled="viewDialog.isView"
+                                                   style="width:100%">
+                                            <el-option v-for="item in getOptions('vuePath')" :key="item.label"
+                                                       :label="item.label" :value="item.value"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                    <el-form-item class="margin-top-22">
+                                        <el-select v-model="buildFileDialog.javaPath" clearable
+                                                   placeholder="请选择后端代码根目录" :disabled="viewDialog.isView"
+                                                   style="width:100%">
+                                            <el-option v-for="item in getOptions('javaPath')" :key="item.label"
+                                                       :label="item.label" :value="item.value"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                    <el-form-item class="margin-top-22">
+                                        <el-select v-model="buildFileDialog.codeTemplate" clearable
+                                                   placeholder="请选择代码模板" :disabled="viewDialog.isView"
+                                                   style="width:100%">
+                                            <el-option v-for="item in getOptions('codeTemplate')" :key="item.label"
+                                                       :label="item.label" :value="item.value"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-form>
+                                <span slot="footer">
                      <el-button @click="buildFileDialog.isShow = false">取 消</el-button>
                      <el-button
                          :type="this.buildFileDialog.isAllSelect ? 'success' : 'primary'"
                          plain
                          @click="fileTypesAll"
-                     >{{this.buildFileDialog.isAllSelect ? '取消全选' : '全 选'}}</el-button>
+                     >{{ this.buildFileDialog.isAllSelect ? '取消全选' : '全 选' }}</el-button>
                      <el-button type="success" @click="downloadFile()">下 载</el-button>
                      <el-button type="primary" @click="buildFile()">确 定</el-button>
                   </span>
-                    </el-dialog>
-                    <el-dialog custom-class="dialog" title="生成局部代码" :visible.sync="buildPartialDialog.isShow" width="30%">
-                        <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
-                            <div>
-                                <el-row :gutter="20" v-show="false"><!--   -->
-                                    <textarea ref="buildPartialRef" v-html="buildPartialDialog.sql" ></textarea>
-                                </el-row>
-                                <el-row :gutter="20">
-                                    <el-col :span="8" class="frame-col"><el-button class="frame-but" type="warning" plain @click="copySql">SQL</el-button></el-col>
-                                    <el-col :span="8" class="frame-col"><el-button class="frame-but" type="primary" plain @click="copyEntity">实体</el-button></el-col>
-                                    <el-col :span="8" class="frame-col"><el-button class="frame-but" type="success" plain @click="allCode">全部</el-button></el-col>
-                                </el-row>
-                            </div>
-                        </el-form>
-                    </el-dialog>
-                    <!-- 新增/编辑结束 -->
-                </div>
-                </div>
-            </dv-border-box-13>
-        </el-col>
+                            </el-dialog>
+                            <el-dialog custom-class="dialog" title="生成局部代码"
+                                       :visible.sync="buildPartialDialog.isShow" width="30%">
+                                <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules"
+                                         ref="ruleForm">
+                                    <div>
+                                        <el-row :gutter="20" v-show="false"><!--   -->
+                                            <textarea ref="buildPartialRef" v-html="buildPartialDialog.sql"></textarea>
+                                        </el-row>
+                                        <el-row :gutter="20">
+                                            <el-col :span="8" class="frame-col">
+                                                <el-button class="frame-but" type="warning" plain @click="copySql">SQL
+                                                </el-button>
+                                            </el-col>
+                                            <el-col :span="8" class="frame-col">
+                                                <el-button class="frame-but" type="primary" plain @click="copyEntity">
+                                                    实体
+                                                </el-button>
+                                            </el-col>
+                                            <el-col :span="8" class="frame-col">
+                                                <el-button class="frame-but" type="success" plain @click="allCode">
+                                                    全部
+                                                </el-button>
+                                            </el-col>
+                                        </el-row>
+                                    </div>
+                                </el-form>
+                            </el-dialog>
+                            <!-- 新增/编辑结束 -->
+                        </div>
+                    </div>
+                </dv-border-box-13>
+            </el-col>
         </el-row>
-      </div>
+    </div>
 </template>
 <script>
 export default {
@@ -541,13 +578,13 @@ export default {
             },
             rules: {
                 name: [
-                    { required: true, message: "请输入名称", trigger: "blur" }
+                    {required: true, message: "请输入名称", trigger: "blur"}
                 ],
                 number: [
-                    { required: true, message: "请输入编号", trigger: "blur" }
+                    {required: true, message: "请输入编号", trigger: "blur"}
                 ],
                 remark: [
-                    { required: false, message: "请输入备注", trigger: "blur" }
+                    {required: false, message: "请输入备注", trigger: "blur"}
                 ]
             },
             screenWidth: document.body.clientWidth
@@ -626,7 +663,7 @@ export default {
                         insertIndex: result.insertIndex,
                         level: row.level + 1,
                         projectId: projectId,
-                        projectEntity: { id: row.id, name: row.label },
+                        projectEntity: {id: row.id, name: row.label},
                         parentId: row.id,
                         detailEntitys: result.detailEntitys
                     };
@@ -666,10 +703,13 @@ export default {
             this.getTableOptions(
                 this.isEmpty(row.projectId) ? row.id : row.projectId
             );
+            this.viewDialog.isLoading = true;
+            this.viewDialog.isShow = false;
             this.viewDialog.isEdit = false;
             this.viewDialog.isTools = true;
             this.getHttp("/api/project/tools?id=" + row.id, {}).then(result => {
                 this.viewDialog.isShow = true;
+                this.viewDialog.isLoading = false;
                 this.data = result;
                 this.data.level = row.level;
                 this.data.projectEntity = {
@@ -691,7 +731,7 @@ export default {
                     isEmpty;
                     this.viewDialog.isShow = true;
                     this.data = result;
-                    this.data.projectEntity = { id: row.id, name: row.label };
+                    this.data.projectEntity = {id: row.id, name: row.label};
                 }
             );
         },
@@ -704,12 +744,15 @@ export default {
             this.getTableOptions(
                 this.isEmpty(row.projectId) ? row.id : row.projectId
             );
+            this.viewDialog.isLoading = true;
+            this.viewDialog.isShow = false;
             this.viewDialog.isEdit = true;
             this.viewDialog.isTools = false;
             this.getHttp("/api/project/editView?id=" + row.id).then(result => {
                 this.viewDialog.isShow = true;
+                this.viewDialog.isLoading = false;
                 this.data = result;
-                this.data.projectEntity = { id: row.id, name: row.label };
+                this.data.projectEntity = {id: row.id, name: row.label};
             });
         },
         //添加明细
@@ -764,7 +807,7 @@ export default {
             this.currentIndex = this.currentIndex + 1;
         },
         //动态修改类名
-        tableRowClassName({ row, rowIndex }) {
+        tableRowClassName({row, rowIndex}) {
             row.index = rowIndex;
             if (this.isNotEmpty(row.id) || row.number == "parentId") {
                 return "warning-row";
@@ -785,11 +828,11 @@ export default {
                     : this.data.detailEntitys[this.currentIndex - 1].number;
             this.postHttp(
                 "/api/project/oneSql?id=" +
-                    this.data.projectId +
-                    "&tableNumber=" +
-                    this.data.number +
-                    "&previousColumnNumber=" +
-                    previousColumnNumber,
+                this.data.projectId +
+                "&tableNumber=" +
+                this.data.number +
+                "&previousColumnNumber=" +
+                previousColumnNumber,
                 row
             ).then(result => {
                 this.buildPartialDialog.sql = result;
@@ -800,7 +843,7 @@ export default {
                 textarea.select();
                 if (document.execCommand("copy")) {
                     document.execCommand("copy");
-                    this.$message({ message: "复制成功", type: "success" });
+                    this.$message({message: "复制成功", type: "success"});
                 }
                 //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
                 document.body.removeChild(textarea);
@@ -811,9 +854,9 @@ export default {
             var row = this.data.detailEntitys[this.currentIndex];
             this.postHttp(
                 "/api/project/oneEntity?id=" +
-                    this.data.projectId +
-                    "&tableNumber=" +
-                    this.data.number,
+                this.data.projectId +
+                "&tableNumber=" +
+                this.data.number,
                 row
             ).then(result => {
                 this.buildPartialDialog.sql = result;
@@ -824,7 +867,7 @@ export default {
                 textarea.select();
                 if (document.execCommand("copy")) {
                     document.execCommand("copy");
-                    this.$message({ message: "复制成功", type: "success" });
+                    this.$message({message: "复制成功", type: "success"});
                 }
                 //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
                 document.body.removeChild(textarea);
@@ -838,11 +881,11 @@ export default {
                     : this.data.detailEntitys[this.currentIndex - 1].number;
             this.postHttp(
                 "/api/project/allCode?id=" +
-                    this.data.projectId +
-                    "&tableNumber=" +
-                    this.data.number +
-                    "&previousColumnNumber=" +
-                    previousColumnNumber,
+                this.data.projectId +
+                "&tableNumber=" +
+                this.data.number +
+                "&previousColumnNumber=" +
+                previousColumnNumber,
                 row
             ).then(result => {
                 this.buildPartialDialog.sql = result;
@@ -853,7 +896,7 @@ export default {
                 textarea.select();
                 if (document.execCommand("copy")) {
                     document.execCommand("copy");
-                    this.$message({ message: "复制成功", type: "success" });
+                    this.$message({message: "复制成功", type: "success"});
                 }
                 //console.log(JSON.stringify(this.$refs.buildPartialRef.innerText));
                 document.body.removeChild(textarea);
@@ -869,7 +912,7 @@ export default {
             selection.addRange(range);
             if (document.execCommand("copy")) {
                 document.execCommand("copy");
-                this.$message({ message: "复制成功", type: "success" });
+                this.$message({message: "复制成功", type: "success"});
             }
             selection.removeAllRanges();
         },
@@ -1011,7 +1054,8 @@ export default {
             this.postHttp(
                 "/api/project/buildFile",
                 this.buildFileDialog
-            ).then(result => {});
+            ).then(result => {
+            });
         },
         //下载文件
         downloadFile() {
@@ -1020,9 +1064,9 @@ export default {
             );
             window.open(
                 "/api/project/downloadFile?id=" +
-                    this.data.id +
-                    "&fileTypes=" +
-                    fileTypes
+                this.data.id +
+                "&fileTypes=" +
+                fileTypes
             );
         }
     }
@@ -1032,9 +1076,11 @@ export default {
 .frame-col {
     text-align: center;
 }
+
 .frame-but {
     width: 100%;
 }
+
 .tree-node {
     height: 100%;
     /*
@@ -1065,20 +1111,24 @@ export default {
 }
 
 .el-tree-node__content {
+    margin-top: 3px;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 10px;
     height: 42px;
     cursor: pointer;
 }
+
 .el-tree-node__content:hover {
-    background-color: #5c5e61;
+    background-color: rgb(53 67 108);
 }
-.el-tree-node:focus>.el-tree-node__content {
-    background-color: #5c5e61;
+
+.el-tree-node:focus > .el-tree-node__content {
+    background-color: rgb(53 67 108);
 }
+
 .sql-div {
     line-height: 25px;
     overflow-y: scroll;
@@ -1092,9 +1142,11 @@ export default {
     color: #606266;
     padding: 0 15px;
 }
+
 .tool-spacing {
     text-align: right;
 }
+
 /* .operat-but {
     width: 2rem;
 } */
@@ -1102,16 +1154,20 @@ export default {
 .el-button + .el-button {
     margin-left: 0px;
 }
+
 .fileType-checkbox {
     width: 100%;
     color: #fff;
 }
+
 .tips:hover {
     cursor: pointer;
 }
+
 .el-popper {
     border-radius: 25px;
 }
+
 .el-popover {
     position: absolute;
     background: #fff;
@@ -1124,82 +1180,75 @@ export default {
     line-height: 1.4;
     text-align: justify;
     font-size: 14px;
-    box-shadow: 0 2px 12px 0rgba (0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px 0 ;
     word-break: break-all;
 }
+
 .popoverPadding {
     border: 2px dashed #495e9b;
     border-radius: 25px;
     padding: 15px;
 }
+
 .dvBox8 {
     height: calc(93vh - 20px);
 }
+
 .leftBox {
     padding: 0.5vw;
 }
+
 .treeNode {
     margin: 0.5vw;
     height: calc(90vh - 20px - 2vw);
-    background-color:  #282c34;
+    background-color: #282c34;
     color: #fff;
     overflow: auto;
 }
+
 .detailInfo {
     padding: 0.5vw;
-    height: calc(90vh - 20px - 2vw);
+    height: calc(90vh - 2vw);
     overflow-x: auto;
     overflow-y: hidden;
 }
+
 .operat-but:hover {
     animation: shake3856 0.3s linear infinite both;
 }
+
 @keyframes shake3856 {
- 0% {
-  -webkit-transform: translate(0);
-  transform: translate(0);
- }
+    0% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
 
- 20% {
-  -webkit-transform: translate(-2px, 2px);
-  transform: translate(-2px, 2px);
- }
+    20% {
+        -webkit-transform: translate(-2px, 2px);
+        transform: translate(-2px, 2px);
+    }
 
- 40% {
-  -webkit-transform: translate(-2px, -2px);
-  transform: translate(-2px, -2px);
- }
+    40% {
+        -webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+    }
 
- 60% {
-  -webkit-transform: translate(2px, 2px);
-  transform: translate(2px, 2px);
- }
+    60% {
+        -webkit-transform: translate(2px, 2px);
+        transform: translate(2px, 2px);
+    }
 
- 80% {
-  -webkit-transform: translate(2px, -2px);
-  transform: translate(2px, -2px);
- }
+    80% {
+        -webkit-transform: translate(2px, -2px);
+        transform: translate(2px, -2px);
+    }
 
- 100% {
-  -webkit-transform: translate(0);
-  transform: translate(0);
- }
+    100% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
 }
-.dialog .el-dialog__header  {
-    background-color: #282c34;
-  }
-  .dialog .el-dialog__title {
-    line-height: 24px;
-    font-size: 18px;
-    color: #fff;
-}
-  /*body背景色*/
-.dialog .el-dialog__body  {
-    background-color: #282c34;
-}
-.dialog .el-dialog__footer{
-background-color: #282c34;
-}
+
 .el-checkbox.is-bordered {
     padding: 9px 20px 9px 10px;
     border-radius: 4px;
