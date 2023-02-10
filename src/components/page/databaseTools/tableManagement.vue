@@ -1044,7 +1044,7 @@ export default {
     overflow: auto; */
     border-radius: 25px;
     padding: 20px;
-    border: 2px solid #adadad;
+    /* border: 2px solid #adadad; */
 }
 
 .custom-tree-node {
@@ -1151,6 +1151,40 @@ export default {
     height: calc(90vh - 20px - 2vw);
     overflow-x: auto;
     overflow-y: hidden;
+}
+.operat-but:hover {
+    animation: shake3856 0.3s linear infinite both;
+}
+@keyframes shake3856 {
+ 0% {
+  -webkit-transform: translate(0);
+  transform: translate(0);
+ }
+
+ 20% {
+  -webkit-transform: translate(-2px, 2px);
+  transform: translate(-2px, 2px);
+ }
+
+ 40% {
+  -webkit-transform: translate(-2px, -2px);
+  transform: translate(-2px, -2px);
+ }
+
+ 60% {
+  -webkit-transform: translate(2px, 2px);
+  transform: translate(2px, 2px);
+ }
+
+ 80% {
+  -webkit-transform: translate(2px, -2px);
+  transform: translate(2px, -2px);
+ }
+
+ 100% {
+  -webkit-transform: translate(0);
+  transform: translate(0);
+ }
 }
 </style>
 

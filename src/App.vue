@@ -2,7 +2,7 @@
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
         <div  v-show="!$route.meta.showNav">
-            <el-menu class="border-radius-5" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+            <el-menu class="border-radius-5" mode="horizontal" background-color="#282c34" text-color="#fff" active-text-color="#ffd04b">
                 <!-- <el-submenu index="1">
                     <template slot="title">数据库工具</template>
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>

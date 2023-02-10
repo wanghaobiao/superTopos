@@ -12,7 +12,13 @@
                     </el-form-item>
 
                     <el-form-item>
-                        <button type="primary" @click="submitForm('form')">登录</button>
+                        <button @click="submitForm('form')">
+                           登录
+                           <div class="arrow-wrapper">
+                              <div class="arrow"></div>
+
+                           </div>
+                        </button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -157,68 +163,68 @@ export default {
 }
 
 button {
- --border-radius: 15px;
- --border-width: 4px;
- appearance: none;
- position: relative;
- padding: 1em 2em;
- border: 0;
- background-color: #212121;
- font-family: "Roboto", Arial, "Segoe UI", sans-serif;
- font-size: 18px;
- font-weight: 500;
- color: #fff;
- z-index: 2;
+  --primary-color: #645bff;
+  --secondary-color: #fff;
+  --hover-color: #111;
+  --arrow-width: 10px;
+  --arrow-stroke: 2px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 20px;
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
 }
 
-button::after {
- --m-i: linear-gradient(#000, #000);
- --m-o: content-box, padding-box;
- content: "";
- position: absolute;
- left: 0;
- top: 0;
- width: 100%;
- height: 100%;
- padding: var(--border-width);
- border-radius: var(--border-radius);
- background-image: conic-gradient(
-		#488cfb,
-		#29dbbc,
-		#ddf505,
-		#ff9f0e,
-		#e440bb,
-		#655adc,
-		#488cfb
-	);
- -webkit-mask-image: var(--m-i), var(--m-i);
- mask-image: var(--m-i), var(--m-i);
- -webkit-mask-origin: var(--m-o);
- mask-origin: var(--m-o);
- -webkit-mask-clip: var(--m-o);
- mask-composite: exclude;
- -webkit-mask-composite: destination-out;
- filter: hue-rotate(0);
- animation: rotate-hue linear 500ms infinite;
- animation-play-state: paused;
+button .arrow-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-button:hover::after {
- animation-play-state: running;
+button .arrow {
+  margin-top: 1px;
+  width: var(--arrow-width);
+  background: var(--primary-color);
+  height: var(--arrow-stroke);
+  position: relative;
+  transition: 0.2s;
 }
 
-@keyframes rotate-hue {
- to {
-  filter: hue-rotate(1turn);
- }
+button .arrow::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  border: solid var(--secondary-color);
+  border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+  display: inline-block;
+  top: -3px;
+  right: 3px;
+  transition: 0.2s;
+  padding: 3px;
+  transform: rotate(-45deg);
 }
 
-button,
-button::after {
- box-sizing: border-box;
+button:hover {
+  background-color: var(--hover-color);
 }
 
-button:active {
- --border-width: 5px;
+button:hover .arrow {
+  background: var(--secondary-color);
+}
+
+button:hover .arrow:before {
+  right: 0;
+}
+</style>
+
+<style scoped>
+.el-button {
+   border: 0px solid;
 }
 </style>
