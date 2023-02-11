@@ -72,8 +72,8 @@ export default {
 <style scoped>
 
 .card {
-    width: 300px;
-    height: 294px;
+    width: 400px;
+    height: 400px;
     background: white;
     position: relative;
     display: flex;
@@ -88,10 +88,10 @@ export default {
     content: '';
     position: absolute;
     width: 200px;
-    background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
-    height: 180%;
+    background-image: linear-gradient(180deg, rgb(0, 183, 255), #4c63a4);
+    height: 250%;
     animation: rotBGimg 3s linear infinite;
-    transition: all 0.2s linear;
+    transition: all 0.4s linear;
 }
 
 @keyframes rotBGimg {
@@ -119,7 +119,7 @@ export default {
 
 .login-form {
     z-index: 100;
-    width: 500px;
+    width: 1000px;
     margin: 250px auto; /* 上下间距160px，左右自动居中*/
     background-color: rgb(255, 255, 255, 0.8); /* 透明背景色 */
     padding: 30px;
@@ -132,7 +132,7 @@ export default {
     /*
      background: url("./../../../../src/assets/login-bg.jpg"); */
     /*background-image: url("./../../../../src/assets/login-bg.jpg");*/
-    background-color: rgb(255, 48, 255);
+    background-color: #2a559a;
     background-size: 100%;
     width: calc(100% - 0px);
     height: calc(100% - 0px);
@@ -150,7 +150,7 @@ export default {
 button {
     --primary-color: rgb(0, 183, 255);
     --secondary-color: #fff;
-    --hover-color: rgb(255, 48, 255);
+    --hover-color: rgb(236, 45, 236);
     --arrow-width: 40px;
     --arrow-stroke: 2px;
     box-sizing: border-box;

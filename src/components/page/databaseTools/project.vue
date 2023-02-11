@@ -47,8 +47,8 @@
         <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
 
-        <dv-loading v-if="listData.loading" style="color: white">Loading...</dv-loading>
-        <el-table :data="listData.content" ref="listTable" fixed  :height="screenSize.height - 83" fit border
+        <dv-loading v-if="listData.loading" style="color: white;height: 95%" >Loading...</dv-loading>
+        <el-table v-if="!listData.loading" :data="listData.content" ref="listTable" fixed  :height="screenSize.height - 83" fit border
                   :header-cell-style="{ background: 'rgb(55 76 135)',color: '#fff',}"
                   :row-style="{background: '#282c34', color: '#fff',}">
             <el-table-column  type="selection"></el-table-column>
@@ -80,7 +80,7 @@
             </el-table-column>
         </el-table>
         <!-- 列表框结束 -->
-        <el-row :gutter="10" class="pagination">
+        <el-row :gutter="10" class="pagination" v-if="!listData.loading">
             <el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange" :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination>
         </el-row>
         <!-- 新增/编辑开始 -->
@@ -717,5 +717,10 @@
     font-size: 16px;
 }
 
-
+.el-table__fixed-right-patch {
+    position: absolute;
+    top: -1px;
+    right: 0;
+    background-color: rgb(55 76 135);
+}
 </style>

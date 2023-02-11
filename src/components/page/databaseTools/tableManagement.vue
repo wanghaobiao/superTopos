@@ -180,14 +180,14 @@
                                     >新增
                                     </el-button>
                                     <el-button
-                                        type="warning"
+                                        type="success"
                                         @click.prevent="up()"
                                         :loading="viewDialog.butIsLoading"
                                         plain
                                     >上移
                                     </el-button>
                                     <el-button
-                                        type="primary"
+                                        class="cancel-but"
                                         @click.prevent="down()"
                                         :loading="viewDialog.butIsLoading"
                                         plain
@@ -397,6 +397,7 @@
                             </el-row>
                             <el-row class="save-spacing" v-show="viewDialog.isEdit">
                                 <el-button
+                                    class="cancel-but"
                                     @click="viewDialog.isShow = false"
                                     :loading="viewDialog.butIsLoading"
                                 >取 消

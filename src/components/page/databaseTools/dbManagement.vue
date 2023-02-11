@@ -361,6 +361,7 @@
                         </el-row>
                         <el-row class="save-spacing" v-show="viewDialog.isEdit">
                             <el-button
+                                class="cancel-but"
                                 @click="viewDialog.isShow = false"
                                 :loading="viewDialog.butIsLoading"
                             >取 消

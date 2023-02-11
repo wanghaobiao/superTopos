@@ -23,10 +23,13 @@
                     <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
                 </el-submenu>-->
             </el-menu>
-            <div class="card"></div>
+<!--            <div class="card"></div>-->
+            <div class="breathe-btn"></div>
+
         </dv-border-box-13>
         <router-view :style="{'margin-top':  !$route.meta.showNav ? '8px' : '0px'}" class="router-view"></router-view>
     </div>
+
 
 </template>
 <script>
@@ -73,12 +76,79 @@
 
 
 <style>
-
+/*resize*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,input,textarea,p,th,td,menu {
+    margin:0;
+    padding:0;
+}
+body {
+    -webkit-text-size-adjust:none;
+    font-family:Arial,Helvetica,sans-serif;
+}
+img {
+    border:none;
+}
+ol,ul {
+    list-style:none;
+}
+em {
+    font-style:normal;
+}
+a {
+    text-decoration:none;
+}
+.clearfix {
+    #zoom:1;
+}
+.clearfix:after {
+    content:' ';
+    display:block;
+    height:0;
+    clear:both;
+    color:#fff;
+}
+body {
+    background:#333;
+}
+.breathe-btn {
+    z-index: 999;
+    position:relative;
+    margin-left: 4px;
+    width:calc(100% - 8px);
+    height:3px;
+    margin:-3px auto;
+    line-height:40px;
+    border:1px solid #495e9b;
+    border-radius:5px;
+    color:#fff;
+    font-size:20px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 1px 2px rgba(0,0,0,.3);
+    overflow:hidden;
+    background-image:-webkit-gradient(linear,left top,left bottom,from(#81cbfd),to(#495e9b));
+    -webkit-animation-timing-function:ease-in-out;
+    -webkit-animation-name:breathe;
+    -webkit-animation-duration:2700ms;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-direction:alternate;
+}
+@-webkit-keyframes breathe {
+    0% {
+        opacity:.2;
+        box-shadow:0 1px 2px rgba(255,255,255,0.1);
+    }
+    100% {
+        opacity:1;
+        border:1px solid #495e9b;
+        box-shadow:0 1px 30px #495e9b;
+    }
+}
 .card {
-    margin-top: 1px;
+    margin-top: -6px;
     margin-left: 3px;
     width: calc(100% - 6px);
-    height: 3px;
+    height: 5px;
     z-index: -10;
     background: #282c34;
     position: relative;
@@ -99,7 +169,7 @@
     content: '';
     position: absolute;
     width: 100%;
-    background-image: linear-gradient(180deg, rgb(2, 6, 245), rgb(234, 4, 4));
+    background-image: linear-gradient(180deg, #282c34, #517bf6);
     /*background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));*/
     height: 2000px;
     animation: rotBGimg 4s linear infinite;
