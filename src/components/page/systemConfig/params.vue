@@ -27,20 +27,16 @@
             </el-col>
             <el-col :span="4" :offset="2" style="margin-top: 17px">
                 <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
+                <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
+                <el-button class="cancel-but" plain @click.prevent="refreshParams('刷新成功')">刷新缓存</el-button>
             </el-col>
         </el-row>
         </dv-border-box-12>
         <!-- 搜索框结束 -->
-        <!-- 按钮框开始 -->
-        <el-row class="spacing">
-            <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
-            <el-button type="primary" plain @click.prevent="refreshParams('刷新成功')">刷新缓存</el-button>
-        </el-row>
-        <!-- 按钮框结束 -->
         <!-- 列表框开始 -->
-        <dv-loading v-if="listData.loading" style="color: white">Loading...</dv-loading>
-        <el-table :data="listData.content" ref="listTable" row-key="id"  :height="screenSize.height - 120"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}"
-                  :header-cell-style="{background: 'rgb(55 76 135)',color: '#fff',}" :row-style="{background: '#282c34',color: '#fff',}">
+        <dv-loading v-if="listData.loading" style="color: white;height: 95%">Loading...</dv-loading>
+        <el-table :data="listData.content" v-if="!listData.loading" ref="listTable" row-key="id"  :height="screenSize.height - 120"  fit border style="width: 100%"  :tree-props="{children: 'detailEntitys'}"
+                  :header-cell-style="{background: 'rgb(55 76 135)',color: '#fff'}" :row-style="{background: '#282c34',color: '#fff'} " >
             <el-table-column  property="name" label="参数名称" ></el-table-column>
             <el-table-column  property="number" label="参数编码" ></el-table-column>
             <el-table-column  property="isEnable" label="是否启用" ></el-table-column>
@@ -56,7 +52,7 @@
             </el-table-column>
         </el-table>
         <!-- 列表框结束 -->
-        <el-row :gutter="10" class="pagination" >
+        <el-row :gutter="10" class="pagination" v-if="!listData.loading">
             <el-col :span="24" ><el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange"
             :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination></el-col>
         </el-row>
@@ -90,8 +86,8 @@
             </el-form>
             <!-- 新增明细开始 -->
             <!-- 新增明细结束 -->
-            <span slot="footer" class="dialog-footer" v-show="viewDialog.isEdit">
-                <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading">取 消</el-button>
+            <span slot="footer" class="dialog-footer"  v-show="viewDialog.isEdit">
+                <el-button @click="viewDialog.isShow = false" class="cancel-but" :loading="viewDialog.butIsLoading">取 消</el-button>
                 <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
             </span>
         </el-dialog>

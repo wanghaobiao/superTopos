@@ -48,7 +48,6 @@
         <!-- 列表框开始 -->
 
         <dv-loading v-if="listData.loading" style="color: white">Loading...</dv-loading>
-
         <el-table :data="listData.content" ref="listTable" fixed  :height="screenSize.height - 83" fit border
                   :header-cell-style="{ background: 'rgb(55 76 135)',color: '#fff',}"
                   :row-style="{background: '#282c34', color: '#fff',}">
@@ -300,7 +299,7 @@
             </el-table>
             <!-- 新增用户结束 -->
             <span slot="footer" class="dialog-footer" v-show="!viewDialog.isView">
-                <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading">取 消</el-button>
+                <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading" class="cancel-but">取 消</el-button>
                 <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
             </span>
         </el-dialog>

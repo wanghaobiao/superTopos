@@ -430,7 +430,7 @@
                                 </el-form-item>-->
                             </el-form>
                             <span slot="footer">
-                     <el-button @click="buildFileDialog.isShow = false">取 消</el-button>
+                     <el-button class="cancel-but" @click="buildFileDialog.isShow = false">取 消</el-button>
                      <el-button
                          :type="this.buildFileDialog.isAllSelect ? 'success' : 'primary'"
                          plain
@@ -457,7 +457,6 @@
                                         </el-col>
                                         <el-col :span="8" class="frame-col">
                                             <el-button class="frame-but" type="success" plain @click="allCode">全部
-                                            </el-button>
                                             </el-button></el-col>
                                     </el-row>
 

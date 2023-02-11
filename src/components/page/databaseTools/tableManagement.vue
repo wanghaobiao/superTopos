@@ -480,7 +480,7 @@
                                     </el-form-item>
                                 </el-form>
                                 <span slot="footer">
-                     <el-button @click="buildFileDialog.isShow = false">取 消</el-button>
+                     <el-button class="cancel-but" @click="buildFileDialog.isShow = false">取 消</el-button>
                      <el-button
                          :type="this.buildFileDialog.isAllSelect ? 'success' : 'primary'"
                          plain
@@ -1073,6 +1073,7 @@ export default {
 };
 </script>
 <style>
+
 .frame-col {
     text-align: center;
 }
@@ -1170,22 +1171,37 @@ export default {
 
 .el-popover {
     position: absolute;
-    background: #fff;
+    background: rgb(49 44 76);
     min-width: 110px;
     margin: 6px;
-    /* border: 2px solid #495e9b; */
+    border: 1px solid #5f80df;
     padding: 6px;
     z-index: 2000;
     color: #606266;
     line-height: 1.4;
     text-align: justify;
     font-size: 14px;
-    box-shadow: 0 2px 12px 0 ;
+    /* box-shadow: 0 2px 12px 0; */
     word-break: break-all;
 }
 
+.el-popper[x-placement^=right] .popper__arrow::after {
+    bottom: -6px;
+    left: 1px;
+    border-right-color: rgb(49 44 76);
+    border-left-width: 0;
+}
+
+.el-popper[x-placement^=right] .popper__arrow {
+    top: 50%;
+    left: -6px;
+    margin-bottom: 3px;
+    border-right-color: #5f80df;
+    border-left-width: 0;
+}
+
 .popoverPadding {
-    border: 2px dashed #495e9b;
+    border: 2px dashed #4e68b6;
     border-radius: 25px;
     padding: 15px;
 }

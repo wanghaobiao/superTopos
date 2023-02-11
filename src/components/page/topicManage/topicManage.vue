@@ -74,8 +74,8 @@
                     </el-col>
                 </el-row>
             </el-form>
-            <span slot="footer" class="dialog-footer" v-show="!viewDialog.isView">
-                <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading">取 消</el-button>
+            <span slot="footer" class="dialog-footer"  v-show="!viewDialog.isView">
+                <el-button @click="viewDialog.isShow = false" class="cancel-but" :loading="viewDialog.butIsLoading">取 消</el-button>
                 <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
             </span>
         </el-dialog>
@@ -114,10 +114,10 @@
                 </el-row>
             </el-form>
             <span slot="footer" class="dialog-footer" >
-                <el-button v-show="viewDetailDialog.isView" @click="viewDetailDialog.isShow = false" :loading="viewDetailDialog.butIsLoading">取 消</el-button>
+                <el-button v-show="viewDetailDialog.isView" @click="viewDetailDialog.isShow = false" class="cancel-but" :loading="viewDetailDialog.butIsLoading">取 消</el-button>
                 <el-button v-show="viewDetailDialog.isView" type="success"  @click="sqlCopy()" >复制</el-button>
                 <el-button v-show="viewDetailDialog.isView" type="primary" @click="viewDetailDialog.isView = false" >编辑</el-button>
-                <el-button v-show="!viewDetailDialog.isView" @click="viewDetailDialog.isView = true" :loading="viewDetailDialog.butIsLoading">取 消</el-button>
+                <el-button v-show="!viewDetailDialog.isView" @click="viewDetailDialog.isView = true" class="cancel-but" :loading="viewDetailDialog.butIsLoading">取 消</el-button>
                 <el-button v-show="!viewDetailDialog.isView" type="primary" @click="saveDetail()" :loading="viewDetailDialog.butIsLoading">保 存</el-button>
             </span>
         </el-dialog>
@@ -399,7 +399,6 @@
 <style  >
 /* 圆框的样式 */
 .input-border .el-input__inner {
-    border-radius: 10px;
     overflow:auto;
     border: 2px solid #495e9b;
     margin-left: 0px;
@@ -408,7 +407,7 @@
 }
 /* 下拉框 */
 .el-input--suffix .el-input__inner {
-     border-radius: 10px;
+
     overflow:auto;
     border: 2px solid #495e9b;
     margin-left: 4px;

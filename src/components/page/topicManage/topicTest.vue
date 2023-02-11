@@ -272,7 +272,6 @@
 }
 /* 圆框的样式 */
 .input-border .el-input__inner {
-    border-radius: 10px;
     overflow:auto;
     border: 2px solid #495e9b;
     margin-left: 0px;
@@ -282,7 +281,7 @@
 }
 /* 下拉框 */
 .el-input--suffix .el-input__inner {
-     border-radius: 10px;
+
     overflow:auto;
     border: 2px solid #495e9b;
     margin-left: 4px;

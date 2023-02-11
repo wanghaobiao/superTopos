@@ -9,19 +9,21 @@
                     <el-menu-item index="1-2" @click="jumpForTable('tableManagement','DQ')">表结构管理</el-menu-item>
                     <el-menu-item index="1-3" @click="jumpForTable('tableManagement','LS')">表结构管理(历史)</el-menu-item>
                 </el-submenu> -->
-                <el-menu-item index="1" @click="jump('/databaseTools/project')" class="border-radius-5" >项目管理</el-menu-item>
-                <el-menu-item index="2" @click="jumpForTable('tableManagement','DQ')">项目结构管理</el-menu-item>
-                <el-menu-item index="6" @click="jump('/databaseTools/dataSource')">数据库管理</el-menu-item>
-                <el-menu-item index="7" @click="jump('/databaseTools/dbManagement')">数据库逆向</el-menu-item>
-                <el-menu-item index="3" @click="jump('/systemConfig/codeReserve')">代码储备</el-menu-item>
+                <el-menu-item index="1" @click="jump('/databaseTools/project')" class="border-radius-5 el-menu-x" >项目管理</el-menu-item>
+                <el-menu-item index="2" @click="jumpForTable('tableManagement','DQ')" class="el-menu-x">项目结构管理</el-menu-item>
+                <el-menu-item index="6" @click="jump('/databaseTools/dataSource')" class="el-menu-x">数据库管理</el-menu-item>
+                <el-menu-item index="7" @click="jump('/databaseTools/dbManagement')" class="el-menu-x">数据库逆向</el-menu-item>
+                <el-menu-item index="3" @click="jump('/systemConfig/codeReserve')" class="el-menu-x">代码储备</el-menu-item>
+                <el-menu-item index="5" @click="jump('/systemConfig/params')" class="el-menu-x">参数管理</el-menu-item>
                 <!--                <el-menu-item index="4" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>-->
                 <!--                <el-menu-item index="5" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item>-->
-                <el-submenu index="2">
+<!--                <el-submenu index="2">
                     <template slot="title">系统配置</template>
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
-                    <!--                    <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>-->
-                </el-submenu>
+                    <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
+                </el-submenu>-->
             </el-menu>
+            <div class="card"></div>
         </dv-border-box-13>
         <router-view :style="{'margin-top':  !$route.meta.showNav ? '8px' : '0px'}" class="router-view"></router-view>
     </div>
@@ -66,8 +68,77 @@
 
 
 
+
+
+
+
 <style>
 
+.card {
+    margin-top: 1px;
+    margin-left: 3px;
+    width: calc(100% - 6px);
+    height: 3px;
+    z-index: -10;
+    background: #282c34;
+    position: relative;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.card h2 {
+    z-index: 1;
+    color: white;
+    font-size: 2em;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    background-image: linear-gradient(180deg, rgb(2, 6, 245), rgb(234, 4, 4));
+    /*background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));*/
+    height: 2000px;
+    animation: rotBGimg 4s linear infinite;
+    transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    background: #07182E;
+;
+    inset: 5px;
+    border-radius: 15px;
+}
+/* .card:hover:before {
+  background-image: linear-gradient(180deg, rgb(81, 255, 0), purple);
+  animation: rotBGimg 3.5s linear infinite;
+} */
+
+
+/********************************************************动画开始********************************************************/
+
+
+/********************************************************动画结束********************************************************/
+.el-menu-x {
+    background-color: rgba(246, 243, 243, 0.01) !important;;
+    border-bottom-color: rgba(255, 208, 75, 0) !important;;
+
+}
 body {
     background-color: #282c34;
 }
@@ -77,10 +148,10 @@ body {
 }
 .el-submenu__title:hover{
     background-color: rgb(255, 255, 255, 0) !important;
-    }
-    .el-menu-item:hover {
+}
+.el-menu-item:hover {
     background-color: rgb(255, 255, 255, 0) !important;
-    }
+}
 
 .el-menu-demo{
     border-radius: 10px;
@@ -214,10 +285,20 @@ body .el-table th.gutter{
 .tb-edit .edit-row .el-select+span {
     display: none
 }
+
 /***************************************** 详情样式结束 *****************************************/
 /***************************************** 覆盖样式开始 *****************************************/
 /* table鼠标悬停颜色 */
 .el-table--enable-row-hover .el-table__body tr:hover>td{
+    background-color: rgb(53 67 108) !important;
+}
+
+/* table鼠标悬停颜色 */
+.el-table__body tr:hover>td{
+    background-color: rgb(53 67 108) !important;
+}
+/* table鼠标悬停颜色 */
+.el-table--striped .el-table__body tr.el-table__row--striped.current-row td, .el-table__body tr.current-row>td, .el-table__body tr.hover-row.current-row>td, .el-table__body tr.hover-row.el-table__row--striped.current-row>td, .el-table__body tr.hover-row.el-table__row--striped>td, .el-table__body tr.hover-row>td {
     background-color: rgb(53 67 108) !important;
 }
 
@@ -251,6 +332,16 @@ body .el-table th.gutter{
     padding: 12px 20px;
     font-size: 14px;
     border-radius: 5px;
+}
+
+.el-form-item__label {
+    text-align: right;
+    float: left;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 40px;
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
 }
 /***************************************** 覆盖样式结束 *****************************************/
 /***************************************** 修改滚动条开始 *****************************************/
@@ -341,7 +432,40 @@ div::-webkit-scrollbar-corner{
     background: #c78323;
     border-color: #f9bb5c;
 }
+
+.el-button--primary {
+    color: white;
+    background: #495e9b;
+    border-color: #4d79fb;
+}
+.el-button--success {
+    color: white;
+    background: #0f4e28;
+    border-color: #1e703f;
+}
+.el-button--danger {
+    color: white;
+    background: #af2e2e;
+    border-color: #d13b3b;
+}
+.el-button--warning {
+    color: white;
+    background: #c78323;
+    border-color: #f9bb5c;
+}
+.cancel-but {
+    color: white;
+    background: #ff7657;
+    border-color: #ff5f3a;
+}
+.cancel-but:hover {
+    color: white;
+    background: #ff5937;
+    border-color: #ff5f3a;
+}
+
 /***************************************** 修改按钮默认样式结束 *****************************************/
+/***************************************** 修改分页默认样式开始 *****************************************/
 .el-pagination.is-background .btn-next.disabled, .el-pagination.is-background .btn-next:disabled, .el-pagination.is-background .btn-prev.disabled, .el-pagination.is-background .btn-prev:disabled, .el-pagination.is-background .el-pager li.disabled {
     color: white;
 }
@@ -358,4 +482,27 @@ div::-webkit-scrollbar-corner{
     background-color: #495e9b;
     color: #fff;
 }
+
+
+.el-checkbox__inner {
+    display: inline-block;
+    position: relative;
+    border: 1px solid #2752b7;
+    border-radius: 2px;
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+    background-color: #000;
+    z-index: 1;
+    transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
+}
+/***************************************** 修改分页默认样式结束 *****************************************/
+/***************************************** 修改单选框默认样式开始 *****************************************/
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: rgb(53 67 108);
+    border-color: #409EFF;
+}
+
+/***************************************** 修改单选框默认样式结束 *****************************************/
+
 </style>

@@ -201,7 +201,7 @@
             </el-table>
             <!-- 新增明细结束 -->
             <span slot="footer" class="dialog-footer" v-show="!viewDialog.isView">
-                <el-button @click="viewDialog.isShow = false" :loading="viewDialog.butIsLoading">取 消</el-button>
+                <el-button @click="viewDialog.isShow = false"  class="cancel-but":loading="viewDialog.butIsLoading">取 消</el-button>
                 <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>
             </span>
         </el-dialog>
