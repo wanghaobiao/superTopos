@@ -84,7 +84,7 @@
             <el-pagination background  @size-change="handleSizeChange"  @current-change="handleCurrentChange" :page-size="listData.size" layout="total,prev, pager, next" :total="listData.totalElements"></el-pagination>
         </el-row>
         <!-- 新增/编辑开始 -->
-        <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'"  customClass="dialog"  :visible.sync="viewDialog.isShow":close-on-click-modal= "false"  :fullscreen = "true">
+        <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" :close-on-click-modal= "false"  :fullscreen = "true">
             <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
                 <el-row :gutter="20">
                     <el-col :span="12">
@@ -707,21 +707,15 @@
         }
     };
 </script>
-<style scoped>
+<style >
 .el-input__inner {
     border-radius: 10px;
     overflow: auto;
-    border: 2px solid #495e9b;
+    border: 2px solid #adadad;
     margin-left: 4px;
     height: 42px;
     font-size: 16px;
 }
-
-
-
-</style>
-<style >
-
 
 
 </style>
