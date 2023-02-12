@@ -1274,6 +1274,12 @@ export default {
     line-height: normal;
     height: 40px;
 }
+.el-input .el-input__inner {
+    background-color: rgb(53 67 108);
+    border-color: #495e9b;
+    color: #C0C4CC;
+    cursor: not-allowed;
+}
 </style>
 
 <style scoped>

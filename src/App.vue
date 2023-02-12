@@ -2,7 +2,7 @@
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
         <dv-border-box-13 style="height: 60px;background-color: #282c34;color: #fff; z-index: 11" v-show="!$route.meta.showNav">
-            <el-menu class="elmenu"  mode="horizontal" background-color="rgba(165, 42, 42, 0)" text-color="#fff" active-text-color="#ffd04b" >
+            <el-menu class="elmenu" :default-active="activeIndex" mode="horizontal" background-color="rgba(165, 42, 42, 0)" text-color="#fff" active-text-color="#ffd04b" >
                 <!-- <el-submenu index="1">
                     <template slot="title">数据库工具</template>
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
@@ -42,6 +42,7 @@
         },
         data() {
             return {
+                activeIndex:'2',
                 pages: [],
                 menuData:[],
                 screenSize:{}
@@ -126,7 +127,7 @@ body {
     cursor:pointer;
     box-shadow:0 1px 2px rgba(0,0,0,.3);
     overflow:hidden;
-    background-image:-webkit-gradient(linear,left top,left bottom,from(#81cbfd),to(#495e9b));
+    background-image:-webkit-gradient(linear,left top,left bottom,from(#6789e8),to(#495e9b));
     -webkit-animation-timing-function:ease-in-out;
     -webkit-animation-name:breathe;
     -webkit-animation-duration:2700ms;

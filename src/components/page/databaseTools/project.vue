@@ -5,7 +5,7 @@
         <dv-border-box-12 style="height: 78px;background-color: #282c34;color: #fff; z-index: 11;margin-top: 15px;">
             <el-row style="margin-top: -10px" >
                 <el-col :span="18">
-                    <el-form  class="demo-form-inline">
+                    <el-form  >
                         <el-row style="margin-top: 17px">
                             <el-col :span="8">
                                 <el-form-item  label="名称" :label-width="formLabelWidth">
@@ -707,7 +707,7 @@
         }
     };
 </script>
-<style >
+<style scoped>
 .el-input__inner {
     border-radius: 10px;
     overflow: auto;

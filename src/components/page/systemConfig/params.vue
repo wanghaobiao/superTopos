@@ -35,7 +35,7 @@
         <!-- 搜索框结束 -->
         <!-- 列表框开始 -->
         <dv-loading v-if="listData.loading" style="color: white;height: 95%">Loading...</dv-loading>
-        <el-table :data="listData.content" v-if="!listData.loading" ref="listTable" row-key="id"  :height="screenSize.height - 75"  fit border style="width: 100%;margin-top: 5px"  :tree-props="{children: 'detailEntitys'}"
+        <el-table :data="listData.content" v-if="!listData.loading" ref="listTable" row-key="id"  :height="screenSize.height - 75"  fit border style="width: 100%;margin-top: 5px"  :tree-props="{children: 'children'}"
                   :header-cell-style="{background: 'rgb(55 76 135)',color: '#fff'}" :row-style="{background: '#282c34',color: '#fff'} " >
             <el-table-column  property="name" label="参数名称" ></el-table-column>
             <el-table-column  property="number" label="参数编码" ></el-table-column>

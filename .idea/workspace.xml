@@ -9,9 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="代码提交">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dataSource.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/project.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/login/login.vue" afterDir="false" />
@@ -202,14 +201,8 @@
       <workItem from="1676007763700" duration="2781000" />
       <workItem from="1676010735538" duration="15849000" />
       <workItem from="1676039354617" duration="17669000" />
-      <workItem from="1676098403380" duration="22331000" />
-    </task>
-    <task id="LOCAL-00001" summary="超级工具代码提交">
-      <created>1594187644227</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1594187644227</updated>
+      <workItem from="1676098403380" duration="27534000" />
+      <workItem from="1676206815366" duration="624000" />
     </task>
     <task id="LOCAL-00002" summary="超级工具代码提交">
       <created>1594276316269</created>
@@ -540,7 +533,21 @@
       <option name="project" value="LOCAL" />
       <updated>1676119242770</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="代码提交">
+      <created>1676126662512</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1676126662512</updated>
+    </task>
+    <task id="LOCAL-00050" summary="代码提交">
+      <created>1676126836709</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1676126836709</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,15 +620,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/App.vue</url>
-          <line>128</line>
-          <properties lambdaOrdinal="-1" />
+          <line>147</line>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/page/login/login.vue</url>
-          <line>152</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
