@@ -25,9 +25,10 @@
                     </el-row>
                 </el-form>
             </el-col>
-            <el-col :span="4" :offset="2" style="margin-top: 17px">
+            <el-col :span="5" :offset="1" style="margin-top: 17px">
                 <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
                 <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
+                <el-button type="danger" plain @click="editPassDialog.isShow = true">修改密码</el-button>
                 <el-button class="cancel-but" plain @click.prevent="refreshParams('刷新成功')">刷新缓存</el-button>
             </el-col>
         </el-row>
@@ -92,6 +93,23 @@
             </span>
         </el-dialog>
         <!-- 新增/编辑结束 -->
+        <!-- 修改密码开始 -->
+        <el-dialog title="修改登录密码" :visible.sync="editPassDialog.isShow" customClass="view-dialog" >
+            <el-form :model="editPassDialog" v-loading="editPassDialog.butIsLoading" :rules="editPassRules" ref="editPassForm" >
+                <el-form-item label="密码" clearable :label-width="formLabelWidth" prop="passWord">
+                    <el-input type="password" v-model="editPassDialog.passWord" placeholder="请输入密码"  ></el-input>
+                </el-form-item>
+                <el-form-item label="再次输入" clearable :label-width="formLabelWidth" prop="passWord2">
+                    <el-input type="password" v-model="editPassDialog.passWord2" placeholder="请输入再次输入" ></el-input>
+                </el-form-item>
+            </el-form>
+            <!-- 新增明细开始 -->
+            <!-- 新增明细结束 -->
+            <span slot="footer" class="dialog-footer" >
+                <el-button type="primary" @click="editPassWord()" :loading="viewDialog.butIsLoading">确认</el-button>
+            </span>
+        </el-dialog>
+        <!-- 修改密码结束 -->
     </div>
 </template>
 <script>
@@ -117,12 +135,27 @@
                     isEdit: false,
                     butIsLoading: false,
                 },
+                editPassDialog:{
+                    passWord : '',
+                    passWord2 : '',
+                    isShow: false,
+                    isEdit: false,
+                    butIsLoading: false,
+                },
                 formLabelWidth: "120px",
                 data: {
                     detailEntitys: []
                 },
                 listData: {
                      loading:false,
+                },
+                editPassRules: {
+                    passWord : [
+                        { required: true, message: '请输入密码', trigger: 'blur' },
+                    ],
+                    passWord2 : [
+                        { required: true, message: '请再次输入', trigger: 'blur' },
+                    ]
                 },
                 rules: {
                     name : [
@@ -215,6 +248,23 @@
                 this.getHttp("/api/params/view?id="+id,{}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
+                });
+            },
+            //修改密码
+            editPassWord() {
+                this.$refs.editPassForm.validate((valid) => {
+                    if (valid) {
+                        if(this.editPassDialog.passWord != this.editPassDialog.passWord2){
+                            this.$message.warning( '两次输入不一致,请再次确认' );
+                            return ;
+                        }
+                        this.getHttp("/api/userManagement/userManagement/editPassWord?passWord="+this.editPassDialog.passWord,{}).then(result => {
+                            this.data = result;
+                            this.$router.push("/login/login");
+                        });
+                    } else {
+                        return false;
+                    }
                 });
             },
             //打开编辑
