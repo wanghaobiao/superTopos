@@ -22,6 +22,7 @@
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
                     <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
                 </el-submenu>-->
+                <el-menu-item index="10" @click="loginOut" class="el-menu-x" style="float: right; margin-right: 20px;color: red;">退出</el-menu-item>
             </el-menu>
 <!--            <div class="card"></div>-->
             <div class="breathe-btn"></div>
@@ -49,6 +50,15 @@
             };
         },
         methods: {
+            loginOut() {
+                this.$confirm('确认退出？').then(_ => {
+                    this.delCookie();
+                    this.$router.replace("/login/login")
+                    done()
+                }).catch(_ => {
+
+                })
+            },
             jump(routerUrl){
                 this.$router.push(routerUrl);
             },
@@ -200,13 +210,21 @@ body {
   animation: rotBGimg 3.5s linear infinite;
 } */
 
+.el-message-box {
+    background-color: #282c34;
+    border: 1px solid #495e9b;
+}
+.el-message-box__message {
+    color: #fff;
+}
+
 
 /********************************************************动画开始********************************************************/
 
 
 /********************************************************动画结束********************************************************/
 .el-menu-x {
-    background-color: rgba(246, 243, 243, 0.01) !important;;
+    /* background-color: rgba(246, 243, 243, 0.01) !important;; */
     border-bottom-color: rgba(255, 208, 75, 0) !important;;
 
 }
