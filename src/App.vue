@@ -22,7 +22,7 @@
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
                     <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
                 </el-submenu>-->
-                <el-menu-item index="10" @click="loginOut" class="el-menu-x" style="float: right; margin-right: 20px;color: red;">退出</el-menu-item>
+                <el-menu-item index="10" @click="loginOut" class="el-menu-x" style="float: right; margin-right: 20px;">退出</el-menu-item>
             </el-menu>
 <!--            <div class="card"></div>-->
             <div class="breathe-btn"></div>
