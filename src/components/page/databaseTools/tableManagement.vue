@@ -64,10 +64,10 @@
                                         </div>
                                     </div>
                                     <div slot="reference">
-                           <span @click="goView(data)">
-                              <i :class="data.icon" :style="{color : data.color}"></i>
-                              {{ node.label }}
-                           </span>
+                                        <span> <!--- @click="goView(data)"-->
+                                            <i :class="data.icon" :style="{color : data.color}"></i>
+                                            {{ node.label }}
+                                        </span>
                                     </div>
                                 </el-popover>
                             </div>
@@ -311,7 +311,7 @@
                                             >
                                                 <el-option
                                                     v-for="item in tableOptions"
-                                                    :key="item.label"
+                                                    :key="item.value"
                                                     :label="item.label"
                                                     :value="item.value"
                                                 ></el-option>

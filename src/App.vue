@@ -22,7 +22,7 @@
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
                     <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
                 </el-submenu>-->
-                <el-menu-item index="10" @click="loginOut" class="el-menu-x" style="float: right; margin-right: 20px;">退出</el-menu-item>
+                <el-menu-item index="99" @click="loginOut" class="el-menu-x" style="float: right; margin-right: 20px;">退出</el-menu-item>
             </el-menu>
 <!--            <div class="card"></div>-->
             <div class="breathe-btn"></div>
@@ -51,7 +51,9 @@
         },
         methods: {
             loginOut() {
-                this.$confirm('确认退出？').then(_ => {
+                this.$confirm('确认退出？',{
+                    customClass: "test"
+                }).then(_ => {
                     this.delCookie();
                     this.$router.replace("/login/login")
                     done()
@@ -219,7 +221,17 @@ body {
     color: #fff;
 }
 
+.test .el-message-box__btns .el-button:nth-child(1) {
+    color: white;
+    background: #ff7657;
+    border-color: #ff5f3a;
+}
 
+.test .el-button--primary {
+    color: white;
+    background: #495e9b;
+    border-color: #4d79fb;
+}
 /********************************************************动画开始********************************************************/
 
 
