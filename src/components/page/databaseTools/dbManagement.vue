@@ -146,7 +146,7 @@
                                 ref="tbEdit"
                                 :data="data.detailEntitys"
                                 border
-                                :height="screenSize.height - (viewDialog.isEdit ? 200 : 124)"
+                                :height="screenSize.height - (viewDialog.isEdit ? 220 : 124)"
                                 v-loading="viewDialog.butIsLoading"
                                 highlight-current-row
                                 :row-class-name="tableRowClassName"
@@ -485,6 +485,7 @@ export default {
         this.search();
         this.getParams();
         this.refreshScreenSize();
+
     },
     data() {
         return {

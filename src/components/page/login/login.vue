@@ -24,7 +24,6 @@
 
 </template>
 <script>
-
 export default {
     data() {
         return {
@@ -70,7 +69,6 @@ export default {
             });
         },
         keyDown(e) {
-            debugger
             if(e.keyCode === 13) {
                 this.submitForm('form')
             }

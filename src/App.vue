@@ -2,7 +2,7 @@
     <div id="app" :style="{width:screenSize.width+'px'}">
         <!--导航条-->
         <dv-border-box-13 style="height: 60px;background-color: #282c34;color: #fff; z-index: 11" v-show="!$route.meta.showNav">
-            <el-menu class="elmenu" :default-active="activeIndex" mode="horizontal" background-color="rgba(165, 42, 42, 0)" text-color="#fff" active-text-color="#ffd04b" >
+            <el-menu     :default-active="activeIndex" mode="horizontal" background-color="rgba(165, 42, 42, 0)" text-color="#fff" active-text-color="#ffd04b" style="border-bottom: solid 0px #e6e6e6;" >
                 <!-- <el-submenu index="1">
                     <template slot="title">数据库工具</template>
                     <el-menu-item index="1-1" @click="jump('/databaseTools/project')">项目管理</el-menu-item>
@@ -88,6 +88,7 @@
 
 <style>
 /*resize*/
+/*resize*/
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,input,textarea,p,th,td,menu {
     margin:0;
     padding:0;
@@ -137,7 +138,7 @@ body {
     cursor:pointer;
     box-shadow:0 1px 2px rgba(0,0,0,.3);
     overflow:hidden;
-    background-image:-webkit-gradient(linear,left top,left bottom,from(#6789e8),to(#495e9b));
+    background-image:-webkit-gradient(linear,left top,left bottom,from(#81cbfd),to(#495e9b));
     -webkit-animation-timing-function:ease-in-out;
     -webkit-animation-name:breathe;
     -webkit-animation-duration:2700ms;
@@ -156,7 +157,7 @@ body {
     }
 }
 .card {
-    margin-top: -6px;
+    margin-top: -4px;
     margin-left: 3px;
     width: calc(100% - 6px);
     height: 5px;
@@ -179,10 +180,10 @@ body {
 .card::before {
     content: '';
     position: absolute;
-    width: 100%;
+    width: 200%;
     background-image: linear-gradient(180deg, #282c34, #517bf6);
     /*background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));*/
-    height: 2000px;
+    height: 3000px;
     animation: rotBGimg 4s linear infinite;
     transition: all 0.2s linear;
 }

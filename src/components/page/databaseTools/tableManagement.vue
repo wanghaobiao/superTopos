@@ -534,6 +534,7 @@ export default {
         this.search();
         this.getParams();
         this.refreshScreenSize();
+
     },
     data() {
         return {
@@ -729,7 +730,6 @@ export default {
             this.viewDialog.isTools = false;
             this.getHttp("/api/project/editView?id=" + row.id, {}).then(
                 result => {
-                    isEmpty;
                     this.viewDialog.isShow = true;
                     this.data = result;
                     this.data.projectEntity = {id: row.id, name: row.label};
