@@ -105,7 +105,7 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="内容" clearable :label-width="formLabelWidth" prop="remark">
-                             <kindeditor  v-if="!viewDetailDialog.isView"  :content.sync="codeReserveDetail.content" :id="'kin'"  height="450px"  width="100%"/>
+                             <kindeditor  v-if="!viewDetailDialog.isView"  :content.sync="codeReserveDetail.content" :id="'kin'"  height="450px"  width="100%" cssData="body {background: #282c34;color: #fff}"/>
                             <!-- <quill-editor v-if="!viewDetailDialog.isView" ref="myTextEditor" v-model="codeReserveDetail.content"  style="height:450px;"></quill-editor> --><!-- :options="editorOption" -->
                             <div class="text-div" v-if="viewDetailDialog.isView" ref="sqlDiv" v-html="codeReserveDetail.content" :style="{height:'450px'}"></div>
                         </el-form-item>
@@ -496,5 +496,41 @@
     position: relative;
     font-size: 14px;
 }
-
+.ke-container {
+    display: block;
+    border: 1px solid #495e9b;
+    background-color: #282c34;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.ke-toolbar {
+    border-bottom: 1px solid #495e9b;
+    background-color: #282c34;
+    padding: 2px 5px;
+    text-align: left;
+    overflow: hidden;
+    zoom: 1;
+}
+.ke-toolbar .ke-outline {
+    border: 1px solid #495e9b;
+    margin: 1px;
+    padding: 1px 2px;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+    cursor: pointer;
+    display: block;
+    float: left;
+}
+.ke-statusbar {
+    position: relative;
+    background-color: #282c34;
+    border-top: 1px solid #495e9b;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+    text-align: center;
+    cursor: s-resize;
+}
 </style>
