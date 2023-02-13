@@ -27,7 +27,7 @@ Vue.prototype.onLoad = function(_this) {
     })
 }
 Vue.prototype.onRefresh = function(_this) {
-   
+
     _this.pageParams.pageNo = 1;
     _this.pageParams.pageNum = 10;
     _this.pageLoad.finished = false;
@@ -86,7 +86,7 @@ Vue.prototype.resultDealWith = function(result,resolve) {
         resolve({code : 505});
     }
 
-}    
+}
 /**********************http访问方法结束*********************/
 /**
  * Created by Schon on 2018/9/13 0013.
@@ -114,7 +114,7 @@ Vue.prototype.getCookie = function (param){
       return c_param;
     }
 };
-  
+
 /**********************缓存的公共方法开始*********************/
 //刷新缓存
 Vue.prototype.refreshParams = function (message){
@@ -131,16 +131,16 @@ Vue.prototype.refreshParams = function (message){
 Vue.prototype.getOptions = function (paramsName){
     if(window.sessionStorage.optionsParams){
         var optionsParams = JSON.parse(window.sessionStorage.optionsParams);
-        return optionsParams[paramsName];  
+        return optionsParams[paramsName];
     }
     return '';
-    
+
 }
 
 //获取缓存
 Vue.prototype.getBaseOptions = function (){
     var optionsBaseParams = JSON.parse(window.sessionStorage.optionsBaseParams);
-    return optionsBaseParams;  
+    return optionsBaseParams;
 }
 
 //获取缓存
@@ -211,9 +211,9 @@ Vue.prototype.copy = function (data) {
     return Object.keys(data).map(function (key) {
         return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
     }).join("&");
-   
+
 },
-//list 提取  
+//list 提取
 Vue.prototype.listExtract = function (listPararm,column) {
     var arr = [];
     for (var i = 0; i < listPararm.length; i++) {
@@ -222,7 +222,7 @@ Vue.prototype.listExtract = function (listPararm,column) {
     }
     return arr;
 },
-//list 提取  
+//list 提取
 Vue.prototype.toComma = function (arr) {
     var commaStr = "";
     for (var i = 0; i < arr.length; i++) {
@@ -432,7 +432,7 @@ Vue.prototype.clearCache = function (_this) {
         : vnode.key;
         var cache = parentVnode.componentInstance.cache;
         var keys  = parentVnode.componentInstance.keys;
-    
+
         if (cache[key]) {
             _this.$destroy()
         // remove key
@@ -481,7 +481,7 @@ Vue.prototype.urlEncodeURIComponent = function (param) {
         return param;
     }
 
-    
+
 }
  //上移
  Vue.prototype.upIndex = function (arr,index)

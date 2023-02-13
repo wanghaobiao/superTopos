@@ -25,6 +25,9 @@
 </template>
 <script>
 
+import de from "element-ui/src/locale/lang/de";
+import De from "element-ui/src/locale/lang/de";
+
 export default {
     data() {
         return {
@@ -70,7 +73,6 @@ export default {
             });
         },
         keyDown(e) {
-            debugger
             if(e.keyCode === 13) {
                 this.submitForm('form')
             }
