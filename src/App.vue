@@ -134,7 +134,7 @@ body {
     -webkit-animation-iteration-count:infinite;
     -webkit-animation-direction:alternate;
 }
-@-webkit-keyframes breathe {
+@keyframes breathe {
     0% {
         opacity:.2;
         box-shadow:0 1px 2px rgba(255,255,255,0.1);
@@ -217,9 +217,12 @@ body {
   background: #282c34 !important;
   border: 1px solid #282c34;
 }
+.el-menu.el-menu--horizontal {
+    border-bottom: solid 0px #e6e6e6;
+}
 .el-menu--horizontal {
     border-right: none;
-    border-bottom: solid 0px #e6e6e6;
+    border-bottom: 0px solid #e6e6e6;
 }
 .el-submenu__title:hover{
     background-color: rgb(255, 255, 255, 0) !important;

@@ -24,7 +24,6 @@
 
 </template>
 <script>
-import de from "element-ui/src/locale/lang/de";
 
 export default {
     data() {
@@ -47,6 +46,10 @@ export default {
     },
     mounted() {
         document.querySelector('body').setAttribute('style', ' margin: 0px;')
+        window.addEventListener('keydown', this.keyDown)
+    },
+    destroyed () {
+        window.removeEventListener('keydown', this.keyDown, false)
     },
     methods: {
         submitForm(formName) {
@@ -66,6 +69,12 @@ export default {
                 }
             });
         },
+        keyDown(e) {
+            debugger
+            if(e.keyCode === 13) {
+                this.submitForm('form')
+            }
+        }
     },
 };
 </script>
