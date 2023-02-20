@@ -199,7 +199,6 @@
                                     :data="data.detailEntitys"
                                     border
                                     :height="screenSize.height - (viewDialog.isEdit ? 220  : 124)"
-                                    v-loading="viewDialog.butIsLoading"
                                     highlight-current-row
                                     :row-class-name="tableRowClassName"
                                     @current-change="currentChange"
@@ -936,21 +935,24 @@ export default {
                         }
                     }
                     let isAllOk = false;
-                    for (let k = 0; k < this.data.detailEntitys.length; k++) {
-                        let li = this.data.detailEntitys[k];
-                        if (!li.name || li.name === "") {
-                            let msg = `请填写第${k + 1}行名称字段`;
-                            this.$message.warning(msg);
-                            isAllOk = true;
-                            break;
-                        }
-                        if (!li.number || li.number === "") {
-                            let msg = `请填写第${k + 1}行属性名字段`;
-                            this.$message.warning(msg);
-                            isAllOk = true;
-                            break;
+                    if (this.data.level != 2) {
+                        for (let k = 0; k < this.data.detailEntitys.length; k++) {
+                            let li = this.data.detailEntitys[k];
+                            if (!li.name || li.name === "") {
+                                let msg = `请填写第${k + 1}行名称`;
+                                this.$message.warning(msg);
+                                isAllOk = true;
+                                break;
+                            }
+                            if (!li.number || li.number === "") {
+                                let msg = `请填写第${k + 1}行属性名`;
+                                this.$message.warning(msg);
+                                isAllOk = true;
+                                break;
+                            }
                         }
                     }
+
                     if (isAllOk) {
                         return;
                     }

@@ -10,11 +10,11 @@
                     <el-menu-item index="1-3" @click="jumpForTable('tableManagement','LS')">表结构管理(历史)</el-menu-item>
                 </el-submenu> -->
                 <el-menu-item index="1" @click="jump('/databaseTools/project')" class="border-radius-5 el-menu-x" >项目管理</el-menu-item>
-                <el-menu-item index="2" @click="jumpForTable('tableManagement','DQ')" class="el-menu-x">项目结构管理</el-menu-item>
-                <el-menu-item index="6" @click="jump('/databaseTools/dataSource')" class="el-menu-x">数据库管理</el-menu-item>
-                <el-menu-item index="7" @click="jump('/databaseTools/dbManagement')" class="el-menu-x">数据库逆向</el-menu-item>
-                <el-menu-item index="3" @click="jump('/systemConfig/codeReserve')" class="el-menu-x">代码储备</el-menu-item>
-                <el-menu-item index="5" @click="jump('/systemConfig/params')" class="el-menu-x">参数管理</el-menu-item>
+                <el-menu-item index="2" @click="jumpForTable('tableManagement','DQ')" class="el-menu-x" >项目结构管理</el-menu-item>
+                <el-menu-item index="6" @click="jump('/databaseTools/dataSource')" class="el-menu-x" >数据库管理</el-menu-item>
+                <el-menu-item index="7" @click="jump('/databaseTools/dbManagement')" class="el-menu-x" >数据库逆向</el-menu-item>
+                <el-menu-item index="3" @click="jump('/systemConfig/codeReserve')" class="el-menu-x" >代码储备</el-menu-item>
+                <el-menu-item index="5" @click="jump('/systemConfig/params')" class="el-menu-x" >参数管理</el-menu-item>
                 <!--                <el-menu-item index="4" @click="jump('/topicManage/topicManage')">题目管理</el-menu-item>-->
                 <!--                <el-menu-item index="5" @click="jump('/topicManage/topicTest')">基础构建</el-menu-item>-->
 <!--                <el-submenu index="2">
@@ -22,7 +22,7 @@
                     <el-menu-item index="2-1" @click="jump('/systemConfig/params')">参数管理</el-menu-item>
                     <el-menu-item index="2-2" @click="jump('/userManagement/userManagement')">用户管理</el-menu-item>
                 </el-submenu>-->
-                <el-menu-item index="99" @click="loginOut" class="el-menu-x" style="float: right; margin-right: 20px;">退出</el-menu-item>
+                <el-menu-item index="99" @click="loginOut" class="el-menu-x" style="float: right; margin-right: 20px;background-color: transparent">退出</el-menu-item>
             </el-menu>
 <!--            <div class="card"></div>-->
             <div class="breathe-btn"></div>
@@ -120,9 +120,6 @@ a {
     height:0;
     clear:both;
     color:#fff;
-}
-body {
-    background:#333;
 }
 .breathe-btn {
     z-index: 999;
@@ -237,11 +234,13 @@ body {
 
 /********************************************************动画结束********************************************************/
 .el-menu-x {
-    /* background-color: rgba(246, 243, 243, 0.01) !important;; */
+     background-color: rgba(246, 243, 243, 0) !important;;
     border-bottom-color: rgba(255, 208, 75, 0) !important;;
 
 }
 body {
+    background:#333;
+
     background-color: #282c34;
 }
 .el-popover{

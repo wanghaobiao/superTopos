@@ -59,7 +59,7 @@
         </el-row>
         <!-- 新增/编辑开始 -->
         <el-dialog :title="viewDialog.isEdit ? '编辑' : '查看'" :visible.sync="viewDialog.isShow" customClass="view-dialog" >
-            <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
+            <el-form :model="data"  :rules="rules" ref="ruleForm" >
                 <el-form-item label="参数名称" clearable :label-width="formLabelWidth" prop="name">
                     <el-input :disabled="!viewDialog.isEdit" v-model="data.name" placeholder="请输入参数名称" autocomplete="off"></el-input>
                 </el-form-item>

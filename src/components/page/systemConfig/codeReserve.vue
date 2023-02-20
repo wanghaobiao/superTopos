@@ -89,7 +89,7 @@
 
         <!-- 新增/编辑开始 -->
         <el-dialog :title="viewDetailDialog.isView ? '查看' : viewDetailDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDetailDialog.isShow" customClass="view-dialog" :close-on-click-modal="viewDetailDialog.isView">
-            <el-form :model="data" v-loading="viewDetailDialog.butIsLoading" :rules="rules" ref="ruleForm" >
+            <el-form :model="data" :rules="rules" ref="ruleForm" >
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="名称" clearable :label-width="formLabelWidth" prop="name">

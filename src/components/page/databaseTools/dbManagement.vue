@@ -374,7 +374,7 @@
                             </el-button>
                             <!--                  <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存</el-button>-->
                         </el-row>
-                        <el-dialog title="生成代码" :visible.sync="buildFileDialog.isShow" width="30%">
+                        <el-dialog  custom-class="dialog"  title="生成代码" :visible.sync="buildFileDialog.isShow" width="30%">
                             <el-form
                                 :model="data"
                                 v-loading="viewDialog.butIsLoading"

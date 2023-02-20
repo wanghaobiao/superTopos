@@ -6,7 +6,7 @@
         <!-- 搜索框开始 -->
         <dv-border-box-12 style="height: 78px;background-color: #282c34;color: #fff; z-index: 11;margin-top: 15px;">
         <el-row style="margin-top: -10px" >
-            <el-col :span="18">
+                <el-col :span="17">
                 <el-form  class="demo-form-inline">
                     <el-row style="margin-top: 17px">
                         <el-col :span="8">
@@ -34,7 +34,7 @@
                     </el-row>
                 </el-form>
             </el-col>
-            <el-col :span="4" :offset="2" style="margin-top: 17px">
+            <el-col :span="5" :offset="2" style="margin-top: 17px">
                 <el-button type="primary" plain @click.prevent="search()">搜索</el-button>
                 <el-button type="success" plain @click.prevent="goAdd()">新增</el-button>
                 <el-button type="danger" plain @click.prevent="batchDel()">删除</el-button>
@@ -88,7 +88,7 @@
         </el-row>
         <!-- 新增/编辑开始 -->
         <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" :close-on-click-modal="false" >
-            <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
+            <el-form :model="data" :rules="rules" ref="ruleForm" >
                 <el-row>
                   <el-col :span="12">
                     <el-form-item label="项目编号" clearable :label-width="formLabelWidth" prop="projectNum">

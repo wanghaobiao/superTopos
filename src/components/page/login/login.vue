@@ -214,14 +214,8 @@ body {
 .el-button {
     border: 0px solid;
 }
+
 </style>
 <style>
-.el-input .el-input__inner {
-    background-color: rgb(255, 255, 255);
-    border-color: #495e9b;
-    color: #C0C4CC;
-    cursor: not-allowed;
-    border-radius: 0.9em;
 
-}
 </style>

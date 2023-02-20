@@ -85,7 +85,7 @@
         </el-row>
         <!-- 新增/编辑开始 -->
         <el-dialog :title="viewDialog.isView ? '查看' : viewDialog.isView == null ? '新增' : '编辑'" :visible.sync="viewDialog.isShow" customClass="view-dialog" :close-on-click-modal= "false"  :fullscreen = "true">
-            <el-form :model="data" v-loading="viewDialog.butIsLoading" :rules="rules" ref="ruleForm" >
+            <el-form :model="data" :rules="rules" ref="ruleForm" >
                 <el-row :gutter="20">
                     <el-col :span="12">
                         <el-form-item label="名称" clearable :label-width="formLabelWidth" prop="name">
@@ -181,7 +181,7 @@
                 <el-button type="warning"  @click.prevent="up()" :loading="viewDialog.butIsLoading" plain>上移</el-button>
                 <el-button type="primary"  @click.prevent="down()" :loading="viewDialog.butIsLoading" plain>下移</el-button>
             </el-row>
-            <el-table :data="data.detailEntitys"  border  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit"
+            <el-table :data="data.detailEntitys"  border   @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit"
                       :header-cell-style="{ background: 'rgb(55 76 135)',color: '#fff',}"
                       :row-style="{background: '#282c34', color: '#fff',}">
                 <el-table-column width="50" type="index" label="序号"></el-table-column>
@@ -268,10 +268,10 @@
             </el-table>
             <!-- 新增明细结束 -->
             <!-- 新增用户开始 -->
-            <el-row class="spacing" v-show="!viewDialog.isView"  style="margin-top: 20px">
-                <el-button type="primary" @click.prevent="goAddUser()" >新增用户</el-button>
+            <el-row class="spacing" v-show="!viewDialog.isView"  style="margin-top: 10px">
+                <el-button type="primary" @click.prevent="goAddUser()" :loading="viewDialog.butIsLoading">新增用户</el-button>
             </el-row>
-            <el-table :data="data.projectRoleUserEntities"  border  v-loading="viewDialog.butIsLoading" @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit"
+            <el-table :data="data.projectRoleUserEntities"  border  @current-change="currentChange" :row-class-name="tableRowClassName"  :highlight-current-row="!viewDialog.isView" class="tb-edit"
                       :header-cell-style="{ background: 'rgb(55 76 135)',color: '#fff',}"
                       :row-style="{background: '#282c34', color: '#fff',}">
 
