@@ -124,6 +124,8 @@
     </div>
 </template>
 <script>
+    import de from "element-ui/src/locale/lang/de";
+
     export default {
         created() {
             this.monitorEnter();
@@ -244,6 +246,7 @@
                 this.getHttp("/api/systemConfig/codeReserve/view?id="+id,{}).then(result => {
                     this.viewDialog.isShow = true;
                     this.data = result;
+
                 });
             },
             //打开编辑
@@ -329,10 +332,16 @@
                 });
             },
             //点击标签
+
             labelClick(index){
                 this.labelClickIndex = index;
                 this.getHttp("/api/systemConfig/codeReserve/view?id="+this.listData.content[index].id,{}).then(result => {
-                    this.data = result;
+                    this.data = Object.assign({}, result)
+                    this.data.codeReserveDetail = Object.assign([], result.codeReserveDetail);
+                    if (this.labelDetailClickIndex != null){
+                        this.codeReserveDetail = this.data.codeReserveDetail[this.labelDetailClickIndex];
+                    }
+                    console.log('====='+JSON.stringify(this.data.codeReserveDetail));
                 });
             },
 
@@ -347,6 +356,7 @@
                 this.labelDetailClickIndex = index;
                 this.codeReserveDetail = this.data.codeReserveDetail[this.labelDetailClickIndex];
                 //this.goDetailView();
+
             },
             //打开明细详情
             goDetailView() {
@@ -369,6 +379,7 @@
                 }else{
                     this.data.codeReserveDetail[this.labelDetailClickIndex] = this.codeReserveDetail;
                 }
+                this.data.codeReserveDetail[this.labelDetailClickIndex] = this.codeReserveDetail;
                 for(var i = 0; i < this.data.codeReserveDetail.length; i++){
                     this.data.codeReserveDetail[i].id = null;
                 }
@@ -397,6 +408,8 @@
             //监听enter事件
             monitorEnter(){
                 var _self = this
+                console.log('---'+JSON.stringify(this.data.codeReserveDetail));
+
                 document.onkeydown = function () {
                     var key = window.event.keyCode
                     if (key === 13) {

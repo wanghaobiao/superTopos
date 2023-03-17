@@ -146,7 +146,7 @@
                                 ref="tbEdit"
                                 :data="data.detailEntitys"
                                 border
-                                :height="screenSize.height - (viewDialog.isEdit ? 220 : 124)"
+                                :height="screenSize.height - (viewDialog.isEdit ? 220 : 124) - (screenSize.height > 1000 ? 55 : 0 )"
                                 v-loading="viewDialog.butIsLoading"
                                 highlight-current-row
                                 :row-class-name="tableRowClassName"
@@ -160,8 +160,6 @@
                                 <el-table-column label="名称" width="200">
                                     <template scope="scope">
                                         <el-input
-                                            v-model="scope.row.name"
-                                            placeholder="请输入名称"
                                             :disabled="!viewDialog.isEdit || scope.row.columnProperties == 'linkColumn'"
                                             clearable
                                         ></el-input>
@@ -431,14 +429,15 @@
                                 </el-form-item>-->
                             </el-form>
                             <span slot="footer">
-                     <el-button class="cancel-but" @click="buildFileDialog.isShow = false">取 消</el-button>
+                     <el-button class="cancel-but" @click="buildFileDialog.isShow = false" :loading="buildFileDialog.butIsLoading">取 消</el-button>
                      <el-button
                          :type="this.buildFileDialog.isAllSelect ? 'success' : 'primary'"
                          plain
+                         :loading="buildFileDialog.butIsLoading"
                          @click="fileTypesAll"
                      >{{ this.buildFileDialog.isAllSelect ? '取消全选' : '全 选' }}</el-button>
-                     <el-button type="success" @click="downloadFile()">下 载</el-button>
-                     <el-button type="primary" @click="buildFile()">确 定</el-button>
+                     <el-button type="success" @click="downloadFile()" :loading="buildFileDialog.butIsLoading">下 载</el-button>
+                     <el-button type="primary" @click="buildFile()" :loading="buildFileDialog.butIsLoading">确 定</el-button>
                   </span>
                         </el-dialog>
                         <el-dialog title="生成局部代码" :visible.sync="buildPartialDialog.isShow" width="30%">
@@ -957,9 +956,11 @@ export default {
         //生成文件
         buildFile() {
             this.data['fileTypes'] = this.buildFileDialog.fileTypes;
+            this.buildFileDialog.butIsLoading = true;
             this.postHttp(
                 "/api/project/buildFileFromTable", this.data
             ).then((result) => {
+                this.buildFileDialog.butIsLoading = false;
                 this.$message({message: '生成成功', type: 'success'});
             });
         },

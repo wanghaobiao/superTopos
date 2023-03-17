@@ -10,13 +10,9 @@
   <component name="ChangeListManager">
     <list default="true" id="17ec15c7-9cd1-4e13-86d2-68bd5f15249b" name="Default Changelist" comment="代码提交">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/dbManagement.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/databaseTools/tableManagement.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/login/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/login/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/util/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/util/util.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/systemConfig/codeReserve.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,21 +203,14 @@
       <workItem from="1676206815366" duration="4999000" />
       <workItem from="1676250810481" duration="721000" />
       <workItem from="1676251604168" duration="1978000" />
-      <workItem from="1676255347587" duration="3217000" />
-    </task>
-    <task id="LOCAL-00005" summary="增删改查 已完善">
-      <created>1594489228179</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1594489228179</updated>
-    </task>
-    <task id="LOCAL-00006" summary="增删改查 已完善">
-      <created>1594799546367</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1594799546367</updated>
+      <workItem from="1676255347587" duration="3370000" />
+      <workItem from="1676269447458" duration="1707000" />
+      <workItem from="1676282253983" duration="2175000" />
+      <workItem from="1676343708930" duration="949000" />
+      <workItem from="1676618873591" duration="1406000" />
+      <workItem from="1676856163565" duration="5837000" />
+      <workItem from="1676971285304" duration="2727000" />
+      <workItem from="1678969010668" duration="4517000" />
     </task>
     <task id="LOCAL-00007" summary="增删改查 已完善">
       <created>1594814057805</created>
@@ -552,7 +541,21 @@
       <option name="project" value="LOCAL" />
       <updated>1676251067167</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="代码提交">
+      <created>1676267415635</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1676267415636</updated>
+    </task>
+    <task id="LOCAL-00055" summary="代码提交">
+      <created>1676856204791</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1676856204791</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

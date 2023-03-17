@@ -166,7 +166,7 @@
                                         class="sql-div"
                                         ref="sqlDiv"
                                         v-html="data.sql"
-                                        :style="{height:(screenSize.height - 170)+'px'}"
+                                        :style="{height:(screenSize.height - 170 - (screenSize.height > 1000 ? 55 : 0 ))+'px'}"
                                     ></div>
                                 </el-form-item>
                             </el-form>
@@ -198,7 +198,7 @@
                                     ref="tbEdit"
                                     :data="data.detailEntitys"
                                     border
-                                    :height="screenSize.height - (viewDialog.isEdit ? 220  : 124)"
+                                    :height="screenSize.height - (viewDialog.isEdit ? 220  : 124) - (screenSize.height > 1000 ? 55 : 0 )"
                                     highlight-current-row
                                     :row-class-name="tableRowClassName"
                                     @current-change="currentChange"
@@ -404,6 +404,7 @@
                                 <el-button type="primary" @click="save()" :loading="viewDialog.butIsLoading">保 存
                                 </el-button>
                             </el-row>
+                            <dv-loading v-if="buildFileDialog.butIsLoading" style="color: white;margin-top: 25%">Loading...</dv-loading>
                             <el-dialog custom-class="dialog" title="生成代码" :visible.sync="buildFileDialog.isShow"
                                        width="30%">
                                 <el-form
@@ -480,14 +481,15 @@
                                     </el-form-item>
                                 </el-form>
                                 <span slot="footer">
-                     <el-button class="cancel-but" @click="buildFileDialog.isShow = false">取 消</el-button>
+                     <el-button class="cancel-but" @click="buildFileDialog.isShow = false" :loading="buildFileDialog.butIsLoading" >取 消</el-button>
                      <el-button
                          :type="this.buildFileDialog.isAllSelect ? 'success' : 'primary'"
                          plain
                          @click="fileTypesAll"
+                         :loading="buildFileDialog.butIsLoading"
                      >{{ this.buildFileDialog.isAllSelect ? '取消全选' : '全 选' }}</el-button>
-                     <el-button type="success" @click="downloadFile()">下 载</el-button>
-                     <el-button type="primary" @click="buildFile()">确 定</el-button>
+                     <el-button type="success" @click="downloadFile()" :loading="buildFileDialog.butIsLoading" >下 载</el-button>
+                     <el-button type="primary" @click="buildFile()" :loading="buildFileDialog.butIsLoading" >确 定</el-button>
                   </span>
                             </el-dialog>
                             <el-dialog custom-class="dialog" title="生成局部代码"
@@ -530,10 +532,10 @@ export default {
     name: "tableManagement",
 
     created() {
+
         this.search();
         this.getParams();
         this.refreshScreenSize();
-
     },
     data() {
         return {
@@ -1054,10 +1056,13 @@ export default {
         //生成文件
         buildFile() {
             this.buildFileDialog.id = this.data.id;
+            this.buildFileDialog.butIsLoading = true;
             this.postHttp(
                 "/api/project/buildFile",
                 this.buildFileDialog
             ).then(result => {
+                this.buildFileDialog.butIsLoading = false;
+
             });
         },
         //下载文件
