@@ -19,7 +19,7 @@
                             <div
                                 class="custom-tree-node"
                                 slot-scope="{ node, data }"
-                                @click="() => goTools(data)"
+                                @click="() => goEdit(data)"
                             >
                                 <el-popover
                                     placement="right"
@@ -538,10 +538,11 @@
                                                 plain
                                                 size="small"
                                                 @click="
-                                                    buildPartialDialog.isShow = true
+                                                    copySql
                                                 "
-                                                >生成
+                                                >SQL
                                             </el-button>
+<!--                                            buildPartialDialog.isShow = true-->
                                             <el-button
                                                 type="danger"
                                                 plain
@@ -564,6 +565,7 @@
                                 class="tool-spacing"
                                 v-show="viewDialog.isTools"
                             >
+                                <el-button @click="goEdit(chickRow)" plain type="primary">编辑</el-button>
                                 <el-button
                                     @click="sqlCopy()"
                                     plain
@@ -578,10 +580,15 @@
                                     >生成代码
                                 </el-button>
                             </el-row>
-                            <el-row
-                                class="save-spacing"
-                                v-show="viewDialog.isEdit"
-                            >
+                            <el-row class="save-spacing" v-show="viewDialog.isEdit">
+                                <el-button @click="goTools(chickRow)" plain type="success">SQL</el-button>
+                                <el-button
+                                    type="primary"
+                                    @click="buildFileDialog.isShow = true"
+                                    :loading="viewDialog.butIsLoading"
+                                    v-if="data.level == 3"
+                                >生成代码
+                                </el-button>
                                 <el-button
                                     class="cancel-but"
                                     @click="viewDialog.isShow = false"
@@ -918,6 +925,7 @@ export default {
             listData: {
                 loading: false
             },
+            chickRow : {},
             rules: {
                 name: [
                     { required: true, message: "请输入名称", trigger: "blur" }
@@ -990,6 +998,7 @@ export default {
         },
         //打开新增
         goAdd(row) {
+            this.chickRow = row;
             this.resetForm("ruleForm");
             var projectId = this.isEmpty(row.projectId)
                 ? row.id
@@ -1042,6 +1051,7 @@ export default {
         },
         //打开工具箱
         goTools(row) {
+            this.chickRow = row;
             this.getTableOptions(
                 this.isEmpty(row.projectId) ? row.id : row.projectId
             );
@@ -1063,6 +1073,7 @@ export default {
 
         //打开详情
         goView(row) {
+            this.chickRow = row;
             this.getTableOptions(
                 this.isEmpty(row.projectId) ? row.id : row.projectId
             );
@@ -1081,6 +1092,7 @@ export default {
         },
         //打开编辑
         goEdit(row) {
+            this.chickRow = row;
             this.resetForm("ruleForm");
             this.getTableOptions(
                 this.isEmpty(row.projectId) ? row.id : row.projectId
@@ -1282,6 +1294,7 @@ export default {
             }
             selection.removeAllRanges();
         },
+
         //删除明细
         delDetails(index) {
             this.data.detailEntitys.splice(index, 1);
