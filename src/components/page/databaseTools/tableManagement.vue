@@ -538,7 +538,7 @@
                                                 plain
                                                 size="small"
                                                 @click="
-                                                    copySql
+                                                    copySql(scope.$index)
                                                 "
                                                 >SQL
                                             </el-button>
@@ -837,7 +837,7 @@
                                                     class="frame-but"
                                                     type="warning"
                                                     plain
-                                                    @click="copySql"
+                                                    @click="copySql()"
                                                     >SQL
                                                 </el-button>
                                             </el-col>
@@ -1173,12 +1173,13 @@ export default {
             this.currentIndex = row.index;
         },
         //复制SQL
-        copySql() {
-            var row = this.data.detailEntitys[this.currentIndex];
+        copySql(index) {
+            console.log(JSON.stringify(index))
+            var row = this.data.detailEntitys[index];
             var previousColumnNumber =
-                this.currentIndex == 0
+                index == 0
                     ? ""
-                    : this.data.detailEntitys[this.currentIndex - 1].number;
+                    : this.data.detailEntitys[index - 1].number;
             this.postHttp(
                 "/api/project/oneSql?id=" +
                     this.data.projectId +
